@@ -1,0 +1,5 @@
+D:\Code\Personal\Fulcrum\Fulcrum\bin\Debug\Fulcrum.Core.dll
+D:\Code\Personal\Fulcrum\Fulcrum\bin\Debug\Fulcrum.Core.pdb
+D:\Code\Personal\Fulcrum\Fulcrum\obj\Debug\Fulcrum.Core.csprojResolveAssemblyReference.cache
+D:\Code\Personal\Fulcrum\Fulcrum\obj\Debug\Fulcrum.Core.dll
+D:\Code\Personal\Fulcrum\Fulcrum\obj\Debug\Fulcrum.Core.pdb
