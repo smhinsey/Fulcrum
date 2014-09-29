@@ -1,7 +1,7 @@
 D:\Code\Personal\Fulcrum\Fulcrum.Tests\bin\Debug\Fulcrum.Tests.dll
 D:\Code\Personal\Fulcrum\Fulcrum.Tests\bin\Debug\Fulcrum.Tests.pdb
-D:\Code\Personal\Fulcrum\Fulcrum.Tests\bin\Debug\Fulcrum.Core.dll
-D:\Code\Personal\Fulcrum\Fulcrum.Tests\bin\Debug\Fulcrum.Core.pdb
 D:\Code\Personal\Fulcrum\Fulcrum.Tests\obj\Debug\Fulcrum.Tests.csprojResolveAssemblyReference.cache
 D:\Code\Personal\Fulcrum\Fulcrum.Tests\obj\Debug\Fulcrum.Tests.dll
 D:\Code\Personal\Fulcrum\Fulcrum.Tests\obj\Debug\Fulcrum.Tests.pdb
+D:\Code\Personal\Fulcrum\Fulcrum.Tests\bin\Debug\Fulcrum.dll
+D:\Code\Personal\Fulcrum\Fulcrum.Tests\bin\Debug\Fulcrum.pdb

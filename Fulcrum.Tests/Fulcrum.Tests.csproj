@@ -50,9 +50,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fulcrum\Fulcrum.Core.csproj">
+    <ProjectReference Include="..\Fulcrum\Fulcrum.csproj">
       <Project>{2e634771-5bd9-4e1b-adb0-a6855e8501e2}</Project>
-      <Name>Fulcrum.Core</Name>
+      <Name>Fulcrum</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -7,8 +7,8 @@
     <ProjectGuid>{2E634771-5BD9-4E1B-ADB0-A6855E8501E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fulcrum.Core</RootNamespace>
-    <AssemblyName>Fulcrum.Core</AssemblyName>
+    <RootNamespace>Fulcrum</RootNamespace>
+    <AssemblyName>Fulcrum</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,12 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICommand.cs" />
-    <Compile Include="ICommandHandler.cs" />
-    <Compile Include="Error.cs" />
-    <Compile Include="IEvent.cs" />
-    <Compile Include="IQuery.cs" />
+    <Compile Include="Core\ICommand.cs" />
+    <Compile Include="Core\ICommandHandler.cs" />
+    <Compile Include="Core\Error.cs" />
+    <Compile Include="Core\IEvent.cs" />
+    <Compile Include="Core\IQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\Registry\IRegistry.cs" />
+    <Compile Include="Common\Registry\IRecord.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Runtime\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

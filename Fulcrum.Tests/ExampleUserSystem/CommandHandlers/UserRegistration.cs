@@ -17,7 +17,7 @@ namespace Fulcrum.Tests.ExampleUserSystem.CommandHandlers
 		  _userQueries = userQueries;
 	  }
 
-	  public IList<IEvent> Handle(RegisterUser command)
+	  public void Handle(RegisterUser command)
     {
       var sideEffects = new List<IEvent>();
 
@@ -27,8 +27,6 @@ namespace Fulcrum.Tests.ExampleUserSystem.CommandHandlers
 			}
 		  
 			sideEffects.Add(new UserRegistered());
-
-		  return sideEffects;
     }
   }
 }
