@@ -5,7 +5,9 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulcrum", "Fulcrum.csproj", "{2E634771-5BD9-4E1B-ADB0-A6855E8501E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fulcrum.Tests", "..\Fulcrum.Tests\Fulcrum.Tests.csproj", "{9B5F368E-9F84-4EC2-849D-EA51A8879156}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\Fulcrum.Tests\Tests.csproj", "{9B5F368E-9F84-4EC2-849D-EA51A8879156}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "..\Examples\Examples.csproj", "{11DFD6F4-E03D-41A2-B307-2B6FB114E861}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9B5F368E-9F84-4EC2-849D-EA51A8879156}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B5F368E-9F84-4EC2-849D-EA51A8879156}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B5F368E-9F84-4EC2-849D-EA51A8879156}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11DFD6F4-E03D-41A2-B307-2B6FB114E861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11DFD6F4-E03D-41A2-B307-2B6FB114E861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11DFD6F4-E03D-41A2-B307-2B6FB114E861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11DFD6F4-E03D-41A2-B307-2B6FB114E861}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
