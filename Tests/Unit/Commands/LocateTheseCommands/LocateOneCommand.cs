@@ -2,7 +2,7 @@
 
 namespace Tests.Unit.Commands.LocateTheseCommands
 {
-	public class ExtractThreeCommand : ICommand
+	public class LocateOneCommand : ICommand
 	{
 		 
 	}

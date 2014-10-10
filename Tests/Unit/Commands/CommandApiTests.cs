@@ -1,6 +1,8 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using Fulcrum.Runtime;
 using Tests.Unit.Commands.DescribeTheseCommands;
+using Tests.Unit.Commands.LocateTheseCommands;
 using Xunit;
 
 namespace Tests.Unit.Commands
@@ -16,6 +18,9 @@ namespace Tests.Unit.Commands
 				"Tests.Unit.Commands.LocateTheseCommands");
 
 			Assert.Equal(3, commands.Count);
+			Assert.True(commands.Any(c => c == typeof(LocateOneCommand)));
+			Assert.True(commands.Any(c => c == typeof(LocateAnotherCommand)));
+			Assert.True(commands.Any(c => c == typeof(AnotherCommandToLocate)));
 		}
 
 		[Fact]

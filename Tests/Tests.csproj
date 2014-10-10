@@ -57,9 +57,9 @@
     <Compile Include="Unit\Commands\CommandApiTests.cs" />
     <Compile Include="Unit\Commands\DescribeTheseCommands\DescribeThisValidatedCommand.cs" />
     <Compile Include="Unit\Commands\DescribeTheseCommands\DescribeThisBasicCommand.cs" />
-    <Compile Include="Unit\Commands\LocateTheseCommands\ExtractThreeCommand.cs" />
-    <Compile Include="Unit\Commands\LocateTheseCommands\ExtractTwoCommand.cs" />
-    <Compile Include="Unit\Commands\LocateTheseCommands\ExtractOneCommand.cs" />
+    <Compile Include="Unit\Commands\LocateTheseCommands\AnotherCommandToLocate.cs" />
+    <Compile Include="Unit\Commands\LocateTheseCommands\LocateAnotherCommand.cs" />
+    <Compile Include="Unit\Commands\LocateTheseCommands\LocateOneCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fulcrum\Fulcrum.csproj">
