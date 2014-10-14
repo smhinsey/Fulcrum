@@ -54,7 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unit\Commands\CommandApiTests.cs" />
+    <Compile Include="Unit\Commands\CommandDescriptionTests.cs" />
+    <Compile Include="Unit\Commands\CommandLocationTests.cs" />
     <Compile Include="Unit\Commands\DescribeTheseCommands\DescribeThisValidatedCommand.cs" />
     <Compile Include="Unit\Commands\DescribeTheseCommands\DescribeThisBasicCommand.cs" />
     <Compile Include="Unit\Commands\LocateTheseCommands\AnotherCommandToLocate.cs" />

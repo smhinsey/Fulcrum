@@ -56,7 +56,9 @@ namespace Fulcrum.Runtime
 
 			var validationTypeTable = new Dictionary<Type, Action<object>>
 			{
-				{ typeof(RequiredAttribute), attr => propertySchema.Required = true },
+				{
+					typeof(RequiredAttribute), attr => propertySchema.Required = true
+				},
 				{
 					typeof(RangeAttribute), attr =>
 					{

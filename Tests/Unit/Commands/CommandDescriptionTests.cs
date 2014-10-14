@@ -1,28 +1,11 @@
-﻿using System.Linq;
-using System.Reflection;
-using Fulcrum.Runtime;
+﻿using Fulcrum.Runtime;
 using Tests.Unit.Commands.DescribeTheseCommands;
-using Tests.Unit.Commands.LocateTheseCommands;
 using Xunit;
 
 namespace Tests.Unit.Commands
 {
-	public class CommandApiTests
+	public class CommandDescriptionTests
 	{
-		[Fact]
-		public void Locate_commands_in_assembly_via_namespace()
-		{
-			var extractor = new CommandLocator();
-
-			var commands = extractor.FindCommands(Assembly.GetExecutingAssembly(),
-				"Tests.Unit.Commands.LocateTheseCommands");
-
-			Assert.Equal(3, commands.Count);
-			Assert.True(commands.Any(c => c == typeof(LocateOneCommand)));
-			Assert.True(commands.Any(c => c == typeof(LocateAnotherCommand)));
-			Assert.True(commands.Any(c => c == typeof(AnotherCommandToLocate)));
-		}
-
 		[Fact]
 		public void Generate_schema_for_basic_command()
 		{
@@ -47,6 +30,8 @@ namespace Tests.Unit.Commands
 			Assert.True(schema.Properties.ContainsKey("requiredFirstName"));
 			Assert.True(schema.Properties.ContainsKey("requiredAgeWithMinAndMax"));
 			Assert.True(schema.Properties.ContainsKey("emailWithPattern"));
+
+			// it's not the intent of this test to cover validation exhaustively
 
 			Assert.True(schema.Properties["requiredFirstName"].Required.HasValue);
 			Assert.True(schema.Properties["requiredFirstName"].Required.Value);
