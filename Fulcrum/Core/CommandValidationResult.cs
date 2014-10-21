@@ -11,6 +11,11 @@ namespace Fulcrum.Core
 			IsCommandValid = isCommandValid;
 		}
 
+		public CommandValidationResult(bool isCommandValid) :
+			this(isCommandValid, new List<CommandValidationMessage>())
+		{
+		}
+
 		public bool IsCommandValid { get; private set; }
 
 		public IReadOnlyList<CommandValidationMessage> ValidationMessages { get; private set; }

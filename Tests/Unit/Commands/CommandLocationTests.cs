@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Fulcrum.Runtime;
-using Tests.Unit.Commands.LocateTheseCommands;
+using Tests.Unit.Commands.Location;
 using Xunit;
 
 namespace Tests.Unit.Commands
@@ -15,7 +15,7 @@ namespace Tests.Unit.Commands
 			var extractor = new CommandLocator();
 
 			var commands = extractor.FindCommands(Assembly.GetExecutingAssembly(),
-				"Tests.Unit.Commands.LocateTheseCommands");
+				"Tests.Unit.Commands.Location");
 
 			var expectedCommands = new List<Type>()
 			{

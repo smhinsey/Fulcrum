@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Fulcrum.Core;
+using Fulcrum.Runtime;
 
-namespace Tests.Unit.Commands.DescribeTheseCommands
+namespace Tests.Unit.Commands.Validation
 {
-	public class DescribeThisValidatedCommand : ICommand
+	[QueryValidation(typeof(ValidationQuery))]
+	public class SchemaValidationCommand : ICommand
 	{
 		[RegularExpression(".@")]
 		public string EmailWithPattern { get; set; }

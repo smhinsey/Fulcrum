@@ -1,6 +1,6 @@
 ﻿using Fulcrum.Core;
 
-namespace Tests.Unit.Commands.LocateTheseCommands
+namespace Tests.Unit.Commands.Location
 {
 	public class AnotherCommandToLocate : ICommand
 	{

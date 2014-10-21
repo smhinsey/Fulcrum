@@ -1,8 +1,8 @@
 ﻿using Fulcrum.Core;
 
-namespace Tests.Unit.Commands.DescribeTheseCommands
+namespace Tests.Unit.Commands.Validation
 {
-	public class DescribeThisBasicCommand : ICommand
+	public class SchemaTestingCommand : ICommand
 	{
 		public int AnIntegerValue { get; set; }
 

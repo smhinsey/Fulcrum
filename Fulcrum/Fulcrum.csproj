@@ -50,11 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CommandValidationMessage.cs" />
+    <Compile Include="Core\CommandValidationResult.cs" />
     <Compile Include="Core\ICommand.cs" />
     <Compile Include="Core\ICommandHandler.cs" />
     <Compile Include="Core\Error.cs" />
     <Compile Include="Core\IEvent.cs" />
     <Compile Include="Core\IQuery.cs" />
+    <Compile Include="Core\ICommandValidationQuery.cs" />
+    <Compile Include="Runtime\CommandDescriptor.cs" />
+    <Compile Include="Runtime\Api\Resources\QueryDescription.cs" />
+    <Compile Include="Runtime\QueryDescriptor.cs" />
+    <Compile Include="Runtime\QueryValidationAttribute.cs" />
+    <Compile Include="Runtime\Api\Resources\CommandDescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\Registry\IRegistry.cs" />
     <Compile Include="Common\Registry\IRecord.cs" />
@@ -64,6 +72,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

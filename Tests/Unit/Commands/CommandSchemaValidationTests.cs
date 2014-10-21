@@ -1,0 +1,56 @@
+﻿using Fulcrum.Runtime;
+using Tests.Unit.Commands.Validation;
+using Xunit;
+
+namespace Tests.Unit.Commands
+{
+	public class CommandSchemaValidationTests
+	{
+		[Fact]
+		public void Required_with_min_and_max_values()
+		{
+			var generator = new CommandSchemaGenerator();
+
+			var schema = generator.GenerateSchema(typeof(SchemaValidationCommand));
+
+			Assert.True(schema.Properties["requiredAgeWithMinAndMax"].Required.HasValue);
+			Assert.True(schema.Properties["requiredAgeWithMinAndMax"].Required.Value);
+
+			Assert.True(schema.Properties["requiredAgeWithMinAndMax"].Minimum == 18);
+			Assert.True(schema.Properties["requiredAgeWithMinAndMax"].Maximum == 100);
+		}
+
+		[Fact]
+		public void Simpled_required_field()
+		{
+			var generator = new CommandSchemaGenerator();
+
+			var schema = generator.GenerateSchema(typeof(SchemaValidationCommand));
+
+			Assert.True(schema.Properties["requiredFirstName"].Required.HasValue);
+			Assert.True(schema.Properties["requiredFirstName"].Required.Value);
+		}
+
+		[Fact]
+		public void Pattern()
+		{
+			var generator = new CommandSchemaGenerator();
+
+			var schema = generator.GenerateSchema(typeof(SchemaValidationCommand));
+
+			Assert.True(schema.Properties["emailWithPattern"].Pattern == ".@");
+		}
+
+		[Fact]
+		public void Query()
+		{
+			var generator = new CommandSchemaGenerator();
+
+			var schema = generator.GenerateSchema(typeof(SchemaValidationCommand));
+
+			var pattern = "validationQuery://Tests.Unit.Commands.Validation/ValidationQuery";
+
+			Assert.Equal(pattern, schema.Pattern);
+		}
+	}
+}

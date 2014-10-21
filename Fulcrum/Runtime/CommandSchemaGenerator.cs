@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using Castle.Core.Internal;
 using Newtonsoft.Json.Schema;
 
 namespace Fulcrum.Runtime
@@ -34,6 +35,8 @@ namespace Fulcrum.Runtime
 					addPropertyToSchema(commandSchema, property, new JsonSchema { Type = JsonSchemaType.None });
 				}
 			}
+
+			addQueryValidation(commandSchema, command);
 
 			return commandSchema;
 		}
@@ -82,6 +85,20 @@ namespace Fulcrum.Runtime
 			{
 				validationTypeTable[attr.GetType()](attr);
 			}
+		}
+
+		private void addQueryValidation(JsonSchema commandSchema, Type commandType)
+		{
+			var queryValidationAttribute = commandType.GetAttribute<QueryValidationAttribute>();
+
+			if (queryValidationAttribute == null)
+			{
+				return;
+			}
+
+			var descriptor = queryValidationAttribute.Descriptor;
+
+			commandSchema.Pattern = "validationQuery://" + descriptor.Namespace + "/" + descriptor.Name;
 		}
 
 		private string formatPropertyName(string name)
