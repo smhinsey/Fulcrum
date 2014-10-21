@@ -59,6 +59,7 @@
     <Compile Include="Common\Web\WindsorControllerActivator.cs" />
     <Compile Include="Common\Web\WindsorDependencyResolver.cs" />
     <Compile Include="Common\Web\WindsorDependencyScope.cs" />
+    <Compile Include="Runtime\CommandPublicationRecord.cs" />
     <Compile Include="Core\CommandValidationMessage.cs" />
     <Compile Include="Core\CommandValidationResult.cs" />
     <Compile Include="Core\ICommand.cs" />

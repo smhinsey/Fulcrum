@@ -15,16 +15,16 @@ namespace Fulcrum.Runtime
 		{
 			var commandSchema = new CommandSchema();
 
+			var propertyTypeTable = new Dictionary<Type, Action<PropertyInfo>>
+			{
+				{ typeof(string), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.String }) },
+				{ typeof(int), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Integer }) },
+				{ typeof(float), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Float }) },
+				{ typeof(bool), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Boolean }) }
+			};
+
 			foreach (var property in command.GetProperties())
 			{
-				var propertyTypeTable = new Dictionary<Type, Action<PropertyInfo>>
-				{
-					{ typeof(string), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.String }) },
-					{ typeof(int), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Integer }) },
-					{ typeof(float), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Float }) },
-					{ typeof(bool), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Boolean }) }
-				};
-
 				var propertyType = property.PropertyType;
 
 				if (propertyTypeTable.ContainsKey(propertyType))
@@ -33,6 +33,7 @@ namespace Fulcrum.Runtime
 				}
 				else
 				{
+					// TODO: Is object the best type? Should this be an exception instead?
 					addPropertyToSchema(commandSchema, property, new JsonSchema { Type = JsonSchemaType.Object });
 				}
 			}

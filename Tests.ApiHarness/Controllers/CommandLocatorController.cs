@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api.Resources;
@@ -21,7 +22,12 @@ namespace Tests.ApiHarness.Controllers
 		{
 			var commandType = _commandLocator.FindInNamespace(name, inNamespace);
 
-			return new CommandDescription(commandType);
+			if (commandType != null)
+			{
+				return new CommandDescription(commandType);
+			}
+
+			throw new HttpResponseException(HttpStatusCode.NotFound);
 		}
 
 		[Route("commands")]

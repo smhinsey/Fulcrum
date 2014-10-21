@@ -4,6 +4,7 @@ using Xunit;
 
 namespace Tests.Unit.Commands
 {
+	// TODO: we should probably assert more than just the name on all of these
 	public class CommandSchemaGeneratorTests
 	{
 		[Fact]
