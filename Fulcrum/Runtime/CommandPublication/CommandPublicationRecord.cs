@@ -9,7 +9,7 @@ namespace Fulcrum.Runtime
 		{
 		}
 
-		public bool HandlingComplete { get; private set; }
+		public CommandPublicationStatus Status { get; private set; }
 
 		public Guid Id { get; set; }
 	}

@@ -71,6 +71,7 @@
     <Compile Include="Runtime\Api\Resources\QueryDescription.cs" />
     <Compile Include="Core\CommandSchema.cs" />
     <Compile Include="Core\QueryDescriptor.cs" />
+    <Compile Include="Runtime\CommandPublicationStatus.cs" />
     <Compile Include="Runtime\ICommandLocator.cs" />
     <Compile Include="Runtime\QueryValidationAttribute.cs" />
     <Compile Include="Runtime\Api\Resources\CommandDescription.cs" />
