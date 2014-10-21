@@ -1,11 +1,11 @@
 ﻿namespace Examples.UserProfileBC.QueryModel
 {
-  public enum UserState
-  {
-    Disabled = -1,
+	public enum UserState
+	{
+		Disabled = -1,
 
-    Unverified = 0,
+		Unverified = 0,
 
-    Active = 1,
-  }
+		Active = 1,
+	}
 }

@@ -4,16 +4,16 @@ using Fulcrum.Core;
 
 namespace Examples.UserProfileBC.Queries
 {
-  public class UserQueries : IQuery
-  {
-    public IList<User> ListAllUsers()
-    {
-      return new List<User>();
-    }
-
+	public class UserQueries : IQuery
+	{
 		public bool IsEmailAlreadyRegistered(string username)
 		{
 			return true;
 		}
-  }
+
+		public IList<User> ListAllUsers()
+		{
+			return new List<User>();
+		}
+	}
 }

@@ -1,7 +1,6 @@
 ﻿namespace Fulcrum.Core
 {
-  public interface IQuery
-  {
-     
-  }
+	public interface IQuery
+	{
+	}
 }

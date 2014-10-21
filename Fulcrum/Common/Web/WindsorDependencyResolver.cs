@@ -6,6 +6,7 @@ using Castle.MicroKernel;
 using IDependencyResolver = System.Web.Http.Dependencies.IDependencyResolver;
 
 // based on http://cangencer.wordpress.com/2012/12/22/integrating-asp-net-web-api-with-castle-windsor/
+
 namespace Fulcrum.Common.Web
 {
 	public class WindsorDependencyResolver : IDependencyResolver

@@ -12,8 +12,8 @@ namespace Fulcrum.Runtime.Api.Resources
 			CommandModel = Activator.CreateInstance(commandType);
 		}
 
-		public JsonSchema Schema { get; private set; }
-
 		public object CommandModel { get; private set; }
+
+		public JsonSchema Schema { get; private set; }
 	}
 }

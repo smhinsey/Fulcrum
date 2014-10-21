@@ -1,8 +1,7 @@
-﻿
-namespace Examples.UserProfileBC.QueryModel
+﻿namespace Examples.UserProfileBC.QueryModel
 {
-  public class Profile
-  {
-    public string DisplayName { get; set; }
-  }
+	public class Profile
+	{
+		public string DisplayName { get; set; }
+	}
 }
