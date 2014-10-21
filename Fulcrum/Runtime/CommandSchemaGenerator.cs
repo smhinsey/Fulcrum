@@ -4,24 +4,25 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using Castle.Core.Internal;
+using Fulcrum.Core;
 using Newtonsoft.Json.Schema;
 
 namespace Fulcrum.Runtime
 {
 	public class CommandSchemaGenerator
 	{
-		public JsonSchema GenerateSchema(Type command)
+		public static CommandSchema GenerateSchema(Type command)
 		{
-			var commandSchema = new JsonSchema();
+			var commandSchema = new CommandSchema();
 
 			foreach (var property in command.GetProperties())
 			{
 				var propertyTypeTable = new Dictionary<Type, Action<PropertyInfo>>
 				{
 					{ typeof(string), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.String }) },
-					{ typeof(int), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.String }) },
-					{ typeof(float), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.String }) },
-					{ typeof(bool), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.String }) }
+					{ typeof(int), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Integer }) },
+					{ typeof(float), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Float }) },
+					{ typeof(bool), prop => addPropertyToSchema(commandSchema, prop, new JsonSchema { Type = JsonSchemaType.Boolean }) }
 				};
 
 				var propertyType = property.PropertyType;
@@ -32,7 +33,7 @@ namespace Fulcrum.Runtime
 				}
 				else
 				{
-					addPropertyToSchema(commandSchema, property, new JsonSchema { Type = JsonSchemaType.None });
+					addPropertyToSchema(commandSchema, property, new JsonSchema { Type = JsonSchemaType.Object });
 				}
 			}
 
@@ -41,7 +42,7 @@ namespace Fulcrum.Runtime
 			return commandSchema;
 		}
 
-		private void addPropertyToSchema(JsonSchema commandSchema, PropertyInfo property, JsonSchema propertySchema)
+		private static void addPropertyToSchema(JsonSchema commandSchema, PropertyInfo property, JsonSchema propertySchema)
 		{
 			if (commandSchema.Properties == null)
 			{
@@ -53,7 +54,7 @@ namespace Fulcrum.Runtime
 			commandSchema.Properties.Add(formatPropertyName(property.Name), propertySchema);
 		}
 
-		private void addPropertyValidationToSchema(PropertyInfo property, JsonSchema propertySchema)
+		private static void addPropertyValidationToSchema(PropertyInfo property, JsonSchema propertySchema)
 		{
 			var attributes = property.GetCustomAttributes(true);
 
@@ -87,7 +88,7 @@ namespace Fulcrum.Runtime
 			}
 		}
 
-		private void addQueryValidation(JsonSchema commandSchema, Type commandType)
+		private static void addQueryValidation(CommandSchema commandSchema, Type commandType)
 		{
 			var queryValidationAttribute = commandType.GetAttribute<QueryValidationAttribute>();
 
@@ -98,10 +99,12 @@ namespace Fulcrum.Runtime
 
 			var descriptor = queryValidationAttribute.Descriptor;
 
-			commandSchema.Pattern = "validationQuery://" + descriptor.Namespace + "/" + descriptor.Name;
+			commandSchema.ValidateByQuery = true;
+			// NOTE: we need a globally-safe way of referring to URLs
+			commandSchema.ValidationQueryUrl = "/validation-queries/" + descriptor.Namespace + "/" + descriptor.Name;
 		}
 
-		private string formatPropertyName(string name)
+		private static string formatPropertyName(string name)
 		{
 			return Char.ToLowerInvariant(name[0]) + name.Substring(1);
 		}

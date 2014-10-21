@@ -42,16 +42,13 @@
     <Compile Include="UserProfileBC\CommandHandlers\UserRegistration.cs" />
     <Compile Include="UserProfileBC\Commands\RegisterUser.cs" />
     <Compile Include="UserProfileBC\Errors\UsernameAlreadyInUse.cs" />
-    <Compile Include="UserProfileBC\Events\UserRegistered.cs" />
     <Compile Include="UserProfileBC\Queries\UserQueries.cs" />
     <Compile Include="UserProfileBC\QueryModel\Profile.cs" />
     <Compile Include="UserProfileBC\QueryModel\User.cs" />
     <Compile Include="UserProfileBC\QueryModel\UserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserProfileBC\EventHandlers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Fulcrum\Fulcrum.csproj">
       <Project>{2e634771-5bd9-4e1b-adb0-a6855e8501e2}</Project>

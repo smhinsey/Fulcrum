@@ -9,9 +9,10 @@ namespace Fulcrum.Runtime
 	{
 		public QueryValidationAttribute(Type queryType)
 		{
-			if (queryType.GetInterfaces().Any(x =>
-				x.IsGenericType &&
-				x.GetGenericTypeDefinition() != typeof(ICommandValidationQuery<>)))
+			if (queryType.GetInterfaces()
+				.Any(x =>
+					x.IsGenericType &&
+					x.GetGenericTypeDefinition() != typeof(ICommandValidationQuery<>)))
 			{
 				throw new ArgumentException
 					("You must supply an type which implements ICommandValidationQuery", "queryType");

@@ -9,9 +9,7 @@ namespace Tests.Unit.Commands
 		[Fact]
 		public void Required_with_min_and_max_values()
 		{
-			var generator = new CommandSchemaGenerator();
-
-			var schema = generator.GenerateSchema(typeof(SchemaValidationCommand));
+			var schema = CommandSchemaGenerator.GenerateSchema(typeof(SchemaValidationCommand));
 
 			Assert.True(schema.Properties["requiredAgeWithMinAndMax"].Required.HasValue);
 			Assert.True(schema.Properties["requiredAgeWithMinAndMax"].Required.Value);
@@ -23,9 +21,7 @@ namespace Tests.Unit.Commands
 		[Fact]
 		public void Simpled_required_field()
 		{
-			var generator = new CommandSchemaGenerator();
-
-			var schema = generator.GenerateSchema(typeof(SchemaValidationCommand));
+			var schema = CommandSchemaGenerator.GenerateSchema(typeof(SchemaValidationCommand));
 
 			Assert.True(schema.Properties["requiredFirstName"].Required.HasValue);
 			Assert.True(schema.Properties["requiredFirstName"].Required.Value);
@@ -34,9 +30,7 @@ namespace Tests.Unit.Commands
 		[Fact]
 		public void Pattern()
 		{
-			var generator = new CommandSchemaGenerator();
-
-			var schema = generator.GenerateSchema(typeof(SchemaValidationCommand));
+			var schema = CommandSchemaGenerator.GenerateSchema(typeof(SchemaValidationCommand));
 
 			Assert.True(schema.Properties["emailWithPattern"].Pattern == ".@");
 		}
@@ -44,13 +38,12 @@ namespace Tests.Unit.Commands
 		[Fact]
 		public void Query()
 		{
-			var generator = new CommandSchemaGenerator();
+			var schema = CommandSchemaGenerator.GenerateSchema(typeof(SchemaValidationCommand));
 
-			var schema = generator.GenerateSchema(typeof(SchemaValidationCommand));
+			var queryUrl = "/validation-queries/Tests.Unit.Commands.Validation/ValidationQuery";
 
-			var pattern = "validationQuery://Tests.Unit.Commands.Validation/ValidationQuery";
-
-			Assert.Equal(pattern, schema.Pattern);
+			Assert.Equal(true, schema.ValidateByQuery);
+			Assert.Equal(queryUrl, schema.ValidationQueryUrl);
 		}
 	}
 }

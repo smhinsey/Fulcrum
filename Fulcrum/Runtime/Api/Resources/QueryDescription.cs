@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Schema;
+﻿using Fulcrum.Core;
+using Newtonsoft.Json.Schema;
 
 namespace Fulcrum.Runtime.Api.Resources
 {

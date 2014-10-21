@@ -15,6 +15,6 @@ namespace Tests.Unit.Commands.Validation
 		public int RequiredAgeWithMinAndMax { get; set; }
 
 		[Required]
-		public string RequiredFirstName { get; set; }
+		public bool RequiredFirstName { get; set; }
 	}
 }
