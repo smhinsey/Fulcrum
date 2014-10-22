@@ -1,6 +1,5 @@
 ﻿using System;
 using Fulcrum.Core;
-using Newtonsoft.Json.Schema;
 
 namespace Fulcrum.Runtime.Api.Resources
 {
@@ -14,6 +13,6 @@ namespace Fulcrum.Runtime.Api.Resources
 
 		public object CommandModel { get; private set; }
 
-		public JsonSchema Schema { get; private set; }
+		public CommandSchema Schema { get; private set; }
 	}
 }

@@ -59,7 +59,7 @@
     <Compile Include="Common\Web\WindsorControllerActivator.cs" />
     <Compile Include="Common\Web\WindsorDependencyResolver.cs" />
     <Compile Include="Common\Web\WindsorDependencyScope.cs" />
-    <Compile Include="Runtime\CommandPublicationRecord.cs" />
+    <Compile Include="Runtime\CommandPublication\CommandPublicationRecord.cs" />
     <Compile Include="Core\CommandValidationMessage.cs" />
     <Compile Include="Core\CommandValidationResult.cs" />
     <Compile Include="Core\ICommand.cs" />
@@ -71,7 +71,7 @@
     <Compile Include="Runtime\Api\Resources\QueryDescription.cs" />
     <Compile Include="Core\CommandSchema.cs" />
     <Compile Include="Core\QueryDescriptor.cs" />
-    <Compile Include="Runtime\CommandPublicationStatus.cs" />
+    <Compile Include="Runtime\CommandPublication\CommandPublicationStatus.cs" />
     <Compile Include="Runtime\ICommandLocator.cs" />
     <Compile Include="Runtime\QueryValidationAttribute.cs" />
     <Compile Include="Runtime\Api\Resources\CommandDescription.cs" />
