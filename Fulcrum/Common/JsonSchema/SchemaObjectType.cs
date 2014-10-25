@@ -1,7 +1,8 @@
 ﻿namespace Fulcrum.Common.JsonSchema
 {
-	public class SchemaProperty
+	public enum SchemaObjectType
 	{
-		 
+		Object,
+		Array
 	}
 }
