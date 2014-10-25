@@ -1,8 +1,8 @@
 ﻿namespace Fulcrum.Common.JsonSchema
 {
-	public class UnvalidatedProperty : ISchemaProperty
+	public class SimplePropertyMetadata : ISchemaPropertyMetadata
 	{
-		public UnvalidatedProperty(SchemaPropertyType type)
+		public SimplePropertyMetadata(SchemaPropertyType type)
 		{
 			Type = type;
 		}

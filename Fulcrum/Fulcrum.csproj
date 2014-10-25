@@ -56,9 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Web\WindsorControllerActivator.cs" />
-    <Compile Include="Common\Web\WindsorDependencyResolver.cs" />
-    <Compile Include="Common\Web\WindsorDependencyScope.cs" />
+    <Compile Include="Common\JsonSchema\ISchemaPropertyMetadata.cs" />
+    <Compile Include="Common\JsonSchema\SchemaObjectType.cs" />
+    <Compile Include="Common\JsonSchema\SimplePropertyMetadata.cs" />
+    <Compile Include="Common\JsonSchema\SchemaPropertyType.cs" />
+    <Compile Include="Common\JsonSchema\SchemaRoot.cs" />
+    <Compile Include="Common\JsonSchema\ValidatedPropertyMetadata.cs" />
+    <Compile Include="Core\Web\WindsorControllerActivator.cs" />
+    <Compile Include="Core\Web\WindsorDependencyResolver.cs" />
+    <Compile Include="Core\Web\WindsorDependencyScope.cs" />
     <Compile Include="Runtime\CommandPublication\CommandPublicationRecord.cs" />
     <Compile Include="Core\CommandValidationMessage.cs" />
     <Compile Include="Core\CommandValidationResult.cs" />

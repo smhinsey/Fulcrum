@@ -1,8 +1,8 @@
 ﻿namespace Fulcrum.Common.JsonSchema
 {
-	public class ValidatedProperty : ISchemaProperty
+	public class ValidatedPropertyMetadata : ISchemaPropertyMetadata
 	{
-		public ValidatedProperty(SchemaPropertyType type)
+		public ValidatedPropertyMetadata(SchemaPropertyType type)
 		{
 			Type = type;
 		}
