@@ -5,7 +5,7 @@ using Fulcrum.Runtime;
 namespace Tests.Unit.Commands.Validation
 {
 	[QueryValidation(typeof(ValidationQuery))]
-	public class SchemaValidationCommand : ICommand
+	public class SchemaValidationCommand : DefaultCommand
 	{
 		[RegularExpression(".@")]
 		public string EmailWithPattern { get; set; }

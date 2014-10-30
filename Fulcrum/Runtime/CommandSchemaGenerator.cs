@@ -9,7 +9,7 @@ using Newtonsoft.Json.Schema;
 
 namespace Fulcrum.Runtime
 {
-	public class CommandSchemaGenerator
+	public static class CommandSchemaGenerator
 	{
 		public static CommandSchema GenerateSchema(Type command)
 		{
@@ -45,6 +45,11 @@ namespace Fulcrum.Runtime
 
 		private static void addPropertyToSchema(JsonSchema commandSchema, PropertyInfo property, JsonSchema propertySchema)
 		{
+			if (checkForBlacklistedName(property.Name))
+			{
+				return;
+			}
+
 			if (commandSchema.Properties == null)
 			{
 				commandSchema.Properties = new Dictionary<string, JsonSchema>();
@@ -53,6 +58,11 @@ namespace Fulcrum.Runtime
 			addPropertyValidationToSchema(property, propertySchema);
 
 			commandSchema.Properties.Add(formatPropertyName(property.Name), propertySchema);
+		}
+
+		private static bool checkForBlacklistedName(string name)
+		{
+			return name == "PublicationRecordId";
 		}
 
 		private static void addPropertyValidationToSchema(PropertyInfo property, JsonSchema propertySchema)

@@ -2,7 +2,7 @@
 
 namespace Tests.Unit.Commands.Validation
 {
-	public class SchemaTestingCommand : ICommand
+	public class SchemaTestingCommand : DefaultCommand
 	{
 		public int AnIntegerValue { get; set; }
 

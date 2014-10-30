@@ -37,6 +37,12 @@
     <Reference Include="Castle.Windsor">
       <HintPath>packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -62,10 +68,26 @@
     <Compile Include="Common\JsonSchema\SchemaPropertyType.cs" />
     <Compile Include="Common\JsonSchema\SchemaRoot.cs" />
     <Compile Include="Common\JsonSchema\ValidatedPropertyMetadata.cs" />
+    <Compile Include="Core\DefaultCommand.cs" />
+    <Compile Include="Core\ICommandPipeline.cs" />
     <Compile Include="Core\Web\WindsorControllerActivator.cs" />
     <Compile Include="Core\Web\WindsorDependencyResolver.cs" />
     <Compile Include="Core\Web\WindsorDependencyScope.cs" />
-    <Compile Include="Runtime\CommandPublication\CommandPublicationRecord.cs" />
+    <Compile Include="Migrations\201410290734358_initial.cs" />
+    <Compile Include="Migrations\201410290734358_initial.Designer.cs">
+      <DependentUpon>201410290734358_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410290755137_initial1.cs" />
+    <Compile Include="Migrations\201410290755137_initial1.Designer.cs">
+      <DependentUpon>201410290755137_initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410290821537_initial2.cs" />
+    <Compile Include="Migrations\201410290821537_initial2.Designer.cs">
+      <DependentUpon>201410290821537_initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Runtime\CommandPipeline\CommandPipelineDbContext.cs" />
+    <Compile Include="Runtime\CommandPipeline\CommandPublicationRecord.cs" />
     <Compile Include="Core\CommandValidationMessage.cs" />
     <Compile Include="Core\CommandValidationResult.cs" />
     <Compile Include="Core\ICommand.cs" />
@@ -77,8 +99,11 @@
     <Compile Include="Runtime\Api\Resources\QueryDescription.cs" />
     <Compile Include="Core\CommandSchema.cs" />
     <Compile Include="Core\QueryDescriptor.cs" />
-    <Compile Include="Runtime\CommandPublication\CommandPublicationStatus.cs" />
+    <Compile Include="Core\CommandPublicationStatus.cs" />
+    <Compile Include="Core\ICommandPublicationRecord.cs" />
+    <Compile Include="Runtime\CommandPipeline\SimpleCommandPipeline.cs" />
     <Compile Include="Runtime\ICommandLocator.cs" />
+    <Compile Include="Core\PortableCommand.cs" />
     <Compile Include="Runtime\QueryValidationAttribute.cs" />
     <Compile Include="Runtime\Api\Resources\CommandDescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,9 +113,20 @@
     <Compile Include="Runtime\CommandSchemaGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201410290734358_initial.resx">
+      <DependentUpon>201410290734358_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410290755137_initial1.resx">
+      <DependentUpon>201410290755137_initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410290821537_initial2.resx">
+      <DependentUpon>201410290821537_initial2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

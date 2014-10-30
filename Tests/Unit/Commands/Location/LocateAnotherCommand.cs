@@ -2,7 +2,7 @@
 
 namespace Tests.Unit.Commands.Location
 {
-	public class LocateAnotherCommand : ICommand
+	public class LocateAnotherCommand : DefaultCommand
 	{
 	}
 }

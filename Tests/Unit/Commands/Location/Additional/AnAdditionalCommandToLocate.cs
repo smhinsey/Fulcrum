@@ -2,7 +2,7 @@
 
 namespace Tests.Unit.Commands.Location.Additional
 {
-	public class AnAdditionalCommandToLocate : ICommand
+	public class AnAdditionalCommandToLocate : DefaultCommand
 	{
 	}
 }

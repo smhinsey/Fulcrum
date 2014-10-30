@@ -7,7 +7,7 @@ using Castle.MicroKernel.Lifestyle;
 
 // based on http://cangencer.wordpress.com/2012/12/22/integrating-asp-net-web-api-with-castle-windsor/
 
-namespace Fulcrum.Common.Web
+namespace Fulcrum.Core.Web
 {
 	public class WindsorDependencyScope : IDependencyScope
 	{
