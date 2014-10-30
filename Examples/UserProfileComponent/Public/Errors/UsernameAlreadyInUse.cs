@@ -1,11 +1,8 @@
 ﻿using Fulcrum.Core;
 
-namespace Examples.UserProfileBC.Errors
+namespace Examples.UserProfileComponent.Public.Errors
 {
 	public class UsernameAlreadyInUse : Error
 	{
-		public UsernameAlreadyInUse(ICommand relatedCommand) : base(relatedCommand)
-		{
-		}
 	}
 }

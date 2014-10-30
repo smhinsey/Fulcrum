@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Examples.UserProfileBC.QueryModel;
+using Examples.UserProfileComponent.Public.QueryModel;
 using Fulcrum.Core;
 
-namespace Examples.UserProfileBC.Queries
+namespace Examples.UserProfileComponent.Public.Queries
 {
 	public class UserQueries : IQuery
 	{

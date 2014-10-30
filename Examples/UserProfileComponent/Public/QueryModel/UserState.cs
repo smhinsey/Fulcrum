@@ -1,4 +1,4 @@
-﻿namespace Examples.UserProfileBC.QueryModel
+﻿namespace Examples.UserProfileComponent.Public.QueryModel
 {
 	public enum UserState
 	{

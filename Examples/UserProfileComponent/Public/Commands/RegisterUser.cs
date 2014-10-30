@@ -1,6 +1,6 @@
 ﻿using Fulcrum.Core;
 
-namespace Examples.UserProfileBC.Commands
+namespace Examples.UserProfileComponent.Public.Commands
 {
 	public class RegisterUser : DefaultCommand
 	{

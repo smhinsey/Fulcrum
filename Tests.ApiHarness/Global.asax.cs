@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Examples.UserProfileBC.Commands;
+using Examples.UserProfileComponent.Public.Commands;
 using Fulcrum.Core.Web;
 using Fulcrum.Runtime;
 using Tests.Unit.Commands.Validation;

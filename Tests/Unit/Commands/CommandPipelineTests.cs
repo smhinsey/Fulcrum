@@ -1,4 +1,5 @@
-﻿using Castle.Windsor;
+﻿using System.Linq;
+using Castle.Windsor;
 using Fulcrum.Runtime.CommandPipeline;
 using Tests.Unit.Commands.Pipeline;
 using Xunit;
@@ -8,17 +9,27 @@ namespace Tests.Unit.Commands
 	public class CommandPipelineTests
 	{
 		[Fact]
-		public void Enables_without_error()
+		public void Executes_command_handler_which_throws()
 		{
 			var container = new WindsorContainer();
 
-			var pipeline = new SimpleCommandPipeline(container);
+			var handlers = PipelineInstaller.InstallHandlers(container, GetType().Assembly);
 
-			pipeline.InstallHandlers(container, GetType().Assembly);
+			var pipeline = new SimpleCommandPipeline(container, handlers);
 
 			pipeline.EnablePublication();
 
-			pipeline.Publish(new PingPipelineCommand());
+			Assert.Throws<PingPongError>(() => { pipeline.Publish(new PingPipelineCommand()); });
+		}
+
+		[Fact]
+		public void Installs_handlers()
+		{
+			var container = new WindsorContainer();
+
+			var handlers = PipelineInstaller.InstallHandlers(container, GetType().Assembly);
+
+			Assert.Equal(1, handlers.Count(h => h.GetType() == typeof(PingPongHandler)));
 		}
 	}
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Fulcrum.Core;
@@ -17,10 +15,10 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 		private bool _enabled;
 
-		public SimpleCommandPipeline(IWindsorContainer container)
+		public SimpleCommandPipeline(IWindsorContainer container, IList<ICommandHandler> installedHandlers)
 		{
 			_container = container;
-			_installedHandlers = new List<ICommandHandler>();
+			_installedHandlers = installedHandlers;
 
 			_container.Register(Component.For<SimpleCommandPipeline>().Instance(this));
 		}
@@ -44,30 +42,6 @@ namespace Fulcrum.Runtime.CommandPipeline
 					select dbRecord);
 
 				return recordQuery.SingleOrDefault();
-			}
-		}
-
-		public void InstallHandlers(IWindsorContainer targetContainer, params Assembly[] assembliesToScan)
-		{
-			if (assembliesToScan.Length == 0)
-			{
-				assembliesToScan = new[] { Assembly.GetExecutingAssembly() };
-			}
-
-			foreach (var assembly in assembliesToScan)
-			{
-				targetContainer.Register(
-					Classes.FromAssembly(assembly)
-						.BasedOn(typeof(ICommandHandler))
-						.WithServiceAllInterfaces()
-						.WithServiceSelf());
-			}
-
-			var handlers = _container.ResolveAll<ICommandHandler>();
-
-			foreach (var handler in handlers)
-			{
-				_installedHandlers.Add(handler);
 			}
 		}
 
@@ -126,7 +100,16 @@ namespace Fulcrum.Runtime.CommandPipeline
 				throw new Exception("Publication disabled");
 			}
 
+			command.AssignPublicationRecordId(Guid.NewGuid());
+
 			var result = new CommandPublicationRecord(command);
+
+			using (var db = new CommandPipelineDbContext())
+			{
+				db.CommandPublicationRecords.Add(result);
+
+				db.SaveChanges();
+			}
 
 			// Should this be done via strategy? We'll need a separate set of interfaces
 			// for an async pipeline. What other types of executors are realistic? A pooled
@@ -139,6 +122,8 @@ namespace Fulcrum.Runtime.CommandPipeline
 				// TODO: determine if referenceHandler can handle command
 				if (true)
 				{
+					MarkAsProcessing(result.Id);
+
 					try
 					{
 						var resolvedHandler = _container.Resolve(installedHandler.GetType());
@@ -149,10 +134,16 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 						// TODO: invoke on a task, wait for the results, and update the record appropriately
 						handler.Invoke(resolvedHandler, new object[] { command });
+
+						//MarkAsComplete(result.Id);
 					}
 					catch (Exception ex)
 					{
-						MarkAsFailed(result.Id, "Unrecoverable command processing error", ex);
+						// the outer exception is always going to be TargetInvocationException
+
+						MarkAsFailed(result.Id, "Unrecoverable command processing error", ex.InnerException);
+
+						throw ex.InnerException;
 					}
 				}
 			}

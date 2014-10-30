@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserProfileComponent\Private\CommandHandlers\UserRegistration.cs" />
+    <Compile Include="UserProfileComponent\Internals\CommandHandlers\UserRegistration.cs" />
     <Compile Include="UserProfileComponent\Public\Commands\RegisterUser.cs" />
     <Compile Include="UserProfileComponent\Public\Errors\UsernameAlreadyInUse.cs" />
     <Compile Include="UserProfileComponent\Public\Queries\UserQueries.cs" />
@@ -49,7 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UserProfileComponent\Private\DomainModel\" />
+    <Folder Include="UserProfileComponent\Internals\DomainModel\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fulcrum\Fulcrum.csproj">

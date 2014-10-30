@@ -1,5 +1,4 @@
-﻿using System;
-using Fulcrum.Core;
+﻿using Fulcrum.Core;
 
 namespace Tests.Unit.Commands.Pipeline
 {
@@ -8,7 +7,7 @@ namespace Tests.Unit.Commands.Pipeline
 	{
 		public void Handle(PingPipelineCommand command)
 		{
-			Console.WriteLine("Ping");
+			throw new PingPongError();
 		}
 	}
 }

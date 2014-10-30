@@ -8,6 +8,10 @@ namespace Fulcrum.Core
 	/// </summary>
 	public class PortableCommand
 	{
+		public PortableCommand()
+		{
+		}
+
 		public PortableCommand(ICommand command, CommandSchema commandSchema)
 		{
 			ClrAssemblyName = command.GetType().Assembly.FullName;

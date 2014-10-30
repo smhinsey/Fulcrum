@@ -1,8 +1,8 @@
-﻿using Examples.UserProfileBC.Commands;
-using Examples.UserProfileBC.Queries;
+﻿using Examples.UserProfileComponent.Public.Commands;
+using Examples.UserProfileComponent.Public.Queries;
 using Fulcrum.Core;
 
-namespace Examples.UserProfileBC.CommandHandlers
+namespace Examples.UserProfileComponent.Internals.CommandHandlers
 {
 	public class UserRegistration :
 		ICommandHandler<RegisterUser>

@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201410290821537_initial2.Designer.cs">
       <DependentUpon>201410290821537_initial2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410300653164_initial3.cs" />
+    <Compile Include="Migrations\201410300653164_initial3.Designer.cs">
+      <DependentUpon>201410300653164_initial3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPipelineDbContext.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPublicationRecord.cs" />
@@ -101,6 +105,7 @@
     <Compile Include="Core\QueryDescriptor.cs" />
     <Compile Include="Core\CommandPublicationStatus.cs" />
     <Compile Include="Core\ICommandPublicationRecord.cs" />
+    <Compile Include="Runtime\CommandPipeline\PipelineInstaller.cs" />
     <Compile Include="Runtime\CommandPipeline\SimpleCommandPipeline.cs" />
     <Compile Include="Runtime\ICommandLocator.cs" />
     <Compile Include="Core\PortableCommand.cs" />
@@ -125,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410290821537_initial2.resx">
       <DependentUpon>201410290821537_initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410300653164_initial3.resx">
+      <DependentUpon>201410300653164_initial3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

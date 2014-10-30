@@ -6,6 +6,10 @@ namespace Fulcrum.Runtime.CommandPipeline
 {
 	public class CommandPublicationRecord : ICommandPublicationRecord
 	{
+		public CommandPublicationRecord()
+		{
+		}
+
 		public CommandPublicationRecord(ICommand command)
 		{
 			Status = CommandPublicationStatus.Unpublished;

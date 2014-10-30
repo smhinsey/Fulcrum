@@ -45,6 +45,13 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\Fulcrum\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Fulcrum\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\Fulcrum\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Fulcrum\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -69,7 +76,8 @@
     <Compile Include="Unit\Commands\CommandSchemaValidationTests.cs" />
     <Compile Include="Unit\Commands\Location\Additional\AnAdditionalCommandToLocate.cs" />
     <Compile Include="Unit\Commands\Pipeline\PingPipelineCommand.cs" />
-    <Compile Include="Unit\Commands\Pipeline\PingPongHandlers.cs" />
+    <Compile Include="Unit\Commands\Pipeline\PingPongError.cs" />
+    <Compile Include="Unit\Commands\Pipeline\PingPongHandler.cs" />
     <Compile Include="Unit\Commands\PortableCommands\PortabilityCommand.cs" />
     <Compile Include="Unit\Commands\PortableCommandTests.cs" />
     <Compile Include="Unit\Commands\Validation\SchemaValidationCommand.cs" />

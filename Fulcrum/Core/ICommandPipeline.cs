@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Reflection;
-using Castle.Windsor;
 
 namespace Fulcrum.Core
 {
@@ -25,12 +23,6 @@ namespace Fulcrum.Core
 		/// <param name="publicationId"></param>
 		/// <returns></returns>
 		ICommandPublicationRecord Inquire(Guid publicationId);
-
-		/// <summary>
-		///   Using custom configuration if necessary, load a specified set of command handlers
-		///   into the target container such that the handlers can be executed.
-		/// </summary>
-		void InstallHandlers(IWindsorContainer targetContainer, params Assembly[] assembliesToScan);
 
 		ICommandPublicationRecord MarkAsComplete(Guid publicationId);
 
