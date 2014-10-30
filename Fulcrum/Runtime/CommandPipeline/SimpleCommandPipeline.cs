@@ -135,15 +135,16 @@ namespace Fulcrum.Runtime.CommandPipeline
 						// TODO: invoke on a task, wait for the results, and update the record appropriately
 						handler.Invoke(resolvedHandler, new object[] { command });
 
-						//MarkAsComplete(result.Id);
+						MarkAsComplete(result.Id);
 					}
 					catch (Exception ex)
 					{
 						// the outer exception is always going to be TargetInvocationException
+						var appException = ex.InnerException;
 
-						MarkAsFailed(result.Id, "Unrecoverable command processing error", ex.InnerException);
+						MarkAsFailed(result.Id, "Unrecoverable command processing error", appException);
 
-						throw ex.InnerException;
+						throw appException;
 					}
 				}
 			}
