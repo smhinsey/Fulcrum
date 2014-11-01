@@ -6,8 +6,11 @@ using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Examples.UserProfileComponent.Public.Commands;
+using Fulcrum.Core;
 using Fulcrum.Core.Web;
 using Fulcrum.Runtime;
+using Fulcrum.Runtime.CommandPipeline;
+using Tests.Unit.Commands.Pipeline;
 using Tests.Unit.Commands.Validation;
 
 namespace Tests.ApiHarness
@@ -22,6 +25,7 @@ namespace Tests.ApiHarness
 		{
 			configureCommandLocations();
 			configureContainer();
+			configureCommandPipeline();
 
 			AreaRegistration.RegisterAllAreas();
 			GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -35,6 +39,16 @@ namespace Tests.ApiHarness
 
 			// TODO: Create generalized config system
 			_commandLocator.AddCommandSource(typeof(SchemaTestingCommand).Assembly, typeof(SchemaTestingCommand).Namespace);
+			_commandLocator.AddCommandSource(typeof(PingPipelineCommand).Assembly, typeof(PingPipelineCommand).Namespace);
+		}
+
+		private void configureCommandPipeline()
+		{
+			var handlers = PipelineInstaller.InstallHandlers(_container, typeof(PingPipelineCommand).Assembly);
+
+			var pipeline = new SimpleCommandPipeline(_container, handlers);
+
+			pipeline.EnablePublication();
 		}
 
 		private void configureContainer()

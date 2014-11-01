@@ -75,6 +75,7 @@
     <Compile Include="Unit\Commands\CommandLocationTests.cs" />
     <Compile Include="Unit\Commands\CommandSchemaValidationTests.cs" />
     <Compile Include="Unit\Commands\Location\Additional\AnAdditionalCommandToLocate.cs" />
+    <Compile Include="Unit\Commands\Pipeline\PongPipelineCommand.cs" />
     <Compile Include="Unit\Commands\Pipeline\PingPipelineCommand.cs" />
     <Compile Include="Unit\Commands\Pipeline\PingPongError.cs" />
     <Compile Include="Unit\Commands\Pipeline\PingPongHandler.cs" />

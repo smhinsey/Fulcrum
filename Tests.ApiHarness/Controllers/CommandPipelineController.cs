@@ -2,21 +2,28 @@
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
+using Fulcrum.Core;
 using Fulcrum.Runtime;
+using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.Api.Resources;
 
 namespace Tests.ApiHarness.Controllers
 {
-	public class CommandLocatorController : ApiController
+	[RoutePrefix("commands")]
+	public class CommandPipelineController : ApiController
 	{
 		private readonly ICommandLocator _commandLocator;
 
-		public CommandLocatorController(ICommandLocator commandLocator)
+		private readonly ICommandPipeline _commandPipeline;
+
+		public CommandPipelineController(ICommandLocator commandLocator, ICommandPipeline commandPipeline)
 		{
 			_commandLocator = commandLocator;
+			_commandPipeline = commandPipeline;
 		}
 
-		[Route("commands/{inNamespace}/{name}")]
+		[Route("{inNamespace}/{name}")]
 		[HttpGet]
 		public CommandDescription Detail(string inNamespace, string name)
 		{
@@ -30,7 +37,7 @@ namespace Tests.ApiHarness.Controllers
 			throw new HttpResponseException(HttpStatusCode.NotFound);
 		}
 
-		[Route("commands")]
+		[Route("")]
 		[HttpGet]
 		public IEnumerable<CommandDescription> ListAll()
 		{
@@ -39,6 +46,23 @@ namespace Tests.ApiHarness.Controllers
 			var descriptions = commands.Select(command => new CommandDescription(command));
 
 			return descriptions.ToList();
+		}
+
+		[Route("{inNamespace}/{name}/publish")]
+		[HttpPost]
+		public ICommandPublicationRecord Publish(string inNamespace, string name, 
+			[ModelBinder(typeof(CommandModelBinder))] ICommand command)
+		{
+			if (ModelState.IsValid)
+			{
+				return _commandPipeline.Publish(command);
+			}
+			else
+			{
+				// return validation errors
+			}
+
+			throw new HttpResponseException(HttpStatusCode.NotFound);
 		}
 	}
 }

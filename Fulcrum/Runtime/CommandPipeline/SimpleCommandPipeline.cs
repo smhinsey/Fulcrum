@@ -20,7 +20,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 			_container = container;
 			_installedHandlers = installedHandlers;
 
-			_container.Register(Component.For<SimpleCommandPipeline>().Instance(this));
+			_container.Register(Component.For<ICommandPipeline>().Instance(this));
 		}
 
 		public void DisablePublication()
@@ -116,36 +116,46 @@ namespace Fulcrum.Runtime.CommandPipeline
 			// executor would likely require a custom ICommandPipeline implementation in order
 			// to manage its own lifecycle, so it couldn't be done this way. Could anything?
 
-			// TODO: consider one-handler-per-command
+			// Should we really allow more than one handler per command?
 			foreach (var installedHandler in _installedHandlers)
 			{
-				// TODO: determine if referenceHandler can handle command
-				if (true)
+				const string HandleMethodName = "Handle";
+
+				var potentialHandlerMethods = installedHandler.GetType().GetMethods();
+
+				var handlerMethods = potentialHandlerMethods
+					.Where(m => m.Name == HandleMethodName);
+
+				var configuredHandlerForThisCommand = handlerMethods
+					.Any(m => m.GetParameters().ToList().Any(p => p.ParameterType == command.GetType()));
+
+				if (!configuredHandlerForThisCommand)
 				{
-					MarkAsProcessing(result.Id);
+					continue;
+				}
 
-					try
-					{
-						var resolvedHandler = _container.Resolve(installedHandler.GetType());
+				MarkAsProcessing(result.Id);
 
-						var handlerType = resolvedHandler.GetType();
+				try
+				{
+					var resolvedHandler = _container.Resolve(installedHandler.GetType());
 
-						var handler = handlerType.GetMethod("Handle", new[] { command.GetType() });
+					var handlerType = resolvedHandler.GetType();
 
-						// TODO: invoke on a task, wait for the results, and update the record appropriately
-						handler.Invoke(resolvedHandler, new object[] { command });
+					var handler = handlerType.GetMethod(HandleMethodName, new[] { command.GetType() });
 
-						MarkAsComplete(result.Id);
-					}
-					catch (Exception ex)
-					{
-						// the outer exception is always going to be TargetInvocationException
-						var appException = ex.InnerException;
+					// TODO: invoke on a task, wait for the results, and update the record appropriately
+					handler.Invoke(resolvedHandler, new object[] { command });
 
-						MarkAsFailed(result.Id, "Unrecoverable command processing error", appException);
+					result = (CommandPublicationRecord)MarkAsComplete(result.Id);
+				}
+				catch (Exception ex)
+				{
+					// the outer exception is always going to be TargetInvocationException
+					var appException = ex.InnerException;
 
-						throw appException;
-					}
+					// TODO: derive a better headline from the particular exception
+					result = (CommandPublicationRecord)MarkAsFailed(result.Id, "Unrecoverable command processing error", appException);
 				}
 			}
 

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Castle.Windsor;
+using Fulcrum.Core;
 using Fulcrum.Runtime.CommandPipeline;
 using Tests.Unit.Commands.Pipeline;
 using Xunit;
@@ -18,8 +19,9 @@ namespace Tests.Unit.Commands
 			var pipeline = new SimpleCommandPipeline(container, handlers);
 
 			pipeline.EnablePublication();
+			var record = pipeline.Publish(new PingPipelineCommand());
 
-			Assert.Throws<PingPongError>(() => { pipeline.Publish(new PingPipelineCommand()); });
+			Assert.Equal(CommandPublicationStatus.Failed, record.Status);
 		}
 
 		[Fact]
