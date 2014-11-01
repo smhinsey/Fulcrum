@@ -1,7 +1,7 @@
 ﻿using System;
 using Fulcrum.Core;
 
-namespace Fulcrum.Runtime.Api.Resources
+namespace Fulcrum.Runtime.Api.Results
 {
 	public class CommandDescription : CommandDescriptor
 	{

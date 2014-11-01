@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\JsonSchema\ISchemaPropertyMetadata.cs" />
+    <Compile Include="Common\JsonSchema\JsonLink.cs" />
     <Compile Include="Common\JsonSchema\SchemaObjectType.cs" />
     <Compile Include="Common\JsonSchema\SimplePropertyMetadata.cs" />
     <Compile Include="Common\JsonSchema\SchemaPropertyType.cs" />
@@ -131,6 +132,8 @@
     <Compile Include="Runtime\Api\BaseMvcController.cs" />
     <Compile Include="Runtime\Api\CommandModelBinder.cs" />
     <Compile Include="Runtime\Api\JsonNetResult.cs" />
+    <Compile Include="Runtime\Api\Results\CommandPublication\PublicationFailureResult.cs" />
+    <Compile Include="Runtime\Api\Results\CommandPublication\PublicationImmediateResult.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPipelineDbContext.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPublicationRecord.cs" />
     <Compile Include="Core\CommandValidationMessage.cs" />
@@ -141,7 +144,7 @@
     <Compile Include="Core\IQuery.cs" />
     <Compile Include="Core\ICommandValidationQuery.cs" />
     <Compile Include="Core\CommandDescriptor.cs" />
-    <Compile Include="Runtime\Api\Resources\QueryDescription.cs" />
+    <Compile Include="Runtime\Api\Results\QueryDescription.cs" />
     <Compile Include="Core\CommandSchema.cs" />
     <Compile Include="Core\QueryDescriptor.cs" />
     <Compile Include="Core\CommandPublicationStatus.cs" />
@@ -151,7 +154,7 @@
     <Compile Include="Runtime\ICommandLocator.cs" />
     <Compile Include="Core\PortableCommand.cs" />
     <Compile Include="Runtime\QueryValidationAttribute.cs" />
-    <Compile Include="Runtime\Api\Resources\CommandDescription.cs" />
+    <Compile Include="Runtime\Api\Results\CommandDescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\Registry\IRegistry.cs" />
     <Compile Include="Common\Registry\IRecord.cs" />

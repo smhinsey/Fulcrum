@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Fulcrum.Runtime.Api.Resources;
+using Fulcrum.Runtime.Api.Results;
 using Newtonsoft.Json.Schema;
 
 namespace Tests.ApiHarness.Controllers

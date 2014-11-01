@@ -6,7 +6,7 @@ using System.Web.Http.ModelBinding;
 using Fulcrum.Core;
 using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api;
-using Fulcrum.Runtime.Api.Resources;
+using Fulcrum.Runtime.Api.Results;
 
 namespace Tests.ApiHarness.Controllers
 {

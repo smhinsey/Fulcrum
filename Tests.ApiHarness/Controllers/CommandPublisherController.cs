@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Fulcrum.Core;
 using Fulcrum.Runtime.Api;
+using Fulcrum.Runtime.Api.Results.CommandPublication;
 
 namespace Tests.ApiHarness.Controllers
 {
@@ -24,7 +25,16 @@ namespace Tests.ApiHarness.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				return Json(_commandPipeline.Publish(command));
+				var record = _commandPipeline.Publish(command);
+
+				if (record.Status == CommandPublicationStatus.Failed)
+				{
+					return Json(new PublicationFailureResult(record));
+				}
+				else
+				{
+					return Json(new PublicationImmediateResult(record));
+				}
 			}
 			else
 			{

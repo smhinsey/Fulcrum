@@ -1,7 +1,7 @@
 ﻿using Fulcrum.Core;
 using Newtonsoft.Json.Schema;
 
-namespace Fulcrum.Runtime.Api.Resources
+namespace Fulcrum.Runtime.Api.Results
 {
 	public class QueryDescription : QueryDescriptor
 	{
