@@ -102,11 +102,11 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 			command.AssignPublicationRecordId(Guid.NewGuid());
 
-			var result = new CommandPublicationRecord(command);
+			var publicationRecord = new CommandPublicationRecord(command);
 
 			using (var db = new CommandPipelineDbContext())
 			{
-				db.CommandPublicationRecords.Add(result);
+				db.CommandPublicationRecords.Add(publicationRecord);
 
 				db.SaveChanges();
 			}
@@ -134,7 +134,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 					continue;
 				}
 
-				MarkAsProcessing(result.Id);
+				MarkAsProcessing(publicationRecord.Id);
 
 				try
 				{
@@ -147,7 +147,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 					// TODO: invoke on a task, wait for the results, and update the record appropriately
 					handler.Invoke(resolvedHandler, new object[] { command });
 
-					result = (CommandPublicationRecord)MarkAsComplete(result.Id);
+					publicationRecord = (CommandPublicationRecord)MarkAsComplete(publicationRecord.Id);
 				}
 				catch (Exception ex)
 				{
@@ -155,11 +155,11 @@ namespace Fulcrum.Runtime.CommandPipeline
 					var appException = ex.InnerException;
 
 					// TODO: derive a better headline from the particular exception
-					result = (CommandPublicationRecord)MarkAsFailed(result.Id, "Unrecoverable command processing error", appException);
+					publicationRecord = (CommandPublicationRecord)MarkAsFailed(publicationRecord.Id, "Unrecoverable command processing error", appException);
 				}
 			}
 
-			return result;
+			return publicationRecord;
 		}
 
 		private CommandPublicationRecord safelyFetchRecord(Guid publicationId, CommandPipelineDbContext db)

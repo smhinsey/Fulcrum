@@ -9,6 +9,7 @@ using Examples.UserProfileComponent.Public.Commands;
 using Fulcrum.Core;
 using Fulcrum.Core.Web;
 using Fulcrum.Runtime;
+using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.CommandPipeline;
 using Tests.Unit.Commands.Pipeline;
 using Tests.Unit.Commands.Validation;
@@ -44,6 +45,8 @@ namespace Tests.ApiHarness
 
 		private void configureCommandPipeline()
 		{
+			ModelBinders.Binders.Add(typeof(ICommand), new CommandModelBinder());
+
 			var handlers = PipelineInstaller.InstallHandlers(_container, typeof(PingPipelineCommand).Assembly);
 
 			var pipeline = new SimpleCommandPipeline(_container, handlers);
@@ -64,11 +67,19 @@ namespace Tests.ApiHarness
 					.UsingFactoryMethod(() => _commandLocator)
 				);
 
+			// set up web api di
 			GlobalConfiguration.Configuration.DependencyResolver = new WindsorDependencyResolver(_container.Kernel);
-
 			GlobalConfiguration.Configuration.Services.Replace(
 				typeof(IHttpControllerActivator),
 				new WindsorControllerActivator(_container));
+
+			// set up mvc di
+			_container.Register(Classes.FromThisAssembly()
+															 .BasedOn<IController>()
+															 .LifestyleTransient());
+
+			var controllerFactory = new WindsorControllerFactory(_container.Kernel);
+			ControllerBuilder.Current.SetControllerFactory(controllerFactory);
 		}
 	}
 }

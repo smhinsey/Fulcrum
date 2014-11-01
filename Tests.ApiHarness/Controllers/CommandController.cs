@@ -11,13 +11,13 @@ using Fulcrum.Runtime.Api.Resources;
 namespace Tests.ApiHarness.Controllers
 {
 	[RoutePrefix("commands")]
-	public class CommandPipelineController : ApiController
+	public class CommandController : ApiController
 	{
 		private readonly ICommandLocator _commandLocator;
 
 		private readonly ICommandPipeline _commandPipeline;
 
-		public CommandPipelineController(ICommandLocator commandLocator, ICommandPipeline commandPipeline)
+		public CommandController(ICommandLocator commandLocator, ICommandPipeline commandPipeline)
 		{
 			_commandLocator = commandLocator;
 			_commandPipeline = commandPipeline;
@@ -46,23 +46,6 @@ namespace Tests.ApiHarness.Controllers
 			var descriptions = commands.Select(command => new CommandDescription(command));
 
 			return descriptions.ToList();
-		}
-
-		[Route("{inNamespace}/{name}/publish")]
-		[HttpPost]
-		public ICommandPublicationRecord Publish(string inNamespace, string name, 
-			[ModelBinder(typeof(CommandModelBinder))] ICommand command)
-		{
-			if (ModelState.IsValid)
-			{
-				return _commandPipeline.Publish(command);
-			}
-			else
-			{
-				// return validation errors
-			}
-
-			throw new HttpResponseException(HttpStatusCode.NotFound);
 		}
 	}
 }

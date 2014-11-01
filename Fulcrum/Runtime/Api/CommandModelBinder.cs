@@ -1,17 +1,17 @@
 ﻿using System;
+using System.Reflection;
 using System.Web.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.ModelBinding;
+using System.Web.Mvc;
 
 namespace Fulcrum.Runtime.Api
 {
-	public class CommandModelBinder : IModelBinder
+	public class CommandModelBinder : DefaultModelBinder
 	{
 		public CommandModelBinder()
 		{
 		}
 
-		public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
 			var serviceLocator = GlobalConfiguration.Configuration.DependencyResolver.BeginScope();
 
@@ -27,16 +27,23 @@ namespace Fulcrum.Runtime.Api
 
 				var commandType = commandLocator.FindInNamespace(commandName, commandNamespace);
 
-				if (commandType != null)
+				var command = Activator.CreateInstance(commandType);
+
+				var commandProperties = command.GetType().GetProperties();
+
+				foreach (var property in commandProperties)
 				{
-					var command = Activator.CreateInstance(commandType);
+					if (property.CanWrite)
+					{
+						var value = bindingContext.ValueProvider.GetValue(property.Name);
 
-					bindingContext.Model = command;
-
-					return true;
+						property.SetValue(command, value.RawValue);
+					}
 				}
+
+				return command;
 			}
-			return false;
+			return null;
 		}
 	}
 }

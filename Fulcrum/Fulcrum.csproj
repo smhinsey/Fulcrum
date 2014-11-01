@@ -110,6 +110,7 @@
     <Compile Include="Core\Web\WindsorControllerActivator.cs" />
     <Compile Include="Core\Web\WindsorDependencyResolver.cs" />
     <Compile Include="Core\Web\WindsorDependencyScope.cs" />
+    <Compile Include="Core\Web\WindsorControllerFactory.cs" />
     <Compile Include="Migrations\201410290734358_initial.cs" />
     <Compile Include="Migrations\201410290734358_initial.Designer.cs">
       <DependentUpon>201410290734358_initial.cs</DependentUpon>
@@ -127,7 +128,9 @@
       <DependentUpon>201410300653164_initial3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Runtime\Api\BaseMvcController.cs" />
     <Compile Include="Runtime\Api\CommandModelBinder.cs" />
+    <Compile Include="Runtime\Api\JsonNetResult.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPipelineDbContext.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPublicationRecord.cs" />
     <Compile Include="Core\CommandValidationMessage.cs" />
