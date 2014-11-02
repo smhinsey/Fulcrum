@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fulcrum.Core;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
 
 namespace Fulcrum.Common.JsonSchema
@@ -31,9 +32,14 @@ namespace Fulcrum.Common.JsonSchema
 				return;
 			}
 
+			if (commandSchema.ValidateByQuery)
+			{
+				ValidationQueryUrl = commandSchema.ValidationQueryUrl;
+			}
+
 			foreach (var property in commandSchema.Properties)
 			{
-				var validated = isPropertyValidated(property.Value) || commandSchema.ValidateByQuery;
+				var validated = isPropertyValidated(property.Value);
 
 				var propertyType = getPropertyType(property.Value);
 
@@ -58,6 +64,9 @@ namespace Fulcrum.Common.JsonSchema
 				Properties.Add(property.Key, metadata);
 			}
 		}
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public string ValidationQueryUrl { get; set; }
 
 		public string Description { get; private set; }
 

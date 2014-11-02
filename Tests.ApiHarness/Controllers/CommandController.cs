@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Fulcrum.Core;
 using Fulcrum.Runtime;
@@ -69,7 +68,13 @@ namespace Tests.ApiHarness.Controllers
 				return Json(new PublicationImmediateResult(record));
 			}
 
-			return JsonWithoutNulls(ModelState.Values.Where(x => x.Errors.Count >= 1));
+			var states = ModelState.Values.Where(x => x.Errors.Count >= 1);
+
+			var errorMessages = (from state in states
+				from error in state.Errors
+				select error.ErrorMessage);
+
+			return JsonWithoutNulls(new { errors = errorMessages.ToList()});
 		}
 	}
 }
