@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Http;
+using System.Web.Mvc;
 using Fulcrum.Common.JsonSchema;
 using Fulcrum.Runtime;
+using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.Api.Results;
 
 namespace Tests.ApiHarness.Controllers
 {
 	[RoutePrefix("queries")]
-	public class QueryController : ApiController
+	public class QueryController : BaseMvcController
 	{
 		private readonly IQueryLocator _queryLocator;
 
@@ -20,7 +20,7 @@ namespace Tests.ApiHarness.Controllers
 
 		[Route("")]
 		[HttpGet]
-		public IList<QueryDescription> ListAll()
+		public ActionResult ListAll()
 		{
 			var queryGroups = _queryLocator.ListAllQueryGroups();
 
@@ -29,12 +29,12 @@ namespace Tests.ApiHarness.Controllers
 				from method in methods
 				select new QueryDescription(@group.Name, @group.Namespace, method, true, true)).ToList();
 
-			return result;
+			return Json(result);
 		}
 
 		[Route("{inNamespace}/{queryObjectName}/{query}")]
 		[HttpGet]
-		public QueryDescription QueryDetails(string inNamespace, string queryObjectName, string query)
+		public ActionResult QueryDetails(string inNamespace, string queryObjectName, string query)
 		{
 			var queryGroup = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
 
@@ -48,12 +48,12 @@ namespace Tests.ApiHarness.Controllers
 				queryDescription.Links.Add(new JsonLink("/queries/", "home"));
 			}
 
-			return queryDescription;
+			return Json(queryDescription);
 		}
 
 		[Route("{inNamespace}/{queryObjectName}")]
 		[HttpGet]
-		public QueryObjectDescription  QueryObjectDetails(string inNamespace, string queryObjectName)
+		public ActionResult QueryObjectDetails(string inNamespace, string queryObjectName)
 		{
 			var queryGroup = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
 
@@ -64,7 +64,15 @@ namespace Tests.ApiHarness.Controllers
 
 			var links = new List<JsonLink> { new JsonLink("/queries/", "home") };
 
-			return new QueryObjectDescription(links, descriptions);
+			return Json(new QueryObjectDescription(links, descriptions));
 		}
+
+		[Route("{inNamespace}/{queryObjectName}/{query}/results")]
+		[HttpGet]
+		public ActionResult Results()
+		{
+			return Json("Run query");
+		}
+
 	}
 }

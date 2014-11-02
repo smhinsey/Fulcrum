@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Odbc;
 using System.Linq;
 using System.Reflection;
 using Castle.Core.Internal;
@@ -51,7 +50,6 @@ namespace Fulcrum.Runtime.Api.Results
 			});
 
 			Links.Add(new JsonLink(string.Format("/queries/{0}/{1}/{2}/results?{3}", Namespace, QueryObject, Query, queryString), "results"));
-
 		}
 
 		public List<JsonLink> Links { get; private set; }
