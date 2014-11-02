@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Fulcrum.Core;
 using Fulcrum.Runtime;
@@ -32,7 +33,21 @@ namespace Tests.ApiHarness.Controllers
 				return Json(new CommandDescription(commandType, false));
 			}
 
-			return HttpNotFound("Unable to locate specified command.");
+			return Json(new { error = "Unable to locate specified command." });
+		}
+
+		[Route("publication-registry/{publicationId}")]
+		[HttpGet]
+		public ActionResult Inquire(Guid publicationId)
+		{
+			var record = _commandPipeline.Inquire(publicationId);
+
+			if (record != null)
+			{
+				return Json(new DetailedPublicationRecordResult(record));
+			}
+
+			return JsonWithoutNulls(new { error = string.Format("Record {0} not found in command registry.", publicationId) });
 		}
 
 		[Route("")]
@@ -47,6 +62,14 @@ namespace Tests.ApiHarness.Controllers
 		}
 
 		[Route("{inNamespace}/{name}/publish")]
+		[HttpGet]
+		public JsonResult PublicationGetWarning()
+		{
+			return Json(new { error = "HTTP POST only." });
+		}
+
+		[Route("{inNamespace}/{name}/publish")]
+		[HttpPost]
 		public JsonResult Publish(string inNamespace, string name,
 			[ModelBinder(typeof(CommandModelBinder))] ICommand command)
 		{
@@ -62,10 +85,10 @@ namespace Tests.ApiHarness.Controllers
 
 				if (record.Status == CommandPublicationStatus.Failed)
 				{
-					return Json(new PublicationFailureResult(record));
+					return Json(new CommandFailedResult(record));
 				}
 
-				return Json(new PublicationImmediateResult(record));
+				return Json(new CommandCompleteOrPendingResult(record));
 			}
 
 			var states = ModelState.Values.Where(x => x.Errors.Count >= 1);
@@ -74,7 +97,7 @@ namespace Tests.ApiHarness.Controllers
 				from error in state.Errors
 				select error.ErrorMessage);
 
-			return JsonWithoutNulls(new { errors = errorMessages.ToList()});
+			return JsonWithoutNulls(new { errors = errorMessages.ToList() });
 		}
 	}
 }

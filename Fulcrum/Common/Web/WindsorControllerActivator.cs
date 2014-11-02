@@ -4,7 +4,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
 using Castle.Windsor;
 
-namespace Fulcrum.Core.Web
+namespace Fulcrum.Common.Web
 {
 	// Based on http://blog.ploeh.dk/2012/10/03/DependencyInjectioninASP.NETWebAPIwithCastleWindsor/
 	public class WindsorControllerActivator : IHttpControllerActivator

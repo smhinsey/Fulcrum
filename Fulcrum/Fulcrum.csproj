@@ -108,10 +108,10 @@
     <Compile Include="Common\JsonSchema\ValidatedPropertyMetadata.cs" />
     <Compile Include="Core\DefaultCommand.cs" />
     <Compile Include="Core\ICommandPipeline.cs" />
-    <Compile Include="Core\Web\WindsorControllerActivator.cs" />
-    <Compile Include="Core\Web\WindsorDependencyResolver.cs" />
-    <Compile Include="Core\Web\WindsorDependencyScope.cs" />
-    <Compile Include="Core\Web\WindsorControllerFactory.cs" />
+    <Compile Include="Common\Web\WindsorControllerActivator.cs" />
+    <Compile Include="Common\Web\WindsorDependencyResolver.cs" />
+    <Compile Include="Common\Web\WindsorDependencyScope.cs" />
+    <Compile Include="Common\Web\WindsorControllerFactory.cs" />
     <Compile Include="Migrations\201410290734358_initial.cs" />
     <Compile Include="Migrations\201410290734358_initial.Designer.cs">
       <DependentUpon>201410290734358_initial.cs</DependentUpon>
@@ -132,8 +132,10 @@
     <Compile Include="Runtime\Api\BaseMvcController.cs" />
     <Compile Include="Runtime\Api\CommandModelBinder.cs" />
     <Compile Include="Runtime\Api\JsonNetResult.cs" />
-    <Compile Include="Runtime\Api\Results\CommandPublication\PublicationFailureResult.cs" />
-    <Compile Include="Runtime\Api\Results\CommandPublication\PublicationImmediateResult.cs" />
+    <Compile Include="Runtime\Api\Results\CommandPublication\CommandFailedResult.cs" />
+    <Compile Include="Runtime\Api\Results\CommandPublication\DetailedPublicationRecordResult.cs" />
+    <Compile Include="Runtime\Api\Results\CommandPublication\CommandCompleteOrPendingResult.cs" />
+    <Compile Include="Runtime\QueryLocator.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPipelineDbContext.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPublicationRecord.cs" />
     <Compile Include="Core\CommandValidationMessage.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Runtime\CommandPipeline\SimpleCommandPipeline.cs" />
     <Compile Include="Runtime\ICommandLocator.cs" />
     <Compile Include="Core\PortableCommand.cs" />
+    <Compile Include="Runtime\IQueryLocator.cs" />
     <Compile Include="Runtime\QueryValidationAttribute.cs" />
     <Compile Include="Runtime\Api\Results\CommandDescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

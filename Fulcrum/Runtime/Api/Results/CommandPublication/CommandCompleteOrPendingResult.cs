@@ -5,16 +5,20 @@ using Fulcrum.Core;
 
 namespace Fulcrum.Runtime.Api.Results.CommandPublication
 {
-	public class PublicationImmediateResult
+	public class CommandCompleteOrPendingResult
 	{
-		public PublicationImmediateResult(ICommandPublicationRecord record)
+		public CommandCompleteOrPendingResult(ICommandPublicationRecord record)
 		{
 			Created = record.Created;
 			Id = record.Id;
 			Status = record.Status;
 			Updated = record.Updated;
 			CommandName = record.PortableCommand.ClrTypeName;
-			Links = new List<JsonLink>() { new JsonLink(string.Format("command-registry/{0}", Id), "details") };
+			Links = new List<JsonLink>()
+			{
+				new JsonLink(string.Format("/commands/publication-registry/{0}", Id), "details"),
+				new JsonLink("/commands/", "home")
+			};
 		}
 
 		public string CommandName { get; set; }

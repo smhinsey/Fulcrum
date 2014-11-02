@@ -1,16 +1,15 @@
-﻿using Fulcrum.Core;
-using Newtonsoft.Json.Schema;
+﻿using System;
+using System.Collections.Generic;
+using Fulcrum.Core;
 
 namespace Fulcrum.Runtime.Api.Results
 {
 	public class QueryDescription : QueryDescriptor
 	{
-		public QueryDescription(string parentNamespace, string name, JsonSchema schema) :
-			base(parentNamespace, name)
+		public QueryDescription(string parentNamespace, string name, string method,
+			IDictionary<string, Type> parameters) :
+				base(parentNamespace, name, method, parameters)
 		{
-			Schema = schema;
 		}
-
-		public JsonSchema Schema { get; private set; }
 	}
 }

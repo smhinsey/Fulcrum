@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel;
 
-namespace Fulcrum.Core.Web
+namespace Fulcrum.Common.Web
 {
 	public class WindsorControllerFactory : DefaultControllerFactory
 	{

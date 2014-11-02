@@ -6,24 +6,25 @@ using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Examples.UserProfileComponent.Public.Commands;
+using Fulcrum.Common.Web;
 using Fulcrum.Core;
-using Fulcrum.Core.Web;
 using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.CommandPipeline;
 using Tests.Unit.Commands.Pipeline;
 using Tests.Unit.Commands.Validation;
+using Tests.Unit.Queries;
+using Tests.Unit.Queries.Location.Additional;
 
 namespace Tests.ApiHarness
 {
 	public class WebApiApplication : HttpApplication
 	{
-		private CommandLocator _commandLocator;
-
 		private IWindsorContainer _container;
 
 		protected void Application_Start()
 		{
+			configureQueryLocations();
 			configureCommandLocations();
 			configureContainer();
 			configureCommandPipeline();
@@ -36,11 +37,16 @@ namespace Tests.ApiHarness
 
 		private void configureCommandLocations()
 		{
-			_commandLocator = new CommandLocator(typeof(RegisterUser).Assembly, typeof(RegisterUser).Namespace);
+			var commandLocator = new CommandLocator(typeof(RegisterUser).Assembly, typeof(RegisterUser).Namespace);
 
 			// TODO: Create generalized config system
-			_commandLocator.AddCommandSource(typeof(SchemaTestingCommand).Assembly, typeof(SchemaTestingCommand).Namespace);
-			_commandLocator.AddCommandSource(typeof(PingPipelineCommand).Assembly, typeof(PingPipelineCommand).Namespace);
+			commandLocator.AddCommandSource(typeof(SchemaTestingCommand).Assembly, typeof(SchemaTestingCommand).Namespace);
+			commandLocator.AddCommandSource(typeof(PingPipelineCommand).Assembly, typeof(PingPipelineCommand).Namespace);
+
+			_container.Register(
+				Component.For<ICommandLocator>()
+					.UsingFactoryMethod(() => commandLocator)
+				);
 		}
 
 		private void configureCommandPipeline()
@@ -62,11 +68,6 @@ namespace Tests.ApiHarness
 				.BasedOn<ApiController>()
 				.LifestylePerWebRequest());
 
-			_container.Register(
-				Component.For<ICommandLocator>()
-					.UsingFactoryMethod(() => _commandLocator)
-				);
-
 			// set up web api di
 			GlobalConfiguration.Configuration.DependencyResolver = new WindsorDependencyResolver(_container.Kernel);
 			GlobalConfiguration.Configuration.Services.Replace(
@@ -75,11 +76,24 @@ namespace Tests.ApiHarness
 
 			// set up mvc di
 			_container.Register(Classes.FromThisAssembly()
-															 .BasedOn<IController>()
-															 .LifestyleTransient());
+				.BasedOn<IController>()
+				.LifestyleTransient());
 
 			var controllerFactory = new WindsorControllerFactory(_container.Kernel);
 			ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+		}
+
+		private void configureQueryLocations()
+		{
+			var queryLocator = new QueryLocator(typeof(TestQuery).Assembly, typeof(TestQuery).Namespace);
+
+			// TODO: Create generalized config system
+			queryLocator.AddQuerySource(typeof(LocateThisQuery).Assembly, typeof(LocateThisQuery).Namespace);
+
+			_container.Register(
+				Component.For<IQueryLocator>()
+					.UsingFactoryMethod(() => queryLocator)
+				);
 		}
 	}
 }

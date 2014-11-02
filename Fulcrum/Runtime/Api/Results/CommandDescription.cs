@@ -17,12 +17,16 @@ namespace Fulcrum.Runtime.Api.Results
 			
 			Links = new List<JsonLink>()
 			{
-				new JsonLink(string.Format("/commands/{0}/{1}/publish", Namespace, Name), "publication")
+				new JsonLink(string.Format("/commands/{0}/{1}/publish", Namespace, Name), "publication"),
 			};
 
 			if (includeDetails)
 			{
 				Links.Add(new JsonLink(string.Format("/commands/{0}/{1}", Namespace, Name), "details"));
+			}
+			else
+			{
+				Links.Add(new JsonLink("/commands/", "home"));
 			}
 		}
 

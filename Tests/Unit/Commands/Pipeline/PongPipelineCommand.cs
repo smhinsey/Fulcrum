@@ -10,6 +10,6 @@ namespace Tests.Unit.Commands.Pipeline
 
 		[Required]
 		[Range(18, 100)]
-		public int Validated { get; set; }
+		public int NumberToBeValidated { get; set; }
 	}
 }

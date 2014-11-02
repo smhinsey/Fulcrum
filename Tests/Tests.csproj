@@ -87,6 +87,9 @@
     <Compile Include="Unit\Commands\Location\LocateAnotherCommand.cs" />
     <Compile Include="Unit\Commands\Location\LocateThisCommand.cs" />
     <Compile Include="Unit\Commands\Validation\ValidationQuery.cs" />
+    <Compile Include="Unit\Queries\Location\Additional\LocateThisQuery.cs" />
+    <Compile Include="Unit\Queries\QueryLocatorTests.cs" />
+    <Compile Include="Unit\Queries\Location\TestQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fulcrum\Fulcrum.csproj">

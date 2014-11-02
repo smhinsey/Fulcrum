@@ -3,28 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Dependencies;
 using Castle.MicroKernel;
-using IDependencyResolver = System.Web.Http.Dependencies.IDependencyResolver;
+using Castle.MicroKernel.Lifestyle;
 
 // based on http://cangencer.wordpress.com/2012/12/22/integrating-asp-net-web-api-with-castle-windsor/
 
-namespace Fulcrum.Core.Web
+namespace Fulcrum.Common.Web
 {
-	public class WindsorDependencyResolver : IDependencyResolver
+	public class WindsorDependencyScope : IDependencyScope
 	{
 		private readonly IKernel _container;
 
-		public WindsorDependencyResolver(IKernel container)
+		private readonly IDisposable _scope;
+
+		public WindsorDependencyScope(IKernel container)
 		{
 			_container = container;
-		}
-
-		public IDependencyScope BeginScope()
-		{
-			return new WindsorDependencyScope(_container);
+			_scope = container.BeginScope();
 		}
 
 		public void Dispose()
 		{
+			_scope.Dispose();
 		}
 
 		public object GetService(Type serviceType)

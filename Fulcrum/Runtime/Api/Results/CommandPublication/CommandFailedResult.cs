@@ -2,9 +2,9 @@ using Fulcrum.Core;
 
 namespace Fulcrum.Runtime.Api.Results.CommandPublication
 {
-	public class PublicationFailureResult : PublicationImmediateResult
+	public class CommandFailedResult : CommandCompleteOrPendingResult
 	{
-		public PublicationFailureResult(ICommandPublicationRecord record) : base(record)
+		public CommandFailedResult(ICommandPublicationRecord record) : base(record)
 		{
 			ErrorDetails = record.ErrorDetails;
 			ErrorHeadline = record.ErrorHeadline;
