@@ -10,12 +10,28 @@ namespace Fulcrum.Runtime.Api
 {
 	public class JsonNetResult : JsonResult
 	{
+		public JsonNetResult(bool includeNulls)
+		{
+			var nullRule = includeNulls ? NullValueHandling.Include : NullValueHandling.Ignore;
+
+			Settings = new JsonSerializerSettings
+			{
+				ReferenceLoopHandling = ReferenceLoopHandling.Error,
+				NullValueHandling = nullRule,
+				Formatting = Formatting.None,
+				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				Converters = new List<JsonConverter>
+					{
+						new StringEnumConverter()
+					}
+			};
+		}
+
 		public JsonNetResult()
 		{
 			Settings = new JsonSerializerSettings
 			{
 				ReferenceLoopHandling = ReferenceLoopHandling.Error,
-				NullValueHandling = NullValueHandling.Include,
 				Formatting = Formatting.None,
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
 				Converters = new List<JsonConverter>

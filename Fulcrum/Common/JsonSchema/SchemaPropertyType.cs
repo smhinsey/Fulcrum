@@ -4,8 +4,8 @@
 	{
 		Boolean,
 		Integer,
-		Number,
+		Float,
 		String,
-		Null,
+		Object,
 	}
 }

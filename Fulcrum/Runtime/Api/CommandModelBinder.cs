@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -37,7 +36,16 @@ namespace Fulcrum.Runtime.Api
 					{
 						var value = bindingContext.ValueProvider.GetValue(property.Name);
 
-						property.SetValue(command, value.RawValue);
+						if (value == null)
+						{
+							var errorMessage = string.Format("Property '{0}' missing from command.", property.Name);
+
+							bindingContext.ModelState.AddModelError(property.Name, errorMessage);
+						}
+						else
+						{
+							property.SetValue(command, value.RawValue);
+						}
 					}
 				}
 

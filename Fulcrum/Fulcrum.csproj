@@ -104,7 +104,7 @@
     <Compile Include="Common\JsonSchema\SchemaObjectType.cs" />
     <Compile Include="Common\JsonSchema\SimplePropertyMetadata.cs" />
     <Compile Include="Common\JsonSchema\SchemaPropertyType.cs" />
-    <Compile Include="Common\JsonSchema\SchemaRoot.cs" />
+    <Compile Include="Common\JsonSchema\SchemaObject.cs" />
     <Compile Include="Common\JsonSchema\ValidatedPropertyMetadata.cs" />
     <Compile Include="Core\DefaultCommand.cs" />
     <Compile Include="Core\ICommandPipeline.cs" />

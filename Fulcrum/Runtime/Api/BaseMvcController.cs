@@ -13,8 +13,18 @@ namespace Fulcrum.Runtime.Api
 				Data = data,
 				ContentType = contentType,
 				ContentEncoding = contentEncoding,
-				JsonRequestBehavior = behavior
+				JsonRequestBehavior = JsonRequestBehavior.AllowGet
+			};
+		}
+
+		protected JsonResult JsonWithoutNulls(object data)
+		{
+			return new JsonNetResult(false)
+			{
+				Data = data,
+				JsonRequestBehavior = JsonRequestBehavior.AllowGet
 			};
 		} 
+
 	}
 }

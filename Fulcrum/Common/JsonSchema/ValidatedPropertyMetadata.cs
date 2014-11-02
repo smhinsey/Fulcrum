@@ -1,4 +1,6 @@
-﻿namespace Fulcrum.Common.JsonSchema
+﻿using Newtonsoft.Json;
+
+namespace Fulcrum.Common.JsonSchema
 {
 	public class ValidatedPropertyMetadata : ISchemaPropertyMetadata
 	{
@@ -7,8 +9,30 @@
 			Type = type;
 		}
 
-		public SchemaPropertyType Type { get; private set; }
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public bool? ExclusiveMaximum { get; set; }
 
-		// TODO: add all json schema validation options, query validation, and ShouldSerialize{Member} methods
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public bool? ExclusiveMinimum { get; set; }
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public double? Maximum { get; set; }
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public int? MaximumLength { get; set; }
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public double? Minimum { get; set; }
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public int? MinimumLength { get; set; }
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public string Pattern { get; set; }
+
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public bool? Required { get; set; }
+
+		public SchemaPropertyType Type { get; private set; }
 	}
 }
