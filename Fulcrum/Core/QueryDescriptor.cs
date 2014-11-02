@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Fulcrum.Core
 {
 	public class QueryDescriptor
 	{
-		public QueryDescriptor(string name, string @namespace, string method, IDictionary<string, Type> parameters)
+		public QueryDescriptor(string name, string @namespace, MethodInfo methodInfo)
 		{
-			Parameters = parameters;
-			Method = method;
 			Namespace = @namespace;
 			Name = name;
 		}

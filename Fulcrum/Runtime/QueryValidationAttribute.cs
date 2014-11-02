@@ -15,10 +15,12 @@ namespace Fulcrum.Runtime
 					x.GetGenericTypeDefinition() != typeof(ICommandValidationQuery<>)))
 			{
 				throw new ArgumentException
-					("You must supply an type which implements ICommandValidationQuery", "queryType");
+					("You must supply a type which implements ICommandValidationQuery", "queryType");
 			}
 
-			Descriptor = new QueryDescriptor(queryType.Name, queryType.Namespace);
+			var method = queryType.GetType().GetMethod("ValidateCommand");
+
+			Descriptor = new QueryDescriptor(queryType.Name, queryType.Namespace, method);
 		}
 
 		public QueryDescriptor Descriptor { get; private set; }

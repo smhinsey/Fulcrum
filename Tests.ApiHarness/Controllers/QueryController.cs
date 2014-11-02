@@ -2,7 +2,6 @@
 using System.Web.Http;
 using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api.Results;
-using Newtonsoft.Json.Schema;
 
 namespace Tests.ApiHarness.Controllers
 {
@@ -16,20 +15,18 @@ namespace Tests.ApiHarness.Controllers
 			_queryLocator = queryLocator;
 		}
 
-		[Route("")]
-		[HttpGet]
-		public IList<QueryDescription> ListAll()
-		{
-
-
-			return new List<QueryDescription>();
-		}
-
 		[Route("{groupName}")]
 		[HttpGet]
 		public QueryDescription Details(string groupName)
 		{
-			
+			return null;
+		}
+
+		[Route("")]
+		[HttpGet]
+		public IList<QueryDescription> ListAll()
+		{
+			return new List<QueryDescription>();
 		}
 	}
 }
