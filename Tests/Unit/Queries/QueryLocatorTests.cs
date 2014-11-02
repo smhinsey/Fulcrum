@@ -32,7 +32,7 @@ namespace Tests.Unit.Queries
 
 			extractor.AddQuerySource(secondQueryType.Assembly, secondQueryType.Namespace);
 
-			var queries = extractor.ListAllQueries();
+			var queries = extractor.ListAllQueryGroups();
 
 			var expectedQueries = new List<Type>()
 			{
@@ -50,7 +50,7 @@ namespace Tests.Unit.Queries
 
 			var extractor = new QueryLocator(queryType.Assembly, queryType.Namespace);
 
-			var queries = extractor.ListAllQueries();
+			var queries = extractor.ListAllQueryGroups();
 
 			var expectedQueries = new List<Type>()
 			{
@@ -69,7 +69,7 @@ namespace Tests.Unit.Queries
 
 			extractor.AddQuerySource(queryType.Assembly, queryType.Namespace);
 
-			var commands = extractor.ListAllQueries();
+			var commands = extractor.ListAllQueryGroups();
 
 			var expectedCommands = new List<Type>()
 			{

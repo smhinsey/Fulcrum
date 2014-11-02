@@ -8,14 +8,10 @@ namespace Fulcrum.Runtime
 	{
 		void AddQuerySource(Assembly assembly, string inNamespace);
 
-		Type FindInNamespace(string commandName, string inNamespace);
+		Type FindInNamespace(string queryName, string inNamespace);
 
-		/// <summary>
-		///   Returns all instances of IQuery located in the configured assembly and
-		///   namespace.
-		/// </summary>
-		/// <returns>A list of query types in the specified location.</returns>
-		IList<Type> ListAllQueries();
- 
+		IList<Type> ListAllQueryGroups();
+
+		IList<MethodInfo> ListQueriesInQueryObject(Type groupType);
 	}
 }

@@ -112,7 +112,7 @@ namespace Fulcrum.Runtime
 
 			commandSchema.ValidateByQuery = true;
 			// NOTE: we need a globally-safe way of referring to URLs
-			commandSchema.ValidationQueryUrl = "/validation-queries/" + descriptor.Namespace + "/" + descriptor.Name;
+			commandSchema.ValidationQueryUrl = "/validation-queries/" + descriptor.Namespace + "/" + descriptor.QueryObject;
 		}
 
 		private static string formatPropertyName(string name)

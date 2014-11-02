@@ -18,7 +18,7 @@ namespace Fulcrum.Runtime
 					("You must supply a type which implements ICommandValidationQuery", "queryType");
 			}
 
-			var method = queryType.GetType().GetMethod("ValidateCommand");
+			var method = queryType.GetMethod("ValidateCommand");
 
 			Descriptor = new QueryDescriptor(queryType.Name, queryType.Namespace, method);
 		}

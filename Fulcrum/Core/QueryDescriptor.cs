@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Fulcrum.Core
 {
+	// TODO: clarify the ambiguity query methods not being directly represented in IQuery
 	public class QueryDescriptor
 	{
-		public QueryDescriptor(string name, string @namespace, MethodInfo methodInfo)
+		public QueryDescriptor(string queryObject, string @namespace, MethodInfo methodInfo)
 		{
 			Namespace = @namespace;
-			Name = name;
+			QueryObject = queryObject;
+			Query = methodInfo.Name;
 		}
 
-		public string Name { get; private set; }
+		public string Query { get; private set; }
+
+		public string QueryObject { get; private set; }
 
 		public string Namespace { get; private set; }
-
-		public string Method { get; private set; }
-
-		public IDictionary<string, Type> Parameters { get; private set; } 
 	}
 }

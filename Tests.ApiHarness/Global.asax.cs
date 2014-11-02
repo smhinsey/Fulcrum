@@ -24,9 +24,9 @@ namespace Tests.ApiHarness
 
 		protected void Application_Start()
 		{
+			configureContainer();
 			configureQueryLocations();
 			configureCommandLocations();
-			configureContainer();
 			configureCommandPipeline();
 
 			AreaRegistration.RegisterAllAreas();

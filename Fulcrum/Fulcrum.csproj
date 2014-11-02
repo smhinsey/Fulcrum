@@ -135,6 +135,7 @@
     <Compile Include="Runtime\Api\Results\CommandPublication\CommandFailedResult.cs" />
     <Compile Include="Runtime\Api\Results\CommandPublication\DetailedPublicationRecordResult.cs" />
     <Compile Include="Runtime\Api\Results\CommandPublication\CommandCompleteOrPendingResult.cs" />
+    <Compile Include="Runtime\Api\Results\QueryObjectDescription.cs" />
     <Compile Include="Runtime\QueryLocator.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPipelineDbContext.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPublicationRecord.cs" />

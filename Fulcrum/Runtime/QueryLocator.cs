@@ -40,12 +40,12 @@ namespace Fulcrum.Runtime
 				.ForEach(_commands.Add);
 		}
 
-		public Type FindInNamespace(string commandName, string inNamespace)
+		public Type FindInNamespace(string queryName, string inNamespace)
 		{
-			return _commands.FirstOrDefault(t => t.Name == commandName && t.Namespace == inNamespace);
+			return _commands.FirstOrDefault(t => t.Name == queryName && t.Namespace == inNamespace);
 		}
 
-		public IList<Type> ListAllQueries()
+		public IList<Type> ListAllQueryGroups()
 		{
 			var types = new List<Type>();
 
@@ -57,6 +57,23 @@ namespace Fulcrum.Runtime
 			}
 
 			return types;
+		}
+
+		public IList<MethodInfo> ListQueriesInQueryObject(Type queryGroup)
+		{
+			var results = new List<MethodInfo>();
+
+			var methods = queryGroup.GetMethods();
+
+			foreach (var method in methods)
+			{
+				if (method.DeclaringType == queryGroup && method.IsPublic)
+				{
+					results.Add(method);
+				}
+			}
+
+			return results;
 		}
 	}
 }
