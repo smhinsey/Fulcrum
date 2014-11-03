@@ -167,6 +167,7 @@ namespace Tests.ApiHarness.Controllers
 
 				var results = queryMethod.Invoke(queryImplementation, parameterValues);
 
+				// TODO: we need a scheme for identifying paginated queries and supporting them here
 				var wrappedResults = new
 				{
 					links = new List<JsonLink>
