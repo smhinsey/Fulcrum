@@ -90,6 +90,7 @@ namespace Tests.ApiHarness.Controllers
 
 				var paramIndex = 0;
 
+				// TODO: this should be factored out
 				foreach (var parameter in parameters)
 				{
 					var parameterInRequest = Request.Params[parameter.Name];
