@@ -49,7 +49,25 @@ namespace Fulcrum.Runtime.Api.Results
 				paramCounter++;
 			});
 
-			Links.Add(new JsonLink(string.Format("/queries/{0}/{1}/{2}/results?{3}", Namespace, QueryObject, Query, queryString), "results"));
+			var isValidationQuery = false;
+
+			var queryObjectType = methodInfo.DeclaringType;
+
+			if (queryObjectType.GetInterfaces().Any(i => typeof(ICommandValidationQuery).IsAssignableFrom(i)))
+			{
+				isValidationQuery = true;
+			}
+
+			if (isValidationQuery)
+			{
+				Links.Add(new JsonLink(string.Format("/queries/{0}/{1}/{2}/validate", 
+					Namespace, QueryObject, Query), "results"));
+			}
+			else
+			{
+				Links.Add(new JsonLink(string.Format("/queries/{0}/{1}/{2}/results?{3}", 
+					Namespace, QueryObject, Query, queryString), "results"));
+			}
 		}
 
 		public List<JsonLink> Links { get; private set; }

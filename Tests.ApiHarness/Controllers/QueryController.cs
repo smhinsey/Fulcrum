@@ -23,12 +23,12 @@ namespace Tests.ApiHarness.Controllers
 		[HttpGet]
 		public ActionResult ListAll()
 		{
-			var queryGroups = _queryLocator.ListAllQueryGroups();
+			var queryObjects = _queryLocator.ListAllQueryObjects();
 
-			var result = (from @group in queryGroups
-				let methods = _queryLocator.ListQueriesInQueryObject(@group)
+			var result = (from queryObject in queryObjects
+				let methods = _queryLocator.ListQueriesInQueryObject(queryObject)
 				from method in methods
-				select new QueryDescription(@group.Name, @group.Namespace, method, true, true)).ToList();
+				select new QueryDescription(queryObject.Name, queryObject.Namespace, method, true, true)).ToList();
 
 			return Json(result);
 		}
@@ -37,12 +37,12 @@ namespace Tests.ApiHarness.Controllers
 		[HttpGet]
 		public ActionResult QueryDetails(string inNamespace, string queryObjectName, string query)
 		{
-			var queryGroup = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
+			var queryObject = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
 
-			var queries = _queryLocator.ListQueriesInQueryObject(queryGroup);
+			var queries = _queryLocator.ListQueriesInQueryObject(queryObject);
 
 			var queryDescription = queries.Where(q => q.Name == query).Select(q =>
-				new QueryDescription(queryGroup.Name, queryGroup.Namespace, q, false, true)).SingleOrDefault();
+				new QueryDescription(queryObject.Name, queryObject.Namespace, q, false, true)).SingleOrDefault();
 
 			if (queryDescription != null)
 			{
@@ -151,9 +151,11 @@ namespace Tests.ApiHarness.Controllers
 						}
 						else
 						{
-							throw new InvalidOperationException(
-								string.Format("Parameter {0} is of an unsupported type {1}",
-									parameter.Name, parameter.ParameterType.Name));
+							return Json(new
+							{
+								error = string.Format("Query parameter {0}'s type, {1}, is not supported and this query cannot be executed.",
+									parameter.Name, parameter.ParameterType.Name)
+							});
 						}
 					}
 
@@ -162,7 +164,10 @@ namespace Tests.ApiHarness.Controllers
 
 				if (missingParams.Count > 0)
 				{
-					return Json(new { error = "Unable to execute query due to missing or invalid parameter(s).", missingOrInvalidParameters = missingParams });
+					return Json(new
+					{
+						error = "Unable to execute query due to missing or invalid parameter(s).", missingOrInvalidParameters = missingParams
+					});
 				}
 
 				var results = queryMethod.Invoke(queryImplementation, parameterValues);
@@ -182,6 +187,26 @@ namespace Tests.ApiHarness.Controllers
 			}
 
 			return Json(string.Format("Unable to locate implementation for query {0}", query));
+		}
+
+		[Route("{inNamespace}/{queryObjectName}/validate")]
+		[HttpPost]
+		public ActionResult Validate(string inNamespace, string queryObjectName)
+		{
+			// TODO: implement validation query execution
+
+			// the primary piece of work here is to set up model binding for an ICommand
+			// instance coming out of the POST payload, just like the command publication
+			// API endpoint.
+
+			return Json("Command validation queries not yet implemented.");
+		}
+
+		[Route("{inNamespace}/{queryObjectName}/validate")]
+		[HttpGet]
+		public ActionResult ValidateGetWarning(string inNamespace, string queryObjectName)
+		{
+			return Json(new { error = "HTTP POST only." });
 		}
 	}
 }

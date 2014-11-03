@@ -37,10 +37,9 @@ namespace Tests.ApiHarness
 
 		private void configureCommandLocations()
 		{
-			var commandLocator = new CommandLocator(typeof(RegisterUser).Assembly, typeof(RegisterUser).Namespace);
+			var commandLocator = new CommandLocator(typeof(SchemaTestingCommand).Assembly, typeof(SchemaTestingCommand).Namespace);
 
 			// TODO: Create generalized config system
-			commandLocator.AddCommandSource(typeof(SchemaTestingCommand).Assembly, typeof(SchemaTestingCommand).Namespace);
 			commandLocator.AddCommandSource(typeof(PingPipelineCommand).Assembly, typeof(PingPipelineCommand).Namespace);
 
 			_container.Register(
@@ -89,6 +88,7 @@ namespace Tests.ApiHarness
 
 			// TODO: Create generalized config system
 			queryLocator.AddQuerySource(typeof(LocateThisQuery).Assembly, typeof(LocateThisQuery).Namespace);
+			queryLocator.AddQuerySource(typeof(ValidationQuery).Assembly, typeof(ValidationQuery).Namespace);
 
 			_container.Register(
 				Component.For<IQueryLocator>()

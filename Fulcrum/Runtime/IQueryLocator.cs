@@ -10,7 +10,7 @@ namespace Fulcrum.Runtime
 
 		Type FindInNamespace(string queryName, string inNamespace);
 
-		IList<Type> ListAllQueryGroups();
+		IList<Type> ListAllQueryObjects();
 
 		IList<MethodInfo> ListQueriesInQueryObject(Type groupType);
 	}

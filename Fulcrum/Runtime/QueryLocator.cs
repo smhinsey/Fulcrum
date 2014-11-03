@@ -45,7 +45,7 @@ namespace Fulcrum.Runtime
 			return _commands.FirstOrDefault(t => t.Name == queryName && t.Namespace == inNamespace);
 		}
 
-		public IList<Type> ListAllQueryGroups()
+		public IList<Type> ListAllQueryObjects()
 		{
 			var types = new List<Type>();
 
