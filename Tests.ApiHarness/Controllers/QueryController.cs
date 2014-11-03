@@ -165,7 +165,19 @@ namespace Tests.ApiHarness.Controllers
 					return Json(new { error = "Unable to execute query due to missing or invalid parameter(s).", missingOrInvalidParameters = missingParams });
 				}
 
-				return Json(queryMethod.Invoke(queryImplementation, parameterValues));
+				var results = queryMethod.Invoke(queryImplementation, parameterValues);
+
+				var wrappedResults = new
+				{
+					links = new List<JsonLink>
+					{
+						new JsonLink("/queries/", "home"),
+						new JsonLink(string.Format("/queries/{0}/{1}/{2}", inNamespace, queryObjectName, query), "details")
+					},
+					results
+				};
+
+				return Json(wrappedResults);
 			}
 
 			return Json(string.Format("Unable to locate implementation for query {0}", query));
