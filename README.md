@@ -8,4 +8,4 @@ To view demo
 * Build
 * Run update-database
 * Set API Test Harness as startup project
-* Start API Test Harness, view in browser at /commands or /queries
+* Start API Test Harness, & using Postman issue GET requests to /commands or /queries
