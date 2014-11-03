@@ -7,7 +7,6 @@ using Fulcrum.Core;
 using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.Api.Results;
-using Fulcrum.Runtime.Api.Results.CommandPublication;
 
 namespace Tests.ApiHarness.Controllers
 {
@@ -208,8 +207,8 @@ namespace Tests.ApiHarness.Controllers
 			var states = ModelState.Values.Where(x => x.Errors.Count >= 1);
 
 			var errorMessages = (from state in states
-													 from error in state.Errors
-													 select error.ErrorMessage);
+				from error in state.Errors
+				select error.ErrorMessage);
 
 			return JsonWithoutNulls(new { errors = errorMessages.ToList() });
 		}

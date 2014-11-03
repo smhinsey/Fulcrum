@@ -47,7 +47,10 @@ namespace Tests.ApiHarness.Controllers
 				return Json(new DetailedPublicationRecordResult(record));
 			}
 
-			return JsonWithoutNulls(new { error = string.Format("Record {0} not found in command registry.", publicationId) });
+			return JsonWithoutNulls(new
+			{
+				error = string.Format("Record {0} not found in command registry.", publicationId)
+			});
 		}
 
 		[Route("")]

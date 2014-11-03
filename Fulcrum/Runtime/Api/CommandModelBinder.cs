@@ -44,7 +44,17 @@ namespace Fulcrum.Runtime.Api
 						}
 						else
 						{
-							property.SetValue(command, value.RawValue);
+							try
+							{
+								property.SetValue(command, value.RawValue);
+							}
+							catch (Exception e)
+							{
+								var errorMessage = string.Format("Error setting command property '{0}':{1}", 
+									property.Name, e.Message);
+
+								bindingContext.ModelState.AddModelError(property.Name, errorMessage);
+							}
 						}
 					}
 				}
