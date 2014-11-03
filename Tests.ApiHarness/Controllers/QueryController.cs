@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Fulcrum.Common.JsonSchema;
+using Fulcrum.Core;
 using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.Api.Results;
+using Fulcrum.Runtime.Api.Results.CommandPublication;
 
 namespace Tests.ApiHarness.Controllers
 {
@@ -191,15 +193,25 @@ namespace Tests.ApiHarness.Controllers
 
 		[Route("{inNamespace}/{queryObjectName}/validate")]
 		[HttpPost]
-		public ActionResult Validate(string inNamespace, string queryObjectName)
+		public ActionResult Validate(string inNamespace, string queryObjectName,
+			[ModelBinder(typeof(CommandModelBinder))] ICommand command)
 		{
-			// TODO: implement validation query execution
+			// TODO: how do we tell the model binder what type of command it is?
 
-			// the primary piece of work here is to set up model binding for an ICommand
-			// instance coming out of the POST payload, just like the command publication
-			// API endpoint.
+			// See comments in CommandController.Publish for more on what is meant by IsValid
+			if (ModelState.IsValid)
+			{
+				// TODO: implement validation query execution
+				return Json("Command validation queries not yet implemented.");
+			}
 
-			return Json("Command validation queries not yet implemented.");
+			var states = ModelState.Values.Where(x => x.Errors.Count >= 1);
+
+			var errorMessages = (from state in states
+													 from error in state.Errors
+													 select error.ErrorMessage);
+
+			return JsonWithoutNulls(new { errors = errorMessages.ToList() });
 		}
 
 		[Route("{inNamespace}/{queryObjectName}/validate")]
