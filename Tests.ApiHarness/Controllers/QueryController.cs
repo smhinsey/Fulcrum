@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Fulcrum.Common.JsonSchema;
@@ -55,12 +56,12 @@ namespace Tests.ApiHarness.Controllers
 		[HttpGet]
 		public ActionResult QueryObjectDetails(string inNamespace, string queryObjectName)
 		{
-			var queryGroup = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
+			var queryObject = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
 
-			var queries = _queryLocator.ListQueriesInQueryObject(queryGroup);
+			var queries = _queryLocator.ListQueriesInQueryObject(queryObject);
 
 			var descriptions = queries.Select(query =>
-				new QueryDescription(queryGroup.Name, queryGroup.Namespace, query, true, false)).ToList();
+				new QueryDescription(queryObject.Name, queryObject.Namespace, query, true, false)).ToList();
 
 			var links = new List<JsonLink> { new JsonLink("/queries/", "home") };
 
@@ -69,10 +70,65 @@ namespace Tests.ApiHarness.Controllers
 
 		[Route("{inNamespace}/{queryObjectName}/{query}/results")]
 		[HttpGet]
-		public ActionResult Results()
+		public ActionResult Results(string inNamespace, string queryObjectName, string query)
 		{
-			return Json("Run query");
-		}
+			var queryObject = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
 
+			var queries = _queryLocator.ListQueriesInQueryObject(queryObject);
+
+			var queryMethod = queries.SingleOrDefault(q => q.Name == query);
+
+			var queryImplementation = DependencyResolver.Current.GetService(queryObject);
+
+			if (queryMethod != null)
+			{
+				var parameters = queryMethod.GetParameters();
+
+				var parameterValues = new object[parameters.Length];
+
+				var missingParams = new List<string>();
+
+				var paramIndex = 0;
+
+				foreach (var parameter in parameters)
+				{
+					var parameterInRequest = Request.Params[parameter.Name];
+
+					if (parameterInRequest == null)
+					{
+						missingParams.Add(parameter.Name);
+					}
+					else
+					{
+						if (parameter.ParameterType == typeof(string))
+						{
+							parameterValues[paramIndex] = parameterInRequest;
+						}
+						else if (parameter.ParameterType == typeof(int))
+						{
+							parameterValues[paramIndex] = Convert.ToInt32(parameterInRequest);
+						}
+						else if (parameter.ParameterType == typeof(bool))
+						{
+							parameterValues[paramIndex] = Convert.ToBoolean(parameterInRequest);
+						}
+						else if (parameter.ParameterType == typeof(decimal))
+						{
+							parameterValues[paramIndex] = Convert.ToDecimal(parameterInRequest);
+						}
+						else if (parameter.ParameterType == typeof(double))
+						{
+							parameterValues[paramIndex] = Convert.ToDouble(parameterInRequest);
+						}
+					}
+
+					paramIndex++;
+				}
+
+				return Json(queryMethod.Invoke(queryImplementation, parameterValues));
+			}
+
+			return Json(string.Format("Unable to locate implementation for query {0}", query));
+		}
 	}
 }

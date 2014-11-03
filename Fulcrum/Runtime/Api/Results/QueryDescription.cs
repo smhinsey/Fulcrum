@@ -39,7 +39,7 @@ namespace Fulcrum.Runtime.Api.Results
 			Parameters.Keys.ForEach(k =>
 			{
 				queryString += k;
-				queryString += string.Format("{{{0}}}", paramCounter + 1);
+				queryString += string.Format("={{{0}}}", paramCounter + 1);
 
 				if (paramCounter < Parameters.Keys.Count - 1)
 				{
