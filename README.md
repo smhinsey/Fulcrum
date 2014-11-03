@@ -7,5 +7,5 @@ To view demo
 * Pull code
 * Build
 * Run update-database
-* Set API Test Harness as startup project
-* Start API Test Harness, & using Postman issue GET requests to /commands or /queries
+* Set API Test Harness as startup project & run it
+* Using Postman issue GET requests to /commands or /queries
