@@ -106,23 +106,62 @@ namespace Tests.ApiHarness.Controllers
 						}
 						else if (parameter.ParameterType == typeof(int))
 						{
-							parameterValues[paramIndex] = Convert.ToInt32(parameterInRequest);
+							try
+							{
+								parameterValues[paramIndex] = Convert.ToInt32(parameterInRequest);
+							}
+							catch (Exception)
+							{
+								missingParams.Add(parameter.Name);
+							}
 						}
 						else if (parameter.ParameterType == typeof(bool))
 						{
-							parameterValues[paramIndex] = Convert.ToBoolean(parameterInRequest);
+							try
+							{
+								parameterValues[paramIndex] = Convert.ToBoolean(parameterInRequest);
+							}
+							catch (Exception)
+							{
+								missingParams.Add(parameter.Name);
+							}
 						}
 						else if (parameter.ParameterType == typeof(decimal))
 						{
-							parameterValues[paramIndex] = Convert.ToDecimal(parameterInRequest);
+							try
+							{
+								parameterValues[paramIndex] = Convert.ToDecimal(parameterInRequest);
+							}
+							catch (Exception)
+							{
+								missingParams.Add(parameter.Name);
+							}
 						}
 						else if (parameter.ParameterType == typeof(double))
 						{
-							parameterValues[paramIndex] = Convert.ToDouble(parameterInRequest);
+							try
+							{
+								parameterValues[paramIndex] = Convert.ToDouble(parameterInRequest);
+							}
+							catch (Exception)
+							{
+								missingParams.Add(parameter.Name);
+							}
+						}
+						else
+						{
+							throw new InvalidOperationException(
+								string.Format("Parameter {0} is of an unsupported type {1}",
+									parameter.Name, parameter.ParameterType.Name));
 						}
 					}
 
 					paramIndex++;
+				}
+
+				if (missingParams.Count > 0)
+				{
+					return Json(new { error = "Unable to execute query due to missing or invalid parameter(s).", missingOrInvalidParameters = missingParams });
 				}
 
 				return Json(queryMethod.Invoke(queryImplementation, parameterValues));
