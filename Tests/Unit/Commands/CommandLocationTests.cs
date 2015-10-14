@@ -18,7 +18,7 @@ namespace Tests.Unit.Commands
 
 			extractor.AddCommandSource(commandType.Assembly, commandType.Namespace);
 
-			var locatedType = extractor.FindInNamespace(commandType.Name, commandType.Namespace);
+			var locatedType = extractor.Find(commandType.Name, commandType.Namespace);
 
 			Assert.Equal(commandType, locatedType);
 		}

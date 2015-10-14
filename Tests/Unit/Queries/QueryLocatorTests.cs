@@ -17,7 +17,7 @@ namespace Tests.Unit.Queries
 
 			extractor.AddQuerySource(queryType.Assembly, queryType.Namespace);
 
-			var locatedType = extractor.FindInNamespace(queryType.Name, queryType.Namespace);
+			var locatedType = extractor.Find(queryType.Name, queryType.Namespace);
 
 			Assert.Equal(queryType, locatedType);
 		}

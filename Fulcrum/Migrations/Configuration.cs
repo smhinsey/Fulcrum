@@ -5,11 +5,12 @@ namespace Fulcrum.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Fulcrum.Runtime.CommandPipeline.CommandPipelineDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<Fulcrum.Runtime.CommandPipeline.CommandPipelineDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "Fulcrum.Runtime.CommandPipeline";
         }
 
         protected override void Seed(Fulcrum.Runtime.CommandPipeline.CommandPipelineDbContext context)

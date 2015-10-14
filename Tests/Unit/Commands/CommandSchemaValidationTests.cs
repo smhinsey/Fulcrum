@@ -19,7 +19,7 @@ namespace Tests.Unit.Commands
 		{
 			var schema = CommandSchemaGenerator.GenerateSchema(typeof(SchemaValidationCommand));
 
-			var queryUrl = "/queries/Tests.Unit.Commands.Validation/ValidationQuery";
+			var queryUrl = "/queries/Tests.Unit.Commands.Validation/ValidationQuery/validate";
 
 			Assert.Equal(true, schema.ValidateByQuery);
 			Assert.Equal(queryUrl, schema.ValidationQueryUrl);

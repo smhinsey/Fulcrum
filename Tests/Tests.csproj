@@ -52,9 +52,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\Fulcrum\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Fulcrum\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Fulcrum\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -81,6 +81,7 @@
     <Compile Include="Unit\Commands\Pipeline\PingPongHandler.cs" />
     <Compile Include="Unit\Commands\PortableCommands\PortabilityCommand.cs" />
     <Compile Include="Unit\Commands\PortableCommandTests.cs" />
+    <Compile Include="Unit\Commands\Validation\NewCommand.cs" />
     <Compile Include="Unit\Commands\Validation\SchemaValidationCommand.cs" />
     <Compile Include="Unit\Commands\Validation\SchemaTestingCommand.cs" />
     <Compile Include="Unit\Commands\Location\AnotherCommandToLocate.cs" />
@@ -92,12 +93,6 @@
     <Compile Include="Unit\Queries\Location\TestQuery.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fulcrum\Fulcrum.csproj">
-      <Project>{2e634771-5bd9-4e1b-adb0-a6855e8501e2}</Project>
-      <Name>Fulcrum</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Unit\Commands\PortableCommandTests.Verify_json_command.approved.txt" />
     <Content Include="Unit\Commands\PortableCommandTests.Verify_json_command_schema.approved.txt" />
   </ItemGroup>
@@ -105,7 +100,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Fulcrum\Fulcrum.csproj">
+      <Project>{2e634771-5bd9-4e1b-adb0-a6855e8501e2}</Project>
+      <Name>Fulcrum</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

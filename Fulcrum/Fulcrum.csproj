@@ -11,6 +11,8 @@
     <AssemblyName>Fulcrum</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\Merit\</SolutionDir>
+    <RestorePackages>false</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,76 +23,126 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Dev|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseDev|AnyCPU'">
+    <OutputPath>bin\ReleaseDev\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseTest|AnyCPU'">
+    <OutputPath>bin\ReleaseTest\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseStaging|AnyCPU'">
+    <OutputPath>bin\ReleaseStaging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseProduction|AnyCPU'">
+    <OutputPath>bin\ReleaseProduction\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
-      <HintPath>packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="CommonServiceLocator.WindsorAdapter.Unofficial">
+      <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.Unofficial.3.3.0.0\lib\Net40\CommonServiceLocator.WindsorAdapter.Unofficial.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="Elmah">
+      <HintPath>..\..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -99,6 +151,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Claims\ClaimsIdentityExtensions.cs" />
+    <Compile Include="Common\DateTimeExtensions.cs" />
+    <Compile Include="Common\ILoggingSource.cs" />
+    <Compile Include="Common\IPagedList.cs" />
+    <Compile Include="Common\Log4NetLoggingSourceExtensions.cs" />
+    <Compile Include="Common\QueryReferencer.cs" />
+    <Compile Include="Common\ResultPage.cs" />
     <Compile Include="Common\JsonSchema\ISchemaPropertyMetadata.cs" />
     <Compile Include="Common\JsonSchema\JsonLink.cs" />
     <Compile Include="Common\JsonSchema\SchemaObjectType.cs" />
@@ -106,36 +165,54 @@
     <Compile Include="Common\JsonSchema\SchemaPropertyType.cs" />
     <Compile Include="Common\JsonSchema\SchemaObject.cs" />
     <Compile Include="Common\JsonSchema\ValidatedPropertyMetadata.cs" />
+    <Compile Include="Common\StringExtensions.cs" />
+    <Compile Include="Core\Ddd\ICommonService.cs" />
+    <Compile Include="Core\EventDescriptor.cs" />
+    <Compile Include="Core\EventSchema.cs" />
+    <Compile Include="Core\DefaultEvent.cs" />
+    <Compile Include="Core\EventPublicationStatus.cs" />
+    <Compile Include="Core\Ddd\IAggregateRoot.cs" />
+    <Compile Include="Core\Ddd\IBackgroundTask.cs" />
+    <Compile Include="Core\Ddd\IDomainService.cs" />
+    <Compile Include="Core\Ddd\IError.cs" />
+    <Compile Include="Core\Ddd\IRepository.cs" />
     <Compile Include="Core\DefaultCommand.cs" />
+    <Compile Include="Core\IEventPublicationRecord.cs" />
+    <Compile Include="Core\IEventHandler.cs" />
+    <Compile Include="Core\IEvent.cs" />
+    <Compile Include="Core\IEventPipeline.cs" />
     <Compile Include="Core\ICommandPipeline.cs" />
     <Compile Include="Common\Web\WindsorControllerActivator.cs" />
     <Compile Include="Common\Web\WindsorDependencyResolver.cs" />
     <Compile Include="Common\Web\WindsorDependencyScope.cs" />
     <Compile Include="Common\Web\WindsorControllerFactory.cs" />
-    <Compile Include="Migrations\201410290734358_initial.cs" />
-    <Compile Include="Migrations\201410290734358_initial.Designer.cs">
-      <DependentUpon>201410290734358_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410290755137_initial1.cs" />
-    <Compile Include="Migrations\201410290755137_initial1.Designer.cs">
-      <DependentUpon>201410290755137_initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410290821537_initial2.cs" />
-    <Compile Include="Migrations\201410290821537_initial2.Designer.cs">
-      <DependentUpon>201410290821537_initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410300653164_initial3.cs" />
-    <Compile Include="Migrations\201410300653164_initial3.Designer.cs">
-      <DependentUpon>201410300653164_initial3.cs</DependentUpon>
+    <Compile Include="Core\IdentifierQueryReference.cs" />
+    <Compile Include="Core\Ddd\IEntity.cs" />
+    <Compile Include="Core\IFormModel.cs" />
+    <Compile Include="Core\PortableEvent.cs" />
+    <Compile Include="Migrations\201509301951594_Initialize.cs" />
+    <Compile Include="Migrations\201509301951594_Initialize.Designer.cs">
+      <DependentUpon>201509301951594_Initialize.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Runtime\Api\BaseMvcController.cs" />
     <Compile Include="Runtime\Api\CommandModelBinder.cs" />
     <Compile Include="Runtime\Api\JsonNetResult.cs" />
+    <Compile Include="Runtime\Api\Results\EventDescription.cs" />
+    <Compile Include="Runtime\Api\Results\EventPublication\EventCompleteOrPendingResult.cs" />
+    <Compile Include="Runtime\Api\Results\EventPublication\EventFailedResult.cs" />
+    <Compile Include="Runtime\Api\Results\EventPublication\DetailedEventPublicationRecordResult.cs" />
     <Compile Include="Runtime\Api\Results\CommandPublication\CommandFailedResult.cs" />
     <Compile Include="Runtime\Api\Results\CommandPublication\DetailedPublicationRecordResult.cs" />
     <Compile Include="Runtime\Api\Results\CommandPublication\CommandCompleteOrPendingResult.cs" />
     <Compile Include="Runtime\Api\Results\QueryObjectDescription.cs" />
+    <Compile Include="Runtime\EventSchemaGenerator.cs" />
+    <Compile Include="Runtime\EventLocator.cs" />
+    <Compile Include="Runtime\EventPipeline\EventPublicationRegistry.cs" />
+    <Compile Include="Runtime\EventPipeline\EventPublicationRecord.cs" />
+    <Compile Include="Runtime\CommandPipeline\CommandPublicationRegistry.cs" />
+    <Compile Include="Runtime\EventPipeline\SimpleEventPipeline.cs" />
+    <Compile Include="Runtime\IEventLocator.cs" />
     <Compile Include="Runtime\QueryLocator.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPipelineDbContext.cs" />
     <Compile Include="Runtime\CommandPipeline\CommandPublicationRecord.cs" />
@@ -164,23 +241,21 @@
     <Compile Include="Common\Registry\IRecord.cs" />
     <Compile Include="Runtime\CommandLocator.cs" />
     <Compile Include="Runtime\CommandSchemaGenerator.cs" />
+    <Compile Include="Runtime\Web\ClientSideException.cs" />
+    <Compile Include="Runtime\Web\DefaultCommandController.cs" />
+    <Compile Include="Runtime\Web\DefaultErrorLogController.cs" />
+    <Compile Include="Runtime\Web\DefaultLogController.cs" />
+    <Compile Include="Runtime\Web\DefaultQueryController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201410290734358_initial.resx">
-      <DependentUpon>201410290734358_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410290755137_initial1.resx">
-      <DependentUpon>201410290755137_initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410290821537_initial2.resx">
-      <DependentUpon>201410290821537_initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410300653164_initial3.resx">
-      <DependentUpon>201410300653164_initial3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201509301951594_Initialize.resx">
+      <DependentUpon>201509301951594_Initialize.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

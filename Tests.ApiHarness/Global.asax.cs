@@ -39,7 +39,6 @@ namespace Tests.ApiHarness
 		{
 			var commandLocator = new CommandLocator(typeof(SchemaTestingCommand).Assembly, typeof(SchemaTestingCommand).Namespace);
 
-			// TODO: Create generalized config system
 			commandLocator.AddCommandSource(typeof(PingPipelineCommand).Assembly, typeof(PingPipelineCommand).Namespace);
 
 			_container.Register(
@@ -54,9 +53,7 @@ namespace Tests.ApiHarness
 
 			var handlers = PipelineInstaller.InstallHandlers(_container, typeof(PingPipelineCommand).Assembly);
 
-			var pipeline = new SimpleCommandPipeline(_container, handlers);
-
-			pipeline.EnablePublication();
+			var pipeline = new SimpleCommandPipeline(_container, handlers, new CommandPipelineDbContext());
 		}
 
 		private void configureContainer()

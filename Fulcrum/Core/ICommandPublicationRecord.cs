@@ -12,12 +12,12 @@ namespace Fulcrum.Core
 
 		string ErrorHeadline { get; set; }
 
-		DateTime? Updated { get; set; }
-
 		PortableCommand PortableCommand { get; }
 
-		IDictionary<string, Guid> RelatedModelIds { get; }
+		IList<IdentifierQueryReference> QueryReferences { get; set; }
 
 		CommandPublicationStatus Status { get; set; }
+
+		DateTime? Updated { get; set; }
 	}
 }

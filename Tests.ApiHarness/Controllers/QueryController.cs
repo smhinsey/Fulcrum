@@ -38,7 +38,7 @@ namespace Tests.ApiHarness.Controllers
 		[HttpGet]
 		public ActionResult QueryDetails(string inNamespace, string queryObjectName, string query)
 		{
-			var queryObject = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
+			var queryObject = _queryLocator.Find(queryObjectName, inNamespace);
 
 			var queries = _queryLocator.ListQueriesInQueryObject(queryObject);
 
@@ -57,7 +57,7 @@ namespace Tests.ApiHarness.Controllers
 		[HttpGet]
 		public ActionResult QueryObjectDetails(string inNamespace, string queryObjectName)
 		{
-			var queryObject = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
+			var queryObject = _queryLocator.Find(queryObjectName, inNamespace);
 
 			var queries = _queryLocator.ListQueriesInQueryObject(queryObject);
 
@@ -73,7 +73,7 @@ namespace Tests.ApiHarness.Controllers
 		[HttpGet]
 		public ActionResult Results(string inNamespace, string queryObjectName, string query)
 		{
-			var queryObject = _queryLocator.FindInNamespace(queryObjectName, inNamespace);
+			var queryObject = _queryLocator.Find(queryObjectName, inNamespace);
 
 			var queries = _queryLocator.ListQueriesInQueryObject(queryObject);
 

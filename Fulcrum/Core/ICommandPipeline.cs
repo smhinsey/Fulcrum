@@ -8,16 +8,6 @@ namespace Fulcrum.Core
 	public interface ICommandPipeline
 	{
 		/// <summary>
-		///   Prevent the publication of commands.
-		/// </summary>
-		void DisablePublication();
-
-		/// <summary>
-		///   Allow the publication of commands.
-		/// </summary>
-		void EnablePublication();
-
-		/// <summary>
 		///   Returns the current publication record.
 		/// </summary>
 		/// <param name="publicationId"></param>
@@ -30,6 +20,9 @@ namespace Fulcrum.Core
 
 		ICommandPublicationRecord MarkAsProcessing(Guid publicationId);
 
+		ICommandPublicationRecord MarkAsWaitingOnJob(Guid publicationId);
+
 		ICommandPublicationRecord Publish(ICommand command);
+
 	}
 }

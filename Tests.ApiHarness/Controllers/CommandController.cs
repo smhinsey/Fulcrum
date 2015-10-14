@@ -26,7 +26,7 @@ namespace Tests.ApiHarness.Controllers
 		[HttpGet]
 		public ActionResult Detail(string inNamespace, string name)
 		{
-			var commandType = _commandLocator.FindInNamespace(name, inNamespace);
+			var commandType = _commandLocator.Find(name, inNamespace);
 
 			if (commandType != null)
 			{

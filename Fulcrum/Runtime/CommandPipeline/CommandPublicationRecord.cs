@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Castle.Components.DictionaryAdapter;
 using Fulcrum.Core;
 
 namespace Fulcrum.Runtime.CommandPipeline
@@ -15,8 +16,8 @@ namespace Fulcrum.Runtime.CommandPipeline
 			Status = CommandPublicationStatus.Unpublished;
 			Id = command.PublicationRecordId;
 			PortableCommand = new PortableCommand(command, CommandSchemaGenerator.GenerateSchema(command.GetType()));
-			RelatedModelIds = new Dictionary<string, Guid>();
 			Created = DateTime.UtcNow;
+			QueryReferences = new EditableList<IdentifierQueryReference>();
 		}
 
 		public DateTime Created { get; private set; }
@@ -31,8 +32,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 		public PortableCommand PortableCommand { get; private set; }
 
-		// TODO: figure out what this really needs to look like
-		public IDictionary<string, Guid> RelatedModelIds { get; private set; }
+		public IList<IdentifierQueryReference> QueryReferences { get; set; }
 
 		public CommandPublicationStatus Status { get; set; }
 	}

@@ -17,12 +17,20 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 			CommandName = record.PortableCommand.ClrTypeName;
 			Links = new List<JsonLink>()
 			{
-				new JsonLink("/commands/", "home")
+				new JsonLink("/api/commands/", "home")
 			};
 			OriginalCommand = JsonConvert.DeserializeObject(record.PortableCommand.CommandJson);
 			CommandSchema = JsonConvert.DeserializeObject(record.PortableCommand.CommandJsonSchema);
 			ErrorDetails = record.ErrorDetails;
 			ErrorHeadline = record.ErrorHeadline;
+
+			foreach (var reference in record.QueryReferences)
+			{
+				var queryUrl = string.Format("/api/queries/{0}/results?id={1}", 
+					reference.QueryName, reference.QueryParameter);
+
+				Links.Add(new JsonLink(queryUrl,"query-reference"));
+			}
 		}
 
 		public string CommandName { get; set; }

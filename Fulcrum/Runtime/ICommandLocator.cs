@@ -8,7 +8,7 @@ namespace Fulcrum.Runtime
 	{
 		void AddCommandSource(Assembly assembly, string inNamespace);
 
-		Type FindInNamespace(string commandName, string inNamespace);
+		Type Find(string commandName, string inNamespace);
 
 		/// <summary>
 		///   Returns all instances of ICommand located in the configured assembly and

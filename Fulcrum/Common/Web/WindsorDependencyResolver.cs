@@ -25,6 +25,7 @@ namespace Fulcrum.Common.Web
 
 		public void Dispose()
 		{
+			//_container.Dispose();	
 		}
 
 		public object GetService(Type serviceType)

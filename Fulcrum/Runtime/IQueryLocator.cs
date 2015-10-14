@@ -8,7 +8,7 @@ namespace Fulcrum.Runtime
 	{
 		void AddQuerySource(Assembly assembly, string inNamespace);
 
-		Type FindInNamespace(string queryName, string inNamespace);
+		Type Find(string queryName, string inNamespace);
 
 		IList<Type> ListAllQueryObjects();
 

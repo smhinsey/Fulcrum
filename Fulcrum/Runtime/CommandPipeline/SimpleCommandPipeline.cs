@@ -1,115 +1,103 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
-using Castle.MicroKernel.Registration;
+using System.Web;
 using Castle.Windsor;
+using Elmah;
+using Fulcrum.Common;
 using Fulcrum.Core;
 
 namespace Fulcrum.Runtime.CommandPipeline
 {
-	public class SimpleCommandPipeline : ICommandPipeline
+	public class SimpleCommandPipeline : ICommandPipeline, ILoggingSource
 	{
 		private readonly IWindsorContainer _container;
 
+		private readonly CommandPipelineDbContext _db;
+
 		private readonly IList<ICommandHandler> _installedHandlers;
 
-		private bool _enabled;
-
-		public SimpleCommandPipeline(IWindsorContainer container, IList<ICommandHandler> installedHandlers)
+		public SimpleCommandPipeline(IWindsorContainer container, IList<ICommandHandler> installedHandlers,
+			CommandPipelineDbContext db)
 		{
 			_container = container;
 			_installedHandlers = installedHandlers;
-
-			_container.Register(Component.For<ICommandPipeline>().Instance(this));
-		}
-
-		public void DisablePublication()
-		{
-			_enabled = false;
-		}
-
-		public void EnablePublication()
-		{
-			_enabled = true;
+			_db = db;
 		}
 
 		public ICommandPublicationRecord Inquire(Guid publicationId)
 		{
-			using (var db = new CommandPipelineDbContext())
-			{
-				var recordQuery = (from dbRecord in db.CommandPublicationRecords
-					where dbRecord.Id == publicationId
-					select dbRecord);
+			var recordQuery = (from dbRecord in _db.CommandPublicationRecords
+			                   where dbRecord.Id == publicationId
+			                   select dbRecord);
 
-				return recordQuery.SingleOrDefault();
-			}
+			recordQuery = recordQuery.Include(r => r.QueryReferences);
+
+			return recordQuery.SingleOrDefault();
 		}
 
 		public ICommandPublicationRecord MarkAsComplete(Guid publicationId)
 		{
-			using (var db = new CommandPipelineDbContext())
-			{
-				var record = safelyFetchRecord(publicationId, db);
+			var record = safelyFetchRecord(publicationId);
 
-				record.Status = CommandPublicationStatus.Complete;
-				record.Updated = DateTime.UtcNow;
+			record.Status = CommandPublicationStatus.Complete;
+			record.Updated = DateTime.UtcNow;
 
-				db.SaveChanges();
+			_db.SaveChanges();
 
-				return record;
-			}
+			return record;
 		}
 
 		public ICommandPublicationRecord MarkAsFailed(Guid publicationId, string errorHeadline, Exception exception)
 		{
-			using (var db = new CommandPipelineDbContext())
-			{
-				var record = safelyFetchRecord(publicationId, db);
+			var record = safelyFetchRecord(publicationId);
 
-				record.Status = CommandPublicationStatus.Failed;
-				record.Updated = DateTime.UtcNow;
+			record.Status = CommandPublicationStatus.Failed;
+			record.Updated = DateTime.UtcNow;
 
-				record.ErrorHeadline = errorHeadline;
-				record.ErrorDetails = exception.ToString();
+			record.ErrorHeadline = errorHeadline;
+			record.ErrorDetails = exception.ToString();
 
-				db.SaveChanges();
+			_db.SaveChanges();
 
-				return record;
-			}
+			return record;
 		}
 
 		public ICommandPublicationRecord MarkAsProcessing(Guid publicationId)
 		{
-			using (var db = new CommandPipelineDbContext())
-			{
-				var record = safelyFetchRecord(publicationId, db);
+			var record = safelyFetchRecord(publicationId);
 
-				record.Status = CommandPublicationStatus.Processing;
-				record.Updated = DateTime.UtcNow;
+			record.Status = CommandPublicationStatus.Processing;
+			record.Updated = DateTime.UtcNow;
 
-				db.SaveChanges();
+			_db.SaveChanges();
 
-				return record;
-			}
+			return record;
+		}
+
+		public ICommandPublicationRecord MarkAsWaitingOnJob(Guid publicationId)
+		{
+			var record = safelyFetchRecord(publicationId);
+
+			record.Status = CommandPublicationStatus.WaitingOnJob;
+			record.Updated = DateTime.UtcNow;
+
+			_db.SaveChanges();
+
+			return record;
 		}
 
 		public ICommandPublicationRecord Publish(ICommand command)
 		{
-			if (!_enabled)
-			{
-				throw new Exception("Publication disabled");
-			}
-
 			command.AssignPublicationRecordId(Guid.NewGuid());
 
 			var publicationRecord = new CommandPublicationRecord(command);
 
-			using (var db = new CommandPipelineDbContext())
-			{
-				db.CommandPublicationRecords.Add(publicationRecord);
+			_db.CommandPublicationRecords.Add(publicationRecord);
 
-				db.SaveChanges();
-			}
+			_db.SaveChanges();
 
 			// Should this be done via strategy? We'll need a separate set of interfaces
 			// for an async pipeline. What other types of executors are realistic? A pooled
@@ -144,10 +132,31 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 					var handler = handlerType.GetMethod(HandleMethodName, new[] { command.GetType() });
 
-					// TODO: invoke on a task, wait for the results, and update the record appropriately
+					// TODO: async could go here
 					handler.Invoke(resolvedHandler, new object[] { command });
 
-					publicationRecord = (CommandPublicationRecord)MarkAsComplete(publicationRecord.Id);
+					var latestRecord = safelyFetchRecord(publicationRecord.Id);
+
+					// don't complete commands which are waiting on jobs
+					if (latestRecord.Status != CommandPublicationStatus.WaitingOnJob)
+					{
+						publicationRecord = (CommandPublicationRecord)MarkAsComplete(publicationRecord.Id);
+					}
+					else
+					{
+						publicationRecord = latestRecord;
+					}
+
+					// this call is unnecessary as Windsor ignores manual releases
+					// of PerWebRequest lifestyle components
+					//_container.Release(resolvedHandler);
+
+					var disposable = resolvedHandler as IDisposable;
+
+					if (disposable != null)
+					{
+						disposable.Dispose();
+					}
 				}
 				catch (Exception ex)
 				{
@@ -155,18 +164,30 @@ namespace Fulcrum.Runtime.CommandPipeline
 					var appException = ex.InnerException;
 
 					// TODO: derive a better headline from the particular exception
-					publicationRecord = (CommandPublicationRecord)MarkAsFailed(publicationRecord.Id, "Unrecoverable command processing error", appException);
+					publicationRecord = (CommandPublicationRecord)MarkAsFailed(publicationRecord.Id, appException.Message, appException);
+
+					if (HttpContext.Current != null)
+					{
+						var fromCurrentContext = ErrorSignal.FromCurrentContext();
+						fromCurrentContext.Raise(appException);
+					}
 				}
 			}
 
-			return publicationRecord;
+			this.LogInfo("Published command {0}, view details at {1}commands/publication-registry/{2}.",
+				command.GetType().Name, ConfigurationSettings.AppSettings["ApiBaseUrl"], publicationRecord.Id);
+
+			return safelyFetchRecord(publicationRecord.Id);
 		}
 
-		private CommandPublicationRecord safelyFetchRecord(Guid publicationId, CommandPipelineDbContext db)
+		// TODO: delegate all usages to CommandPublicationRegistry
+		private CommandPublicationRecord safelyFetchRecord(Guid publicationId)
 		{
-			var recordQuery = (from dbRecord in db.CommandPublicationRecords
-				where dbRecord.Id == publicationId
-				select dbRecord);
+			var recordQuery = (from dbRecord in _db.CommandPublicationRecords
+			                   where dbRecord.Id == publicationId
+			                   select dbRecord);
+
+			recordQuery = recordQuery.Include(r => r.QueryReferences);
 
 			var record = recordQuery.SingleOrDefault();
 

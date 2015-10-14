@@ -24,12 +24,12 @@ namespace Fulcrum.Runtime.Api.Results
 
 			if (includeDetailsLink)
 			{
-				Links.Add(new JsonLink(string.Format("/queries/{0}/{1}/{2}", Namespace, QueryObject, Query), "details"));
+				Links.Add(new JsonLink(string.Format("/api/queries/{0}/{1}/{2}", Namespace, QueryObject, Query), "details"));
 			}
 
 			if (includeQueryObjectLink)
 			{
-				Links.Add(new JsonLink(string.Format("/queries/{0}/{1}", Namespace, QueryObject), "queryObject"));
+				Links.Add(new JsonLink(string.Format("/api/queries/{0}/{1}", Namespace, QueryObject), "queryObject"));
 			}
 
 			var queryString = string.Empty;
@@ -60,12 +60,12 @@ namespace Fulcrum.Runtime.Api.Results
 
 			if (isValidationQuery)
 			{
-				Links.Add(new JsonLink(string.Format("/queries/{0}/{1}/{2}/validate", 
+				Links.Add(new JsonLink(string.Format("/api/queries/{0}/{1}/{2}/validate", 
 					Namespace, QueryObject, Query), "results"));
 			}
 			else
 			{
-				Links.Add(new JsonLink(string.Format("/queries/{0}/{1}/{2}/results?{3}", 
+				Links.Add(new JsonLink(string.Format("/api/queries/{0}/{1}/{2}/results?{3}", 
 					Namespace, QueryObject, Query, queryString), "results"));
 			}
 		}

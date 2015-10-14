@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Castle.Core.Internal;
+using Fulcrum.Common;
 using Fulcrum.Core;
 
 namespace Fulcrum.Runtime
 {
-	public class CommandLocator : ICommandLocator
+	public class CommandLocator : ICommandLocator, ILoggingSource
 	{
 		private readonly IDictionary<string, Assembly> _assemblies;
 
@@ -39,9 +40,30 @@ namespace Fulcrum.Runtime
 				.ForEach(_commands.Add);
 		}
 
-		public Type FindInNamespace(string commandName, string inNamespace)
+		public Type Find(string commandName, string inNamespace)
 		{
-			return _commands.FirstOrDefault(t => t.Name == commandName && t.Namespace == inNamespace);
+			var matchCount = _commands.Count(q => q.Name == commandName);
+
+			if (matchCount == 1)
+			{
+				return _commands.FirstOrDefault(t => t.Name == commandName);
+			}
+
+			if (matchCount > 1)
+			{
+				this.LogInfo("More than one command found for {0}. Narrowing by namespace {1}.",
+					commandName, inNamespace);
+
+				return _commands.FirstOrDefault(t => t.Name == commandName
+																												 && t.Namespace == inNamespace);
+			}
+
+			var message = string.Format("Command {0} in {1} matched {2} registered types.",
+				commandName, inNamespace, matchCount);
+
+			this.LogWarn(message);
+
+			throw new Exception(message);
 		}
 
 		/// <summary>
