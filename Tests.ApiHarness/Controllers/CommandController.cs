@@ -1,106 +1,55 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using Fulcrum.Core;
 using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api;
-using Fulcrum.Runtime.Api.Results;
-using Fulcrum.Runtime.Api.Results.CommandPublication;
+using Fulcrum.Runtime.Web;
 
 namespace Tests.ApiHarness.Controllers
 {
 	[RoutePrefix("commands")]
-	public class CommandController : BaseMvcController
+	public class CommandController : DefaultCommandController
 	{
-		private readonly ICommandLocator _commandLocator;
-
-		private readonly ICommandPipeline _commandPipeline;
-
 		public CommandController(ICommandPipeline commandPipeline, ICommandLocator commandLocator)
+			: base(commandPipeline, commandLocator)
 		{
-			_commandPipeline = commandPipeline;
-			_commandLocator = commandLocator;
 		}
 
 		[Route("{inNamespace}/{name}")]
 		[HttpGet]
-		public ActionResult Detail(string inNamespace, string name)
+		public override ActionResult Detail(string inNamespace, string name)
 		{
-			var commandType = _commandLocator.Find(name, inNamespace);
-
-			if (commandType != null)
-			{
-				return Json(new CommandDescription(commandType, false));
-			}
-
-			return Json(new { error = "Unable to locate specified command." });
+			return base.Detail(inNamespace, name);
 		}
 
 		[Route("publication-registry/{publicationId}")]
 		[HttpGet]
-		public ActionResult Inquire(Guid publicationId)
+		public override ActionResult Inquire(Guid publicationId)
 		{
-			var record = _commandPipeline.Inquire(publicationId);
-
-			if (record != null)
-			{
-				return Json(new DetailedPublicationRecordResult(record));
-			}
-
-			return JsonWithoutNulls(new
-			{
-				error = string.Format("Record {0} not found in command registry.", publicationId)
-			});
+			return base.Inquire(publicationId);
 		}
 
 		[Route("")]
 		[HttpGet]
-		public JsonResult ListAll()
+		public override JsonResult ListAll()
 		{
-			var commands = _commandLocator.ListAllCommands();
-
-			var descriptions = commands.Select(command => new CommandDescription(command, true));
-
-			return JsonWithoutNulls(descriptions.ToList());
+			return base.ListAll();
 		}
 
 		[Route("{inNamespace}/{name}/publish")]
 		[HttpGet]
-		public JsonResult PublicationGetWarning()
+		public override JsonResult PublicationGetWarning()
 		{
-			return Json(new { error = "HTTP POST only." });
+			return base.PublicationGetWarning();
 		}
 
-		[Route("{inNamespace}/{name}/publish")]
+		[Route("{inNamespace}/{commandName}/publish")]
 		[HttpPost]
-		public JsonResult Publish(string inNamespace, string name,
+		//[Authorize]
+		public override JsonResult Publish(string inNamespace, string commandName,
 			[ModelBinder(typeof(CommandModelBinder))] ICommand command)
 		{
-			// This is not command-level validation, rather this is 
-			// validation that all of the command's properties are intact.
-			// Command handlers are responsible for their own validation
-			// so "incomplete" commands may still be published in order
-			// to support features such as synchronization of work in 
-			// progress to multiple devices.
-			if (ModelState.IsValid)
-			{
-				var record = _commandPipeline.Publish(command);
-
-				if (record.Status == CommandPublicationStatus.Failed)
-				{
-					return Json(new CommandFailedResult(record));
-				}
-
-				return Json(new CommandCompleteOrPendingResult(record));
-			}
-
-			var states = ModelState.Values.Where(x => x.Errors.Count >= 1);
-
-			var errorMessages = (from state in states
-				from error in state.Errors
-				select error.ErrorMessage);
-
-			return JsonWithoutNulls(new { errors = errorMessages.ToList() });
+			return base.Publish(inNamespace, commandName, command);
 		}
 	}
 }
