@@ -1,4 +1,4 @@
-﻿namespace Examples.UserProfileComponent.Public.QueryModel
+﻿namespace TestFakes.UserProfileComponent.Public.QueryModel
 {
 	public class User
 	{

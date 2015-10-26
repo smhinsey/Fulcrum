@@ -206,6 +206,8 @@
     <Compile Include="Runtime\Api\Results\CommandPublication\DetailedPublicationRecordResult.cs" />
     <Compile Include="Runtime\Api\Results\CommandPublication\CommandCompleteOrPendingResult.cs" />
     <Compile Include="Runtime\Api\Results\QueryObjectDescription.cs" />
+    <Compile Include="Runtime\AppSettings.cs" />
+    <Compile Include="Runtime\CommonAppSetup.cs" />
     <Compile Include="Runtime\EventSchemaGenerator.cs" />
     <Compile Include="Runtime\EventLocator.cs" />
     <Compile Include="Runtime\EventPipeline\EventPublicationRegistry.cs" />

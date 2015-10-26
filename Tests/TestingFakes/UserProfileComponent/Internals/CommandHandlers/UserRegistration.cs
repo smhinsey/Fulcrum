@@ -1,8 +1,8 @@
-﻿using Examples.UserProfileComponent.Public.Commands;
-using Examples.UserProfileComponent.Public.Queries;
-using Fulcrum.Core;
+﻿using Fulcrum.Core;
+using TestFakes.UserProfileComponent.Public.Commands;
+using TestFakes.UserProfileComponent.Public.Queries;
 
-namespace Examples.UserProfileComponent.Internals.CommandHandlers
+namespace TestFakes.UserProfileComponent.Internals.CommandHandlers
 {
 	public class UserRegistration :
 		ICommandHandler<RegisterUser>

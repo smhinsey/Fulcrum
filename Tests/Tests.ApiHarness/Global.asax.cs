@@ -5,16 +5,15 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Examples.UserProfileComponent.Public.Commands;
 using Fulcrum.Common.Web;
 using Fulcrum.Core;
 using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.CommandPipeline;
-using UnitTests.Unit.Commands.Pipeline;
-using UnitTests.Unit.Commands.Validation;
-using UnitTests.Unit.Queries.Location;
-using UnitTests.Unit.Queries.Location.Additional;
+using UnitTests.Commands.Pipeline;
+using UnitTests.Commands.Validation;
+using UnitTests.Queries.Location;
+using UnitTests.Queries.Location.Additional;
 
 namespace Tests.ApiHarness
 {
