@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
-namespace UserSystem.WebUI
+namespace Seed.WebUI
 {
     public static class WebApiConfig
     {

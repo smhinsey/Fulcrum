@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace UserSystem
+namespace SeedComponents
 {
 	public class UserSystemDb : DbContext
 	{

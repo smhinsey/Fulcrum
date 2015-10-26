@@ -7,8 +7,8 @@
     <ProjectGuid>{EF410D73-FE6C-47A3-A44A-B8443A74687B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UserSystem</RootNamespace>
-    <AssemblyName>UserSystem</AssemblyName>
+    <RootNamespace>SeedComponents</RootNamespace>
+    <AssemblyName>SeedComponents</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

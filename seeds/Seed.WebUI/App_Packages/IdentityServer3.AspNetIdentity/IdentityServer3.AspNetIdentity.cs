@@ -19,14 +19,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using IdentityServer3.Core.Models;
-using IdentityServer3.Core.Services;
-using IdentityServer3.Core.Extensions;
-using IdentityServer3.Core;
 using IdentityModel;
+using IdentityServer3.Core;
+using IdentityServer3.Core.Extensions;
+using IdentityServer3.Core.Models;
 using IdentityServer3.Core.Services.Default;
 
-namespace IdentityServer3.AspNetIdentity
+namespace Seed.WebUI.App_Packages.IdentityServer3.AspNetIdentity
 {
     public class AspNetIdentityUserService<TUser, TKey> : UserServiceBase
         where TUser : class, Microsoft.AspNet.Identity.IUser<TKey>, new()

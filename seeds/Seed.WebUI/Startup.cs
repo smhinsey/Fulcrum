@@ -1,9 +1,6 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
-using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
@@ -14,14 +11,12 @@ using Fulcrum.Common;
 using Fulcrum.Common.Web;
 using Fulcrum.Runtime.TiltedGlobe.Runtime;
 using log4net.Config;
-using Microsoft.Owin;
 using Microsoft.Owin.Cors;
-using Microsoft.Owin.Security.DataHandler.Encoder;
-using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using SeedComponents;
 
-namespace UserSystem.WebUI
+namespace Seed.WebUI
 {
 	public partial class Startup : ILoggingSource
 	{

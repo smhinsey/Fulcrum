@@ -1,6 +1,6 @@
 ﻿using Fulcrum.Runtime;
 
-namespace UserSystem
+namespace SeedComponents
 {
 	public class UserSystemSettings : AppSettings
 	{

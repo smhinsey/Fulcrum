@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-using BrockAllen.MembershipReboot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using IdentityModel.Extensions;
+using BrockAllen.MembershipReboot;
 using IdentityServer3.Core;
 using IdentityServer3.Core.Extensions;
 using IdentityServer3.Core.Models;
-using IdentityServer3.Core.Services;
 using IdentityServer3.Core.Services.Default;
 
-namespace IdentityServer3.MembershipReboot
+namespace Seed.WebUI.App_Packages.IdentityServer3.MembershipReboot
 {
     public class MembershipRebootUserService<TAccount> : UserServiceBase
         where TAccount : UserAccount

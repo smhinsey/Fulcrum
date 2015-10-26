@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UserSystem.WebUI</RootNamespace>
-    <AssemblyName>UserSystem.WebUI</AssemblyName>
+    <RootNamespace>Seed.WebUI</RootNamespace>
+    <AssemblyName>Seed.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -230,9 +230,9 @@
       <Project>{2E634771-5BD9-4E1B-ADB0-A6855E8501E2}</Project>
       <Name>Fulcrum</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UserSystem\UserSystem.csproj">
-      <Project>{EF410D73-FE6C-47A3-A44A-B8443A74687B}</Project>
-      <Name>UserSystem</Name>
+    <ProjectReference Include="..\SeedComponents\SeedComponents.csproj">
+      <Project>{ef410d73-fe6c-47a3-a44a-b8443a74687b}</Project>
+      <Name>SeedComponents</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
