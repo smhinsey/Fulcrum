@@ -43,13 +43,13 @@ namespace Seed.WebUI
 			configureMvc();
 		}
 
+		// TODO: move to CommonAppSetup
 		private void configureMvc()
 		{
 			_container.Register(Classes.FromAssemblyInThisApplication()
 			                           .BasedOn<ApiController>()
 			                           .LifestyleTransient());
 
-			// set up mvc di
 			_container.Register(Classes.FromThisAssembly()
 			                           .BasedOn<IController>()
 			                           .LifestyleTransient());
@@ -61,6 +61,7 @@ namespace Seed.WebUI
 			DependencyResolver.SetResolver(new WindsorServiceLocator(_container));
 		}
 
+		// TODO: move to CommonAppSetup
 		private void configureWebApi(HttpConfiguration config)
 		{
 			config.MapHttpAttributeRoutes();
