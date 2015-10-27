@@ -14,15 +14,16 @@ To see a quick demo
 * Using SQL Server, create a database called Fulcrum and update the ConnectionString elements in all app/web.config files in the project
 * Build
 * Run update-database
-* Set API Test Harness as startup project & run it, it will launch a browser
-* Navigate to /commands or /queries
-* You can also use Postman to explore the API and it's necessary to use it when authentication is enabled
+* Set Tests.ApiHarness as the startup project & run it without the debugger
+* In the browser window launched by the last step, navigate to /commands or /queries
+* You can also use Postman to explore the API (it's necessary to use it when authentication is enabled)
 
 Core To-do
 =======
 1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
 1. Make CommandController claims-aware
 1. Make QueryController claims-aware
+2. Create custom AuthorizeAttribute with on/off config switch
 1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 2. Better config management, specifically around the connection string
 
