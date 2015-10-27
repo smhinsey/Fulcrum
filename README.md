@@ -3,7 +3,7 @@ Purpose
 
 Fulcrum provides a self-describing HTTP API to browse, validate, and publish commands, and also to browse and execute queries. These commands and queries represent an application's capabilities by expressing operations which modify its internal state as commands and operations which return its internal state as queries. While Fulcrum can be used with just about any architectural style, it works best with a service-oriented domain driven design-based approach. 
 
-The seed project integrates Fulcrum with Identity Server v3 and Membership Reboot, along with Angular, angular-schema-form, TV4.js, Bootstrap CSS, and other libraries to provide a default project which can be used to kickstart new development. Ideally, a NuGet package installer can be developed which would deploy the seed project into an empty ASP.NET Web Application project.
+The seed project integrates Fulcrum with Identity Server v3 and Membership Reboot, along with Angular, Angular UI, angular-schema-form, TV4.js, Bootstrap CSS, and other libraries to provide a default project which can be used to kickstart new development. Ideally, a NuGet package installer can be developed which would deploy the seed project into an empty ASP.NET Web Application project.
 
 Getting Started
 =======
