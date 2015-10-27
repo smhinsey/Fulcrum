@@ -7,7 +7,7 @@ namespace Fulcrum.Runtime.Api.Results.EventPublication
 {
 	public class EventCompleteOrPendingResult
 	{
-        public EventCompleteOrPendingResult(IEventPublicationRecord record)
+		public EventCompleteOrPendingResult(IEventPublicationRecord record)
 		{
 			Created = record.Created;
 			Id = record.Id;
@@ -31,9 +31,9 @@ namespace Fulcrum.Runtime.Api.Results.EventPublication
 			}
 		}
 
-		public string EventName { get; set; }
-
 		public DateTime Created { get; private set; }
+
+		public string EventName { get; set; }
 
 		public Guid Id { get; private set; }
 

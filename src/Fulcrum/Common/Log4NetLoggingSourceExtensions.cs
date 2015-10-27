@@ -139,6 +139,15 @@ namespace Fulcrum.Common
 		}
 
 		/// <summary>
+		///   Returns the current session id, if one has been set.
+		/// </summary>
+		/// <returns></returns>
+		public static Guid? LogGetSessionId(this ILoggingSource source)
+		{
+			return LogIdOverride;
+		}
+
+		/// <summary>
 		///   Writes a debug message to the configured log4net buffer.
 		/// </summary>
 		/// <param name="source"> An ILoggingSource implementation. </param>
@@ -165,25 +174,6 @@ namespace Fulcrum.Common
 		}
 
 		/// <summary>
-		///   Writes a debug message to the configured log4net buffer.
-		/// </summary>
-		/// <param name="source"> An ILoggingSource implementation. </param>
-		/// <param name="message"> The message to be written to the log. </param>
-		/// <param name="formatParameters"> String formatting parameters used to render the message. </param>
-		public static void LogWarn(this ILoggingSource source,
-			string message, params object[] formatParameters)
-		{
-			setSessionLogContext();
-
-			var logger = LogManager.GetLogger(source.GetType());
-
-			if (logger.IsWarnEnabled)
-			{
-				logger.Warn(string.Format(message, formatParameters));
-			}
-		}
-
-		/// <summary>
 		///   Used by applications which need to set their session log ids directly, rather than via claims.
 		/// </summary>
 		/// <returns></returns>
@@ -205,14 +195,23 @@ namespace Fulcrum.Common
 			return LogIdOverride.Value;
 		}
 
-
 		/// <summary>
-		/// Returns the current session id, if one has been set.
+		///   Writes a debug message to the configured log4net buffer.
 		/// </summary>
-		/// <returns></returns>
-		public static Guid? LogGetSessionId(this ILoggingSource source)
+		/// <param name="source"> An ILoggingSource implementation. </param>
+		/// <param name="message"> The message to be written to the log. </param>
+		/// <param name="formatParameters"> String formatting parameters used to render the message. </param>
+		public static void LogWarn(this ILoggingSource source,
+			string message, params object[] formatParameters)
 		{
-			return LogIdOverride;
+			setSessionLogContext();
+
+			var logger = LogManager.GetLogger(source.GetType());
+
+			if (logger.IsWarnEnabled)
+			{
+				logger.Warn(string.Format(message, formatParameters));
+			}
 		}
 
 		private static void setSessionLogContext()

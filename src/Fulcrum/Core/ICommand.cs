@@ -9,10 +9,10 @@ namespace Fulcrum.Core
 	public interface ICommand
 	{
 		/// <summary>
-		/// When a command has been published, it is assigned a publication record
-		/// with a unique identifier. This identifier is returned to the publisher
-		/// and made available to the command's handler so that the two can communicate
-		/// out-of-band via the command pipeline inquiry system.
+		///   When a command has been published, it is assigned a publication record
+		///   with a unique identifier. This identifier is returned to the publisher
+		///   and made available to the command's handler so that the two can communicate
+		///   out-of-band via the command pipeline inquiry system.
 		/// </summary>
 		Guid PublicationRecordId { get; }
 

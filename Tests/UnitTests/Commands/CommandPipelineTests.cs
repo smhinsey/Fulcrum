@@ -10,15 +10,17 @@ namespace UnitTests.Commands
 {
 	public class CommandPipelineTests
 	{
-		[Fact(Skip="Needs to be fixed")]
+		[Fact(Skip = "Needs to be fixed")]
 		public void Executes_command_handler_which_throws()
 		{
 			var container = new WindsorContainer();
 
 			container.Kernel.ComponentModelCreated += model =>
 			                                          {
-																									if (model.LifestyleType == LifestyleType.Undefined || model.LifestyleType == LifestyleType.PerWebRequest)
-																										model.LifestyleType = LifestyleType.Transient;
+				                                          if (model.LifestyleType == LifestyleType.Undefined || model.LifestyleType == LifestyleType.PerWebRequest)
+				                                          {
+					                                          model.LifestyleType = LifestyleType.Transient;
+				                                          }
 			                                          };
 
 			var handlers = PipelineInstaller.InstallHandlers(container, GetType().Assembly);
@@ -36,10 +38,12 @@ namespace UnitTests.Commands
 			var container = new WindsorContainer();
 
 			container.Kernel.ComponentModelCreated += model =>
-			{
-				if (model.LifestyleType == LifestyleType.Undefined || model.LifestyleType == LifestyleType.PerWebRequest)
-					model.LifestyleType = LifestyleType.Transient;
-			};
+			                                          {
+				                                          if (model.LifestyleType == LifestyleType.Undefined || model.LifestyleType == LifestyleType.PerWebRequest)
+				                                          {
+					                                          model.LifestyleType = LifestyleType.Transient;
+				                                          }
+			                                          };
 
 			var handlers = PipelineInstaller.InstallHandlers(container, GetType().Assembly);
 

@@ -1,10 +1,9 @@
 ﻿namespace Fulcrum.Core.Ddd
 {
 	/// <summary>
-	/// Marker interface.
+	///   Marker interface.
 	/// </summary>
 	public interface IEntity
 	{
-		 
 	}
 }

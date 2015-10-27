@@ -6,5 +6,7 @@
 		void Handle(TCommand command);
 	}
 
-	public interface ICommandHandler { }
+	public interface ICommandHandler
+	{
+	}
 }

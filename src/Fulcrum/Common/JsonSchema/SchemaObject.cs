@@ -20,69 +20,24 @@ namespace Fulcrum.Common.JsonSchema
 			Type = type;
 		}
 
-        public SchemaObject(CommandSchema commandSchema, string name, string @namespace)
-            : this()
-        {
-            Type = SchemaObjectType.Object;
-            Title = name;
-            Description = string.Format("JSON schema for {0}/{1}.", @namespace, name);
-
-            if (commandSchema.Properties == null)
-            {
-                return;
-            }
-
-            if (commandSchema.ValidateByQuery)
-            {
-                ValidationQueryUrl = commandSchema.ValidationQueryUrl;
-            }
-
-            foreach (var property in commandSchema.Properties)
-            {
-                var validated = isPropertyValidated(property.Value);
-
-                var propertyType = getPropertyType(property.Value);
-
-                ISchemaPropertyMetadata metadata;
-
-                if (validated)
-                {
-                    var validationMetadata = getValidatedPropertyMetadata(property.Value, propertyType);
-
-                    if (validationMetadata.Required.HasValue && validationMetadata.Required.Value)
-                    {
-                        Required.Add(property.Key);
-                    }
-
-                    metadata = validationMetadata;
-                }
-                else
-                {
-                    metadata = new SimplePropertyMetadata(propertyType);
-                }
-
-                Properties.Add(property.Key, metadata);
-            }
-        }
-
-		public SchemaObject(EventSchema eventSchema, string name, string @namespace)
+		public SchemaObject(CommandSchema commandSchema, string name, string @namespace)
 			: this()
 		{
 			Type = SchemaObjectType.Object;
 			Title = name;
 			Description = string.Format("JSON schema for {0}/{1}.", @namespace, name);
 
-            if (eventSchema.Properties == null)
+			if (commandSchema.Properties == null)
 			{
 				return;
 			}
 
-            if (eventSchema.ValidateByQuery)
+			if (commandSchema.ValidateByQuery)
 			{
-                ValidationQueryUrl = eventSchema.ValidationQueryUrl;
+				ValidationQueryUrl = commandSchema.ValidationQueryUrl;
 			}
 
-            foreach (var property in eventSchema.Properties)
+			foreach (var property in commandSchema.Properties)
 			{
 				var validated = isPropertyValidated(property.Value);
 
@@ -110,8 +65,50 @@ namespace Fulcrum.Common.JsonSchema
 			}
 		}
 
-		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-		public string ValidationQueryUrl { get; set; }
+		public SchemaObject(EventSchema eventSchema, string name, string @namespace)
+			: this()
+		{
+			Type = SchemaObjectType.Object;
+			Title = name;
+			Description = string.Format("JSON schema for {0}/{1}.", @namespace, name);
+
+			if (eventSchema.Properties == null)
+			{
+				return;
+			}
+
+			if (eventSchema.ValidateByQuery)
+			{
+				ValidationQueryUrl = eventSchema.ValidationQueryUrl;
+			}
+
+			foreach (var property in eventSchema.Properties)
+			{
+				var validated = isPropertyValidated(property.Value);
+
+				var propertyType = getPropertyType(property.Value);
+
+				ISchemaPropertyMetadata metadata;
+
+				if (validated)
+				{
+					var validationMetadata = getValidatedPropertyMetadata(property.Value, propertyType);
+
+					if (validationMetadata.Required.HasValue && validationMetadata.Required.Value)
+					{
+						Required.Add(property.Key);
+					}
+
+					metadata = validationMetadata;
+				}
+				else
+				{
+					metadata = new SimplePropertyMetadata(propertyType);
+				}
+
+				Properties.Add(property.Key, metadata);
+			}
+		}
 
 		public string Description { get; private set; }
 
@@ -123,9 +120,11 @@ namespace Fulcrum.Common.JsonSchema
 
 		public SchemaObjectType Type { get; private set; }
 
+		[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+		public string ValidationQueryUrl { get; set; }
+
 		private SchemaPropertyType getPropertyType(Newtonsoft.Json.Schema.JsonSchema value)
 		{
-
 			var schemaType = value.Type.Value;
 
 			if (schemaType == JsonSchemaType.Boolean)
@@ -149,53 +148,6 @@ namespace Fulcrum.Common.JsonSchema
 			}
 
 			return SchemaPropertyType.Object;
-		}
-
-		private bool isPropertyValidated(Newtonsoft.Json.Schema.JsonSchema value)
-		{
-			var result = false;
-
-			if (value.ExclusiveMaximum.HasValue)
-			{
-				result = true;
-			}
-
-			if (value.ExclusiveMinimum.HasValue)
-			{
-				result = true;
-			}
-
-			if (value.Maximum.HasValue)
-			{
-				result = true;
-			}
-
-			if (value.MaximumLength.HasValue)
-			{
-				result = true;
-			}
-
-			if (value.Minimum.HasValue)
-			{
-				result = true;
-			}
-
-			if (value.MinimumLength.HasValue)
-			{
-				result = true;
-			}
-
-			if (!string.IsNullOrWhiteSpace(value.Pattern))
-			{
-				result = true;
-			}
-
-			if (value.Required.HasValue)
-			{
-				result = true;
-			}
-
-			return result;
 		}
 
 		private ValidatedPropertyMetadata getValidatedPropertyMetadata
@@ -241,6 +193,53 @@ namespace Fulcrum.Common.JsonSchema
 			if (value.Required.HasValue)
 			{
 				result.Required = value.Required;
+			}
+
+			return result;
+		}
+
+		private bool isPropertyValidated(Newtonsoft.Json.Schema.JsonSchema value)
+		{
+			var result = false;
+
+			if (value.ExclusiveMaximum.HasValue)
+			{
+				result = true;
+			}
+
+			if (value.ExclusiveMinimum.HasValue)
+			{
+				result = true;
+			}
+
+			if (value.Maximum.HasValue)
+			{
+				result = true;
+			}
+
+			if (value.MaximumLength.HasValue)
+			{
+				result = true;
+			}
+
+			if (value.Minimum.HasValue)
+			{
+				result = true;
+			}
+
+			if (value.MinimumLength.HasValue)
+			{
+				result = true;
+			}
+
+			if (!string.IsNullOrWhiteSpace(value.Pattern))
+			{
+				result = true;
+			}
+
+			if (value.Required.HasValue)
+			{
+				result = true;
 			}
 
 			return result;

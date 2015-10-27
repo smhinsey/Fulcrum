@@ -21,9 +21,9 @@ namespace Fulcrum.Runtime.Api
 				Formatting = Formatting.None,
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
 				Converters = new List<JsonConverter>
-					{
-						new StringEnumConverter()
-					}
+				{
+					new StringEnumConverter()
+				}
 			};
 		}
 
@@ -35,9 +35,9 @@ namespace Fulcrum.Runtime.Api
 				Formatting = Formatting.None,
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
 				Converters = new List<JsonConverter>
-					{
-						new StringEnumConverter()
-					}
+				{
+					new StringEnumConverter()
+				}
 			};
 		}
 

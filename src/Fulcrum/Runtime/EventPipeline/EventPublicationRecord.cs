@@ -11,11 +11,11 @@ namespace Fulcrum.Runtime.EventPipeline
 		{
 		}
 
-        public EventPublicationRecord(IEvent ev)
+		public EventPublicationRecord(IEvent ev)
 		{
 			Status = EventPublicationStatus.Unpublished;
-            Id = ev.PublicationRecordId;
-            PortableEvent = new PortableEvent(ev, EventSchemaGenerator.GenerateSchema(ev.GetType()));
+			Id = ev.PublicationRecordId;
+			PortableEvent = new PortableEvent(ev, EventSchemaGenerator.GenerateSchema(ev.GetType()));
 			Created = DateTime.UtcNow;
 			QueryReferences = new EditableList<IdentifierQueryReference>();
 		}
@@ -26,14 +26,14 @@ namespace Fulcrum.Runtime.EventPipeline
 
 		public string ErrorHeadline { get; set; }
 
-		public DateTime? Updated { get; set; }
-
-		public Guid Id { get; private set; }
-
-        public PortableEvent PortableEvent { get; private set; }
+		public PortableEvent PortableEvent { get; private set; }
 
 		public IList<IdentifierQueryReference> QueryReferences { get; set; }
 
 		public EventPublicationStatus Status { get; set; }
+
+		public DateTime? Updated { get; set; }
+
+		public Guid Id { get; private set; }
 	}
 }

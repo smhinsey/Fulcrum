@@ -15,7 +15,7 @@ namespace Fulcrum.Runtime.Api.Results
 			Parameters = new Dictionary<string, string>();
 
 			foreach (var parameter in methodInfo.GetParameters()
-				.Where(parameter => !Parameters.ContainsKey(parameter.Name)))
+			                                    .Where(parameter => !Parameters.ContainsKey(parameter.Name)))
 			{
 				Parameters.Add(parameter.Name, parameter.ParameterType.Name);
 			}
@@ -37,17 +37,17 @@ namespace Fulcrum.Runtime.Api.Results
 			var paramCounter = 0;
 
 			Parameters.Keys.ForEach(k =>
-			{
-				queryString += k;
-				queryString += string.Format("={{{0}}}", paramCounter + 1);
+			                        {
+				                        queryString += k;
+				                        queryString += string.Format("={{{0}}}", paramCounter + 1);
 
-				if (paramCounter < Parameters.Keys.Count - 1)
-				{
-					queryString += "&";
-				}
+				                        if (paramCounter < Parameters.Keys.Count - 1)
+				                        {
+					                        queryString += "&";
+				                        }
 
-				paramCounter++;
-			});
+				                        paramCounter++;
+			                        });
 
 			var isValidationQuery = false;
 
@@ -60,12 +60,12 @@ namespace Fulcrum.Runtime.Api.Results
 
 			if (isValidationQuery)
 			{
-				Links.Add(new JsonLink(string.Format("/api/queries/{0}/{1}/{2}/validate", 
+				Links.Add(new JsonLink(string.Format("/api/queries/{0}/{1}/{2}/validate",
 					Namespace, QueryObject, Query), "results"));
 			}
 			else
 			{
-				Links.Add(new JsonLink(string.Format("/api/queries/{0}/{1}/{2}/results?{3}", 
+				Links.Add(new JsonLink(string.Format("/api/queries/{0}/{1}/{2}/results?{3}",
 					Namespace, QueryObject, Query, queryString), "results"));
 			}
 		}

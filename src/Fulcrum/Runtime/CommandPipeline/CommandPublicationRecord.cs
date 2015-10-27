@@ -26,14 +26,14 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 		public string ErrorHeadline { get; set; }
 
-		public DateTime? Updated { get; set; }
-
-		public Guid Id { get; private set; }
-
 		public PortableCommand PortableCommand { get; private set; }
 
 		public IList<IdentifierQueryReference> QueryReferences { get; set; }
 
 		public CommandPublicationStatus Status { get; set; }
+
+		public DateTime? Updated { get; set; }
+
+		public Guid Id { get; private set; }
 	}
 }

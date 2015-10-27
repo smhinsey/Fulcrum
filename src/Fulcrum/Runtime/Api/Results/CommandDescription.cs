@@ -14,7 +14,7 @@ namespace Fulcrum.Runtime.Api.Results
 			var commandSchema = CommandSchemaGenerator.GenerateSchema(commandType);
 
 			Schema = new SchemaObject(commandSchema, Name, Namespace);
-			
+
 			Links = new List<JsonLink>()
 			{
 				new JsonLink(string.Format("/api/commands/{0}/{1}/publish", Namespace, Name), "publication"),
@@ -30,9 +30,9 @@ namespace Fulcrum.Runtime.Api.Results
 			}
 		}
 
-		public List<JsonLink> Links { get; private set; }
-
 		public object EmptyModel { get; private set; }
+
+		public List<JsonLink> Links { get; private set; }
 
 		public SchemaObject Schema { get; private set; }
 	}

@@ -12,7 +12,7 @@ namespace Fulcrum.Common
 			PageSize = pageSize;
 			TotalResults = totalResults;
 
-			CurrentPage = (int)Math.Ceiling((skip + 1) /(decimal)PageSize);
+			CurrentPage = (int)Math.Ceiling((skip + 1) / (decimal)PageSize);
 		}
 
 		public int CurrentPage { get; private set; }

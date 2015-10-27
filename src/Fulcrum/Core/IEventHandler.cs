@@ -3,8 +3,10 @@
 	public interface IEventHandler<in TEvent> : IEventHandler
 		where TEvent : IEvent
 	{
-        void Handle(TEvent ev);
+		void Handle(TEvent ev);
 	}
 
-	public interface IEventHandler { }
+	public interface IEventHandler
+	{
+	}
 }

@@ -19,8 +19,8 @@ namespace Fulcrum.Runtime
 			_events = new List<Type>();
 		}
 
-        public EventLocator(Assembly assembly, string inNamespace)
-            : this()
+		public EventLocator(Assembly assembly, string inNamespace)
+			: this()
 		{
 			AddEventSource(assembly, inNamespace);
 		}
@@ -35,9 +35,9 @@ namespace Fulcrum.Runtime
 			_assemblies.Add(inNamespace, assembly);
 
 			assembly.GetTypes()
-				.Where(type => typeof(IEvent).IsAssignableFrom(type)
-				               && type.Namespace == inNamespace)
-				.ForEach(_events.Add);
+			        .Where(type => typeof(IEvent).IsAssignableFrom(type)
+			                       && type.Namespace == inNamespace)
+			        .ForEach(_events.Add);
 		}
 
 		public Type FindInNamespace(string eventName, string inNamespace)
@@ -57,8 +57,8 @@ namespace Fulcrum.Runtime
 			foreach (var assembly in _assemblies)
 			{
 				types.AddRange(assembly.Value.GetTypes()
-					.Where(type => typeof(IEvent).IsAssignableFrom(type)
-					               && type.Namespace == assembly.Key));
+				                       .Where(type => typeof(IEvent).IsAssignableFrom(type)
+				                                      && type.Namespace == assembly.Key));
 			}
 
 			return types;

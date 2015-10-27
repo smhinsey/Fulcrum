@@ -14,9 +14,9 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 		public DbSet<CommandPublicationRecord> CommandPublicationRecords { get; set; }
 
-		public DbSet<IdentifierQueryReference> QueryReferences { get; set; }
+		public DbSet<EventPublicationRecord> EventPublicationRecords { get; set; }
 
-        public DbSet<EventPublicationRecord> EventPublicationRecords { get; set; }
+		public DbSet<IdentifierQueryReference> QueryReferences { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{

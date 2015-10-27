@@ -3,10 +3,10 @@ using System.Reflection;
 
 namespace Tests.ApiHarness.Areas.HelpPage.ModelDescriptions
 {
-    public interface IModelDocumentationProvider
-    {
-        string GetDocumentation(MemberInfo member);
+	public interface IModelDocumentationProvider
+	{
+		string GetDocumentation(MemberInfo member);
 
-        string GetDocumentation(Type type);
-    }
+		string GetDocumentation(Type type);
+	}
 }

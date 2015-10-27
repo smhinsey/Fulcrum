@@ -152,26 +152,24 @@ namespace Fulcrum.Runtime.EventPipeline
 					var logSessionId = this.LogGetSessionId();
 
 					var task = Task.Run(() =>
-					                 {
+					                    {
+						                    if (logSessionId.HasValue)
+						                    {
+							                    this.LogSetSessionId(logSessionId.Value);
+						                    }
 
-														 if (logSessionId.HasValue)
-														 {
-															 this.LogSetSessionId(logSessionId.Value);
-														 }
-
-						                 try
-						                 {
-							                 handler.Invoke(resolvedHandler, new object[] { ev });
-						                 }
-						                 finally
-						                 {
-															 if (logSessionId.HasValue)
-															 {
-																 this.LogClearSessionId();
-															 }
-						                 }
-				
-					                 });
+						                    try
+						                    {
+							                    handler.Invoke(resolvedHandler, new object[] { ev });
+						                    }
+						                    finally
+						                    {
+							                    if (logSessionId.HasValue)
+							                    {
+								                    this.LogClearSessionId();
+							                    }
+						                    }
+					                    });
 
 					tasks.Add(task);
 

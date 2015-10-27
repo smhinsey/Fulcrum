@@ -7,9 +7,9 @@ namespace Fulcrum.Runtime.CommandPipeline
 {
 	public class CommandPublicationRegistry
 	{
-        private readonly CommandPipelineDbContext _db;
+		private readonly CommandPipelineDbContext _db;
 
-        public CommandPublicationRegistry(CommandPipelineDbContext db)
+		public CommandPublicationRegistry(CommandPipelineDbContext db)
 		{
 			_db = db;
 		}

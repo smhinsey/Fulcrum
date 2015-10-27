@@ -26,10 +26,10 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 
 			foreach (var reference in record.QueryReferences)
 			{
-				var queryUrl = string.Format("/api/queries/{0}/results?id={1}", 
+				var queryUrl = string.Format("/api/queries/{0}/results?id={1}",
 					reference.QueryName, reference.QueryParameter);
 
-				Links.Add(new JsonLink(queryUrl,"query-reference"));
+				Links.Add(new JsonLink(queryUrl, "query-reference"));
 			}
 		}
 
@@ -38,6 +38,10 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 		public object CommandSchema { get; private set; }
 
 		public DateTime Created { get; private set; }
+
+		public string ErrorDetails { get; private set; }
+
+		public string ErrorHeadline { get; private set; }
 
 		public Guid Id { get; private set; }
 
@@ -48,9 +52,5 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 		public CommandPublicationStatus Status { get; private set; }
 
 		public DateTime? Updated { get; private set; }
-
-		public string ErrorDetails { get; private set; }
-
-		public string ErrorHeadline { get; private set; }
 	}
 }

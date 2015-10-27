@@ -60,11 +60,6 @@ namespace Fulcrum.Runtime
 			commandSchema.Properties.Add(formatPropertyName(property.Name), propertySchema);
 		}
 
-		private static bool checkForBlacklistedName(string name)
-		{
-			return name == "PublicationRecordId";
-		}
-
 		private static void addPropertyValidationToSchema(PropertyInfo property, JsonSchema propertySchema)
 		{
 			var attributes = property.GetCustomAttributes(true);
@@ -76,20 +71,20 @@ namespace Fulcrum.Runtime
 				},
 				{
 					typeof(RangeAttribute), attr =>
-					{
-						var range = (RangeAttribute)attr;
+					                        {
+						                        var range = (RangeAttribute)attr;
 
-						propertySchema.Minimum = double.Parse(range.Minimum.ToString());
-						propertySchema.Maximum = double.Parse(range.Maximum.ToString());
-					}
+						                        propertySchema.Minimum = double.Parse(range.Minimum.ToString());
+						                        propertySchema.Maximum = double.Parse(range.Maximum.ToString());
+					                        }
 				},
 				{
 					typeof(RegularExpressionAttribute), attr =>
-					{
-						var regex = (RegularExpressionAttribute)attr;
+					                                    {
+						                                    var regex = (RegularExpressionAttribute)attr;
 
-						propertySchema.Pattern = regex.Pattern;
-					}
+						                                    propertySchema.Pattern = regex.Pattern;
+					                                    }
 				}
 			};
 
@@ -113,6 +108,11 @@ namespace Fulcrum.Runtime
 			commandSchema.ValidateByQuery = true;
 			// NOTE: we need a globally-safe way of referring to URLs
 			commandSchema.ValidationQueryUrl = "/queries/" + descriptor.Namespace + "/" + descriptor.QueryObject + "/validate";
+		}
+
+		private static bool checkForBlacklistedName(string name)
+		{
+			return name == "PublicationRecordId";
 		}
 
 		private static string formatPropertyName(string name)

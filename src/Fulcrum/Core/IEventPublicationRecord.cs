@@ -12,9 +12,9 @@ namespace Fulcrum.Core
 
 		string ErrorHeadline { get; set; }
 
-		IList<IdentifierQueryReference> QueryReferences { get; set; }
+		PortableEvent PortableEvent { get; }
 
-        PortableEvent PortableEvent { get; }
+		IList<IdentifierQueryReference> QueryReferences { get; set; }
 
 		EventPublicationStatus Status { get; set; }
 

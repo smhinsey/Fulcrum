@@ -8,6 +8,5 @@
 
 	public interface ICommandValidationQuery : IQuery
 	{
-		
 	}
 }

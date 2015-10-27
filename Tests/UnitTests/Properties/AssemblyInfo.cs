@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
-
+using ApprovalTests.Reporters;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-using ApprovalTests.Reporters;
 
 [assembly: AssemblyTitle("Fulcrum.Tests")]
 [assembly: AssemblyDescription("")]
@@ -40,4 +39,5 @@ using ApprovalTests.Reporters;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 // ApprovalTests.NET global reporter configuration
+
 [assembly: UseReporter(typeof(FileLauncherReporter), typeof(ClipboardReporter))]

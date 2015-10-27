@@ -3,9 +3,13 @@
 	public enum SchemaPropertyType
 	{
 		Boolean,
+
 		Integer,
+
 		Float,
+
 		String,
+
 		Object,
 	}
 }

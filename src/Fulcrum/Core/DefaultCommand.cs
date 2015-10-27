@@ -10,12 +10,12 @@ namespace Fulcrum.Core
 			PublicationRecordId = Guid.Empty;
 		}
 
-		[JsonIgnore]
-		public Guid PublicationRecordId { get; private set; }
-
 		public void AssignPublicationRecordId(Guid id)
 		{
 			PublicationRecordId = id;
 		}
+
+		[JsonIgnore]
+		public Guid PublicationRecordId { get; private set; }
 	}
 }

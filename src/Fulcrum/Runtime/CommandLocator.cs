@@ -35,9 +35,9 @@ namespace Fulcrum.Runtime
 			_assemblies.Add(inNamespace, assembly);
 
 			assembly.GetTypes()
-				.Where(type => typeof(ICommand).IsAssignableFrom(type)
-				               && type.Namespace == inNamespace)
-				.ForEach(_commands.Add);
+			        .Where(type => typeof(ICommand).IsAssignableFrom(type)
+			                       && type.Namespace == inNamespace)
+			        .ForEach(_commands.Add);
 		}
 
 		public Type Find(string commandName, string inNamespace)
@@ -55,7 +55,7 @@ namespace Fulcrum.Runtime
 					commandName, inNamespace);
 
 				return _commands.FirstOrDefault(t => t.Name == commandName
-																												 && t.Namespace == inNamespace);
+				                                     && t.Namespace == inNamespace);
 			}
 
 			var message = string.Format("Command {0} in {1} matched {2} registered types.",
@@ -78,8 +78,8 @@ namespace Fulcrum.Runtime
 			foreach (var assembly in _assemblies)
 			{
 				types.AddRange(assembly.Value.GetTypes()
-					.Where(type => typeof(ICommand).IsAssignableFrom(type)
-					               && type.Namespace == assembly.Key));
+				                       .Where(type => typeof(ICommand).IsAssignableFrom(type)
+				                                      && type.Namespace == assembly.Key));
 			}
 
 			return types;

@@ -1,9 +1,9 @@
 namespace Tests.ApiHarness.Areas.HelpPage.ModelDescriptions
 {
-    public class KeyValuePairModelDescription : ModelDescription
-    {
-        public ModelDescription KeyModelDescription { get; set; }
+	public class KeyValuePairModelDescription : ModelDescription
+	{
+		public ModelDescription KeyModelDescription { get; set; }
 
-        public ModelDescription ValueModelDescription { get; set; }
-    }
+		public ModelDescription ValueModelDescription { get; set; }
+	}
 }

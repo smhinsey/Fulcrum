@@ -152,8 +152,8 @@ namespace Fulcrum.Runtime.Api
 				if (property.PropertyType.IsClass
 				    && elementType != typeof(string)
 				    && elementType != typeof(int)
-						&& elementType != typeof(bool)
-						&& elementType != typeof(DateTime)
+				    && elementType != typeof(bool)
+				    && elementType != typeof(DateTime)
 					)
 				{
 					var instance = Activator.CreateInstance(elementType);
@@ -212,7 +212,7 @@ namespace Fulcrum.Runtime.Api
 										prop.SetValue(instance, coercedValue);
 									}
 								}
-                                else if (prop.PropertyType == typeof(DateTime) || prop.PropertyType == typeof(DateTime?))
+								else if (prop.PropertyType == typeof(DateTime) || prop.PropertyType == typeof(DateTime?))
 								{
 									if (!string.IsNullOrWhiteSpace(localValue.AttemptedValue))
 									{

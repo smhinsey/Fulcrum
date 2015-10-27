@@ -3,6 +3,7 @@
 	public enum SchemaObjectType
 	{
 		Object,
+
 		Array
 	}
 }

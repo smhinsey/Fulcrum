@@ -5,14 +5,12 @@ using Fulcrum.Runtime.Api;
 
 namespace Fulcrum.Runtime.Web
 {
-
 	/// <summary>
-	/// Provides an HTTP API to write to the system-wide logs.
-	/// 
-	/// To use, create a concrete implementation of this abstract controller
-	/// in your web project's Controllers directory, override the virtual methods,
-	/// and define your own routes on them as attributes. If you prefer, you can
-	/// use System.Web.Routing.
+	///   Provides an HTTP API to write to the system-wide logs.
+	///   To use, create a concrete implementation of this abstract controller
+	///   in your web project's Controllers directory, override the virtual methods,
+	///   and define your own routes on them as attributes. If you prefer, you can
+	///   use System.Web.Routing.
 	/// </summary>
 	public abstract class DefaultLogController : BaseMvcController, ILoggingSource
 	{

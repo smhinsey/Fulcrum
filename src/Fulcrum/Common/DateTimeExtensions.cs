@@ -8,7 +8,7 @@ namespace Fulcrum.Common
 		public static DateTime FindWeekStartDate(this DateTime date, DayOfWeek startOfWeek)
 		{
 			var diff = date.DayOfWeek - startOfWeek;
-			
+
 			if (diff < 0)
 			{
 				diff += 7;
@@ -17,11 +17,18 @@ namespace Fulcrum.Common
 			return date.AddDays(-1 * diff).Date;
 		}
 
-		public static DateTime RoundUp(this DateTime dateTime, TimeSpan duration)
+		public static IEnumerable<DateTime> GetWeekDays(this DateTime dateFrom)
 		{
-			var delta = (duration.Ticks - (dateTime.Ticks % duration.Ticks)) % duration.Ticks;
-
-			return new DateTime(dateTime.Ticks + delta, dateTime.Kind);
+			return new List<DateTime>
+			{
+				dateFrom,
+				dateFrom.AddDays(1),
+				dateFrom.AddDays(2),
+				dateFrom.AddDays(3),
+				dateFrom.AddDays(4),
+				dateFrom.AddDays(5),
+				dateFrom.AddDays(6),
+			};
 		}
 
 		public static DateTime RoundDown(this DateTime dateTime, TimeSpan duration)
@@ -40,18 +47,11 @@ namespace Fulcrum.Common
 			return roundUp ? dateTime.RoundUp(duration) : dateTime.RoundDown(duration);
 		}
 
-		public static IEnumerable<DateTime> GetWeekDays(this DateTime dateFrom)
+		public static DateTime RoundUp(this DateTime dateTime, TimeSpan duration)
 		{
-			return new List<DateTime>
-			{
-				dateFrom,
-				dateFrom.AddDays(1),
-				dateFrom.AddDays(2),
-				dateFrom.AddDays(3),
-				dateFrom.AddDays(4),
-				dateFrom.AddDays(5),
-				dateFrom.AddDays(6),
-			};
+			var delta = (duration.Ticks - (dateTime.Ticks % duration.Ticks)) % duration.Ticks;
+
+			return new DateTime(dateTime.Ticks + delta, dateTime.Kind);
 		}
 	}
 }

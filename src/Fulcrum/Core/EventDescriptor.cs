@@ -2,7 +2,7 @@
 {
 	public class EventDescriptor
 	{
-        public EventDescriptor(string name, string @namespace)
+		public EventDescriptor(string name, string @namespace)
 		{
 			Namespace = @namespace;
 			Name = name;

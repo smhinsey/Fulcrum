@@ -12,12 +12,12 @@ namespace Fulcrum.Core
 		{
 		}
 
-        public PortableEvent(IEvent ev, EventSchema eventSchema)
+		public PortableEvent(IEvent ev, EventSchema eventSchema)
 		{
-            ClrAssemblyName = ev.GetType().Assembly.FullName;
-            ClrTypeName = ev.GetType().FullName;
-            EventJson = JsonConvert.SerializeObject(ev);
-            EventJsonSchema = eventSchema.ToString();
+			ClrAssemblyName = ev.GetType().Assembly.FullName;
+			ClrTypeName = ev.GetType().FullName;
+			EventJson = JsonConvert.SerializeObject(ev);
+			EventJsonSchema = eventSchema.ToString();
 		}
 
 		public string ClrAssemblyName { get; private set; }

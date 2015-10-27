@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Http;
 using System.Web.Mvc;
 using Fulcrum.Common;
 using Fulcrum.Core;
@@ -16,13 +10,12 @@ using Fulcrum.Runtime.Api.Results.CommandPublication;
 namespace Fulcrum.Runtime.Web
 {
 	/// <summary>
-	/// Provides an HTTP API for listing visible commands, publishing them,
-	/// and viewing the command publication records associated with them.
-	/// 
-	/// To use, create a concrete implementation of this abstract controller
-	/// in your web project's Controllers directory, override the virtual methods,
-	/// and define your own routes on them as attributes. If you prefer, you can
-	/// use System.Web.Routing.
+	///   Provides an HTTP API for listing visible commands, publishing them,
+	///   and viewing the command publication records associated with them.
+	///   To use, create a concrete implementation of this abstract controller
+	///   in your web project's Controllers directory, override the virtual methods,
+	///   and define your own routes on them as attributes. If you prefer, you can
+	///   use System.Web.Routing.
 	/// </summary>
 	public abstract class DefaultCommandController : BaseMvcController, ILoggingSource
 	{

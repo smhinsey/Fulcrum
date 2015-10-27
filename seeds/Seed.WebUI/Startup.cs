@@ -46,13 +46,13 @@ namespace Seed.WebUI
 		private void configureMvc()
 		{
 			_container.Register(Classes.FromAssemblyInThisApplication()
-																 .BasedOn<ApiController>()
-																 .LifestyleTransient());
+			                           .BasedOn<ApiController>()
+			                           .LifestyleTransient());
 
 			// set up mvc di
 			_container.Register(Classes.FromThisAssembly()
-																 .BasedOn<IController>()
-																 .LifestyleTransient());
+			                           .BasedOn<IController>()
+			                           .LifestyleTransient());
 
 			var controllerFactory = new WindsorControllerFactory(_container.Kernel);
 

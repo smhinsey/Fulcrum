@@ -13,13 +13,12 @@ using Fulcrum.Runtime.Api.Results;
 namespace Fulcrum.Runtime.Web
 {
 	/// <summary>
-	/// Provides an HTTP API for listing visible queries as well as executing
-	/// them and viewing their results.
-	/// 
-	/// To use, create a concrete implementation of this abstract controller
-	/// in your web project's Controllers directory, override the virtual methods,
-	/// and define your own routes on them as attributes. If you prefer, you can
-	/// use System.Web.Routing.
+	///   Provides an HTTP API for listing visible queries as well as executing
+	///   them and viewing their results.
+	///   To use, create a concrete implementation of this abstract controller
+	///   in your web project's Controllers directory, override the virtual methods,
+	///   and define your own routes on them as attributes. If you prefer, you can
+	///   use System.Web.Routing.
 	/// </summary>
 	public abstract class DefaultQueryController : BaseMvcController
 	{

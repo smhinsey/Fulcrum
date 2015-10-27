@@ -23,11 +23,6 @@ namespace Fulcrum.Common.Web
 			return new WindsorDependencyScope(_container);
 		}
 
-		public void Dispose()
-		{
-			//_container.Dispose();	
-		}
-
 		public object GetService(Type serviceType)
 		{
 			return _container.HasComponent(serviceType) ? _container.Resolve(serviceType) : null;
@@ -36,6 +31,11 @@ namespace Fulcrum.Common.Web
 		public IEnumerable<object> GetServices(Type serviceType)
 		{
 			return _container.ResolveAll(serviceType).Cast<object>();
+		}
+
+		public void Dispose()
+		{
+			//_container.Dispose();	
 		}
 	}
 }

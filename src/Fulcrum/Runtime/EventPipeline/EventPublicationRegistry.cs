@@ -10,7 +10,7 @@ namespace Fulcrum.Runtime.EventPipeline
 	{
 		private readonly CommandPipelineDbContext _db;
 
-        public EventPublicationRegistry(CommandPipelineDbContext db)
+		public EventPublicationRegistry(CommandPipelineDbContext db)
 		{
 			_db = db;
 		}

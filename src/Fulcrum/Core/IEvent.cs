@@ -9,10 +9,10 @@ namespace Fulcrum.Core
 	public interface IEvent
 	{
 		/// <summary>
-		/// When a event has been published, it is assigned a publication record
-		/// with a unique identifier. This identifier is returned to the publisher
-        /// and made available to the event's handler so that the two can communicate
-        /// out-of-band via the event pipeline inquiry system.
+		///   When a event has been published, it is assigned a publication record
+		///   with a unique identifier. This identifier is returned to the publisher
+		///   and made available to the event's handler so that the two can communicate
+		///   out-of-band via the event pipeline inquiry system.
 		/// </summary>
 		Guid PublicationRecordId { get; }
 

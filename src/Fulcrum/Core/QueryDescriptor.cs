@@ -12,10 +12,10 @@ namespace Fulcrum.Core
 			Query = methodInfo.Name;
 		}
 
+		public string Namespace { get; private set; }
+
 		public string Query { get; private set; }
 
 		public string QueryObject { get; private set; }
-
-		public string Namespace { get; private set; }
 	}
 }

@@ -13,7 +13,7 @@ namespace Fulcrum.Core
 		void DisablePublication();
 
 		/// <summary>
-        ///   Allow the publication of events.
+		///   Allow the publication of events.
 		/// </summary>
 		void EnablePublication();
 
@@ -24,15 +24,14 @@ namespace Fulcrum.Core
 		/// <returns></returns>
 		IEventPublicationRecord Inquire(Guid publicationId);
 
-        IEventPublicationRecord MarkAsComplete(Guid publicationId);
+		IEventPublicationRecord MarkAsComplete(Guid publicationId);
 
-        IEventPublicationRecord MarkAsFailed(Guid publicationId, string errorHeadline, Exception exception);
+		IEventPublicationRecord MarkAsFailed(Guid publicationId, string errorHeadline, Exception exception);
 
-        IEventPublicationRecord MarkAsProcessing(Guid publicationId);
+		IEventPublicationRecord MarkAsProcessing(Guid publicationId);
 
-        IEventPublicationRecord MarkAsWaitingOnJob(Guid publicationId);
+		IEventPublicationRecord MarkAsWaitingOnJob(Guid publicationId);
 
-        IEventPublicationRecord Publish(IEvent ev);
-
+		IEventPublicationRecord Publish(IEvent ev);
 	}
 }

@@ -21,11 +21,6 @@ namespace Fulcrum.Common.Web
 			_scope = container.BeginScope();
 		}
 
-		public void Dispose()
-		{
-			_scope.Dispose();
-		}
-
 		public object GetService(Type serviceType)
 		{
 			return _container.HasComponent(serviceType) ? _container.Resolve(serviceType) : null;
@@ -34,6 +29,11 @@ namespace Fulcrum.Common.Web
 		public IEnumerable<object> GetServices(Type serviceType)
 		{
 			return _container.ResolveAll(serviceType).Cast<object>();
+		}
+
+		public void Dispose()
+		{
+			_scope.Dispose();
 		}
 	}
 }

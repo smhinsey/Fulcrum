@@ -42,7 +42,7 @@ namespace Tests.ApiHarness
 
 			_container.Register(
 				Component.For<ICommandLocator>()
-					.UsingFactoryMethod(() => commandLocator)
+				         .UsingFactoryMethod(() => commandLocator)
 				);
 		}
 
@@ -60,8 +60,8 @@ namespace Tests.ApiHarness
 			_container = new WindsorContainer();
 
 			_container.Register(Classes.FromAssemblyInThisApplication()
-				.BasedOn<ApiController>()
-				.LifestylePerWebRequest());
+			                           .BasedOn<ApiController>()
+			                           .LifestylePerWebRequest());
 
 			// set up web api di
 			GlobalConfiguration.Configuration.DependencyResolver = new WindsorDependencyResolver(_container.Kernel);
@@ -71,8 +71,8 @@ namespace Tests.ApiHarness
 
 			// set up mvc di
 			_container.Register(Classes.FromThisAssembly()
-				.BasedOn<IController>()
-				.LifestyleTransient());
+			                           .BasedOn<IController>()
+			                           .LifestyleTransient());
 
 			var controllerFactory = new WindsorControllerFactory(_container.Kernel);
 			ControllerBuilder.Current.SetControllerFactory(controllerFactory);
@@ -88,7 +88,7 @@ namespace Tests.ApiHarness
 
 			_container.Register(
 				Component.For<IQueryLocator>()
-					.UsingFactoryMethod(() => queryLocator)
+				         .UsingFactoryMethod(() => queryLocator)
 				);
 		}
 	}

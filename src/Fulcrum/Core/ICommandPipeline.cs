@@ -23,6 +23,5 @@ namespace Fulcrum.Core
 		ICommandPublicationRecord MarkAsWaitingOnJob(Guid publicationId);
 
 		ICommandPublicationRecord Publish(ICommand command);
-
 	}
 }
