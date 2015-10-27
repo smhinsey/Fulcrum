@@ -10,8 +10,8 @@ Getting Started
 
 To see a quick demo
 
-* Pull code
-* Create database called Fulcrum (or update connection strings in app/web.configs)
+* Clone the repo
+* Using SQL Server, create a database called Fulcrum and update the ConnectionString elements in all app/web.config files in the project
 * Build
 * Run update-database
 * Set API Test Harness as startup project & run it, it will launch a browser
@@ -24,6 +24,7 @@ Core To-do
 1. Make CommandController claims-aware
 1. Make QueryController claims-aware
 1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
+2. Better config management, specifically around the connection string
 
 Seed To-Do
 =========
