@@ -26,6 +26,7 @@ Core To-do
 2. Create custom AuthorizeAttribute with on/off config switch
 1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 2. Better config management, specifically around the connection string
+3. Refactor SimpleCommandPipeline, implement pure async
 
 Seed To-Do
 =========
