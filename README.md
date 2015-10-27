@@ -27,6 +27,8 @@ Core To-do
 1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 2. Better config management, specifically around the connection string
 3. Refactor SimpleCommandPipeline, implement pure async
+4. Investigate a way to have IQuery implementations return inline/anonymous projections rather than requiring often-redundant projection types.
+5. Verify that query-based command validation still works and implement anything Seed needs to take advantage of it
 
 Seed To-Do
 =========
