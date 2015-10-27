@@ -30,7 +30,8 @@ Seed To-Do
 =========
 1. Implement Identity Server 3 
 1. Implement Membership Reboot
-1. Create Angular login & auth views, controllers, services, etc.
+2. Create Angular shell
+1. Create login & auth views, controllers, services, etc.
 1. Create profile management views, controllers, etc.
 1. Create user profile admin views, controllers, etc.
 2. Create user authentication/session management views, controllers, etc.
