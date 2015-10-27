@@ -1,7 +1,7 @@
 Purpose
 ======
 
-Fulcrum provides a self-describing HTTP API to browse, validate, and publish commands, and also to browse, validate, and execute queries. These commands and queries represent an application's capabilities by expressing operations which modify its internal state as commands and operations which return its internal state as queries. 
+Fulcrum provides a self-describing HTTP API to browse, validate, and publish commands, and also to browse and execute queries. These commands and queries represent an application's capabilities by expressing operations which modify its internal state as commands and operations which return its internal state as queries, without making assumptions about implementations. 
 
 The seed project will integrate Fulcrum with Identity Server v3 and Membership Reboot, along with Angular, angular-schema-form, TV4.js, Bootstrap CSS, and other libraries to provide a default project which can be used to kickstart new development.
 
