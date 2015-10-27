@@ -105,7 +105,7 @@ namespace Fulcrum.Runtime.Web
 
 				var paramIndex = 0;
 
-				// TODO: this should be factored out
+				// TODO: this needs a major rewrite, see CommandModelBinder for more.
 				foreach (var parameter in parameters)
 				{
 					var parameterInRequest = Request.Params[parameter.Name];

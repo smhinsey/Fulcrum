@@ -7,6 +7,9 @@ using Fulcrum.Common;
 
 namespace Fulcrum.Runtime.Api
 {
+	// TODO: this is in need of a major rewrite. 
+	// best case, this can just delegate to existing code within MVC or Web API, but at the very least
+	// we should introduce something like a type dictionary dispatcher to reduce code duplication, etc.
 	public class CommandModelBinder : DefaultModelBinder, ILoggingSource
 	{
 		private const int MaxRecursionDepth = 25;
