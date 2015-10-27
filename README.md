@@ -24,7 +24,7 @@ Core To-do
 1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
 1. Make CommandController claims-aware
 1. Make QueryController claims-aware
-1. Investigate replacing/augmenting log4net with serilog in ILoggingSource
+1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 
 Seed To-Do
 =========
