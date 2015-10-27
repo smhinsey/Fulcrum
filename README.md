@@ -1,3 +1,10 @@
+Purpose
+======
+
+Fulcrum provides a self-describing HTTP API to browse, validate, and publish commands, and also to browse, validate, and execute queries. These commands and queries represent an application's capabilities by expressing operations which modify its internal state as commands and operations which return its internal state as queries. 
+
+The seed project will integrate Fulcrum with Identity Server v3 and Membership Reboot, along with Angular, angular-schema-form, TV4.js, Bootstrap CSS, and other libraries to provide a default project which can be used to kickstart new development.
+
 Getting Started
 =======
 
@@ -11,14 +18,6 @@ To see a quick demo
 * Navigate to /commands or /queries
 * You can also use Postman to explore the API and it's necessary to use it when authentication is enabled
 
-
-Goals
-======
-
-Fulcrum provides an HTTP-based self-describing API as well as the runtime infrastructure necessary to publish commands and execute queries.
-
-The seed project will integrate Fulcrum with Identity Server v3 and Membership Reboot, along with Angular, angular-schema-form, TV4.js, Bootstrap CSS, and other libraries to provide a default project which can be used to kickstart new development.
-
 Core To-do
 =======
 1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
@@ -31,6 +30,8 @@ Seed To-Do
 1. Implement Identity Server 3 
 1. Implement Membership Reboot
 2. Create Angular shell
+3. Implement directive to automatically render commands by reading their JSON schema from the API (via a read-through cache) and passing it to angular-schema-form
+4. Implement validation of the angular-schema-form forms using the command schema and the TV4.js schema validation library
 1. Create login & auth views, controllers, services, etc.
 1. Create profile management views, controllers, etc.
 1. Create user profile admin views, controllers, etc.
