@@ -21,17 +21,17 @@ The seed project will integrate Fulcrum with Identity Server v3 and Membership R
 
 Core To-do
 =======
-1) Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
-1) Make CommandController claims-aware
-1) Make QueryController claims-aware
-1) Investigate replacing/augmenting log4net with serilog in ILoggingSource
+1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
+1. Make CommandController claims-aware
+1. Make QueryController claims-aware
+1. Investigate replacing/augmenting log4net with serilog in ILoggingSource
 
 Seed To-Do
 =========
-1) Implement Identity Server 3 
-1) Implement Membership Reboot
-1) Create Angular login & auth views, controllers, services, etc.
-1) Create profile management views, controllers, etc.
-1) Implement logging
-1) Install/configure ELMAH, tied to logging
-1) Set up a log viewer UI
+1. Implement Identity Server 3 
+1. Implement Membership Reboot
+1. Create Angular login & auth views, controllers, services, etc.
+1. Create profile management views, controllers, etc.
+1. Implement logging
+1. Install/configure ELMAH, tied to logging
+1. Set up a log viewer UI
