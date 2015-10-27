@@ -32,6 +32,10 @@ Seed To-Do
 1. Implement Membership Reboot
 1. Create Angular login & auth views, controllers, services, etc.
 1. Create profile management views, controllers, etc.
-1. Implement logging
-1. Install/configure ELMAH, tied to logging
-1. Set up a log viewer UI
+1. Create user profile admin views, controllers, etc.
+2. Create user authentication/session management views, controllers, etc.
+1. Implement log4net with file & database appenders
+2. Wire up session log IDs
+1. Create log viewer UI to read from log4net database table
+2. Implement "My Session" feature - a link in the footer to the log viewer, pre-filtered by the current user's session log ID
+1. Install/configure ELMAH, tied to log4net
