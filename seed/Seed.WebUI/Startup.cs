@@ -17,7 +17,7 @@ using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter.Unofficial;
 using Fulcrum.Common;
 using Fulcrum.Common.Web;
-using Fulcrum.Runtime.TiltedGlobe.Runtime;
+using Fulcrum.Runtime;
 using IdentityManager.Configuration;
 using IdentityServer3.Core.Configuration;
 using IdentityServer3.Core.Services;
@@ -26,8 +26,6 @@ using IdentityServer3.Core.Services.InMemory;
 using log4net.Config;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Seed.WebUI;
@@ -54,9 +52,9 @@ namespace Seed.WebUI
 
 			var httpConfig = new HttpConfiguration();
 
-			CommonAppSetup.ConfigureContainer<UserSystemDb, UserSystemSettings>(_container);
-			CommonAppSetup.ConfigureCommandsAndHandlers(_container);
-			CommonAppSetup.ConfigureQueries(_container);
+			FulcrumSetup.ConfigureContainer<UserSystemDb, UserSystemSettings>(_container);
+			FulcrumSetup.ConfigureCommandsAndHandlers(_container);
+			FulcrumSetup.ConfigureQueries(_container);
 
 			app.UseCors(CorsOptions.AllowAll);
 
@@ -175,13 +173,13 @@ namespace Seed.WebUI
 			config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
 			_container.Register(Classes.FromAssemblyInThisApplication()
-														.BasedOn<IHttpController>()
-														.LifestylePerWebRequest());
+			                           .BasedOn<IHttpController>()
+			                           .LifestylePerWebRequest());
 
 			GlobalConfiguration.Configuration.DependencyResolver = new WindsorDependencyResolver(_container.Kernel);
 
 			GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new WindsorControllerActivator(_container));
-			
+
 			config.DependencyResolver = new WindsorDependencyResolver(_container.Kernel);
 
 			config.Services.Replace(typeof(IHttpControllerActivator), new WindsorControllerActivator(_container));
