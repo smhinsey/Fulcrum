@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using BrockAllen.MembershipReboot.Ef;
+using BrockAllen.MembershipReboot.Ef.Migrations;
 
 namespace Seed.WebUI
 {
@@ -16,6 +19,8 @@ namespace Seed.WebUI
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DefaultMembershipRebootDatabase, Configuration>());
 		}
 	}
 }
