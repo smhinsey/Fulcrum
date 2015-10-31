@@ -11,10 +11,14 @@ using Fulcrum.Common;
 using Fulcrum.Common.Web;
 using Fulcrum.Runtime.TiltedGlobe.Runtime;
 using log4net.Config;
+using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using Seed.WebUI;
 using SeedComponents;
+
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace Seed.WebUI
 {

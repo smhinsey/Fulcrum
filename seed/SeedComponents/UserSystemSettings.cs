@@ -4,5 +4,8 @@ namespace SeedComponents
 {
 	public class UserSystemSettings : AppSettings
 	{
+		public UserSystemSettings() : base()
+		{
+		}
 	}
 }

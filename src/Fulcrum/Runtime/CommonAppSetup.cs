@@ -79,7 +79,7 @@ namespace Fulcrum.Runtime
 			}
 
 			public static void ConfigureContainer<TDbContext, TAppSettings>(IWindsorContainer container)
-				where TDbContext : DbContext where TAppSettings : AppSettings
+				where TDbContext : DbContext where TAppSettings : AppSettings, new()
 			{
 				container.Register(
 					Component.For<TDbContext>()
@@ -87,6 +87,7 @@ namespace Fulcrum.Runtime
 
 				container.Register(
 					Component.For<TAppSettings>()
+					         .Instance(new TAppSettings())
 					         .LifestyleSingleton());
 
 				container.Register(

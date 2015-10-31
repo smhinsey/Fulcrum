@@ -1,0 +1,11 @@
+﻿{
+	"version": 3,
+	"file": "site.css",
+	"sources": [
+		"site.scss",
+		"../App/styles/app.scss"
+	],
+	"sourcesContent": [],
+	"mappings": "",
+	"names": []
+}
