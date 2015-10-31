@@ -1,38 +1,25 @@
 ﻿@{
 	ViewBag.Title = "Fulcrum Seed - ";
 }
-<body>
+<body ng-cloak ng-app="@ViewBag.AppRootNamespace">
 	<div class="container">
-
-		<!-- Static navbar -->
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#">@ViewBag.Title @ViewBag.ReleaseLabel</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						@*<li><a href="#">Section A</a></li>*@
+					<ul class="nav navbar-nav" ng-controller="navController">
+						<li ui-sref-active="active"><a ui-sref="home">Home</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">Log In</a></li>
-						<li><a href="#">Register</a></li>
-						<li><a href="#">Admin</a></li>
+						<li ui-sref-active="active"><a ui-sref="register">Register</a></li>
+						<li ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
 					</ul>
-				</div><!--/.nav-collapse -->
-			</div><!--/.container-fluid -->
+				</div>
+			</div>
 		</nav>
-
-		<!-- Main component for a primary marketing message or call to action -->
-		<div class="jumbotron">
-			<h1>Navbar example</h1>
-			<p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-			<p>
-				<a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-			</p>
-		</div>
-
-	</div> <!-- /container -->
-
+		<section ui-view></section>
+	</div> 
 </body>

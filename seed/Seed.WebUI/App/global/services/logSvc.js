@@ -1,4 +1,4 @@
-﻿angular.module(APP_ROOT_NS = '.global.services.log', [])
+﻿angular.module('fulcrumSeed.global.services.log', [])
 	.service('logSvc', [
 		'$modal', '$timeout', '$http', 'appSettings',
 		function ($modal, $timeout, $http, appSettings) {

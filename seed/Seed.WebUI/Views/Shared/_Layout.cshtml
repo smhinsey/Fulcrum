@@ -13,10 +13,11 @@
 
 	<script language="javascript">
 
-	APP_VERSION = "@ViewBag.Version";
-	APP_ROOT_NS = "@ViewBag.AppRootNamespace";
+		APP_VERSION = "@ViewBag.Version";
+		@* TODO: this value isn't currently used -- it'd be nice to figure out how to use it*@
+		APP_ROOT_NS = "@ViewBag.AppRootNamespace";
 
-	angular.module(APP_ROOT_NS + '.global', [])
+		angular.module('fulcrumSeed.global', [])
 			.constant('appSettings', {
 				apiBasePath: "@ViewBag.ApiBasePath",
 			});

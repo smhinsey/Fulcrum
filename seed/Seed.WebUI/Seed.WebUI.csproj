@@ -217,6 +217,8 @@
     <Content Include="App\screens\admin\admin.js" />
     <Content Include="App\screens\admin\users\users.html" />
     <Content Include="App\screens\admin\users\users.js" />
+    <Content Include="App\screens\home\home.html" />
+    <Content Include="App\screens\home\home.js" />
     <Content Include="App\screens\profile\profile.html" />
     <Content Include="App\screens\profile\profile.js" />
     <Content Include="App\screens\register\register.html" />
@@ -228,7 +230,7 @@
     <Content Include="App\styles\app.min.css">
       <DependentUpon>app.css</DependentUpon>
     </Content>
-    <Content Include="App\global\shellController.js" />
+    <Content Include="App\global\shell.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -252,6 +254,17 @@
     <Content Include="Scripts\angular-file-upload.js" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
+    <Content Include="Scripts\angular-local-storage\demo\demo-app.js" />
+    <Content Include="Scripts\angular-local-storage\demo\demo-style.css" />
+    <Content Include="Scripts\angular-local-storage\demo\demo.html" />
+    <Content Include="Scripts\angular-local-storage\dist\angular-local-storage.js" />
+    <Content Include="Scripts\angular-local-storage\dist\angular-local-storage.min.js" />
+    <Content Include="Scripts\angular-local-storage\Gruntfile.js" />
+    <Content Include="Scripts\angular-local-storage\src\angular-local-storage.js" />
+    <Content Include="Scripts\angular-local-storage\src\common.js" />
+    <Content Include="Scripts\angular-local-storage\test\karma.conf.js" />
+    <Content Include="Scripts\angular-local-storage\test\mock\localStorageMock.js" />
+    <Content Include="Scripts\angular-local-storage\test\spec\localStorageSpec.js" />
     <Content Include="Scripts\angular-message-format.js" />
     <Content Include="Scripts\angular-message-format.min.js" />
     <Content Include="Scripts\angular-messages.js" />
@@ -301,6 +314,16 @@
     <Content Include="App\screens\register\register.scss" />
     <Content Include="App\screens\profile\profile.scss" />
     <Content Include="App\screens\admin\admin.scss" />
+    <Content Include="Scripts\angular-local-storage\.bowerrc" />
+    <Content Include="Scripts\angular-local-storage\.gitattributes" />
+    <Content Include="Scripts\angular-local-storage\.gitignore" />
+    <Content Include="Scripts\angular-local-storage\.travis.yml" />
+    <Content Include="Scripts\angular-local-storage\bower.json" />
+    <Content Include="Scripts\angular-local-storage\CHANGELOG.md" />
+    <Content Include="Scripts\angular-local-storage\LICENSE" />
+    <Content Include="Scripts\angular-local-storage\package.json" />
+    <Content Include="Scripts\angular-local-storage\README.md" />
+    <Content Include="Scripts\angular-local-storage\test\.jshintrc" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

@@ -22,7 +22,9 @@ namespace Seed.WebUI
 				);
 
 			bundles.Add(new ScriptBundle("~/bundles/app")
-				.IncludeDirectory("~/app", "*.js", true)
+				.Include("~/app/app.js")
+				.IncludeDirectory("~/app/global", "*.js", true)
+				.IncludeDirectory("~/app/screens", "*.js", true)
 				);
 
 			bundles.Add(new StyleBundle("~/bundles/css")
@@ -31,7 +33,7 @@ namespace Seed.WebUI
 
 			// don't set this so that its value is determined at runtime
 			// from web.config's debug attribute
-			BundleTable.EnableOptimizations = false;
+			//BundleTable.EnableOptimizations = false;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿angular.module(APP_ROOT_NS + '.global.services.auth', [APP_ROOT_NS + '.global', 'LocalStorageModule'])
+﻿angular.module('fulcrumSeed.global.services.auth', ['fulcrumSeed.global', 'LocalStorageModule'])
 	.service('authTokenSvc', [
 		'localStorageService',
 		function (localStorageService) {
