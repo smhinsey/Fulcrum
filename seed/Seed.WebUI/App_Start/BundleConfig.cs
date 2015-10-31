@@ -8,7 +8,17 @@ namespace Seed.WebUI
 		public static void RegisterBundles(BundleCollection bundles)
 		{
 			bundles.Add(new ScriptBundle("~/bundles/libraries")
-				.IncludeDirectory("~/scripts", "*.js", true)
+				.Include("~/Scripts/molodashment.js")
+				.Include("~/Scripts/angular.js")
+				.Include("~/Scripts/angular-cookies.js")
+				.Include("~/Scripts/angular-cache-2.4.1.js")
+				.Include("~/Scripts/angular-sanitize.js")
+				.Include("~/Scripts/angular-file-upload.js")
+				.Include("~/Scripts/angular-ui-router.js")
+				.Include("~/Scripts/angular-ui/ui-bootstrap.js")
+				.Include("~/Scripts/angular-ui/ui-bootstrap-tpls.js")
+				.Include("~/Scripts/angular-ui/ui-utils.js")
+				.Include("~/Scripts/angular-local-storage/dist/angular-local-storage.js")
 				);
 
 			bundles.Add(new ScriptBundle("~/bundles/app")

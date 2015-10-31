@@ -211,6 +211,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\global\services\authSvc.js" />
+    <Content Include="App\global\services\logSvc.js" />
+    <Content Include="App\screens\admin\admin.html" />
+    <Content Include="App\screens\admin\admin.js" />
+    <Content Include="App\screens\admin\users\users.html" />
+    <Content Include="App\screens\admin\users\users.js" />
+    <Content Include="App\screens\profile\profile.html" />
+    <Content Include="App\screens\profile\profile.js" />
+    <Content Include="App\screens\register\register.html" />
+    <Content Include="App\screens\register\register.js" />
     <Content Include="App\styles\app.css">
       <DependentUpon>app.scss</DependentUpon>
     </Content>
@@ -288,6 +298,9 @@
     <Content Include="App\styles\app.css.map">
       <DependentUpon>app.css</DependentUpon>
     </Content>
+    <Content Include="App\screens\register\register.scss" />
+    <Content Include="App\screens\profile\profile.scss" />
+    <Content Include="App\screens\admin\admin.scss" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -338,10 +351,7 @@
   <ItemGroup>
     <Folder Include="App\global\directives\" />
     <Folder Include="App\global\filters\" />
-    <Folder Include="App\global\services\" />
-    <Folder Include="App\screens\admin\users\" />
     <Folder Include="App\screens\login\" />
-    <Folder Include="App\screens\profile\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
