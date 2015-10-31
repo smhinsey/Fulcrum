@@ -9,12 +9,19 @@ namespace SeedComponents.Infrastructure.Identity
 		{
 			return new[]
 			{
+				// TODO: make ClientName configurable
+				// TODO: make ClientId configurable
+				// TODO: make ClientSecrets configurable
+				// TODO: make AccessTokenLifetime configurable
 				new Client
 				{
 					ClientName = "FulcrumApi",
 					Enabled = true,
-					ClientId = "FulcrumUser",
-					ClientSecrets = new List<Secret> { new Secret("secret") },
+					ClientId = "FulcrumApi",
+					ClientSecrets = new List<Secret>()
+					{
+						new Secret("apiSecret".Sha256())
+					},
 					Flow = Flows.ResourceOwner,
 					AccessTokenType = AccessTokenType.Jwt,
 					AccessTokenLifetime = 3600

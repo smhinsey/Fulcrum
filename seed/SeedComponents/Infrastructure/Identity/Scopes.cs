@@ -12,7 +12,7 @@ namespace SeedComponents.Infrastructure.Identity
 				new Scope
 				{
 					Enabled = true,
-					Name = "fulcrumApi",
+					Name = "FulcrumApiScope",
 					Description = "Grants access to the Fulcrum API.",
 					Type = ScopeType.Resource
 				}

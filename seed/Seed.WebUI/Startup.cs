@@ -212,6 +212,7 @@ namespace Seed.WebUI
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomGroupRepository>());
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipDbContext>
 				(resolver => new MembershipDbContext(ConfigurationManager.ConnectionStrings["MembershipReboot"].ConnectionString)));
+			
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipConfig>(MembershipConfig.Config));
 
 			var scopeStore = new InMemoryScopeStore(Scopes.Get());

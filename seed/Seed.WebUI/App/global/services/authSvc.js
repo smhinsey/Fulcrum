@@ -66,7 +66,10 @@
 				var authRequest = {
 					username: username,
 					password: password,
-					grant_type: 'password'
+					grant_type: 'password',
+					//client_id: 'FulcrumApi',
+					//client_secret: 'apiSecret',
+					scope: 'FulcrumApiScope',
 				};
 				var deferred = $q.defer();
 
@@ -75,6 +78,7 @@
 				$http.post(appSettings.apiBasePath + "identity/connect/token", $.param(authRequest), {
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+						'Authorization': 'Basic ' + btoa("FulcrumApi:apiSecret")
 					}
 				})
 					.success(function (token) {
