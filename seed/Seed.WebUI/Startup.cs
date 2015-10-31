@@ -19,6 +19,9 @@ using Fulcrum.Common;
 using Fulcrum.Common.Web;
 using Fulcrum.Runtime;
 using IdentityManager.Configuration;
+using IdentityManager.Core.Logging;
+using IdentityManager.Core.Logging.LogProviders;
+using IdentityManager.Logging;
 using IdentityServer3.Core.Configuration;
 using IdentityServer3.Core.Services;
 using IdentityServer3.Core.Services.Default;
@@ -47,6 +50,8 @@ namespace Seed.WebUI
 		public void Configuration(IAppBuilder app)
 		{
 			XmlConfigurator.Configure();
+
+			LogProvider.SetCurrentLogProvider(new Log4NetLogProvider());
 
 			_container = new WindsorContainer();
 
@@ -108,6 +113,7 @@ namespace Seed.WebUI
 				adminApp =>
 				{
 					var factory = new IdentityManagerServiceFactory();
+
 					factory.Configure(connectionString);
 
 					adminApp.UseIdentityManager(new IdentityManagerOptions()
@@ -124,7 +130,10 @@ namespace Seed.WebUI
 					factory.ConfigureCustomUserService(connectionString);
 
 					// TODO: make RequiresSsl configurable
-					idsrvApp.UseIdentityServer(new IdentityServerOptions
+					// TODO: make IssuerUri configurable
+					// TODO: make PublicOrigin configurable
+					// TODO: make ??? configurable
+					var options = new IdentityServerOptions
 					{
 						SiteName = "FulcrumAPI",
 						IssuerUri = "http://www.fulcrum-seed.local",
@@ -132,7 +141,9 @@ namespace Seed.WebUI
 						Factory = factory,
 						PublicOrigin = "http://www.fulcrum-seed.local",
 						RequireSsl = false,
-					});
+					};
+
+					idsrvApp.UseIdentityServer(options);
 				});
 
 			seedUserData();
