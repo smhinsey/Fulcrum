@@ -1,6 +1,9 @@
 ﻿var app = angular.module('fulcrumSeed',
 [
-	'ui.router', 'LocalStorageModule',
+	'ui.utils',
+	'ui.bootstrap',
+	'ui.router',
+	'LocalStorageModule',
 	'fulcrumSeed.global.directives',
 	'fulcrumSeed.global.filters',
 	'fulcrumSeed.global.services',

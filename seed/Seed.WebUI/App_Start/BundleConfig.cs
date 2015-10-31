@@ -8,8 +8,10 @@ namespace Seed.WebUI
 		public static void RegisterBundles(BundleCollection bundles)
 		{
 			bundles.Add(new ScriptBundle("~/bundles/libraries")
-				.Include("~/Scripts/molodashment.js")
+				.Include("~/Scripts/lodash.js")
+				.Include("~/Scripts/jquery-{version}.js")
 				.Include("~/Scripts/angular.js")
+				.Include("~/Scripts/angular-ui.js")
 				.Include("~/Scripts/angular-cookies.js")
 				.Include("~/Scripts/angular-cache-2.4.1.js")
 				.Include("~/Scripts/angular-sanitize.js")

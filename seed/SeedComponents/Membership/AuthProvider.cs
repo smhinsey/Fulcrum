@@ -7,10 +7,13 @@ using Owin;
 
 namespace SeedComponents.Membership
 {
+	// TODO: lock down CORS origins
 	public class AuthProvider : OAuthAuthorizationServerProvider
 	{
 		public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
 		{
+			context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
 			var svc = context.OwinContext.Environment.GetUserAccountService<UserAccount>();
 
 			UserAccount user;
@@ -28,6 +31,8 @@ namespace SeedComponents.Membership
 
 		public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
 		{
+			context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
 			string cid, csecret;
 
 			if (context.TryGetBasicCredentials(out cid, out csecret))
@@ -44,6 +49,8 @@ namespace SeedComponents.Membership
 
 		public override Task ValidateTokenRequest(OAuthValidateTokenRequestContext context)
 		{
+			context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
 			if (context.TokenRequest.IsResourceOwnerPasswordCredentialsGrantType)
 			{
 				var svc = context.OwinContext.Environment.GetUserAccountService<UserAccount>();

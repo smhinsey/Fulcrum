@@ -1,8 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Configuration;
+using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using BrockAllen.MembershipReboot;
@@ -15,6 +19,10 @@ using Fulcrum.Common;
 using Fulcrum.Common.Web;
 using Fulcrum.Runtime.TiltedGlobe.Runtime;
 using IdentityManager.Configuration;
+using IdentityServer3.Core.Configuration;
+using IdentityServer3.Core.Services;
+using IdentityServer3.Core.Services.Default;
+using IdentityServer3.Core.Services.InMemory;
 using log4net.Config;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
@@ -24,8 +32,11 @@ using Newtonsoft.Json.Serialization;
 using Owin;
 using Seed.WebUI;
 using SeedComponents;
+using SeedComponents.Infrastructure.Identity;
 using SeedComponents.Membership;
 using SeedComponents.Membership.Extensions;
+using SeedComponents.Membership.Repositories;
+using SeedComponents.Membership.Services;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -41,41 +52,24 @@ namespace Seed.WebUI
 
 			_container = new WindsorContainer();
 
-			configureMembershipReboot(app);
-
 			var httpConfig = new HttpConfiguration();
-
-			var oauthServerConfig = new OAuthAuthorizationServerOptions
-			{
-				AllowInsecureHttp = true,
-				Provider = new AuthProvider(),
-				TokenEndpointPath = new PathString("/token")
-			};
-
-			app.UseOAuthAuthorizationServer(oauthServerConfig);
-
-			var oauthConfig = new OAuthBearerAuthenticationOptions
-			{
-				AuthenticationMode = AuthenticationMode.Active,
-				AuthenticationType = "Bearer"
-			};
-
-			app.UseOAuthBearerAuthentication(oauthConfig);
 
 			CommonAppSetup.ConfigureContainer<UserSystemDb, UserSystemSettings>(_container);
 			CommonAppSetup.ConfigureCommandsAndHandlers(_container);
 			CommonAppSetup.ConfigureQueries(_container);
 
-			configureWebApi(httpConfig);
-
 			app.UseCors(CorsOptions.AllowAll);
+
+			configureMvc();
+
+			configureWebApi(httpConfig);
 
 			app.UseWebApi(httpConfig);
 
-			configureMvc();
+			configureIdentityServerAndMembershipReboot(app);
 		}
 
-		private void configureMembershipReboot(IAppBuilder app)
+		private void configureIdentityServerAndMembershipReboot(IAppBuilder app)
 		{
 			var config = new MembershipRebootConfiguration
 			{
@@ -112,16 +106,36 @@ namespace Seed.WebUI
 
 			var connectionString = "MembershipReboot";
 
-			app.Map("/admin", adminApp =>
-			                  {
-				                  var factory = new IdentityManagerServiceFactory();
-				                  factory.Configure(connectionString);
+			app.Map("/admin",
+				adminApp =>
+				{
+					var factory = new IdentityManagerServiceFactory();
+					factory.Configure(connectionString);
 
-				                  adminApp.UseIdentityManager(new IdentityManagerOptions()
-				                  {
-					                  Factory = factory
-				                  });
-			                  });
+					adminApp.UseIdentityManager(new IdentityManagerOptions()
+					{
+						Factory = factory
+					});
+				});
+
+			app.Map("/identity",
+				idsrvApp =>
+				{
+					var factory = getFactory();
+
+					factory.ConfigureCustomUserService(connectionString);
+
+					// TODO: make RequiresSsl configurable
+					idsrvApp.UseIdentityServer(new IdentityServerOptions
+					{
+						SiteName = "FulcrumAPI",
+						IssuerUri = "http://www.fulcrum-seed.local",
+						SigningCertificate = getCert(),
+						Factory = factory,
+						PublicOrigin = "http://www.fulcrum-seed.local",
+						RequireSsl = false,
+					});
+				});
 
 			seedUserData();
 		}
@@ -160,14 +174,52 @@ namespace Seed.WebUI
 
 			config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
+			_container.Register(Classes.FromAssemblyInThisApplication()
+														.BasedOn<IHttpController>()
+														.LifestylePerWebRequest());
+
 			GlobalConfiguration.Configuration.DependencyResolver = new WindsorDependencyResolver(_container.Kernel);
 
+			GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new WindsorControllerActivator(_container));
+			
 			config.DependencyResolver = new WindsorDependencyResolver(_container.Kernel);
 
 			config.Services.Replace(typeof(IHttpControllerActivator), new WindsorControllerActivator(_container));
 		}
 
-		// TODO: once migrations are set up, move this there
+		private X509Certificate2 getCert()
+		{
+			return new X509Certificate2(
+				string.Format(@"{0}\bin\Properties\Fulcrum.pfx", AppDomain.CurrentDomain.BaseDirectory), "password123");
+		}
+
+		private IdentityServerServiceFactory getFactory()
+		{
+			var factory = new IdentityServerServiceFactory();
+
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<ApplicationAccountService>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomGroupService>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomUserRepository>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomGroupRepository>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipDbContext>
+				(resolver => new MembershipDbContext(ConfigurationManager.ConnectionStrings["MembershipReboot"].ConnectionString)));
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipConfig>(MembershipConfig.Config));
+
+			var scopeStore = new InMemoryScopeStore(Scopes.Get());
+
+			factory.ScopeStore = new IdentityServer3.Core.Configuration.Registration<IScopeStore>(resolver => scopeStore);
+
+			var clientStore = new InMemoryClientStore(Clients.Get());
+
+			factory.ClientStore = new IdentityServer3.Core.Configuration.Registration<IClientStore>(resolver => clientStore);
+
+			factory.CorsPolicyService =
+				new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new DefaultCorsPolicyService { AllowAll = true });
+
+			return factory;
+		}
+
+		// TODO: once migrations are set up, move this to Configuration.cs
 		private void seedUserData()
 		{
 			using (_container.BeginScope())

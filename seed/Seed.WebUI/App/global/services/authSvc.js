@@ -72,7 +72,7 @@
 
 				//console.log("direct login requested");
 
-				$http.post(appSettings.apiBasePath + "token", $.param(authRequest), {
+				$http.post(appSettings.apiBasePath + "identity/connect/token", $.param(authRequest), {
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 					}
