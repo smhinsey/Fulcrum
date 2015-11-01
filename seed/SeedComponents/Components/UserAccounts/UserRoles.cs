@@ -1,4 +1,4 @@
-﻿namespace SeedComponents.Membership
+﻿namespace FulcrumSeed.Components.UserAccounts
 {
 	public static class UserRoles
 	{

@@ -393,15 +393,14 @@
       <Project>{2E634771-5BD9-4E1B-ADB0-A6855E8501E2}</Project>
       <Name>Fulcrum</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SeedComponents\SeedComponents.csproj">
+    <ProjectReference Include="..\SeedComponents\FulcrumSeed.csproj">
       <Project>{ef410d73-fe6c-47a3-a44a-b8443a74687b}</Project>
-      <Name>SeedComponents</Name>
+      <Name>FulcrumSeed</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\global\directives\" />
     <Folder Include="App\global\filters\" />
-    <Folder Include="App\screens\login\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

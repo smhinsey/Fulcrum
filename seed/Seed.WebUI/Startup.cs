@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http.Formatting;
@@ -12,6 +11,7 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using BrockAllen.MembershipReboot;
 using BrockAllen.MembershipReboot.Ef;
+using BrockAllen.MembershipReboot.Ef.Migrations;
 using Castle.MicroKernel.Lifestyle;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -19,10 +19,16 @@ using CommonServiceLocator.WindsorAdapter.Unofficial;
 using Fulcrum.Common;
 using Fulcrum.Common.Web;
 using Fulcrum.Runtime;
+using FulcrumSeed;
+using FulcrumSeed.Components.UserAccounts;
+using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
+using FulcrumSeed.Components.UserAccounts.Domain.Services;
+using FulcrumSeed.Infrastructure.Identity;
+using FulcrumSeed.Infrastructure.Membership;
+using FulcrumSeed.Infrastructure.Membership.Extensions;
 using IdentityManager.Configuration;
 using IdentityManager.Core.Logging;
 using IdentityManager.Core.Logging.LogProviders;
-using IdentityManager.Logging;
 using IdentityServer3.Core.Configuration;
 using IdentityServer3.Core.Services;
 using IdentityServer3.Core.Services.Default;
@@ -33,13 +39,8 @@ using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Seed.WebUI;
-using SeedComponents;
-using SeedComponents.Infrastructure.Identity;
-using SeedComponents.Membership;
-using SeedComponents.Membership.Entities;
-using SeedComponents.Membership.Extensions;
-using SeedComponents.Membership.Repositories;
-using SeedComponents.Membership.Services;
+using UserAccount = FulcrumSeed.Components.UserAccounts.Domain.Entities.UserAccount;
+using UserAccountService = BrockAllen.MembershipReboot.UserAccountService;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -53,7 +54,7 @@ namespace Seed.WebUI
 		{
 			XmlConfigurator.Configure();
 
-			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DefaultMembershipRebootDatabase, BrockAllen.MembershipReboot.Ef.Migrations.Configuration>());
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DefaultMembershipRebootDatabase, Configuration>());
 
 			LogProvider.SetCurrentLogProvider(new Log4NetLogProvider());
 
@@ -61,7 +62,7 @@ namespace Seed.WebUI
 
 			var httpConfig = new HttpConfiguration();
 
-			FulcrumSetup.ConfigureContainer<SeedDbContext, UserSystemSettings>(_container);
+			FulcrumSetup.ConfigureContainer<SeedDbContext, SeedSettings>(_container);
 			FulcrumSetup.ConfigureCommandsAndHandlers(_container);
 			FulcrumSetup.ConfigureQueries(_container);
 
@@ -210,13 +211,13 @@ namespace Seed.WebUI
 		{
 			var factory = new IdentityServerServiceFactory();
 
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<ApplicationAccountService>());
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomGroupService>());
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomUserRepository>());
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomGroupRepository>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<FulcrumSeed.Components.UserAccounts.Domain.Services.UserAccountService>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserGroupService>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserAccountRepository>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserGroupRepository>());
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<SeedDbContext>
 				(resolver => new SeedDbContext()));
-			
+
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipConfig>(MembershipConfig.Config));
 
 			var scopeStore = new InMemoryScopeStore(Scopes.Get());
@@ -238,7 +239,7 @@ namespace Seed.WebUI
 		{
 			using (_container.BeginScope())
 			{
-				var svc = _container.Resolve<UserAccountService<ApplicationUser>>();
+				var svc = _container.Resolve<UserAccountService<UserAccount>>();
 
 				if (svc.GetByUsername("testAdmin") == null)
 				{

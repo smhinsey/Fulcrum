@@ -1,18 +1,15 @@
-namespace SeedComponents.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SeedComponents.SeedDbContext>
+namespace FulcrumSeed.Migrations
+{
+	internal sealed class Configuration : DbMigrationsConfiguration<SeedDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(SeedComponents.SeedDbContext context)
+        protected override void Seed(SeedDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

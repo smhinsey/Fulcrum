@@ -7,8 +7,8 @@
     <ProjectGuid>{EF410D73-FE6C-47A3-A44A-B8443A74687B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SeedComponents</RootNamespace>
-    <AssemblyName>SeedComponents</AssemblyName>
+    <RootNamespace>FulcrumSeed</RootNamespace>
+    <AssemblyName>FulcrumSeed</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -121,19 +121,19 @@
     <Compile Include="App_Packages\IdentityServer3.MembershipReboot\IdentityServer3.MembershipReboot.cs" />
     <Compile Include="Infrastructure\Identity\Clients.cs" />
     <Compile Include="Infrastructure\Identity\Scopes.cs" />
-    <Compile Include="Membership\AuthProvider.cs" />
-    <Compile Include="Membership\MembershipConfig.cs" />
-    <Compile Include="Membership\MembershipDbContext.cs" />
-    <Compile Include="Membership\Entities\ApplicationGroup.cs" />
-    <Compile Include="Membership\Repositories\CustomGroupRepository.cs" />
-    <Compile Include="Membership\Services\CustomGroupService.cs" />
-    <Compile Include="Membership\Entities\ApplicationUser.cs" />
-    <Compile Include="Membership\Services\ApplicationAccountService.cs" />
-    <Compile Include="Membership\Repositories\CustomUserRepository.cs" />
-    <Compile Include="Membership\Extensions\CustomUserServiceExtensions.cs" />
-    <Compile Include="Membership\Extensions\MembershipRebootIdentityManagerServiceExtensions.cs" />
-    <Compile Include="Membership\Services\CustomUserService.cs" />
-    <Compile Include="Membership\UserRoles.cs" />
+    <Compile Include="Infrastructure\Membership\AuthProvider.cs" />
+    <Compile Include="Infrastructure\Membership\MembershipConfig.cs" />
+    <Compile Include="Infrastructure\Membership\MembershipDbContext.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Entities\UserGroup.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Repositories\UserGroupRepository.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Services\UserGroupService.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Entities\UserAccount.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Services\UserAccountService.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Repositories\UserAccountRepository.cs" />
+    <Compile Include="Infrastructure\Membership\Extensions\CustomUserServiceExtensions.cs" />
+    <Compile Include="Infrastructure\Membership\Extensions\MembershipRebootIdentityManagerServiceExtensions.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Services\UserMembershipService.cs" />
+    <Compile Include="Components\UserAccounts\UserRoles.cs" />
     <Compile Include="Migrations\201511012021370_InitialState.cs" />
     <Compile Include="Migrations\201511012021370_InitialState.Designer.cs">
       <DependentUpon>201511012021370_InitialState.cs</DependentUpon>
@@ -144,7 +144,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SeedDbContext.cs" />
-    <Compile Include="UserSystemSettings.cs" />
+    <Compile Include="SeedSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +164,10 @@
     <EmbeddedResource Include="Migrations\201511012022210_BasicProfile.resx">
       <DependentUpon>201511012022210_BasicProfile.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\UserAccounts\Commands\" />
+    <Folder Include="Components\UserAccounts\Queries\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

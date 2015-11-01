@@ -5,7 +5,7 @@ using BrockAllen.MembershipReboot;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 
-namespace SeedComponents.Membership
+namespace FulcrumSeed.Infrastructure.Membership
 {
 	// TODO: lock down CORS origins
 	public class AuthProvider : OAuthAuthorizationServerProvider

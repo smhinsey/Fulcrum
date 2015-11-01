@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdentityServer3.Core.Models;
 
-namespace SeedComponents.Infrastructure.Identity
+namespace FulcrumSeed.Infrastructure.Identity
 {
 	public static class Clients
 	{

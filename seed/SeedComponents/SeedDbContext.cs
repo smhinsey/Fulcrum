@@ -1,11 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using BrockAllen.MembershipReboot.Ef;
-using SeedComponents.Membership.Entities;
+using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 
-namespace SeedComponents
+namespace FulcrumSeed
 {
-	public class SeedDbContext : MembershipRebootDbContext<ApplicationUser, ApplicationGroup>
+	public class SeedDbContext : MembershipRebootDbContext<UserAccount, UserGroup>
 	{
 		public SeedDbContext()
 			: base("FulcrumSeedDb")

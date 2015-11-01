@@ -1,9 +1,8 @@
-namespace SeedComponents.Migrations
+using System.Data.Entity.Migrations;
+
+namespace FulcrumSeed.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
-    public partial class InitialState : DbMigration
+	public partial class InitialState : DbMigration
     {
         public override void Up()
         {

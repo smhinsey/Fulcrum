@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 using Fulcrum.Runtime;
-using SeedComponents;
+using FulcrumSeed;
 
 namespace Seed.WebUI.Controllers
 {
 	public class ShellController : Controller
 	{
-		private readonly UserSystemSettings _settings;
+		private readonly SeedSettings _settings;
 
-		public ShellController(UserSystemSettings settings)
+		public ShellController(SeedSettings settings)
 		{
 			_settings = settings;
 		}

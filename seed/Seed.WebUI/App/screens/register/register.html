@@ -1,9 +1,51 @@
-﻿<div class="jumbotron" ng-controller="registerController">
-	<h1>Register</h1>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget tortor magna. Mauris nec lobortis enim, non eleifend dui. Vivamus tristique condimentum nunc, vitae ornare velit bibendum quis. Aliquam erat volutpat. Vivamus molestie velit eget nunc sollicitudin commodo. Nam placerat odio orci. Integer sollicitudin mi nisl, eu placerat elit ullamcorper at. Cras sed nibh et purus pharetra convallis ac vel turpis. Nullam sed euismod ante. Donec ac ornare nibh. Fusce dictum, nunc dictum egestas placerat, ipsum ligula egestas odio, sit amet posuere nisl sapien at dui. Praesent sem mauris, suscipit vel purus hendrerit, mollis congue tortor. Quisque eget vehicula ex. Sed a imperdiet odio, sit amet egestas ante.
-	</p>
-	<p>
-		<a class="btn btn-lg btn-primary" href="#" role="button">Vestibulum! &raquo;</a>
-	</p>
+﻿<div class="row">
+	<div class="col-md-5 col-md-offset-1">
+		<h2>Register</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-5 col-md-offset-1">
+		&nbsp;
+	</div>
+</div>
+<div class="row" ng-controller="registerController">
+	<div class="col-md-11 col-md-offset-1">
+		<form name="regForm" class="form-horizontal">
+				<div class="form-group">
+					<label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="inputFirstName" placeholder="First name">
+					</div>
+				</div>
+			<div class="form-group">
+				<label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="inputLastName" placeholder="Last name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-3">
+					<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+				<div class="col-sm-3">
+					<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPasswordConfirm" class="col-sm-2 control-label">Confirm Password</label>
+				<div class="col-sm-3">
+					<input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirm password">
+				</div>
+			</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Register</button>
+					</div>
+				</div>
+		</form>
+	</div>
 </div>

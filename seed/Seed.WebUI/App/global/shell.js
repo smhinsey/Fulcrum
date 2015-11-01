@@ -76,10 +76,10 @@
 			$scope.login = function () {
 
 				console.log("Login attempt");
-				console.log("Username:", $scope.username);
+				console.log("Username:", $scope.email);
 				console.log("Password:", $scope.password);
 
-				authSvc.login($scope.username, $scope.password)
+				authSvc.login($scope.email, $scope.password)
 					.then(function() {
 						console.log('log in succeeded');
 					}, function() {

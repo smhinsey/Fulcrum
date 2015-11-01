@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BrockAllen.MembershipReboot.Relational;
 
-namespace SeedComponents.Membership.Entities
+namespace FulcrumSeed.Components.UserAccounts.Domain.Entities
 {
-	public class ApplicationUser : RelationalUserAccount
+	public class UserAccount : RelationalUserAccount
 	{
 		[Display(Name = "First Name")]
 		public virtual string FirstName { get; set; }

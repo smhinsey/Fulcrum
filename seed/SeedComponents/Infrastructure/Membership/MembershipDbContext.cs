@@ -1,7 +1,4 @@
-﻿using BrockAllen.MembershipReboot.Ef;
-using SeedComponents.Membership.Entities;
-
-namespace SeedComponents.Membership
+﻿namespace FulcrumSeed.Infrastructure.Membership
 {
 	//public class MembershipDbContext : MembershipRebootDbContext<ApplicationUser, ApplicationGroup>
 	//{
