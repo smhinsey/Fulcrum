@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
@@ -35,6 +36,7 @@ using Seed.WebUI;
 using SeedComponents;
 using SeedComponents.Infrastructure.Identity;
 using SeedComponents.Membership;
+using SeedComponents.Membership.Entities;
 using SeedComponents.Membership.Extensions;
 using SeedComponents.Membership.Repositories;
 using SeedComponents.Membership.Services;
@@ -51,13 +53,15 @@ namespace Seed.WebUI
 		{
 			XmlConfigurator.Configure();
 
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DefaultMembershipRebootDatabase, BrockAllen.MembershipReboot.Ef.Migrations.Configuration>());
+
 			LogProvider.SetCurrentLogProvider(new Log4NetLogProvider());
 
 			_container = new WindsorContainer();
 
 			var httpConfig = new HttpConfiguration();
 
-			FulcrumSetup.ConfigureContainer<UserSystemDb, UserSystemSettings>(_container);
+			FulcrumSetup.ConfigureContainer<SeedDbContext, UserSystemSettings>(_container);
 			FulcrumSetup.ConfigureCommandsAndHandlers(_container);
 			FulcrumSetup.ConfigureQueries(_container);
 
@@ -79,23 +83,23 @@ namespace Seed.WebUI
 				RequireAccountVerification = false
 			};
 
-			_container.Register(
-				Component.For<MembershipRebootConfiguration>()
-				         .Instance(config)
-				         .LifestyleSingleton());
+			//_container.Register(
+			//	Component.For<MembershipRebootConfiguration>()
+			//					 .Instance(config)
+			//					 .LifestyleSingleton());
 
-			_container.Register(
-				Component.For<DefaultMembershipRebootDatabase>()
-				         .LifestylePerWebRequest());
+			//_container.Register(
+			//	Component.For<DefaultMembershipRebootDatabase>()
+			//					 .LifestylePerWebRequest());
 
-			_container.Register(
-				Component.For<IUserAccountRepository>()
-				         .ImplementedBy<DefaultUserAccountRepository>()
-				         .LifestylePerWebRequest());
+			//_container.Register(
+			//	Component.For<IUserAccountRepository>()
+			//					 .ImplementedBy<DefaultUserAccountRepository>()
+			//					 .LifestylePerWebRequest());
 
-			_container.Register(
-				Component.For<UserAccountService>()
-				         .LifestylePerWebRequest());
+			//_container.Register(
+			//	Component.For<UserAccountService>()
+			//					 .LifestylePerWebRequest());
 
 			app.Use(async (ctx, next) =>
 			              {
@@ -146,7 +150,7 @@ namespace Seed.WebUI
 					idsrvApp.UseIdentityServer(options);
 				});
 
-			seedUserData();
+			//seedUserData();
 		}
 
 		// TODO: move to CommonAppSetup
@@ -210,8 +214,8 @@ namespace Seed.WebUI
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomGroupService>());
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomUserRepository>());
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<CustomGroupRepository>());
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipDbContext>
-				(resolver => new MembershipDbContext(ConfigurationManager.ConnectionStrings["MembershipReboot"].ConnectionString)));
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<SeedDbContext>
+				(resolver => new SeedDbContext()));
 			
 			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipConfig>(MembershipConfig.Config));
 
@@ -234,11 +238,11 @@ namespace Seed.WebUI
 		{
 			using (_container.BeginScope())
 			{
-				var svc = _container.Resolve<UserAccountService>();
+				var svc = _container.Resolve<UserAccountService<ApplicationUser>>();
 
-				if (svc.GetByUsername("users", "testAdmin") == null)
+				if (svc.GetByUsername("testAdmin") == null)
 				{
-					var admin = svc.CreateAccount("users", "testAdmin", "password", "testAdmin@example.com");
+					var admin = svc.CreateAccount("testAdmin", "password", "testAdmin@example.com");
 
 					svc.AddClaim(admin.ID, ClaimTypes.Role, UserRoles.Admin);
 				}

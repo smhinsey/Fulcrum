@@ -25,7 +25,7 @@ namespace SeedComponents.Infrastructure.Identity
 					Flow = Flows.ResourceOwner,
 					AccessTokenType = AccessTokenType.Jwt,
 					AccessTokenLifetime = 3600,
-					AllowedScopes = new List<string>() { "FulcrumApiScope" }
+					AllowedScopes = new List<string>() { "FulcrumApiScope" },
 				}
 			};
 		}

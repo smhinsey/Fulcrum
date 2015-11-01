@@ -134,7 +134,16 @@
     <Compile Include="Membership\Extensions\MembershipRebootIdentityManagerServiceExtensions.cs" />
     <Compile Include="Membership\Services\CustomUserService.cs" />
     <Compile Include="Membership\UserRoles.cs" />
-    <Compile Include="UserSystemDb.cs" />
+    <Compile Include="Migrations\201511012021370_InitialState.cs" />
+    <Compile Include="Migrations\201511012021370_InitialState.Designer.cs">
+      <DependentUpon>201511012021370_InitialState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511012022210_BasicProfile.cs" />
+    <Compile Include="Migrations\201511012022210_BasicProfile.Designer.cs">
+      <DependentUpon>201511012022210_BasicProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SeedDbContext.cs" />
     <Compile Include="UserSystemSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,7 +157,14 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511012021370_InitialState.resx">
+      <DependentUpon>201511012021370_InitialState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511012022210_BasicProfile.resx">
+      <DependentUpon>201511012022210_BasicProfile.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

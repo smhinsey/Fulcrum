@@ -3,9 +3,9 @@ using SeedComponents.Membership.Entities;
 
 namespace SeedComponents.Membership.Repositories
 {
-	public class CustomUserRepository : DbContextUserAccountRepository<MembershipDbContext, ApplicationUser>
+	public class CustomUserRepository : DbContextUserAccountRepository<SeedDbContext, ApplicationUser>
 	{
-		public CustomUserRepository(MembershipDbContext ctx)
+		public CustomUserRepository(SeedDbContext ctx)
 			: base(ctx)
 		{
 		}

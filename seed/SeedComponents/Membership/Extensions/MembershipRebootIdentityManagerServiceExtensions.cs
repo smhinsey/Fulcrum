@@ -16,9 +16,9 @@ namespace SeedComponents.Membership.Extensions
 				new Registration<IIdentityManagerService, MembershipRebootIdentityManagerService<ApplicationUser, ApplicationGroup>>();
 			factory.Register(new Registration<UserAccountService<ApplicationUser>>());
 			factory.Register(new Registration<CustomGroupService>());
-			factory.Register(new Registration<DbContextUserAccountRepository<MembershipDbContext, ApplicationUser>>());
-			factory.Register(new Registration<DbContextGroupRepository<MembershipDbContext, ApplicationGroup>>());
-			factory.Register(new Registration<MembershipDbContext>(resolver => new MembershipDbContext(connectionString)));
+			factory.Register(new Registration<DbContextUserAccountRepository<SeedDbContext, ApplicationUser>>());
+			factory.Register(new Registration<DbContextGroupRepository<SeedDbContext, ApplicationGroup>>());
+			factory.Register(new Registration<SeedDbContext>(resolver => new SeedDbContext()));
 			factory.Register(new Registration<MembershipConfig>(MembershipConfig.Config));
 		}
 	}
