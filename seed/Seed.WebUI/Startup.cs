@@ -19,13 +19,13 @@ using CommonServiceLocator.WindsorAdapter.Unofficial;
 using Fulcrum.Common;
 using Fulcrum.Common.Web;
 using Fulcrum.Runtime;
-using FulcrumSeed;
 using FulcrumSeed.Components.UserAccounts;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
 using FulcrumSeed.Components.UserAccounts.Domain.Services;
 using FulcrumSeed.Infrastructure.Identity;
 using FulcrumSeed.Infrastructure.Membership;
 using FulcrumSeed.Infrastructure.Membership.Extensions;
+using FulcrumSeed.WebUI;
 using IdentityManager.Configuration;
 using IdentityManager.Core.Logging;
 using IdentityManager.Core.Logging.LogProviders;
@@ -38,13 +38,12 @@ using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
-using Seed.WebUI;
 using UserAccount = FulcrumSeed.Components.UserAccounts.Domain.Entities.UserAccount;
 using UserAccountService = BrockAllen.MembershipReboot.UserAccountService;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace Seed.WebUI
+namespace FulcrumSeed.WebUI
 {
 	public partial class Startup : ILoggingSource
 	{

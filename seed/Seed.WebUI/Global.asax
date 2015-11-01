@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Seed.WebUI.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="FulcrumSeed.WebUI.Global" Language="C#" %>

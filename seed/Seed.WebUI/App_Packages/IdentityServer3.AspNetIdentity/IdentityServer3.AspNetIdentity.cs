@@ -26,7 +26,7 @@ using IdentityServer3.Core.Services.Default;
 using Microsoft.AspNet.Identity;
 using Constants = IdentityServer3.Core.Constants;
 
-namespace Seed.WebUI.App_Packages.IdentityServer3.AspNetIdentity
+namespace FulcrumSeed.WebUI.App_Packages.IdentityServer3.AspNetIdentity
 {
 	public class AspNetIdentityUserService<TUser, TKey> : UserServiceBase
 		where TUser : class, IUser<TKey>, new()

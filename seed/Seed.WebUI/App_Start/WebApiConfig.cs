@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace Seed.WebUI
+namespace FulcrumSeed.WebUI
 {
 	public static class WebApiConfig
 	{

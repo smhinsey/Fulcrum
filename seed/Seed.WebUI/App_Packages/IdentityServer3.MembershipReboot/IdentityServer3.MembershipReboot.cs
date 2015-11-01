@@ -27,7 +27,7 @@ using IdentityServer3.Core.Extensions;
 using IdentityServer3.Core.Models;
 using IdentityServer3.Core.Services.Default;
 
-namespace Seed.WebUI.App_Packages.IdentityServer3.MembershipReboot
+namespace FulcrumSeed.WebUI.App_Packages.IdentityServer3.MembershipReboot
 {
 	public class MembershipRebootUserService<TAccount> : UserServiceBase
 		where TAccount : UserAccount

@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Seed.WebUI
+namespace FulcrumSeed.WebUI
 {
 	public class BundleConfig
 	{

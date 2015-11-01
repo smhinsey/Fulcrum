@@ -1,8 +1,6 @@
 ﻿using System.Web.Mvc;
-using Fulcrum.Runtime;
-using FulcrumSeed;
 
-namespace Seed.WebUI.Controllers
+namespace FulcrumSeed.WebUI.Controllers
 {
 	public class ShellController : Controller
 	{
