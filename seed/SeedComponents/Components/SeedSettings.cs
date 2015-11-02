@@ -1,6 +1,6 @@
 ﻿using Fulcrum.Runtime;
 
-namespace FulcrumSeed
+namespace FulcrumSeed.Components
 {
 	public class SeedSettings : AppSettings
 	{

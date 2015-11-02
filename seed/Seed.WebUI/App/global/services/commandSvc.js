@@ -17,12 +17,16 @@
 				var retries = 0;
 				var maxRetries = 50;
 
+				if(opts == undefined) {
+					opts = {};
+				}
+
 				var namespace = opts.namespace == undefined ? "~" : opts.namespace;
 
 				var deferred = $q.defer();
 
 				var publish = function () {
-					var url = appSettings.apiBasePath + "commands/" + namespace + "/" + name + "/publish";
+					var url = appSettings.apiBasePath + "api/commands/" + namespace + "/" + name + "/publish";
 
 					$http.post(url, properties)
 						.success(function(pubRecord) {

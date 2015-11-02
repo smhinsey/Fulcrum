@@ -1,10 +1,10 @@
 ﻿using BrockAllen.MembershipReboot;
 using Fulcrum.Core.Concepts;
-using UserAccount = FulcrumSeed.Components.UserAccounts.Domain.Entities.UserAccount;
+using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 
 namespace FulcrumSeed.Infrastructure.Membership
 {
-	public class MembershipConfig : MembershipRebootConfiguration<UserAccount>, IDomainService
+	public class MembershipConfig : MembershipRebootConfiguration<AppUser>, IDomainService
 	{
 		public static readonly MembershipConfig Config;
 
@@ -13,10 +13,11 @@ namespace FulcrumSeed.Infrastructure.Membership
 			// TODO: extract some of these settings to config
 			Config = new MembershipConfig
 			{
-				PasswordHashingIterationCount = 10000,
 				RequireAccountVerification = false,
 				EmailIsUsername = true,
-				EmailIsUnique = true
+				EmailIsUnique = true,
+				MultiTenant = false,
+				Crypto = new DefaultCrypto()
 			};
 		}
 	}

@@ -7,16 +7,19 @@ namespace FulcrumSeed.Components.UserAccounts.CommandHandlers
 {
 	public class RegisterAccountHandler : ILoggingSource, ICommandHandler<RegisterAccount>
 	{
-		private readonly UserAccountService _userSvc;
+		private readonly AppUserService _appUserSvc;
 
-		public RegisterAccountHandler(UserAccountService userSvc)
+		public RegisterAccountHandler(AppUserService appUserSvc)
 		{
-			_userSvc = userSvc;
+			_appUserSvc = appUserSvc;
 		}
 
 		public void Handle(RegisterAccount command)
 		{
-			_userSvc.CreateAccount(command.Email, command.Password, command.Email);
+			var newAccount = _appUserSvc.CreateAccount(command.Email, command.Password, command.Email);
+
+			this.LogInfo("Created account {0} for {1} {2}, {3}.",
+				newAccount.ID, newAccount.FirstName, newAccount.LastName, newAccount.Email);
 		}
 	}
 }

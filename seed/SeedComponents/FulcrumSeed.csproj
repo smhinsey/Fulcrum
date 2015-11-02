@@ -129,12 +129,11 @@
     <Compile Include="Components\UserAccounts\Domain\Entities\UserGroup.cs" />
     <Compile Include="Components\UserAccounts\Domain\Repositories\UserGroupRepository.cs" />
     <Compile Include="Components\UserAccounts\Domain\Services\UserGroupService.cs" />
-    <Compile Include="Components\UserAccounts\Domain\Entities\UserAccount.cs" />
-    <Compile Include="Components\UserAccounts\Domain\Services\UserAccountService.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Entities\AppUser.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Services\AppUserService.cs" />
     <Compile Include="Components\UserAccounts\Domain\Repositories\UserAccountRepository.cs" />
-    <Compile Include="Infrastructure\Membership\Extensions\CustomUserServiceExtensions.cs" />
     <Compile Include="Infrastructure\Membership\Extensions\MembershipRebootIdentityManagerServiceExtensions.cs" />
-    <Compile Include="Components\UserAccounts\Domain\Services\UserMembershipService.cs" />
+    <Compile Include="Components\UserAccounts\Domain\Services\MembershipUserService.cs" />
     <Compile Include="Components\UserAccounts\UserRoles.cs" />
     <Compile Include="Migrations\201511012021370_InitialState.cs" />
     <Compile Include="Migrations\201511012021370_InitialState.Designer.cs">
@@ -145,8 +144,8 @@
       <DependentUpon>201511012022210_BasicProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="SeedDbContext.cs" />
-    <Compile Include="SeedSettings.cs" />
+    <Compile Include="Components\SeedDbContext.cs" />
+    <Compile Include="Components\SeedSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

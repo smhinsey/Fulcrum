@@ -92,23 +92,23 @@ namespace Fulcrum.Runtime
 				Component.For<CommandPipelineDbContext>()
 				         .LifestylePerWebRequest());
 
-			container.Register(Classes.FromAssemblyInThisApplication()
+			container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter("bin"))
 			                          .BasedOn<IQuery>()
 			                          .LifestylePerWebRequest().WithServiceSelf().WithServiceAllInterfaces());
 
-			container.Register(Classes.FromAssemblyInThisApplication()
+			container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter("bin"))
 			                          .BasedOn<IRepository>()
 			                          .LifestylePerWebRequest().WithServiceSelf().WithServiceAllInterfaces());
 
-			container.Register(Classes.FromAssemblyInThisApplication()
+			container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter("bin"))
 			                          .BasedOn<IDomainService>()
 			                          .LifestylePerWebRequest().WithServiceSelf().WithServiceAllInterfaces());
 
-			container.Register(Classes.FromAssemblyInThisApplication()
+			container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter("bin"))
 			                          .BasedOn<ICommonService>()
 			                          .LifestylePerWebRequest().WithServiceSelf().WithServiceAllInterfaces());
 
-			container.Register(Classes.FromAssemblyInThisApplication()
+			container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter("bin"))
 			                          .BasedOn<IBackgroundTask>()
 			                          .LifestylePerWebRequest().WithServiceSelf().WithServiceAllInterfaces());
 

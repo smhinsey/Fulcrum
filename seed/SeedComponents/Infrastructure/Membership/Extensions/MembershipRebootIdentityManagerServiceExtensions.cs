@@ -1,26 +1,31 @@
 ﻿using BrockAllen.MembershipReboot;
 using BrockAllen.MembershipReboot.Ef;
+using FulcrumSeed.Components;
 using FulcrumSeed.Components.UserAccounts.Domain.Entities;
+using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
 using FulcrumSeed.Components.UserAccounts.Domain.Services;
 using IdentityManager;
 using IdentityManager.Configuration;
 using IdentityManager.MembershipReboot;
-using UserAccount = FulcrumSeed.Components.UserAccounts.Domain.Entities.UserAccount;
 
 namespace FulcrumSeed.Infrastructure.Membership.Extensions
 {
+	// TODO: get rid of this
 	public static class MembershipRebootIdentityManagerServiceExtensions
 	{
 		public static void Configure(this IdentityManagerServiceFactory factory, string connectionString)
 		{
 			factory.IdentityManagerService =
-				new Registration<IIdentityManagerService, MembershipRebootIdentityManagerService<UserAccount, UserGroup>>();
-			factory.Register(new Registration<UserAccountService<UserAccount>>());
+				new Registration<IIdentityManagerService, MembershipRebootIdentityManagerService<AppUser, UserGroup>>();
+			factory.Register(new Registration<UserAccountService<AppUser>>());
 			factory.Register(new Registration<UserGroupService>());
-			factory.Register(new Registration<DbContextUserAccountRepository<SeedDbContext, UserAccount>>());
+			factory.Register(new Registration<DbContextUserAccountRepository<SeedDbContext, AppUser>>());
 			factory.Register(new Registration<DbContextGroupRepository<SeedDbContext, UserGroup>>());
 			factory.Register(new Registration<SeedDbContext>(resolver => new SeedDbContext()));
 			factory.Register(new Registration<MembershipConfig>(MembershipConfig.Config));
+			factory.Register(new Registration<UserAccountRepository>());
+			factory.Register(new Registration<IUserAccountRepository<AppUser>>(r => new UserAccountRepository(new SeedDbContext())));
+			factory.Register(new Registration<MembershipRebootConfiguration<AppUser>>(new MembershipRebootConfiguration<AppUser>()));
 		}
 	}
 }

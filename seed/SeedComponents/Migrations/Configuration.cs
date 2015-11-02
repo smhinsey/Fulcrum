@@ -1,4 +1,5 @@
 using System.Data.Entity.Migrations;
+using FulcrumSeed.Components;
 
 namespace FulcrumSeed.Migrations
 {

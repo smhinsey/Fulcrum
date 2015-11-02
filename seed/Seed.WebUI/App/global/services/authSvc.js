@@ -67,8 +67,8 @@
 					username: username,
 					password: password,
 					grant_type: 'password',
-					//client_id: 'FulcrumApi',
-					//client_secret: 'apiSecret',
+					client_id: 'FulcrumApi',
+					client_secret: 'apiSecret',
 					scope: 'FulcrumApiScope',
 				};
 				var deferred = $q.defer();

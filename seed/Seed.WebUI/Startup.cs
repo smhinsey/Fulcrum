@@ -19,14 +19,14 @@ using CommonServiceLocator.WindsorAdapter.Unofficial;
 using Fulcrum.Common;
 using Fulcrum.Common.Web;
 using Fulcrum.Runtime;
+using FulcrumSeed.Components;
 using FulcrumSeed.Components.UserAccounts;
+using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
 using FulcrumSeed.Components.UserAccounts.Domain.Services;
 using FulcrumSeed.Infrastructure.Identity;
 using FulcrumSeed.Infrastructure.Membership;
-using FulcrumSeed.Infrastructure.Membership.Extensions;
 using FulcrumSeed.WebUI;
-using IdentityManager.Configuration;
 using IdentityManager.Core.Logging;
 using IdentityManager.Core.Logging.LogProviders;
 using IdentityServer3.Core.Configuration;
@@ -38,8 +38,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
-using UserAccount = FulcrumSeed.Components.UserAccounts.Domain.Entities.UserAccount;
-using UserAccountService = BrockAllen.MembershipReboot.UserAccountService;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -83,60 +81,40 @@ namespace FulcrumSeed.WebUI
 				RequireAccountVerification = false
 			};
 
-			//_container.Register(
-			//	Component.For<MembershipRebootConfiguration>()
-			//					 .Instance(config)
-			//					 .LifestyleSingleton());
+			_container.Register(
+				Component.For<MembershipRebootConfiguration>()
+				         .Instance(config)
+				         .LifestyleSingleton());
 
-			//_container.Register(
-			//	Component.For<DefaultMembershipRebootDatabase>()
-			//					 .LifestylePerWebRequest());
+			_container.Register(
+				Component.For<DefaultMembershipRebootDatabase>()
+				         .LifestylePerWebRequest());
 
-			//_container.Register(
-			//	Component.For<IUserAccountRepository>()
-			//					 .ImplementedBy<DefaultUserAccountRepository>()
-			//					 .LifestylePerWebRequest());
+			_container.Register(
+				Component.For<IUserAccountRepository>()
+				         .ImplementedBy<DefaultUserAccountRepository>()
+				         .LifestylePerWebRequest());
 
-			//_container.Register(
-			//	Component.For<UserAccountService>()
-			//					 .LifestylePerWebRequest());
+			_container.Register(
+				Component.For<UserAccountService>()
+				         .ImplementedBy<UserAccountService>()
+				         .LifestylePerWebRequest());
 
 			app.Use(async (ctx, next) =>
 			              {
-				              using (_container.BeginScope())
-				              {
-					              ctx.Environment.SetUserAccountService(_container.Resolve<UserAccountService>);
+				              ctx.Environment.SetUserAccountService(_container.Resolve<UserAccountService>);
 
-					              await next();
-				              }
+				              await next();
 			              });
-
-			var connectionString = "MembershipReboot";
-
-			app.Map("/admin",
-				adminApp =>
-				{
-					var factory = new IdentityManagerServiceFactory();
-
-					factory.Configure(connectionString);
-
-					adminApp.UseIdentityManager(new IdentityManagerOptions()
-					{
-						Factory = factory
-					});
-				});
 
 			app.Map("/identity",
 				idsrvApp =>
 				{
 					var factory = getFactory();
 
-					factory.ConfigureCustomUserService(connectionString);
-
 					// TODO: make RequiresSsl configurable
 					// TODO: make IssuerUri configurable
 					// TODO: make PublicOrigin configurable
-					// TODO: make ??? configurable
 					var options = new IdentityServerOptions
 					{
 						SiteName = "FulcrumAPI",
@@ -150,7 +128,7 @@ namespace FulcrumSeed.WebUI
 					idsrvApp.UseIdentityServer(options);
 				});
 
-			//seedUserData();
+			seedUserData();
 		}
 
 		// TODO: move to CommonAppSetup
@@ -174,20 +152,13 @@ namespace FulcrumSeed.WebUI
 		// TODO: move to CommonAppSetup
 		private void configureWebApi(HttpConfiguration config)
 		{
-			config.MapHttpAttributeRoutes();
-
-			config.Routes.MapHttpRoute(
-				"DefaultApi",
-				"api/{controller}/{id}",
-				new { id = RouteParameter.Optional });
-
 			var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
 
 			jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
 			config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
-			_container.Register(Classes.FromAssemblyInThisApplication()
+			_container.Register(Classes.FromAssemblyInDirectory(new AssemblyFilter("bin"))
 			                           .BasedOn<IHttpController>()
 			                           .LifestylePerWebRequest());
 
@@ -208,27 +179,34 @@ namespace FulcrumSeed.WebUI
 
 		private IdentityServerServiceFactory getFactory()
 		{
-			var factory = new IdentityServerServiceFactory();
+			var factory = new IdentityServerServiceFactory
+			{
+				UserService = new Registration<IUserService, MembershipUserService>()
+			};
 
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<FulcrumSeed.Components.UserAccounts.Domain.Services.UserAccountService>());
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserGroupService>());
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserAccountRepository>());
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserGroupRepository>());
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<SeedDbContext>
-				(resolver => new SeedDbContext()));
-
-			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipConfig>(MembershipConfig.Config));
+			factory.Register(new Registration<AppUserService>());
+			factory.Register(new Registration<UserAccountRepository>());
+			factory.Register(new Registration<UserGroupRepository>());
+			factory.Register(new Registration<UserAccountService<AppUser>>());
+			factory.Register(new Registration<UserAccountRepository>());
+			factory.Register(new Registration<IUserAccountRepository<AppUser>>(r => new UserAccountRepository(new SeedDbContext())));
+			factory.Register(new Registration<SeedDbContext>(resolver => new SeedDbContext()));
+			factory.Register(new Registration<UserGroupService>());
+			factory.Register(new Registration<DbContextUserAccountRepository<SeedDbContext, AppUser>>());
+			factory.Register(new Registration<DbContextGroupRepository<SeedDbContext, UserGroup>>());
+			factory.Register(new Registration<MembershipConfig>(MembershipConfig.Config));
+			factory.Register(new Registration<MembershipRebootConfiguration<AppUser>>(new MembershipRebootConfiguration<AppUser>()));
 
 			var scopeStore = new InMemoryScopeStore(Scopes.Get());
 
-			factory.ScopeStore = new IdentityServer3.Core.Configuration.Registration<IScopeStore>(resolver => scopeStore);
+			factory.ScopeStore = new Registration<IScopeStore>(resolver => scopeStore);
 
 			var clientStore = new InMemoryClientStore(Clients.Get());
 
-			factory.ClientStore = new IdentityServer3.Core.Configuration.Registration<IClientStore>(resolver => clientStore);
+			factory.ClientStore = new Registration<IClientStore>(resolver => clientStore);
 
 			factory.CorsPolicyService =
-				new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new DefaultCorsPolicyService { AllowAll = true });
+				new Registration<ICorsPolicyService>(new DefaultCorsPolicyService { AllowAll = true });
 
 			return factory;
 		}
@@ -236,16 +214,13 @@ namespace FulcrumSeed.WebUI
 		// TODO: once migrations are set up, move this to Configuration.cs
 		private void seedUserData()
 		{
-			using (_container.BeginScope())
+			var svc = new AppUserService(MembershipConfig.Config, new UserAccountRepository(new SeedDbContext()));
+
+			if (svc.GetByUsername("testAdmin@example.com") == null)
 			{
-				var svc = _container.Resolve<UserAccountService<UserAccount>>();
+				var admin = svc.CreateAccount("testAdmin@example.com", "password", "testAdmin@example.com");
 
-				if (svc.GetByUsername("testAdmin") == null)
-				{
-					var admin = svc.CreateAccount("testAdmin", "password", "testAdmin@example.com");
-
-					svc.AddClaim(admin.ID, ClaimTypes.Role, UserRoles.Admin);
-				}
+				svc.AddClaim(admin.ID, ClaimTypes.Role, UserRoles.Admin);
 			}
 		}
 	}

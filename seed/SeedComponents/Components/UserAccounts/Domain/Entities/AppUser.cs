@@ -3,7 +3,7 @@ using BrockAllen.MembershipReboot.Relational;
 
 namespace FulcrumSeed.Components.UserAccounts.Domain.Entities
 {
-	public class UserAccount : RelationalUserAccount
+	public class AppUser : RelationalUserAccount
 	{
 		[Display(Name = "First Name")]
 		public virtual string FirstName { get; set; }

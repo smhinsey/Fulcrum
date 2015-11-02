@@ -33,13 +33,13 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
     {
         public string DisplayNameClaimType { get; set; }
         
-        protected readonly UserAccountService<TAccount> userAccountService;
+        protected readonly UserAccountService<TAccount> appUserAccountService;
 
-        public MembershipRebootUserService(UserAccountService<TAccount> userAccountService)
+        public MembershipRebootUserService(UserAccountService<TAccount> appUserAccountService)
         {
-            if (userAccountService == null) throw new ArgumentNullException("userAccountService");
+            if (appUserAccountService == null) throw new ArgumentNullException("appUserAccountService");
 
-            this.userAccountService = userAccountService;
+            this.appUserAccountService = appUserAccountService;
         }
 
         public override Task GetProfileDataAsync(ProfileDataRequestContext ctx)
@@ -47,7 +47,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
             var subject = ctx.Subject;
             var requestedClaimTypes = ctx.RequestedClaimTypes;
 
-            var acct = userAccountService.GetByID(subject.GetSubjectId().ToGuid());
+            var acct = appUserAccountService.GetByID(subject.GetSubjectId().ToGuid());
             if (acct == null)
             {
                 throw new ArgumentException("Invalid subject identifier");
@@ -86,7 +86,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
             }
 
             claims.AddRange(account.Claims.Select(x => new Claim(x.Type, x.Value)));
-            claims.AddRange(userAccountService.MapClaims(account));
+            claims.AddRange(appUserAccountService.MapClaims(account));
 
             return claims;
         }
@@ -98,7 +98,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
 
         protected virtual string GetDisplayNameForAccount(Guid accountID)
         {
-            var acct = userAccountService.GetByID(accountID);
+            var acct = appUserAccountService.GetByID(accountID);
             var claims = GetClaimsFromAccount(acct);
 
             string name = null;
@@ -170,8 +170,8 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
 
         protected virtual bool ValidateLocalCredentials(string username, string password, SignInMessage message, out TAccount account)
         {
-            var tenant = String.IsNullOrWhiteSpace(message.Tenant) ? userAccountService.Configuration.DefaultTenant : message.Tenant;
-            return userAccountService.Authenticate(tenant, username, password, out account);
+            var tenant = String.IsNullOrWhiteSpace(message.Tenant) ? appUserAccountService.Configuration.DefaultTenant : message.Tenant;
+            return appUserAccountService.Authenticate(tenant, username, password, out account);
         }
 
         public override async Task AuthenticateExternalAsync(ExternalAuthenticationContext ctx)
@@ -186,8 +186,8 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
 
             try
             {
-                var tenant = String.IsNullOrWhiteSpace(message.Tenant) ? userAccountService.Configuration.DefaultTenant : message.Tenant;
-                var acct = this.userAccountService.GetByLinkedAccount(tenant, externalUser.Provider, externalUser.ProviderId);
+                var tenant = String.IsNullOrWhiteSpace(message.Tenant) ? appUserAccountService.Configuration.DefaultTenant : message.Tenant;
+                var acct = this.appUserAccountService.GetByLinkedAccount(tenant, externalUser.Provider, externalUser.ProviderId);
                 if (acct == null)
                 {
                     ctx.AuthenticateResult = await ProcessNewExternalAccountAsync(tenant, externalUser.Provider, externalUser.ProviderId, externalUser.Claims);
@@ -212,7 +212,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
 
                 var email = claims.GetValue(Constants.ClaimTypes.Email);
 
-                user = userAccountService.CreateAccount(
+                user = appUserAccountService.CreateAccount(
                     tenant,
                     Guid.NewGuid().ToString("N"),
                     null, email,
@@ -220,7 +220,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
                     user);
             }
 
-            userAccountService.AddOrUpdateLinkedAccount(user, provider, providerId);
+            appUserAccountService.AddOrUpdateLinkedAccount(user, provider, providerId);
 
             var result = await AccountCreatedFromExternalProviderAsync(user.ID, provider, providerId, claims);
             if (result != null) return result;
@@ -249,7 +249,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
 
         protected virtual async Task<AuthenticateResult> SignInFromExternalProviderAsync(Guid accountID, string provider)
         {
-            var account = userAccountService.GetByID(accountID);
+            var account = appUserAccountService.GetByID(accountID);
             var claims = await GetClaimsForAuthenticateResultAsync(account);
             
             return new AuthenticateResult(
@@ -262,7 +262,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
 
         protected virtual Task<AuthenticateResult> UpdateAccountFromExternalClaimsAsync(Guid accountID, string provider, string providerId, IEnumerable<Claim> claims)
         {
-            userAccountService.AddClaims(accountID, new UserClaimCollection(claims));
+            appUserAccountService.AddClaims(accountID, new UserClaimCollection(claims));
             return Task.FromResult<AuthenticateResult>(null);
         }
 
@@ -276,7 +276,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
             var email = claims.GetValue(Constants.ClaimTypes.Email);
             if (email != null)
             {
-                var acct = userAccountService.GetByID(accountID);
+                var acct = appUserAccountService.GetByID(accountID);
                 if (acct.Email == null)
                 {
                     try
@@ -284,11 +284,11 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
                         var email_verified = claims.GetValue(Constants.ClaimTypes.EmailVerified);
                         if (email_verified != null && email_verified == "true")
                         {
-                            userAccountService.SetConfirmedEmail(acct.ID, email);
+                            appUserAccountService.SetConfirmedEmail(acct.ID, email);
                         }
                         else
                         {
-                            userAccountService.ChangeEmailRequest(acct.ID, email);
+                            appUserAccountService.ChangeEmailRequest(acct.ID, email);
                         }
 
                         var emailClaims = new string[] { Constants.ClaimTypes.Email, Constants.ClaimTypes.EmailVerified };
@@ -308,7 +308,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
             var phone = claims.GetValue(Constants.ClaimTypes.PhoneNumber);
             if (phone != null)
             {
-                var acct = userAccountService.GetByID(accountID);
+                var acct = appUserAccountService.GetByID(accountID);
                 if (acct.MobilePhoneNumber == null)
                 {
                     try
@@ -316,11 +316,11 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
                         var phone_verified = claims.GetValue(Constants.ClaimTypes.PhoneNumberVerified);
                         if (phone_verified != null && phone_verified == "true")
                         {
-                            userAccountService.SetConfirmedMobilePhone(acct.ID, phone);
+                            appUserAccountService.SetConfirmedMobilePhone(acct.ID, phone);
                         }
                         else
                         {
-                            userAccountService.ChangeMobilePhoneRequest(acct.ID, phone);
+                            appUserAccountService.ChangeMobilePhoneRequest(acct.ID, phone);
                         }
 
                         var phoneClaims = new string[] { Constants.ClaimTypes.PhoneNumber, Constants.ClaimTypes.PhoneNumberVerified };
@@ -339,7 +339,7 @@ namespace FulcrumSeed.App_Packages.IdentityServer3.MembershipReboot
         {
             var subject = ctx.Subject;
 
-            var acct = userAccountService.GetByID(subject.GetSubjectId().ToGuid());
+            var acct = appUserAccountService.GetByID(subject.GetSubjectId().ToGuid());
             
             ctx.IsActive = acct != null && !acct.IsAccountClosed && acct.IsLoginAllowed;
 

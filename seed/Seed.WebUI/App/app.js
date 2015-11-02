@@ -8,6 +8,8 @@
 	'fulcrumSeed.global.filters',
 	'fulcrumSeed.global.services',
 	'fulcrumSeed.global.services.auth',
+	'fulcrumSeed.global.services.commands',
+	'fulcrumSeed.global.services.queries',
 	'fulcrumSeed.global.shell',
 	'fulcrumSeed.screens',
 ]);
@@ -16,6 +18,8 @@ angular.module('fulcrumSeed.global.directives', []);
 angular.module('fulcrumSeed.global.filters', []);
 angular.module('fulcrumSeed.global.services', []);
 angular.module('fulcrumSeed.global.services.auth', []);
+angular.module('fulcrumSeed.global.services.commands', []);
+angular.module('fulcrumSeed.global.services.queries', []);
 angular.module('fulcrumSeed.global.shell', []);
 angular.module('fulcrumSeed.screens', []);
 

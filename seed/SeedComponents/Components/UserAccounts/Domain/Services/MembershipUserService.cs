@@ -4,10 +4,10 @@ using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 
 namespace FulcrumSeed.Components.UserAccounts.Domain.Services
 {
-	public class UserMembershipService : MembershipRebootUserService<UserAccount>, IDomainService
+	public class MembershipUserService : MembershipRebootUserService<AppUser>, IDomainService
 	{
-		public UserMembershipService(UserAccountService userSvc)
-			: base(userSvc)
+		public MembershipUserService(AppUserService appUserSvc)
+			: base(appUserSvc)
 		{
 		}
 	}

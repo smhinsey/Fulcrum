@@ -6,7 +6,7 @@
 			// TODO: add optional caching
 
 			this.run = function(queryPath, queryName, params) {
-				var url = appSettings.apiBasePath + "queries/" + queryPath + "/" + queryName + "/results?";
+				var url = appSettings.apiBasePath + "api/queries/" + queryPath + "/" + queryName + "/results?";
 
 				return $http.get(url + $.param(params) + "&v=" + APP_VERSION);
 			};
