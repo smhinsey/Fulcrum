@@ -19,6 +19,11 @@ namespace FulcrumSeed.Components.UserAccounts.CommandHandlers
 
 			var newAccount = _appUserSvc.CreateAccount("", command.Password, command.Email);
 
+			newAccount.FirstName = command.FirstName;
+			newAccount.LastName = command.LastName;
+
+			_appUserSvc.Update(newAccount);
+
 			this.LogInfo("Created account {0} for {1} {2}, {3}.",
 				newAccount.ID, newAccount.FirstName, newAccount.LastName, newAccount.Email);
 		}
