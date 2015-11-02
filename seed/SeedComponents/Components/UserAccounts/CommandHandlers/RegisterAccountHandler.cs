@@ -16,7 +16,8 @@ namespace FulcrumSeed.Components.UserAccounts.CommandHandlers
 
 		public void Handle(RegisterAccount command)
 		{
-			var newAccount = _appUserSvc.CreateAccount(command.Email, command.Password, command.Email);
+
+			var newAccount = _appUserSvc.CreateAccount("", command.Password, command.Email);
 
 			this.LogInfo("Created account {0} for {1} {2}, {3}.",
 				newAccount.ID, newAccount.FirstName, newAccount.LastName, newAccount.Email);

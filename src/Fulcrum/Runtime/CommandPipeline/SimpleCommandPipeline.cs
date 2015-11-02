@@ -30,8 +30,8 @@ namespace Fulcrum.Runtime.CommandPipeline
 		public ICommandPublicationRecord Inquire(Guid publicationId)
 		{
 			var recordQuery = (from dbRecord in _db.CommandPublicationRecords
-			                   where dbRecord.Id == publicationId
-			                   select dbRecord);
+												 where dbRecord.Id == publicationId
+												 select dbRecord);
 
 			recordQuery = recordQuery.Include(r => r.QueryReferences);
 
@@ -173,6 +173,10 @@ namespace Fulcrum.Runtime.CommandPipeline
 						var fromCurrentContext = ErrorSignal.FromCurrentContext();
 						fromCurrentContext.Raise(appException);
 					}
+
+					this.LogWarn("Error handling command {0}. {1}.",
+						command.GetType().Name, appException.Message);
+					this.LogDebug("{0}", appException);
 				}
 			}
 
@@ -186,8 +190,8 @@ namespace Fulcrum.Runtime.CommandPipeline
 		private CommandPublicationRecord safelyFetchRecord(Guid publicationId)
 		{
 			var recordQuery = (from dbRecord in _db.CommandPublicationRecords
-			                   where dbRecord.Id == publicationId
-			                   select dbRecord);
+												 where dbRecord.Id == publicationId
+												 select dbRecord);
 
 			recordQuery = recordQuery.Include(r => r.QueryReferences);
 

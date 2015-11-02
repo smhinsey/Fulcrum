@@ -14,12 +14,14 @@
 
 			$scope.register = function() {
 				
+				// TODO: replace this with angular-schema-form/tv4.js driven system
+
 				var cmd = {
-					firstName: "",
-					lastName: "",
-					email: "",
-					password: "",
-					passwordConfirm: "",
+					firstName: $scope.firstName,
+					lastName: $scope.lastName,
+					email: $scope.email,
+					password: $scope.password,
+					passwordConfirm: $scope.password,
 				};
 
 				commandSvc.publish('RegisterAccount', cmd)

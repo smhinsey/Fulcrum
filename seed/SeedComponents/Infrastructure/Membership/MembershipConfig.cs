@@ -8,9 +8,10 @@ namespace FulcrumSeed.Infrastructure.Membership
 	{
 		public static readonly MembershipConfig Config;
 
+		// TODO: remove this
+		// The first quick attempt failed for some reason
 		static MembershipConfig()
 		{
-			// TODO: extract some of these settings to config
 			Config = new MembershipConfig
 			{
 				RequireAccountVerification = false,
@@ -19,6 +20,15 @@ namespace FulcrumSeed.Infrastructure.Membership
 				MultiTenant = false,
 				Crypto = new DefaultCrypto()
 			};
+		}
+
+		public MembershipConfig()
+		{
+			// TODO: extract some of these settings to config
+			EmailIsUsername = true;
+			EmailIsUnique = true;
+			MultiTenant = false;
+			Crypto = new DefaultCrypto();
 		}
 	}
 }
