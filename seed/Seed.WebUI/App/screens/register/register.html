@@ -11,12 +11,12 @@
 <div class="row" ng-controller="registerController">
 	<div class="col-md-11 col-md-offset-1">
 		<form name="regForm" class="form-horizontal">
-				<div class="form-group">
-					<label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="inputFirstName" placeholder="First name" ng-model="firstName">
-					</div>
+			<div class="form-group">
+				<label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="inputFirstName" placeholder="First name" ng-model="firstName">
 				</div>
+			</div>
 			<div class="form-group">
 				<label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
 				<div class="col-sm-3">
@@ -41,11 +41,14 @@
 					<input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirm password">
 				</div>
 			</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary" ng-click="register()">Register</button>
-					</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary" ng-click="register()">Register</button>
 				</div>
+			</div>
 		</form>
+		<hr/>
+		<!--<form sf-schema="schema" sf-form="form" sf-model="model"></form>-->
 	</div>
 </div>
+

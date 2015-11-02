@@ -2,12 +2,15 @@
 	.service('commandSvc',
 	[
 		'$q', 'appSettings', '$timeout', '$http',
-		function ($q, appSettings, $timeout, $http) {
+		function($q, appSettings, $timeout, $http) {
 
-			this.getSchema = function(fullCommandName) {
-				// check cache, if it misses, look for command by name
-				// and return the json schema
-				// if a 404 results, throw error asking if namespace is missing
+			this.getSchema = function(name, namespace) {
+				// TODO: add caching
+				namespace = namespace == undefined ? "~" : namespace;
+
+				var url = appSettings.apiBasePath + "api/commands/" + namespace + "/" + name + "";
+
+				return $http.get(url);
 			};
 			this.validate = function(schema, command) {
 				// use tv4 to validate command using schema.
@@ -17,7 +20,7 @@
 				var retries = 0;
 				var maxRetries = 50;
 
-				if(opts == undefined) {
+				if (opts == undefined) {
 					opts = {};
 				}
 
@@ -25,7 +28,7 @@
 
 				var deferred = $q.defer();
 
-				var publish = function () {
+				var publish = function() {
 					var url = appSettings.apiBasePath + "api/commands/" + namespace + "/" + name + "/publish";
 
 					$http.post(url, properties)
@@ -45,8 +48,8 @@
 								break;
 							case "processing":
 								// wait, then check again
-								$timeout(function () {
-									if(retries < maxRetries) {
+								$timeout(function() {
+									if (retries < maxRetries) {
 										publish();
 										retries++;
 									}

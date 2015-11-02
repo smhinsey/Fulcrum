@@ -21,6 +21,10 @@ namespace FulcrumSeed.WebUI
 				.Include("~/Scripts/angular-ui/ui-bootstrap-tpls.js")
 				.Include("~/Scripts/angular-ui/ui-utils.js")
 				.Include("~/Scripts/angular-local-storage/dist/angular-local-storage.js")
+				.Include("~/Scripts/tv4-1.2.7/tv4.js")
+				.Include("~/Scripts/objectpath-1.2.1/lib/ObjectPath.js")
+				.Include("~/Scripts/angular-schema-form-0.8.12/dist/schema-form.js")
+				.Include("~/Scripts/angular-schema-form-0.8.12/dist/bootstrap-decorator.js")
 				);
 
 			bundles.Add(new ScriptBundle("~/bundles/app")

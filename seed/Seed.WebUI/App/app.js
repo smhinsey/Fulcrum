@@ -4,6 +4,7 @@
 	'ui.bootstrap',
 	'ui.router',
 	'LocalStorageModule',
+	'schemaForm',
 	'fulcrumSeed.global.directives',
 	'fulcrumSeed.global.filters',
 	'fulcrumSeed.global.services',

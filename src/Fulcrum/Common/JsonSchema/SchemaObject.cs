@@ -23,7 +23,7 @@ namespace Fulcrum.Common.JsonSchema
 		public SchemaObject(CommandSchema commandSchema, string name, string @namespace)
 			: this()
 		{
-			Type = SchemaObjectType.Object;
+			Type = SchemaObjectType.@object;
 			Title = name;
 			Description = string.Format("JSON schema for {0}/{1}.", @namespace, name);
 
@@ -68,7 +68,7 @@ namespace Fulcrum.Common.JsonSchema
 		public SchemaObject(EventSchema eventSchema, string name, string @namespace)
 			: this()
 		{
-			Type = SchemaObjectType.Object;
+			Type = SchemaObjectType.@object;
 			Title = name;
 			Description = string.Format("JSON schema for {0}/{1}.", @namespace, name);
 
@@ -129,25 +129,25 @@ namespace Fulcrum.Common.JsonSchema
 
 			if (schemaType == JsonSchemaType.Boolean)
 			{
-				return SchemaPropertyType.Boolean;
+				return SchemaPropertyType.boolean;
 			}
 
 			if (schemaType == JsonSchemaType.Integer)
 			{
-				return SchemaPropertyType.Boolean;
+				return SchemaPropertyType.boolean;
 			}
 
 			if (schemaType == JsonSchemaType.Float)
 			{
-				return SchemaPropertyType.Float;
+				return SchemaPropertyType.@float;
 			}
 
 			if (schemaType == JsonSchemaType.String)
 			{
-				return SchemaPropertyType.String;
+				return SchemaPropertyType.@string;
 			}
 
-			return SchemaPropertyType.Object;
+			return SchemaPropertyType.@object;
 		}
 
 		private ValidatedPropertyMetadata getValidatedPropertyMetadata

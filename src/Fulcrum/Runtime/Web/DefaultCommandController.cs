@@ -35,7 +35,7 @@ namespace Fulcrum.Runtime.Web
 
 			if (commandType != null)
 			{
-				return Json(new CommandDescription(commandType, false));
+				return JsonWithNulls(new CommandDescription(commandType, false));
 			}
 
 			return Json(new { error = "Unable to locate specified command." });
@@ -47,7 +47,7 @@ namespace Fulcrum.Runtime.Web
 
 			if (record != null)
 			{
-				return Json(new DetailedPublicationRecordResult(record));
+				return JsonWithNulls(new DetailedPublicationRecordResult(record));
 			}
 
 			return JsonWithoutNulls(new
@@ -94,10 +94,10 @@ namespace Fulcrum.Runtime.Web
 					{
 						Response.StatusCode = 500;
 
-						return Json(new CommandFailedResult(record));
+						return JsonWithNulls(new CommandFailedResult(record));
 					}
 
-					return Json(new CommandCompleteOrPendingResult(record));
+					return JsonWithNulls(new CommandCompleteOrPendingResult(record));
 				}
 				catch (Exception e)
 				{

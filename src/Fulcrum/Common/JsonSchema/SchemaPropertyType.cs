@@ -2,14 +2,15 @@
 {
 	public enum SchemaPropertyType
 	{
-		Boolean,
+		// TODO: figure out how to get these to serialize as lower case in JSON so they can be correctly cased
+		boolean,
 
-		Integer,
+		integer,
 
-		Float,
+		@float,
 
-		String,
+		@string,
 
-		Object,
+		@object,
 	}
 }

@@ -1,19 +1,35 @@
 ﻿angular.module('fulcrumSeed.screens.register', [])
-		.config(function ($stateProvider) {
+	.config(function($stateProvider) {
 
-			$stateProvider
-				.state('register', {
-					url: "/register",
-					templateUrl: "app/screens/register/register.html?v=" + APP_VERSION
+		$stateProvider
+			.state('register', {
+				url: "/register",
+				templateUrl: "app/screens/register/register.html?v=" + APP_VERSION
+			});
+
+	})
+	.controller('registerController', [
+		'$scope', '$state', '$rootScope', 'commandSvc',
+		function($scope, $state, $rootScope, commandSvc) {
+
+			$scope.form = [
+				"*",
+				{
+					type: "submit",
+					title: "Save"
+				}
+			];
+
+			commandSvc.getSchema('RegisterAccount')
+				.then(function(response) {
+					$scope.schema = response.data.schema;
+
+					console.log('schema', $scope.schema);
 				});
 
-		})
-	.controller('registerController', [
-		'$scope', '$state', '$rootScope','commandSvc',
-		function ($scope, $state, $rootScope, commandSvc) {
 
 			$scope.register = function() {
-				
+
 				// TODO: replace this with angular-schema-form/tv4.js driven system
 
 				var cmd = {
@@ -25,15 +41,14 @@
 				};
 
 				commandSvc.publish('RegisterAccount', cmd)
-					.then(function () {
+					.then(function() {
 
 						console.log('register');
 
-					}, function (error) {
+					}, function(error) {
 						// TODO: ???
 					});
 
-			}
-
+			};
 		}
 	]);

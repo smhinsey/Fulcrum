@@ -1,0 +1,28 @@
+{
+  "name": "tv4",
+  "repo": "geraintluff/tv4",
+  "version": "1.2.7",
+  "description": "A public domain JSON Schema v4 validator for JavaScript",
+  "keywords": [
+    "json-schema",
+    "schema",
+    "validator",
+    "tv4"
+  ],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "tv4.js",
+  "scripts": [
+    "tv4.js",
+    "lang/de.js",
+    "lang/fr.js",
+    "lang/nb.js",
+    "lang/pl-PL.js",
+    "lang/pt-PT.js",
+    "lang/sv-SE.js",
+    "lang/zh-CN.js"
+  ],
+  "styles": [],
+  "files": []
+}
