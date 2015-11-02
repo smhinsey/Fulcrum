@@ -1,9 +1,10 @@
 ﻿using BrockAllen.MembershipReboot;
+using Fulcrum.Core.Concepts;
 using UserAccount = FulcrumSeed.Components.UserAccounts.Domain.Entities.UserAccount;
 
 namespace FulcrumSeed.Infrastructure.Membership
 {
-	public class MembershipConfig : MembershipRebootConfiguration<UserAccount>
+	public class MembershipConfig : MembershipRebootConfiguration<UserAccount>, IDomainService
 	{
 		public static readonly MembershipConfig Config;
 

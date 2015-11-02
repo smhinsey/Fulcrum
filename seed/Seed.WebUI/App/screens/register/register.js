@@ -9,8 +9,29 @@
 
 		})
 	.controller('registerController', [
-		'$scope', '$state', '$rootScope',
-		function ($scope, $state, $rootScope) {
+		'$scope', '$state', '$rootScope','commandSvc',
+		function ($scope, $state, $rootScope, commandSvc) {
+
+			$scope.register = function() {
+				
+				var cmd = {
+					firstName: "",
+					lastName: "",
+					email: "",
+					password: "",
+					passwordConfirm: "",
+				};
+
+				commandSvc.publish('RegisterAccount', cmd)
+					.then(function () {
+
+						console.log('register');
+
+					}, function (error) {
+						// TODO: ???
+					});
+
+			}
 
 		}
 	]);

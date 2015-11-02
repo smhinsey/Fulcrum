@@ -1,4 +1,4 @@
-﻿namespace Fulcrum.Core.Ddd
+﻿namespace Fulcrum.Core.Concepts
 {
 	/// <summary>
 	///   A repository returns an IQueryable or void.

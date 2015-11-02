@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Fulcrum.Core;
-using Fulcrum.Core.Ddd;
+using Fulcrum.Core.Concepts;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.CommandPipeline;
 using Fulcrum.Runtime.EventPipeline;

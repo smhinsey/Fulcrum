@@ -93,6 +93,8 @@ namespace Fulcrum.Runtime.CommandPipeline
 		{
 			command.AssignPublicationRecordId(Guid.NewGuid());
 
+			// TODO: add support for encrypted fields to support things like passwords, SSNs, credit cards, etc.
+			// TODO: move this to CommandPublicationRegistry
 			var publicationRecord = new CommandPublicationRecord(command);
 
 			_db.CommandPublicationRecords.Add(publicationRecord);

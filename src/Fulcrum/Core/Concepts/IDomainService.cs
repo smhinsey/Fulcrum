@@ -1,4 +1,4 @@
-﻿namespace Fulcrum.Core.Ddd
+﻿namespace Fulcrum.Core.Concepts
 {
 	public interface IDomainService
 	{

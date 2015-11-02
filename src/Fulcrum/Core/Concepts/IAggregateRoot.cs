@@ -1,4 +1,4 @@
-﻿namespace Fulcrum.Core.Ddd
+﻿namespace Fulcrum.Core.Concepts
 {
 	/// <summary>
 	///   Marker interface.

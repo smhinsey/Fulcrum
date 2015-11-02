@@ -1,4 +1,4 @@
-﻿namespace Fulcrum.Core.Ddd
+﻿namespace Fulcrum.Core.Concepts
 {
 	/// <summary>
 	///   Encapsulates a logical error within the domain. This differs from an exception

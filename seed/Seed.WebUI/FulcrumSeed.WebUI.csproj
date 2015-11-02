@@ -14,7 +14,7 @@
     <RootNamespace>FulcrumSeed.WebUI</RootNamespace>
     <AssemblyName>FulcrumSeed.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -226,7 +226,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\global\services\authSvc.js" />
+    <Content Include="App\global\services\commandSvc.js" />
     <Content Include="App\global\services\logSvc.js" />
+    <Content Include="App\global\services\querySvc.js" />
     <Content Include="App\screens\admin\admin.html" />
     <Content Include="App\screens\admin\admin.js" />
     <Content Include="App\screens\admin\users\users.html" />
@@ -459,13 +461,13 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53604</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53604/</IISUrl>
+          <IISUrl>http://www.fulcrum-seed.local/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
+          <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://www.fulcrum-seed.local</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
