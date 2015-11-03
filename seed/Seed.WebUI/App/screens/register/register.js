@@ -12,43 +12,38 @@
 		'$scope', '$state', '$rootScope', 'commandSvc',
 		function($scope, $state, $rootScope, commandSvc) {
 
-			$scope.form = [
-				"*",
-				{
-					type: "submit",
-					title: "Save"
-				}
-			];
+			var configureForm = function() {
+				$scope.form = [
+					"*",
+					{
+						type: "submit",
+						title: "Save"
+					}
+				];
 
-			commandSvc.getSchema('RegisterAccount')
-				.then(function(response) {
-					$scope.schema = response.data.schema;
-
-					console.log('schema', $scope.schema);
-				});
-
-
-			$scope.register = function() {
-
-				// TODO: replace this with angular-schema-form/tv4.js driven system
-
-				var cmd = {
-					firstName: $scope.firstName,
-					lastName: $scope.lastName,
-					email: $scope.email,
-					password: $scope.password,
-					passwordConfirm: $scope.password,
-				};
-
-				commandSvc.publish('RegisterAccount', cmd)
-					.then(function() {
-
-						console.log('register');
-
-					}, function(error) {
-						// TODO: ???
+				$scope.formModel = {};
+			};
+			var init = function() {
+				commandSvc.getSchema('RegisterAccount')
+					.then(function(response) {
+						$scope.schema = response.data.schema;
 					});
+			};
 
+			configureForm();
+			init();
+
+			$scope.submit = function (form, formModel) {
+				$scope.$broadcast('schemaFormValidate');
+
+				if (form.$valid) {
+					commandSvc.publish('RegisterAccount', formModel)
+						.then(function() {
+							console.log('register complete!');
+						}, function(error) {
+							// TODO: wire up errorReporter
+						});
+				}
 			};
 		}
 	]);
