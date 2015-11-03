@@ -59,7 +59,7 @@
 			configureForm();
 			init();
 
-			$scope.submit = function (form, formModel) {
+			$scope.register = function (form, formModel) {
 				$scope.$broadcast('schemaFormValidate');
 
 				if (form.$valid) {
