@@ -14,7 +14,33 @@
 
 			var configureForm = function() {
 				$scope.form = [
-					"*",
+					{
+						key: 'firstName',
+						title: 'First Name',
+						type: 'text'
+					},
+					,
+					{
+						key: 'lastName',
+						title: 'Last Name',
+						type: 'text'
+					},
+					,
+					{
+						key: 'email',
+						title: 'Email',
+						type: 'email'
+					},
+					{
+						key: 'password',
+						title: 'Password',
+						type: 'password'
+					},
+					{
+						key: 'passwordConfirm',
+						title: 'Confirm Password',
+						type: 'password'
+					},
 					{
 						type: "submit",
 						title: "Save"
