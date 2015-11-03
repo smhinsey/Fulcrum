@@ -12,5 +12,7 @@
 		'$scope', '$state', '$rootScope',
 		function ($scope, $state, $rootScope) {
 
+
+			$state.go('admin.userAccounts');
 		}
 	]);

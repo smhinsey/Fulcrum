@@ -28,12 +28,18 @@ angular.module('fulcrumSeed.screens', []);
 angular.module('fulcrumSeed.screens', [
 	'fulcrumSeed.screens.home',
 	'fulcrumSeed.screens.admin',
+	'fulcrumSeed.screens.admin.userAccounts',
+	'fulcrumSeed.screens.admin.userGroups',
+	'fulcrumSeed.screens.admin.userSessions',
 	'fulcrumSeed.screens.profile',
 	'fulcrumSeed.screens.register',
 ]);
 
 angular.module('fulcrumSeed.screens.home', []);
 angular.module('fulcrumSeed.screens.admin', []);
+angular.module('fulcrumSeed.screens.admin.userAccounts', []);
+angular.module('fulcrumSeed.screens.admin.userGroups', []);
+angular.module('fulcrumSeed.screens.admin.userSessions', []);
 angular.module('fulcrumSeed.screens.profile', []);
 angular.module('fulcrumSeed.screens.register', []);
 

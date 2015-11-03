@@ -231,8 +231,12 @@
     <Content Include="App\global\services\querySvc.js" />
     <Content Include="App\screens\admin\admin.html" />
     <Content Include="App\screens\admin\admin.js" />
-    <Content Include="App\screens\admin\users\users.html" />
-    <Content Include="App\screens\admin\users\users.js" />
+    <Content Include="App\screens\admin\userGroups\userGroups.html" />
+    <Content Include="App\screens\admin\userGroups\userGroups.js" />
+    <Content Include="App\screens\admin\userSessions\userSessions.html" />
+    <Content Include="App\screens\admin\userSessions\userSessions.js" />
+    <Content Include="App\screens\admin\userAccounts\userAccounts.html" />
+    <Content Include="App\screens\admin\userAccounts\userAccounts.js" />
     <Content Include="App\screens\home\home.html" />
     <Content Include="App\screens\home\home.js" />
     <Content Include="App\screens\profile\profile.html" />
