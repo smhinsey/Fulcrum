@@ -43,7 +43,7 @@
 					},
 					{
 						type: "submit",
-						title: "Save"
+						title: "Register"
 					}
 				];
 
