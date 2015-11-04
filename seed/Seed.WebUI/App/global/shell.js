@@ -1,4 +1,4 @@
-﻿angular.module('fulcrumSeed.global.shell', [])
+﻿angular.module('fulcrumSeed.global.shell', ['fulcrumSeed.global.directives.profile'])
 	.controller('navController', [
 		'$scope', '$state', '$rootScope',
 		function ($scope, $state, $rootScope) {
@@ -35,7 +35,12 @@
 					.then(function (response) {
 						$scope.claims = response.data;
 
-						console.log('$scope.claims', $scope.claims);
+						profileSvc.setProfile({ claims: $scope.claims });
+
+						_.forOwn($scope.claims, function (value, key) {
+							// TODO: extract some of these into a standard profile object?
+							//console.log(key);
+						});
 					},
 						function (error) {
 							// TODO: ??
@@ -52,7 +57,8 @@
 				authSvc.logout();
 				authRedirectSvc.clearRedirect();
 				$rootScope.$broadcast("unauthenticated");
-				$state.go("home");
+
+				window.location.reload();
 			};
 
 			$scope.login = function () {
@@ -67,8 +73,8 @@
 		}
 	])
 	.controller('loginController', [
-		'$scope', '$state', 'authSvc', '$rootScope', 'authRedirectSvc', '$modal',
-		function ($scope, $state, authSvc, $rootScope, authRedirectSvc, $modal) {
+		'$scope', '$state', 'authSvc', '$rootScope', 'authRedirectSvc', '$modalInstance',
+		function ($scope, $state, authSvc, $rootScope, authRedirectSvc, $modalInstance) {
 
 			$scope.username = "";
 			$scope.password = "";
@@ -81,7 +87,8 @@
 
 				authSvc.login($scope.email, $scope.password)
 					.then(function () {
-						console.log('log in succeeded');
+						$state.go("home", {}, { reload: true });
+						$modalInstance.dismiss();
 					}, function () {
 						console.log("log in failed");
 					});

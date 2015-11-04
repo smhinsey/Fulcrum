@@ -163,11 +163,23 @@ namespace FulcrumSeed.WebAuth
 		{
 			var svc = new AppUserService(MembershipConfig.Config, new UserAccountRepository(new SeedDbContext()));
 
-			if (svc.GetByUsername("testAdmin@example.com") == null)
+			var user = svc.GetByUsername("testAdmin@example.com");
+
+			if (user == null)
 			{
 				var admin = svc.CreateAccount("testAdmin@example.com", "password", "testAdmin@example.com");
 
 				svc.AddClaim(admin.ID, ClaimTypes.Role, UserRoles.Admin);
+				svc.AddClaim(admin.ID, ClaimTypes.Role, UserRoles.AuthenticatedUser);
+			}
+			else
+			{
+				var claims = svc.MapClaims(user);
+
+				svc.RemoveClaims(user.ID, new UserClaimCollection(claims));
+
+				svc.AddClaim(user.ID, ClaimTypes.Role, UserRoles.Admin);
+				svc.AddClaim(user.ID, ClaimTypes.Role, UserRoles.AuthenticatedUser);
 			}
 		}
 	}

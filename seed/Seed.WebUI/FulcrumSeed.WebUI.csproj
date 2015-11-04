@@ -246,6 +246,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\global\directives\claims.js" />
     <Content Include="App\global\services\authSvc.js" />
     <Content Include="App\global\services\commandSvc.js" />
     <Content Include="App\global\services\logSvc.js" />
@@ -828,7 +829,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\global\directives\" />
     <Folder Include="App\global\filters\" />
   </ItemGroup>
   <PropertyGroup>

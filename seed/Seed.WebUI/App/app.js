@@ -6,6 +6,7 @@
 	'LocalStorageModule',
 	'schemaForm',
 	'fulcrumSeed.global.directives',
+	'fulcrumSeed.global.directives.claims',
 	'fulcrumSeed.global.filters',
 	'fulcrumSeed.global.services',
 	'fulcrumSeed.global.services.auth',
@@ -17,6 +18,7 @@
 ]);
 
 angular.module('fulcrumSeed.global.directives', []);
+angular.module('fulcrumSeed.global.directives.claims', []);
 angular.module('fulcrumSeed.global.filters', []);
 angular.module('fulcrumSeed.global.services', []);
 angular.module('fulcrumSeed.global.services.auth', []);

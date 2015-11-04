@@ -92,8 +92,6 @@
 						authorized = true;
 						authTokenSvc.setToken(token);
 
-						// TODO: set profile
-
 						$rootScope.$broadcast('authenticated');
 
 						deferred.resolve(token);

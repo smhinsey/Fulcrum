@@ -6,14 +6,14 @@ namespace FulcrumSeed.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.UserAccounts", "FirstName", c => c.String());
-            AddColumn("dbo.UserAccounts", "LastName", c => c.String());
+						//AddColumn("dbo.UserAccounts", "FirstName", c => c.String());
+						//AddColumn("dbo.UserAccounts", "LastName", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.UserAccounts", "LastName");
-            DropColumn("dbo.UserAccounts", "FirstName");
+						//DropColumn("dbo.UserAccounts", "LastName");
+						//DropColumn("dbo.UserAccounts", "FirstName");
         }
     }
 }

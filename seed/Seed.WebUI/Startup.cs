@@ -55,9 +55,7 @@ namespace FulcrumSeed.WebUI
 		public void Configuration(IAppBuilder app)
 		{
 			XmlConfigurator.Configure();
-
-			Database.SetInitializer(new MigrateDatabaseToLatestVersion<DefaultMembershipRebootDatabase, Configuration>());
-
+			
 			LogProvider.SetCurrentLogProvider(new Log4NetLogProvider());
 
 			_container = new WindsorContainer();

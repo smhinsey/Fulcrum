@@ -143,6 +143,10 @@
     <Compile Include="Migrations\201511012022210_BasicProfile.Designer.cs">
       <DependentUpon>201511012022210_BasicProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511040818440_Blank.cs" />
+    <Compile Include="Migrations\201511040818440_Blank.Designer.cs">
+      <DependentUpon>201511040818440_Blank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Components\SeedDbContext.cs" />
     <Compile Include="Components\SeedSettings.cs" />
@@ -155,7 +159,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Content Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511012022210_BasicProfile.resx">
       <DependentUpon>201511012022210_BasicProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511040818440_Blank.resx">
+      <DependentUpon>201511040818440_Blank.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
