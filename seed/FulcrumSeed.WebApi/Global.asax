@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="FulcrumSeed.WebApi.Global" Language="C#" %>

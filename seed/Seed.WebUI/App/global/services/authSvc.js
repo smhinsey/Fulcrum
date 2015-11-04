@@ -74,7 +74,7 @@
 				};
 				var deferred = $q.defer();
 
-				$http.post(appSettings.apiBasePath + "identity/connect/token", $.param(authRequest), {
+				$http.post(appSettings.apiBasePath + "auth/connect/token", $.param(authRequest), {
 						headers: {
 							'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 							'Authorization': 'Basic ' + btoa("FulcrumApi:apiSecret")

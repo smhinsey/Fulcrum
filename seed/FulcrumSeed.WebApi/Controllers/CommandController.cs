@@ -5,9 +5,9 @@ using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.Web;
 
-namespace FulcrumSeed.WebUI.Controllers
+namespace FulcrumSeed.WebApi.Controllers
 {
-	[RoutePrefix("api/commands")]
+	[RoutePrefix("commands")]
 	public class CommandController : DefaultCommandController
 	{
 		public CommandController(ICommandPipeline commandPipeline, ICommandLocator commandLocator)

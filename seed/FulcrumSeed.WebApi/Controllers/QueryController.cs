@@ -5,9 +5,9 @@ using Fulcrum.Runtime;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.Web;
 
-namespace FulcrumSeed.WebUI.Controllers
+namespace FulcrumSeed.WebApi.Controllers
 {
-	[RoutePrefix("api/queries")]
+	[RoutePrefix("queries")]
 	public class QueryController : DefaultQueryController
 	{
 		public QueryController(IQueryLocator queryLocator, IWindsorContainer container)
