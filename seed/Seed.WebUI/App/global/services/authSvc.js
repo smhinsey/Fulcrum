@@ -1,19 +1,20 @@
 ﻿angular.module('fulcrumSeed.global.services.auth', ['fulcrumSeed.global', 'LocalStorageModule'])
 	.service('authTokenSvc', [
 		'localStorageService',
-		function (localStorageService) {
+		function(localStorageService) {
 			var setToken = function (token) {
+				console.log('setting token', token);
 				localStorageService.set("oauth_token", token);
 			};
-			var getToken = function () {
+			var getToken = function() {
 				return localStorageService.get("oauth_token");
 			};
-			var clearToken = function () {
+			var clearToken = function() {
 				console.log('clearing token');
 				return localStorageService.remove("oauth_token");
 			};
 
-			this.getToken = function () {
+			this.getToken = function() {
 				return getToken();
 			};
 
@@ -21,36 +22,36 @@
 				setToken(token);
 			};
 
-			this.clearToken = function () {
+			this.clearToken = function() {
 				clearToken();
 			};
 		}
 	])
 	.service('authRedirectSvc', [
 		'localStorageService',
-		function (localStorageService) {
-			var setRedirect = function (redirect) {
+		function(localStorageService) {
+			var setRedirect = function(redirect) {
 				localStorageService.set("auth_redirect", redirect);
 			};
-			var getRedirect = function () {
+			var getRedirect = function() {
 				return localStorageService.get("auth_redirect");
 			};
-			var clearRedirect = function () {
+			var clearRedirect = function() {
 				//console.log('clearing auth_redirect');
 				return localStorageService.remove("auth_redirect");
 			};
 
-			this.getRedirect = function () {
+			this.getRedirect = function() {
 				return getRedirect();
 			};
 
-			this.setRedirect = function (state, params) {
+			this.setRedirect = function(state, params) {
 				if (state.name != "login") {
 					setRedirect({ state: state, params: params });
 				}
 			};
 
-			this.clearRedirect = function () {
+			this.clearRedirect = function() {
 				clearRedirect();
 			};
 		}
@@ -58,11 +59,11 @@
 	.service('authSvc', [
 		'$http', 'appSettings', 'authTokenSvc', '$q', '$rootScope',
 		'$injector',
-		function ($http, appSettings, authTokenSvc, $q, $rootScope, $injector) {
+		function($http, appSettings, authTokenSvc, $q, $rootScope, $injector) {
 
 			var authorized = false;
 
-			this.login = function (username, password) {
+			this.login = function(username, password) {
 				var authRequest = {
 					username: username,
 					password: password,
@@ -73,29 +74,25 @@
 				};
 				var deferred = $q.defer();
 
-				//console.log("direct login requested");
-
 				$http.post(appSettings.apiBasePath + "identity/connect/token", $.param(authRequest), {
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-						'Authorization': 'Basic ' + btoa("FulcrumApi:apiSecret")
-					}
-				})
-					.success(function (token) {
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+							'Authorization': 'Basic ' + btoa("FulcrumApi:apiSecret")
+						}
+					})
+					.success(function(token) {
 						authorized = true;
 						authTokenSvc.setToken(token);
 
 						// TODO: set profile
 
-						//console.log("authentication broadcast");
 						$rootScope.$broadcast('authenticated');
 
 						deferred.resolve(token);
 
 						var redirectSvc = $injector.get("authRedirectSvc");
 						var redirectTarget = redirectSvc.getRedirect();
-						//console.log('redirectTarget', redirectTarget);
-						//console.log('redirectTarget.state', redirectTarget.state);
+
 						if (redirectTarget) {
 							$injector.get("$state").go(redirectTarget.state.name, redirectTarget.params);
 						} else {
@@ -103,6 +100,7 @@
 						}
 					})
 					.error(function (error) {
+						console.log('authentication error', error);
 						authorized = false;
 						authTokenSvc.clearToken();
 						// TODO: clear profile
@@ -112,11 +110,13 @@
 				return deferred.promise;
 			};
 
-			this.attemptRefresh = function () {
+			this.attemptRefresh = function() {
 
 				var deferred = $q.defer();
 
 				var token = authTokenSvc.getToken();
+
+				console.log('attempting to refresh token', token);
 
 				if (!token) {
 					deferred.reject("No refresh token found");
@@ -125,18 +125,21 @@
 
 				var authRequest = {
 					refresh_token: token.refresh_token,
-					grant_type: 'refresh_token'
+					grant_type: 'refresh_token',
+					client_id: 'FulcrumApi',
+					client_secret: 'apiSecret',
+					scope: 'FulcrumApiScope',
 				};
 
 				// TODO: indicate this in the UI somehow
 				$rootScope.$broadcast('authenticating');
 
-				$http.post(appSettings.apiBasePath + "token", $.param(authRequest), {
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-					}
-				})
-					.success(function (token) {
+				$http.post(appSettings.apiBasePath + "identity/connect/token", $.param(authRequest), {
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+						}
+					})
+					.success(function(token) {
 						authorized = true;
 						authTokenSvc.setToken(token);
 
@@ -145,7 +148,8 @@
 
 						deferred.resolve(token);
 					})
-					.error(function (error) {
+					.error(function(error) {
+						console.log('refresh error', error);
 						authorized = false;
 						authTokenSvc.clearToken();
 						$rootScope.$broadcast('authentication_failed', { error: error });
@@ -155,12 +159,14 @@
 				return deferred.promise;
 			};
 
-			this.logout = function () {
+			this.logout = function() {
+				console.log('logging out');
+
 				authTokenSvc.clearToken();
 				// TODO: clear profile
 			};
 
-			this.isAuthorized = function () {
+			this.isAuthorized = function() {
 				if (authorized) {
 					return true;
 				} else {
@@ -177,11 +183,11 @@
 	])
 	.factory('authInterceptorSvc', [
 		'$q', 'authTokenSvc', '$injector', '$rootScope',
-		function ($q, authTokenSvc, $injector, $rootScope) {
+		function($q, authTokenSvc, $injector, $rootScope) {
 
 			var factory = {};
 
-			factory.request = function (config) {
+			factory.request = function(config) {
 
 				config.headers = config.headers || {};
 
@@ -193,32 +199,33 @@
 				return config;
 			};
 
-			factory.responseError = function (rejection) {
-				if (rejection.status === 401) {
+			factory.responseError = function(rejection) {
+				// TODO: implement refresh tokens in idsvr3
+				if (rejection.status === 401111) {
 					var deferred = $q.defer();
 
 					$injector.get("authSvc").attemptRefresh()
-						.then(function () {
-							// TODO: clean up request-resuming logic
-							$injector.get("$http")(rejection.config).then(function (response) {
-								// we have a successful response - resolve it using deferred
-								$rootScope.$broadcast('authenticated');
+						.then(function() {
+								// TODO: clean up request-resuming logic
+								$injector.get("$http")(rejection.config).then(function(response) {
+									// we have a successful response - resolve it using deferred
+									$rootScope.$broadcast('authenticated');
 
-								deferred.resolve(response);
-								var redirectSvc = $injector.get("authRedirectSvc");
-								var redirectTarget = redirectSvc.getRedirect();
-								//console.log('redirectTarget', redirectTarget);
-								//console.log('redirectTarget.state', redirectTarget.state);
-								$injector.get("$state").go(redirectTarget.state.name, redirectTarget.params);
-							}, function (response) {
-								deferred.reject(response); // retried request failed
+									deferred.resolve(response);
+									var redirectSvc = $injector.get("authRedirectSvc");
+									var redirectTarget = redirectSvc.getRedirect();
+									//console.log('redirectTarget', redirectTarget);
+									//console.log('redirectTarget.state', redirectTarget.state);
+									$injector.get("$state").go(redirectTarget.state.name, redirectTarget.params);
+								}, function(response) {
+									deferred.reject(response); // retried request failed
+									$injector.get("$state").go("login");
+								});
+							}, function(response) {
+								// unable to refresh auth token, prompt for credentials
 								$injector.get("$state").go("login");
-							});
-						}, function (response) {
-							// unable to refresh auth token, prompt for credentials
-							$injector.get("$state").go("login");
-							return;
-						}
+								return;
+							}
 						);
 					return deferred.promise;
 				}

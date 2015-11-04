@@ -1,9 +1,9 @@
 ﻿angular.module('fulcrumSeed.global.shell', [])
 	.controller('navController', [
 		'$scope', '$state', '$rootScope',
-		function($scope, $state, $rootScope) {
+		function ($scope, $state, $rootScope) {
 
-			$rootScope.$on('authenticated', function() {
+			$rootScope.$on('authenticated', function () {
 				$scope.visible = true;
 
 				if (!$scope.$$phase) {
@@ -11,7 +11,7 @@
 				}
 			});
 
-			$rootScope.$on('unauthenticated', function() {
+			$rootScope.$on('unauthenticated', function () {
 				$scope.visible = false;
 
 				if (!$scope.$$phase) {
@@ -23,31 +23,31 @@
 		}
 	])
 	.controller('badgeController', [
-		'$scope', '$state', 'authSvc', '$rootScope', 'authRedirectSvc', '$modal',
-		function($scope, $state, authSvc, $rootScope, authRedirectSvc, $modal) {
+		'$scope', '$state', 'authSvc', '$rootScope', 'authRedirectSvc',
+		'$modal', 'profileSvc',
+		function ($scope, $state, authSvc, $rootScope, authRedirectSvc,
+			$modal, profileSvc) {
 
 			$scope.visible = false;
 
-			$rootScope.$on('authenticated', function() {
-				//profileSvc.get()
-				//	.then(function(profile) {
-				//			$scope.profile = profile;
-				//			$scope.visible = true;
-				//if (!$scope.$$phase) {
-				//	$scope.$apply();
-				//}
-				//		},
-				//		function(error) {
-				//			// TODO: ??
-				//		});
+			$rootScope.$on('authenticated', function () {
+				profileSvc.getClaims()
+					.then(function (response) {
+						$scope.claims = response.data;
+
+						console.log('$scope.claims', $scope.claims);
+					},
+						function (error) {
+							// TODO: ??
+						});
 			});
 
-			$rootScope.$on('unauthenticated', function() {
+			$rootScope.$on('unauthenticated', function () {
 				$scope.visible = false;
 				$scope.profile = undefined;
 			});
 
-			$scope.logout = function() {
+			$scope.logout = function () {
 				$scope.visible = false;
 				authSvc.logout();
 				authRedirectSvc.clearRedirect();
@@ -55,7 +55,7 @@
 				$state.go("home");
 			};
 
-			$scope.login = function() {
+			$scope.login = function () {
 
 				var loginModal = $modal.open({
 					templateUrl: 'login.html',
@@ -68,7 +68,7 @@
 	])
 	.controller('loginController', [
 		'$scope', '$state', 'authSvc', '$rootScope', 'authRedirectSvc', '$modal',
-		function($scope, $state, authSvc, $rootScope, authRedirectSvc, $modal) {
+		function ($scope, $state, authSvc, $rootScope, authRedirectSvc, $modal) {
 
 			$scope.username = "";
 			$scope.password = "";
@@ -80,9 +80,9 @@
 				console.log("Password:", $scope.password);
 
 				authSvc.login($scope.email, $scope.password)
-					.then(function() {
+					.then(function () {
 						console.log('log in succeeded');
-					}, function() {
+					}, function () {
 						console.log("log in failed");
 					});
 			};

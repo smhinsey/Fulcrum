@@ -12,7 +12,6 @@ using System.Web.Mvc;
 using BrockAllen.MembershipReboot;
 using BrockAllen.MembershipReboot.Ef;
 using BrockAllen.MembershipReboot.Ef.Migrations;
-using Castle.MicroKernel.Lifestyle;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter.Unofficial;
@@ -26,9 +25,12 @@ using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
 using FulcrumSeed.Components.UserAccounts.Domain.Services;
 using FulcrumSeed.Infrastructure.Identity;
 using FulcrumSeed.Infrastructure.Membership;
+using FulcrumSeed.Infrastructure.Membership.Extensions;
 using FulcrumSeed.WebUI;
+using IdentityManager.Configuration;
 using IdentityManager.Core.Logging;
 using IdentityManager.Core.Logging.LogProviders;
+using IdentityServer3.AccessTokenValidation;
 using IdentityServer3.Core.Configuration;
 using IdentityServer3.Core.Services;
 using IdentityServer3.Core.Services.Default;
@@ -36,6 +38,9 @@ using IdentityServer3.Core.Services.InMemory;
 using log4net.Config;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Jwt;
+using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
@@ -69,9 +74,13 @@ namespace FulcrumSeed.WebUI
 
 			configureWebApi(httpConfig);
 
-			app.UseWebApi(httpConfig);
+			app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()
+			{
+			});
 
 			configureIdentityServerAndMembershipReboot(app);
+
+			app.UseWebApi(httpConfig);
 		}
 
 		private void configureIdentityServerAndMembershipReboot(IAppBuilder app)
@@ -128,6 +137,39 @@ namespace FulcrumSeed.WebUI
 					idsrvApp.UseIdentityServer(options);
 				});
 
+			//app.Map("/api",
+			//	apiApp =>
+			//	{
+			//		apiApp.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
+			//		{
+			//			Authority = "http://www.fulcrum-seed.local/identity",
+			//			IssuerName = "FulcrumAPI",
+			//			SigningCertificate = getCert(),
+			//			RequiredScopes = new[] { "FulcrumApiScope" },
+			//		});
+			//	});
+
+			app.Map("/api", apiApp =>
+			{
+				//var factory = new IdentityManagerServiceFactory();
+				//factory.Configure("MembershipReboot");
+
+				//apiApp.UseIdentityManager(new IdentityManagerOptions()
+				//{
+				//	Factory = factory,
+				//});
+
+				apiApp.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
+				{
+					Authority = "http://www.fulcrum-seed.local/identity",
+					IssuerName = "FulcrumAPI",
+					SigningCertificate = getCert(),
+					RequiredScopes = new[] { "FulcrumApiScope" },
+				});
+			});
+
+
+
 			seedUserData();
 		}
 
@@ -181,32 +223,32 @@ namespace FulcrumSeed.WebUI
 		{
 			var factory = new IdentityServerServiceFactory
 			{
-				UserService = new Registration<IUserService, MembershipUserService>()
+				UserService = new IdentityServer3.Core.Configuration.Registration<IUserService, MembershipUserService>()
 			};
 
-			factory.Register(new Registration<AppUserService>());
-			factory.Register(new Registration<UserAccountRepository>());
-			factory.Register(new Registration<UserGroupRepository>());
-			factory.Register(new Registration<UserAccountService<AppUser>>());
-			factory.Register(new Registration<UserAccountRepository>());
-			factory.Register(new Registration<IUserAccountRepository<AppUser>>(r => new UserAccountRepository(new SeedDbContext())));
-			factory.Register(new Registration<SeedDbContext>(resolver => new SeedDbContext()));
-			factory.Register(new Registration<UserGroupService>());
-			factory.Register(new Registration<DbContextUserAccountRepository<SeedDbContext, AppUser>>());
-			factory.Register(new Registration<DbContextGroupRepository<SeedDbContext, UserGroup>>());
-			factory.Register(new Registration<MembershipConfig>(MembershipConfig.Config));
-			factory.Register(new Registration<MembershipRebootConfiguration<AppUser>>(new MembershipRebootConfiguration<AppUser>()));
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<AppUserService>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserAccountRepository>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserGroupRepository>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserAccountService<AppUser>>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserAccountRepository>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<IUserAccountRepository<AppUser>>(r => new UserAccountRepository(new SeedDbContext())));
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<SeedDbContext>(resolver => new SeedDbContext()));
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<UserGroupService>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<DbContextUserAccountRepository<SeedDbContext, AppUser>>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<DbContextGroupRepository<SeedDbContext, UserGroup>>());
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipConfig>(MembershipConfig.Config));
+			factory.Register(new IdentityServer3.Core.Configuration.Registration<MembershipRebootConfiguration<AppUser>>(new MembershipRebootConfiguration<AppUser>()));
 
 			var scopeStore = new InMemoryScopeStore(Scopes.Get());
 
-			factory.ScopeStore = new Registration<IScopeStore>(resolver => scopeStore);
+			factory.ScopeStore = new IdentityServer3.Core.Configuration.Registration<IScopeStore>(resolver => scopeStore);
 
 			var clientStore = new InMemoryClientStore(Clients.Get());
 
-			factory.ClientStore = new Registration<IClientStore>(resolver => clientStore);
+			factory.ClientStore = new IdentityServer3.Core.Configuration.Registration<IClientStore>(resolver => clientStore);
 
 			factory.CorsPolicyService =
-				new Registration<ICorsPolicyService>(new DefaultCorsPolicyService { AllowAll = true });
+				new IdentityServer3.Core.Configuration.Registration<ICorsPolicyService>(new DefaultCorsPolicyService { AllowAll = true });
 
 			return factory;
 		}
