@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
@@ -19,24 +14,13 @@ using Fulcrum.Common;
 using Fulcrum.Common.Web;
 using Fulcrum.Runtime;
 using FulcrumSeed.Components;
-using FulcrumSeed.Components.UserAccounts;
-using FulcrumSeed.Components.UserAccounts.Domain.Entities;
-using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
-using FulcrumSeed.Components.UserAccounts.Domain.Services;
-using FulcrumSeed.Infrastructure.Identity;
-using FulcrumSeed.Infrastructure.Membership;
 using FulcrumSeed.WebApi;
 using IdentityManager.Core.Logging;
 using IdentityManager.Core.Logging.LogProviders;
 using IdentityServer3.AccessTokenValidation;
-using IdentityServer3.Core.Configuration;
-using IdentityServer3.Core.Services;
-using IdentityServer3.Core.Services.Default;
-using IdentityServer3.Core.Services.InMemory;
 using log4net.Config;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
-using Microsoft.Owin.Security.Jwt;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
@@ -106,12 +90,11 @@ namespace FulcrumSeed.WebApi
 				              await next();
 			              });
 
+			// TODO: pull Authority from config
 			app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
 			{
-				// TODO: pull from config
 				Authority = "http://www.fulcrum-seed.local/auth",
 			});
-
 		}
 
 		// TODO: move to CommonAppSetup
