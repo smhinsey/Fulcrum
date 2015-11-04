@@ -8,7 +8,7 @@ using IdentityManager;
 using IdentityManager.Configuration;
 using IdentityManager.MembershipReboot;
 
-namespace FulcrumSeed.Infrastructure.Membership.Extensions
+namespace FulcrumSeed.Infrastructure.MembershipReboot.Extensions
 {
 	// TODO: get rid of this
 	public static class MembershipRebootIdentityManagerServiceExtensions

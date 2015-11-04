@@ -5,7 +5,7 @@ using FulcrumSeed.Components;
 using FulcrumSeed.Components.UserAccounts;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
 using FulcrumSeed.Components.UserAccounts.Domain.Services;
-using FulcrumSeed.Infrastructure.Membership;
+using FulcrumSeed.Infrastructure.MembershipReboot;
 
 namespace FulcrumSeed.Migrations
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdentityServer3.Core.Models;
 
-namespace FulcrumSeed.Infrastructure.Identity
+namespace FulcrumSeed.Infrastructure.IdentityServer3
 {
 	public static class Scopes
 	{

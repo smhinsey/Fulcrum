@@ -1,4 +1,4 @@
-﻿namespace FulcrumSeed.Infrastructure.Membership
+﻿namespace FulcrumSeed.Infrastructure.MembershipReboot
 {
 	//public class MembershipDbContext : MembershipRebootDbContext<ApplicationUser, ApplicationGroup>
 	//{

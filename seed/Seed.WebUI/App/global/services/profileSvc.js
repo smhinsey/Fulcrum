@@ -3,12 +3,31 @@
 	[
 		'$q', 'appSettings', '$timeout', '$http','localStorageService',
 		function ($q, appSettings, $timeout, $http, localStorageService) {
-			// TODO: add caching
+			var getClaimsPromise = undefined;
 
-			this.getClaims = function() {
+			var setPromise = function() {
 				var url = appSettings.apiBasePath + "auth/connect/userinfo";
 
-				return $http.get(url);
+				var promise = $http.get(url);
+
+				getClaimsPromise = promise;
+			}
+
+			// uses a promise to prevent multiple simultaneous requests
+			// but successive calls do result in new requests if they are
+			// made after the initial request returns
+			this.getClaims = function () {
+
+				if (getClaimsPromise == undefined) {
+					setPromise();
+				}
+
+				if (getClaimsPromise.$$state.status === 1) {
+					setPromise();
+				}
+
+				// TODO: investigate caching this - lots of edge cases around expiration tho
+				return getClaimsPromise;
 			};
 			var setProfile = function (profile) {
 				localStorageService.set("user_profile", profile);

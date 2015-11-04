@@ -2,7 +2,7 @@
 using Fulcrum.Core.Concepts;
 using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 
-namespace FulcrumSeed.Infrastructure.Membership
+namespace FulcrumSeed.Infrastructure.MembershipReboot
 {
 	public class MembershipConfig : MembershipRebootConfiguration<AppUser>, IDomainService
 	{
