@@ -1,1 +1,19 @@
-﻿<h3>User Accounts</h3>
+﻿<div ng-controller="userAccountsController">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="u in users">
+				<td>{{u.email}}</td>
+				<td>{{u.firstName}}</td>
+				<td>{{u.lastName}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
