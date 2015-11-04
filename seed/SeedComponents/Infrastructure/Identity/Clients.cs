@@ -30,6 +30,7 @@ namespace FulcrumSeed.Infrastructure.Identity
 						"openid",
 						"profile",
 						"roles",
+						"FirstName",
 						"FulcrumApiScope"
 					},
 					UpdateAccessTokenClaimsOnRefresh = true,

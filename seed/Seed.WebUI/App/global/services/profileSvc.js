@@ -6,7 +6,7 @@
 			// TODO: add caching
 
 			this.getClaims = function() {
-				var url = appSettings.apiBasePath + "api/user/claims";
+				var url = appSettings.apiBasePath + "auth/connect/userinfo";
 
 				return $http.get(url);
 			};

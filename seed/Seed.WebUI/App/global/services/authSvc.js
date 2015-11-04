@@ -1,16 +1,23 @@
 ﻿angular.module('fulcrumSeed.global.services.auth', ['fulcrumSeed.global', 'LocalStorageModule'])
 	.service('authTokenSvc', [
 		'localStorageService',
-		function(localStorageService) {
+		function (localStorageService) {
+
 			var setToken = function (token) {
-				console.log('setting token', token);
+				//console.log('setting token', token);
+
 				localStorageService.set("oauth_token", token);
 			};
 			var getToken = function() {
-				return localStorageService.get("oauth_token");
+				var token = localStorageService.get("oauth_token");
+
+				//console.log('reading token', token);
+
+				return token;
 			};
 			var clearToken = function() {
-				console.log('clearing token');
+				//console.log('clearing token');
+
 				return localStorageService.remove("oauth_token");
 			};
 
@@ -58,8 +65,9 @@
 	])
 	.service('authSvc', [
 		'$http', 'appSettings', 'authTokenSvc', '$q', '$rootScope',
-		'$injector',
-		function($http, appSettings, authTokenSvc, $q, $rootScope, $injector) {
+			'$injector',
+		function ($http, appSettings, authTokenSvc, $q, $rootScope,
+			$injector) {
 
 			var authorized = false;
 
@@ -70,7 +78,7 @@
 					grant_type: 'password',
 					client_id: 'FulcrumApi',
 					client_secret: 'apiSecret',
-					scope: 'FulcrumApiScope',
+					scope: 'openid FulcrumApiScope',
 				};
 				var deferred = $q.defer();
 
@@ -192,6 +200,7 @@
 				config.headers = config.headers || {};
 
 				var token = authTokenSvc.getToken();
+
 				if (token) {
 					config.headers.Authorization = 'Bearer ' + token.access_token;
 				}

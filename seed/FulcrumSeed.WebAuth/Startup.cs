@@ -90,6 +90,7 @@ namespace FulcrumSeed.WebAuth
 
 			var factory = getFactory();
 
+			// TODO: make SiteName configurable
 			// TODO: make RequiresSsl configurable
 			// TODO: make IssuerUri configurable
 			// TODO: make PublicOrigin configurable
@@ -97,10 +98,19 @@ namespace FulcrumSeed.WebAuth
 			{
 				SiteName = "FulcrumAPI",
 				IssuerUri = "http://www.fulcrum-seed.local",
-				SigningCertificate = getCert(),
-				Factory = factory,
 				PublicOrigin = "http://www.fulcrum-seed.local",
 				RequireSsl = false,
+
+				SigningCertificate = getCert(),
+				Factory = factory,
+				Endpoints = new EndpointOptions()
+				{
+					EnableUserInfoEndpoint = true,
+					EnableDiscoveryEndpoint = true,
+					EnableAuthorizeEndpoint = true,
+					EnableTokenEndpoint = true,
+					EnableTokenRevocationEndpoint = true
+				},
 			};
 
 			app.UseIdentityServer(options);

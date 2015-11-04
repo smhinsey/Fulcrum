@@ -21,6 +21,7 @@ using IdentityServer3.AccessTokenValidation;
 using log4net.Config;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
+using Microsoft.Owin.Security;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
