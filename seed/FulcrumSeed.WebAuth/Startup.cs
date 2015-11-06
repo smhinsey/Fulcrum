@@ -14,8 +14,8 @@ using FulcrumSeed.Components.UserAccounts;
 using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
 using FulcrumSeed.Components.UserAccounts.Domain.Services;
-using FulcrumSeed.Infrastructure.Identity;
-using FulcrumSeed.Infrastructure.Membership;
+using FulcrumSeed.Infrastructure.IdentityServer3;
+using FulcrumSeed.Infrastructure.MembershipReboot;
 using FulcrumSeed.WebAuth;
 using IdentityManager.Core.Logging;
 using IdentityManager.Core.Logging.LogProviders;
@@ -88,21 +88,23 @@ namespace FulcrumSeed.WebAuth
 				              await next();
 			              });
 
-			var factory = getFactory();
+			// TODO: make configurable
+			var siteName = "Fulcrum API";
+			// TODO: make configurable
+			var issuerUri = "http://www.fulcrum-seed.local";
+			// TODO: make configurable
+			var publicOrigin = "http://www.fulcrum-seed.local";
+			// TODO: make configurable
+			var requireSsl = false;
 
-			// TODO: make SiteName configurable
-			// TODO: make RequiresSsl configurable
-			// TODO: make IssuerUri configurable
-			// TODO: make PublicOrigin configurable
 			var options = new IdentityServerOptions
 			{
-				SiteName = "FulcrumAPI",
-				IssuerUri = "http://www.fulcrum-seed.local",
-				PublicOrigin = "http://www.fulcrum-seed.local",
-				RequireSsl = false,
-
+				SiteName = siteName,
+				IssuerUri = issuerUri,
+				PublicOrigin = publicOrigin,
+				RequireSsl = requireSsl,
 				SigningCertificate = getCert(),
-				Factory = factory,
+				Factory = getFactory(),
 				Endpoints = new EndpointOptions()
 				{
 					EnableUserInfoEndpoint = true,
@@ -111,6 +113,7 @@ namespace FulcrumSeed.WebAuth
 					EnableTokenEndpoint = true,
 					EnableTokenRevocationEndpoint = true
 				},
+			
 			};
 
 			app.UseIdentityServer(options);

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IdentityModel.Owin.ClaimsTransformation</name>
+    </assembly>
+    <members>
+        <member name="T:IdentityModel.Owin.ClaimsTransformation.ClaimsTransformationMiddleware">
+            <summary>
+            The claims transformation middleware
+            </summary>
+        </member>
+        <member name="M:IdentityModel.Owin.ClaimsTransformation.ClaimsTransformationMiddleware.#ctor(System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.Tasks.Task},IdentityModel.Owin.ClaimsTransformation.ClaimsTransformationOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:IdentityModel.Owin.ClaimsTransformation.ClaimsTransformationMiddleware"/> class.
+            </summary>
+            <param name="next">The next middleware.</param>
+            <param name="options">The options.</param>
+        </member>
+        <member name="M:IdentityModel.Owin.ClaimsTransformation.ClaimsTransformationMiddleware.Invoke(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Invokes the middleware.
+            </summary>
+            <param name="env">The env.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Owin.ClaimsTransformationMiddlewareExtensions">
+            <summary>
+            AppBuilder extensions for the claims transformation middleware
+            </summary>
+        </member>
+        <member name="M:Owin.ClaimsTransformationMiddlewareExtensions.UseClaimsTransformation(Owin.IAppBuilder,System.Func{System.Security.Claims.ClaimsPrincipal,System.Threading.Tasks.Task{System.Security.Claims.ClaimsPrincipal}})">
+            <summary>
+            Adds the claims transformation middleware to the OWIN pipeline.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="transformation">The transformation function.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Owin.ClaimsTransformationMiddlewareExtensions.UseClaimsTransformation(Owin.IAppBuilder,IdentityModel.Owin.ClaimsTransformation.ClaimsTransformationOptions)">
+            <summary>
+            Adds the claims transformation middleware to the OWIN pipeline.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="options">The options.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">options</exception>
+        </member>
+        <member name="T:IdentityModel.Owin.ClaimsTransformation.ClaimsTransformationOptions">
+            <summary>
+            Options class for claims transformation middleware
+            </summary>
+        </member>
+        <member name="P:IdentityModel.Owin.ClaimsTransformation.ClaimsTransformationOptions.ClaimsTransformation">
+            <summary>
+            Gets or sets the claims transformation function.
+            </summary>
+            <value>
+            The claims transformation function.
+            </value>
+        </member>
+    </members>
+</doc>

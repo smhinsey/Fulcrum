@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Fulcrum.Core;
+using Fulcrum.Core.Security;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
+using FulcrumSeed.Components.UserAccounts.Queries.Projections;
 
 namespace FulcrumSeed.Components.UserAccounts.Queries
 {
@@ -15,6 +17,7 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 			_repo = repo;
 		}
 
+		[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
 		public IList<AccountProjection> ListUsers()
 		{
 			var users = _repo.ListAll();
@@ -29,16 +32,5 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 
 			return projection.ToList();
 		}
-	}
-
-	public class AccountProjection
-	{
-		public string Email { get; set; }
-
-		public string FirstName { get; set; }
-
-		public Guid Id { get; set; }
-
-		public string LastName { get; set; }
 	}
 }

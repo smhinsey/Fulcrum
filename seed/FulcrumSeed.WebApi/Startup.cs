@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
@@ -21,7 +23,6 @@ using IdentityServer3.AccessTokenValidation;
 using log4net.Config;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
-using Microsoft.Owin.Security;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
@@ -95,6 +96,8 @@ namespace FulcrumSeed.WebApi
 			app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
 			{
 				Authority = "http://www.fulcrum-seed.local/auth",
+				NameClaimType = ClaimTypes.Name,
+				RoleClaimType = ClaimTypes.Role,
 			});
 		}
 

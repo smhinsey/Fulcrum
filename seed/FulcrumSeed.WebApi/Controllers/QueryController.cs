@@ -37,7 +37,7 @@ namespace FulcrumSeed.WebApi.Controllers
 		}
 
 		[Route("{inNamespace}/{queryObjectName}/{query}/results")]
-		//[Authorize]
+		[Authorize]
 		[HttpGet]
 		public override ActionResult Results(string inNamespace, string queryObjectName, string query)
 		{

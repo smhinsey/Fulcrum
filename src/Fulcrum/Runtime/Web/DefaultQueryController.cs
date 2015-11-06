@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Security.Claims;
 using System.Web.Mvc;
 using Castle.MicroKernel.Lifestyle;
 using Castle.Windsor;
 using Fulcrum.Common;
 using Fulcrum.Common.JsonSchema;
 using Fulcrum.Core;
+using Fulcrum.Core.Security;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.Api.Results;
 
@@ -20,7 +23,7 @@ namespace Fulcrum.Runtime.Web
 	///   and define your own routes on them as attributes. If you prefer, you can
 	///   use System.Web.Routing.
 	/// </summary>
-	public abstract class DefaultQueryController : BaseMvcController
+	public abstract class DefaultQueryController : BaseMvcController, ILoggingSource
 	{
 		private readonly IWindsorContainer _container;
 
@@ -92,6 +95,63 @@ namespace Fulcrum.Runtime.Web
 			var queries = _queryLocator.ListQueriesInQueryObject(queryObject);
 
 			var queryMethod = queries.SingleOrDefault(q => q.Name == query);
+
+			// TODO: factor this out
+			var claimsDemandsAttrs = new List<Attribute>(queryMethod.GetCustomAttributes(typeof(RequiresClaimAttribute)));
+
+			if (claimsDemandsAttrs.Any())
+			{
+				var safeToProceed = false;
+
+				var claimsPrincipal = User as ClaimsPrincipal;
+
+				if (claimsPrincipal != null)
+				{
+					var userClaims = claimsPrincipal.Claims;
+
+					if (userClaims != null && userClaims.Count() == claimsDemandsAttrs.Count())
+					{
+						foreach (var claimAttr in claimsDemandsAttrs)
+						{
+							var demandedClaim = claimAttr as RequiresClaimAttribute;
+
+							if (demandedClaim == null)
+							{
+								this.LogDebug("claimAttr is null. This is unexpected.");
+							}
+							else
+							{
+								var matchedClaim = userClaims.SingleOrDefault(c => c.Type == demandedClaim.Type &&
+								                                                   c.Value == demandedClaim.Value);
+
+								if (matchedClaim != null)
+								{
+									safeToProceed = true;
+								}
+								else
+								{
+									this.LogWarn("Query {0}/{1} failed to authorize for claim {2} of {3} against user {4}",
+										queryObject.Name, queryMethod.Name, demandedClaim.Type, demandedClaim.Value, User.Identity.Name);
+								}
+							}
+						}
+					}
+					else
+					{
+						// fail
+					}
+				}
+				else
+				{
+					this.LogWarn("This query requires that the Authorize attribute be present on the query controller's Results action.");
+				}
+
+				if (!safeToProceed)
+				{
+					throw new UnauthorizedAccessException(string.Format("Query {0}/{1} failed to authorize claims for {2}. See WARN logs for more.",
+						queryObject.Name, queryMethod.Name, User.Identity.Name));
+				}
+			}
 
 			var queryImplementation = _container.Resolve(queryObject);
 

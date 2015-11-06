@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdentityServer3.Core.Models;
 
-namespace FulcrumSeed.Infrastructure.Identity
+namespace FulcrumSeed.Infrastructure.IdentityServer3
 {
 	public static class Clients
 	{
@@ -25,13 +25,20 @@ namespace FulcrumSeed.Infrastructure.Identity
 					Flow = Flows.ResourceOwner,
 					AccessTokenType = AccessTokenType.Jwt,
 					AccessTokenLifetime = 3600,
+					AllowAccessToAllScopes = true,
+					AllowAccessToAllCustomGrantTypes = true,
+					AlwaysSendClientClaims = true,
 					AllowedScopes = new List<string>()
 					{
 						"openid",
 						"profile",
 						"roles",
-						"FirstName",
-						"FulcrumApiScope"
+						"FulcrumApiScope",
+						"firstName",
+						"lastName",
+						"name",
+						"read",
+						"write",
 					},
 					UpdateAccessTokenClaimsOnRefresh = true,
 				}

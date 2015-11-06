@@ -2,8 +2,8 @@
 {
 	public static class UserRoles
 	{
-		public static string Admin = "Admin";
-		public static string AuthenticatedUser = "AuthenticatedUser";
-		public static string Anonymous = "Anonymous";
+		public const string Admin = "Admin";
+		public const string AuthenticatedUser = "AuthenticatedUser";
+		public const string Anonymous = "Anonymous";
 	}
 }

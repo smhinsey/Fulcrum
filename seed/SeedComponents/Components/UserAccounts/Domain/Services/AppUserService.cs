@@ -4,7 +4,7 @@ using BrockAllen.MembershipReboot;
 using Fulcrum.Core.Concepts;
 using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
-using FulcrumSeed.Infrastructure.Membership;
+using FulcrumSeed.Infrastructure.MembershipReboot;
 
 namespace FulcrumSeed.Components.UserAccounts.Domain.Services
 {
@@ -19,10 +19,13 @@ namespace FulcrumSeed.Components.UserAccounts.Domain.Services
 		{
 			var results = base.MapClaims(account);
 
+			var firstName = string.IsNullOrWhiteSpace(account.FirstName) ? "(First)" : account.FirstName;
+
 			var claims = new List<Claim>(results)
 			{
-				new Claim("firstName", string.IsNullOrWhiteSpace(account.FirstName) ? "(First)" : account.FirstName), 
+				new Claim("firstName", firstName), 
 				new Claim("lastName", string.IsNullOrWhiteSpace(account.LastName) ? "(Last)" : account.LastName), 
+				new Claim(ClaimTypes.Name, string.IsNullOrWhiteSpace(account.LastName) ? "(Last)" : account.LastName), 
 			};
 
 			return claims;
