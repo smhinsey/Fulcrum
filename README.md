@@ -31,9 +31,9 @@ Near-Term To-do
 1. Create profile management Angular views, controllers, etc. for Seed
 1. Create user profile admin Angular views, controllers, etc. for Seed
 1. Create user authentication/session management Angular views, controllers, etc. for Seed
-1. Implement log4net with file & database appenders for Seed
-1. Wire up session log IDs for Seed
-1. Create log viewer UI to read from log4net database table for Seed
+1. Implement log4net database appender & corresponding EF model for Seed
+1. Make a session log ID or similar variable visible to log4net for Seed
+1. Create viewer UI with searching, sorting, filtering, etc. for logging model
 1. Implement "My Session" feature - a link in the footer to the log viewer, pre-filtered by the current user's session log ID for Seed
 1. Install/configure ELMAH, tied to log4net for Seed
 
