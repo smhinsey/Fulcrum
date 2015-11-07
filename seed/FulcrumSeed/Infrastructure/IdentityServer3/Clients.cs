@@ -7,27 +7,35 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 	{
 		public static IEnumerable<Client> Get()
 		{
+			// TODO: make configurable
+			var clientName = "FulcrumApi";
+
+			// TODO: make configurable
+			var clientId = "FulcrumApi";
+
+			// TODO: make configurable
+			var apiSecret = "apiSecret";
+
+			// TODO: make configurable
+			var accessTokenLifetime = 3600;
+
 			return new[]
 			{
-				// TODO: make ClientName configurable
-				// TODO: make ClientId configurable
-				// TODO: make ClientSecrets configurable
-				// TODO: make AccessTokenLifetime configurable
 				new Client
 				{
-					ClientName = "FulcrumApi",
+					ClientName = clientName,
 					Enabled = true,
-					ClientId = "FulcrumApi",
+					ClientId = clientId,
 					ClientSecrets = new List<Secret>()
 					{
-						new Secret("apiSecret".Sha256())
+						new Secret(apiSecret.Sha256())
 					},
 					Flow = Flows.ResourceOwner,
 					AccessTokenType = AccessTokenType.Jwt,
-					AccessTokenLifetime = 3600,
+					AccessTokenLifetime = accessTokenLifetime,
 					AllowAccessToAllScopes = true,
 					AllowAccessToAllCustomGrantTypes = true,
-					AlwaysSendClientClaims = true,
+					AlwaysSendClientClaims = false,
 					AllowedScopes = new List<string>()
 					{
 						"openid",
