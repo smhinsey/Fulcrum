@@ -39,10 +39,10 @@ Near-Term To-do
 
 Long-Term To-do
 =======
+1. Verify that query-based command validation still works and implement anything Seed needs to take advantage of it
 1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
 1. Create custom AuthorizeAttribute with on/off config switch
-1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 1. Better config management, specifically around the connection string
+1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 1. Refactor SimpleCommandPipeline, implement pure async
 1. Investigate a way to have IQuery implementations return inline/anonymous projections rather than requiring often-redundant projection types.
-1. Verify that query-based command validation still works and implement anything Seed needs to take advantage of it
