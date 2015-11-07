@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{96600D10
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seed", "Seed", "{A8CC00BE-4946-469E-8F95-B2D867E04D5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FulcrumSeed", "seed\SeedComponents\FulcrumSeed.csproj", "{EF410D73-FE6C-47A3-A44A-B8443A74687B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FulcrumSeed", "seed\FulcrumSeed\FulcrumSeed.csproj", "{EF410D73-FE6C-47A3-A44A-B8443A74687B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FulcrumSeed.WebUI", "seed\Seed.WebUI\FulcrumSeed.WebUI.csproj", "{F0742307-3FF4-4C82-A827-A7A7B1F57E6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FulcrumSeed.WebUI", "seed\FulcrumSeed.WebUI\FulcrumSeed.WebUI.csproj", "{F0742307-3FF4-4C82-A827-A7A7B1F57E6D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{D6EC06F6-35A4-40E4-8DB4-F4D1186840BF}"
 	ProjectSection(SolutionItems) = preProject

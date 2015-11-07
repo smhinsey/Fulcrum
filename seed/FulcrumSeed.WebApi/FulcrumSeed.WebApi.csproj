@@ -281,7 +281,7 @@
       <Project>{2e634771-5bd9-4e1b-adb0-a6855e8501e2}</Project>
       <Name>Fulcrum</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SeedComponents\FulcrumSeed.csproj">
+    <ProjectReference Include="..\FulcrumSeed\FulcrumSeed.csproj">
       <Project>{ef410d73-fe6c-47a3-a44a-b8443a74687b}</Project>
       <Name>FulcrumSeed</Name>
     </ProjectReference>
