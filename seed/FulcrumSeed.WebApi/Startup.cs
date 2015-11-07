@@ -96,8 +96,8 @@ namespace FulcrumSeed.WebApi
 			app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
 			{
 				Authority = "http://www.fulcrum-seed.local/auth",
-				NameClaimType = ClaimTypes.Name,
-				RoleClaimType = ClaimTypes.Role,
+				//NameClaimType = ClaimTypes.Name,
+				//RoleClaimType = ClaimTypes.Role,
 			});
 		}
 

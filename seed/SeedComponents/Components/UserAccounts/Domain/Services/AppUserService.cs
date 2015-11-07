@@ -25,7 +25,7 @@ namespace FulcrumSeed.Components.UserAccounts.Domain.Services
 			{
 				new Claim("firstName", firstName), 
 				new Claim("lastName", string.IsNullOrWhiteSpace(account.LastName) ? "(Last)" : account.LastName), 
-				new Claim(ClaimTypes.Name, string.IsNullOrWhiteSpace(account.LastName) ? "(Last)" : account.LastName), 
+				//new Claim(ClaimTypes.Name, string.IsNullOrWhiteSpace(account.LastName) ? "(Last)" : account.LastName), 
 			};
 
 			return claims;
