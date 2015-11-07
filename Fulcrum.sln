@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.ApiHarness", "tests\Tests.ApiHarness\Tests.ApiHarness.csproj", "{30E5CC82-7661-4B9A-96F2-BDF44D84E4E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F2C30E1F-8D5D-49C3-82DA-DC89FC7FB6AF}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{96600D10-942C-4EB4-B3DA-78B8AF8C072A}"
 EndProject

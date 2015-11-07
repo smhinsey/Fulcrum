@@ -25,8 +25,8 @@ Near-Term To-do
 1. ~~Implement directive to automatically render commands by reading their JSON schema from the API (via a read-through cache) and passing it to angular-schema-form for Seed~~
 1. ~~Implement validation of the angular-schema-form forms using the command schema and the TV4.js schema validation library for Seed~~
 1. ~~Create login & auth views, controllers, services, etc. for Seed~~
-1. Make CommandController claims-aware
 1. Make QueryController claims-aware
+1. Make CommandController claims-aware
 1. Create profile management Angular views, controllers, etc. for Seed
 1. Create user profile admin Angular views, controllers, etc. for Seed
 1. Create user authentication/session management Angular views, controllers, etc. for Seed

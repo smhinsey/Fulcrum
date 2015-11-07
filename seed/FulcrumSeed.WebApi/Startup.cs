@@ -92,12 +92,12 @@ namespace FulcrumSeed.WebApi
 				              await next();
 			              });
 
-			// TODO: pull Authority from config
+			// TODO: pull from config
+			var authority = "http://www.fulcrum-seed.local/auth";
+
 			app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
 			{
-				Authority = "http://www.fulcrum-seed.local/auth",
-				//NameClaimType = ClaimTypes.Name,
-				//RoleClaimType = ClaimTypes.Role,
+				Authority = authority,
 			});
 		}
 
