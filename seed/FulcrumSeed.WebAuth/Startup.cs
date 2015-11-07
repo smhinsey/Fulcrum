@@ -143,7 +143,7 @@ namespace FulcrumSeed.WebAuth
 			factory.Register(new Registration<SeedDbContext>(resolver => new SeedDbContext()));
 			factory.Register(new Registration<UserGroupService>());
 			factory.Register(new Registration<DbContextUserAccountRepository<SeedDbContext, AppUser>>());
-			factory.Register(new Registration<DbContextGroupRepository<SeedDbContext, UserGroup>>());
+			factory.Register(new Registration<DbContextGroupRepository<SeedDbContext, UserClaimGroup>>());
 			factory.Register(new Registration<MembershipConfig>(MembershipConfig.Config));
 			factory.Register(new Registration<MembershipRebootConfiguration<AppUser>>(new MembershipRebootConfiguration<AppUser>()));
 

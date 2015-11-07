@@ -60,12 +60,13 @@
 				authRedirectSvc.clearRedirect();
 				$rootScope.$broadcast("unauthenticated");
 
+				$state.go("home", {}, { reload: true });
 				window.location.reload();
 			};
 
 			$scope.login = function () {
 
-				var loginModal = $modal.open({
+				$modal.open({
 					templateUrl: 'login.html',
 					controller: 'loginController',
 					size: 'sm',
@@ -89,6 +90,7 @@
 
 				authSvc.login($scope.email, $scope.password)
 					.then(function () {
+						$rootScope.$broadcast("authenticated");
 						$state.go("home", {}, { reload: true });
 						$modalInstance.dismiss();
 					}, function () {

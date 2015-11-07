@@ -6,7 +6,7 @@ using FulcrumSeed.Infrastructure.MembershipReboot;
 
 namespace FulcrumSeed.Components.UserAccounts.Domain.Services
 {
-	public class UserGroupService : GroupService<UserGroup>, IDomainService
+	public class UserGroupService : GroupService<UserClaimGroup>, IDomainService
 	{
 		public UserGroupService(UserGroupRepository repo, MembershipConfig config)
 			: base(config.DefaultTenant, repo)

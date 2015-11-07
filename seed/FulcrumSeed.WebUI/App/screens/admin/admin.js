@@ -13,7 +13,7 @@
 		function ($scope, $state, $rootScope) {
 
 
-			$state.go('admin.userAccounts');
+			//$state.go('admin.userAccounts');
 		}
 	])
 	.run(function ($rootScope, $state, $stateParams) {
