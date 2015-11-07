@@ -1,4 +1,4 @@
-Purpose
+Overview
 ======
 
 Fulcrum provides a self-describing HTTP API to browse, validate, and publish commands, and also to browse and execute queries. These commands and queries represent an application's capabilities by expressing operations which modify its internal state as commands and operations which return its internal state as queries. While Fulcrum can be used with just about any architectural style, it works best with a service-oriented domain driven design-based approach. 
@@ -14,8 +14,8 @@ Eventually, I'd like to have a script for taking the seed project and renaming i
 * Using SQL Server, create a database and verify that the following 3 connection strings point to it, as they appear in WebApi and WebUI's web.configs: MembershipReboot, FulcrumSeedDb, and CommandPipelineDbContext.
 * Set the FulcrumSeed.WebUI project as the startup project
 * Press CTRL-F5 for Launch without Debugging
-* By default, the system seeds the account testAdmin@example.com/password, which you can log in as.
-* You can the Fulcrum API at /api/commands and /api/queries, but you'll need to use Postman to set up a bearer token header to publish commands or run queries.
+* By default, the system seeds the account testAdmin@example.com/password. You can log in and click around. The Admin link's visibility is driven by claims.
+* You can see the Fulcrum API at /api/commands and /api/queries, but you'll need to use Postman to set up a bearer token header to publish commands or run queries.
 
 Near-Term To-do
 =========
