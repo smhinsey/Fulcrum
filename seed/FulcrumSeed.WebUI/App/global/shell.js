@@ -4,9 +4,11 @@
 		function ($scope, $state, $rootScope) {
 
 			$rootScope.$on('authenticated', function () {
+				console.log('authenticated');
 				$scope.visible = true;
 
 				if (!$scope.$$phase) {
+					console.log('authenticated $$phase');
 					$scope.$apply();
 				}
 			});
