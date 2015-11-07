@@ -31,7 +31,7 @@ Near-Term To-do
 1. Create profile management Angular views, controllers, etc. for Seed
 1. Create user profile admin Angular views, controllers, etc. for Seed
 1. Create user authentication/session management Angular views, controllers, etc. for Seed
-1. Lock down Identity Server implementation
+1. Lock down Identity Server implementation, something like this http://alexbilbie.com/2014/11/oauth-and-javascript/
 1. Implement log4net database appender & corresponding EF model for Seed
 1. Make a session log ID or similar variable visible to log4net for Seed
 1. Create viewer UI with searching, sorting, filtering, etc. for logging model
