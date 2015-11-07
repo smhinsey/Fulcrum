@@ -17,7 +17,8 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 			_repo = repo;
 		}
 
-		[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
+		// TODO: enable this
+		//[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
 		public IList<AccountProjection> ListUsers()
 		{
 			var users = _repo.ListAll();

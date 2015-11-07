@@ -1,0 +1,10 @@
+﻿{
+	"version": 3,
+	"file": "admin.css",
+	"sources": [
+		"admin.scss"
+	],
+	"sourcesContent": [],
+	"mappings": "AAAA,QAAQ,CAAA;EACJ,UAAU,EAAE,YAAa;CADpB",
+	"names": []
+}

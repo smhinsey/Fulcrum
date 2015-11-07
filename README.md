@@ -17,30 +17,32 @@ Eventually, I'd like to have a script for taking the seed project and renaming i
 * By default, the system seeds the account testAdmin@example.com/password. You can log in and click around. The Admin link's visibility is driven by claims.
 * You can see the Fulcrum API at /api/commands and /api/queries, but you'll need to use Postman to set up a bearer token header to publish commands or run queries.
 
-Near-Term To-do
+Seed To-do
 =========
-1. ~~Implement Identity Server 3 for Seed~~
-1. ~~Implement Membership Reboot for Seed~~
-1. ~~Create Angular shell for Seed~~
-1. ~~Implement directive to automatically render commands by reading their JSON schema from the API (via a read-through cache) and passing it to angular-schema-form for Seed~~
-1. ~~Implement validation of the angular-schema-form forms using the command schema and the TV4.js schema validation library for Seed~~
-1. ~~Create login & auth views, controllers, services, etc. for Seed~~
+1.~~Implement Identity Server 3~~
+1.~~Implement Membership Reboot~~
+1.~~Create Angular shell~~
+1.~~Implement directive to automatically render commands by reading their JSON schema from the API (via a read-through cache) and passing it to angular-schema-form~~
+1.~~Implement validation of the angular-schema-form forms using the command schema and the TV4.js schema validation library~~
+1.~~Create login & auth views, controllers, services, etc.~~
 1. Make QueryController claims-aware
 1. Make CommandController claims-aware
-1. Implement Refresh Tokens in Identity Server for Seed
-1. Create profile management Angular views, controllers, etc. for Seed
-1. Create user profile admin Angular views, controllers, etc. for Seed
-1. Create user authentication/session management Angular views, controllers, etc. for Seed
+1. Implement Refresh Tokens in Identity Server 
+1. Create breadcrumb directive
+1. Create profile management Angular views, controllers, etc. 
+1. Create user profile admin Angular views, controllers, etc. 
+1. Create user authentication/session management Angular views, controllers, etc. 
 1. Lock down Identity Server implementation, something like this http://alexbilbie.com/2014/11/oauth-and-javascript/
-1. Implement log4net database appender & corresponding EF model for Seed
-1. Make a session log ID or similar variable visible to log4net for Seed
+1. Implement log4net database appender & corresponding EF model 
+1. Make a session log ID or similar variable visible to log4net 
 1. Create viewer UI with searching, sorting, filtering, etc. for logging model
-1. Implement "My Session" feature - a link in the footer to the log viewer, pre-filtered by the current user's session log ID for Seed
-1. Install/configure ELMAH, tied to log4net for Seed
+1. Implement "My Session" feature - a link in the footer to the log viewer, pre-filtered by the current user's session log ID 
+1. Install/configure ELMAH, tied to log4net 
 
 
-Long-Term To-do
+General To-do
 =======
+1. Extend Command API to include an angular-schema-form form defintion alongside of the JSON Schema. The definition should be based on attributes decorating the command, such as DescriptionAttribute, similarly to the JSON Schema.
 1. Verify that query-based command validation still works and implement anything Seed needs to take advantage of it
 1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
 1. Create custom AuthorizeAttribute with on/off config switch

@@ -3,6 +3,8 @@
 	'ui.utils',
 	'ui.bootstrap',
 	'ui.router',
+	'ui.grid',
+	'angular-loading-bar',
 	'LocalStorageModule',
 	'schemaForm',
 	'fulcrumSeed.global.directives',

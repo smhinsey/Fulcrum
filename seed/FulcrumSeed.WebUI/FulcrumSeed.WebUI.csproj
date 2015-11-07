@@ -252,8 +252,14 @@
     <Content Include="App\global\services\logSvc.js" />
     <Content Include="App\global\services\profileSvc.js" />
     <Content Include="App\global\services\querySvc.js" />
+    <Content Include="App\screens\admin\admin.css">
+      <DependentUpon>admin.scss</DependentUpon>
+    </Content>
     <Content Include="App\screens\admin\admin.html" />
     <Content Include="App\screens\admin\admin.js" />
+    <Content Include="App\screens\admin\admin.min.css">
+      <DependentUpon>admin.css</DependentUpon>
+    </Content>
     <Content Include="App\screens\admin\userGroups\userGroups.html" />
     <Content Include="App\screens\admin\userGroups\userGroups.js" />
     <Content Include="App\screens\admin\userSessions\userSessions.html" />
@@ -282,6 +288,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\select2.css" />
     <Content Include="Content\css\select2.min.css" />
+    <Content Include="Content\loading-bar.css" />
+    <Content Include="Content\loading-bar.min.css" />
     <Content Include="Content\site.css">
       <DependentUpon>site.scss</DependentUpon>
     </Content>
@@ -289,6 +297,9 @@
       <DependentUpon>site.css</DependentUpon>
     </Content>
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Content\ui-grid.css" />
+    <Content Include="Content\ui-grid.min.css" />
+    <Content Include="Content\ui-grid.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-animate.js" />
@@ -469,6 +480,12 @@
     <Content Include="Scripts\angular-schema-form-0.8.12\LICENSE" />
     <Content Include="Scripts\angular-schema-form-0.8.12\package.json" />
     <Content Include="Scripts\angular-schema-form-0.8.12\README.md" />
+    <Content Include="Content\ui-grid.woff" />
+    <Content Include="Content\ui-grid.ttf" />
+    <Content Include="Content\ui-grid.eot" />
+    <Content Include="App\screens\admin\admin.css.map">
+      <DependentUpon>admin.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\az.js" />
     <Content Include="Scripts\i18n\bg.js" />
@@ -514,6 +531,8 @@
     <Content Include="Scripts\i18n\zh-TW.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
     <Content Include="Scripts\objectpath-1.2.1\index.js" />
@@ -768,6 +787,8 @@
     <Content Include="Scripts\tv4-1.2.7\tv4.async-jquery.js" />
     <Content Include="Scripts\tv4-1.2.7\tv4.js" />
     <Content Include="Scripts\tv4-1.2.7\tv4.min.js" />
+    <Content Include="Scripts\ui-grid.js" />
+    <Content Include="Scripts\ui-grid.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

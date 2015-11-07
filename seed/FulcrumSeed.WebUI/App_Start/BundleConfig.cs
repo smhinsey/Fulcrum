@@ -12,6 +12,8 @@ namespace FulcrumSeed.WebUI
 				.Include("~/Scripts/jquery-{version}.js")
 				.Include("~/Scripts/angular.js")
 				.Include("~/Scripts/angular-ui.js")
+				.Include("~/Scripts/ui-grid.js")
+				.Include("~/Scripts/loading-bar.js")
 				.Include("~/Scripts/angular-cookies.js")
 				.Include("~/Scripts/angular-sanitize.js")
 				.Include("~/Scripts/angular-file-upload.js")

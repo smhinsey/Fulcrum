@@ -1,12 +1,17 @@
-﻿<div class="row">
+﻿<div class="row mainContent" ng-controller="adminController">
 	<div class="col-md-12">
-		<h2>Admin</h2>
-	</div>
-</div>
-
-<div class="row mainContent" ng-controller="adminController">
-	<div class="col-md-12">
-
+		<ol class="breadcrumb">
+			<li><a ui-sref="admin.userAccounts">Admin</a></li>
+			<li ng-show="$state.is('admin.userAccounts')" ui-sref-active="active">
+				User Accounts
+			</li>
+			<li ng-show="$state.is('admin.userSessions')" ui-sref-active="active">
+				User Sessions
+			</li>
+			<li ng-show="$state.is('admin.userGroups')" ui-sref-active="active">
+				User Groups
+			</li>			
+		</ol>
 		<ul class="nav nav-tabs">
 			<li ui-sref-active="active" role="presentation">
 				<a ui-sref="admin.userAccounts">User Accounts</a>
