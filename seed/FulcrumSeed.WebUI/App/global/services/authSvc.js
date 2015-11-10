@@ -102,7 +102,10 @@
 						if (redirectTarget) {
 							$injector.get("$state").go(redirectTarget.state.name, redirectTarget.params);
 						} else {
-							$injector.get("$state").go("home");
+							var state = $injector.get("$state");
+							var stateParams = $injector.get("$stateParams");
+
+							state.go(state.current, stateParams, { reload: true });
 						}
 					})
 					.error(function (error) {

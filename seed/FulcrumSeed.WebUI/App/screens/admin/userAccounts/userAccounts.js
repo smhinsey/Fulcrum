@@ -33,13 +33,9 @@
 			};
 
 			var init = function() {
-
 				querySvc.run('UserAccountQueries/ListUsers')
 					.then(function(response) {
-
 						var data = response.data.results;
-
-						console.log('data', data);
 
 						$scope.gridOptions.data = data;
 
@@ -179,10 +175,10 @@
 					{
 						key: 'groupIds',
 						type: 'uiselectmultiple',
-						title: 'Groups',
+						title: 'Group Memberships',
 						options: {
 							asyncCallback: 'loadGroups',
-							//map: { valueProperty: 'id', nameProperty: 'name' }
+							map: { valueProperty: 'id', nameProperty: 'groupName' }
 						}
 					},
 					{

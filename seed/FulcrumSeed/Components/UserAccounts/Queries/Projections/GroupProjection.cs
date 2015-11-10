@@ -4,7 +4,7 @@ namespace FulcrumSeed.Components.UserAccounts.Queries.Projections
 {
 	public class GroupProjection
 	{
-		public string Name { get; set; }
+		public string GroupName { get; set; }
 
 		public string Description { get; set; }
 

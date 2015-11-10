@@ -23,7 +23,7 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 
 			var projection = users.Select(a => new GroupProjection()
 			{
-				Name = a.Name,
+				GroupName = a.Name,
 				Description = a.Description,
 				Id = a.ID
 			});
