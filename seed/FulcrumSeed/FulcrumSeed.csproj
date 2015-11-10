@@ -120,8 +120,10 @@
   <ItemGroup>
     <Compile Include="App_Packages\IdentityServer3.MembershipReboot\IdentityServer3.MembershipReboot.cs" />
     <Compile Include="Components\UserAccounts\CommandHandlers\CreateUserGroupHandler.cs" />
+    <Compile Include="Components\UserAccounts\CommandHandlers\EditAccountHandler.cs" />
     <Compile Include="Components\UserAccounts\CommandHandlers\RegisterAccountHandler.cs" />
     <Compile Include="Components\UserAccounts\Commands\CreateUserClaimGroup.cs" />
+    <Compile Include="Components\UserAccounts\Commands\EditAccount.cs" />
     <Compile Include="Components\UserAccounts\Commands\RegisterAccount.cs" />
     <Compile Include="Components\UserAccounts\Domain\Entities\PermissionClaim.cs" />
     <Compile Include="Components\UserAccounts\Domain\Entities\UserGroupAssociation.cs" />

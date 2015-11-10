@@ -290,6 +290,8 @@
     <Content Include="Content\css\select2.min.css" />
     <Content Include="Content\loading-bar.css" />
     <Content Include="Content\loading-bar.min.css" />
+    <Content Include="Content\select.css" />
+    <Content Include="Content\select.min.css" />
     <Content Include="Content\site.css">
       <DependentUpon>site.scss</DependentUpon>
     </Content>
@@ -310,6 +312,7 @@
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-csp.css" />
     <Content Include="Scripts\angular-file-upload.js" />
+    <Content Include="Scripts\angular-http-auth\http-auth-interceptor.js" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-local-storage\demo\demo-app.js" />
@@ -398,8 +401,24 @@
     <Content Include="Scripts\angular-schema-form-0.8.12\test\services\decorators-test.js" />
     <Content Include="Scripts\angular-schema-form-0.8.12\test\services\messages-test.js" />
     <Content Include="Scripts\angular-schema-form-0.8.12\test\services\schema-form-test.js" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\angular-schema-form-dynamic-select.js" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\angular-schema-form-dynamic-select.min.js" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\app.css" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\app.js" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\gulpfile.js" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\index.html" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\karma.conf.js" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\src\angular-schema-form-dynamic-select.js" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\src\strapmultiselect.html" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\src\strapselect.html" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\src\uiselect.html" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\src\uiselectmultiple.html" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\test\tests.js" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\ui-sortable.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular-translate.js" />
+    <Content Include="Scripts\angular-translate.min.js" />
     <Content Include="Scripts\angular-ui-ieshiv.js" />
     <Content Include="Scripts\angular-ui-ieshiv.min.js" />
     <Content Include="Scripts\angular-ui-router.js" />
@@ -486,6 +505,13 @@
     <Content Include="App\screens\admin\admin.css.map">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\.gitignore" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\bower.json" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\LICENSE" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\package.json" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\README.md" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\test\testdata.json" />
+    <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\test\testdata_mapped.json" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\az.js" />
     <Content Include="Scripts\i18n\bg.js" />
@@ -538,6 +564,8 @@
     <Content Include="Scripts\objectpath-1.2.1\index.js" />
     <Content Include="Scripts\objectpath-1.2.1\lib\ObjectPath.js" />
     <Content Include="Scripts\objectpath-1.2.1\test\index.js" />
+    <Content Include="Scripts\select.js" />
+    <Content Include="Scripts\select.min.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\tv4-1.2.7\doc\_template.html" />

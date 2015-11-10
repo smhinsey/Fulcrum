@@ -1,0 +1,5 @@
+[
+          {"nodeId": "1", "nodeName": "Node 1", "category": "value1"},
+          {"nodeId": "2", "nodeName": "Node 2", "category": "value2"},
+          {"nodeId": "3", "nodeName": "Node 3", "category": "value3"}
+]

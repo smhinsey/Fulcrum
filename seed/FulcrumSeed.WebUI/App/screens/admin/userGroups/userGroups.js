@@ -20,16 +20,6 @@
 				columnDefs: [
 					{ name: 'Name', field: 'name' },
 					{ name: 'Description', field: 'description' },
-					{
-						name: '',
-						field: 'id',
-						enableSorting: false,
-						enableFiltering: false,
-						enableColumnMenus: false,
-						cellTemplate: '<span></span>',
-						headerCellTemplate: "<button class='gridBtn btn btn-primary' ng-click='grid.appScope.newGroup()'>New</button>",
-						maxWidth: 90
-					},
 				],
 			};
 
@@ -39,8 +29,6 @@
 					.then(function (response) {
 
 						var data = response.data.results;
-
-						console.log('data', data);
 
 						$scope.gridOptions.data = data;
 

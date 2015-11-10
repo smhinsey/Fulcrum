@@ -1,5 +1,6 @@
 ﻿<div ng-controller="userGroupsController">
 	<div ui-grid="gridOptions"></div>
+	<button class="gridBtn btn btn-primary" ng-click="newGroup()">New Group</button>
 </div>
 
 <script type="text/ng-template" id="newGroup.html">
@@ -15,6 +16,5 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn btn-default" type="button" ng-click="">Cancel</button>
-		<button class="btn btn-primary" type="button" ng-click="save()">Save</button>
 	</div>
 </script>

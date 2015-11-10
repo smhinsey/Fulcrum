@@ -4,6 +4,8 @@
 	'ui.bootstrap',
 	'ui.router',
 	'ui.grid',
+	'ui.select',
+	'pascalprecht.translate',
 	'angular-loading-bar',
 	'LocalStorageModule',
 	'schemaForm',

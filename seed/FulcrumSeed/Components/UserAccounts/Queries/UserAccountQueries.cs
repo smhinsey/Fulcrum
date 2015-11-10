@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Fulcrum.Core;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
@@ -26,7 +27,8 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 				FirstName = a.FirstName,
 				LastName = a.LastName,
 				Email = a.Email,
-				Id = a.ID
+				Id = a.ID,
+				GroupIds = new Guid[] { }
 			});
 
 			return projection.ToList();
