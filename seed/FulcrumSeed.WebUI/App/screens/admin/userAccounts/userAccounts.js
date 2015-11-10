@@ -88,13 +88,13 @@
 					{
 						key: 'firstName',
 						title: 'First Name',
-						ype: 'text'
-					},,
+						type: 'text'
+					},
 					{
 						key: 'lastName',
 						title: 'Last Name',
 						type: 'text'
-					},,
+					},
 					{
 						key: 'email',
 						title: 'Email',
