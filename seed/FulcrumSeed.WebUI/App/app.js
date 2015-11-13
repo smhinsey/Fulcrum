@@ -64,12 +64,8 @@ app.config([
 		}
 	])
 	.run([
-		'$rootScope', 'authTokenSvc', 'authRedirectSvc',
-		function($rootScope, authTokenSvc, authRedirectSvc) {
-			if (authTokenSvc.getToken()) {
-				$rootScope.$broadcast("authenticated");
-				$rootScope.$emit("authenticated");
-			}
+		'$rootScope', 'authSvc', 'authRedirectSvc',
+		function ($rootScope, authSvc, authRedirectSvc) {
 
 			$rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
 				// track the state the user wants to go to in case they fail authentication
@@ -77,9 +73,15 @@ app.config([
 				authRedirectSvc.setRedirect(toState, toStateParams);
 
 				// ensure nav sync on every state change
-				if (authTokenSvc.getToken()) {
-					$rootScope.$broadcast("authenticated");
-					$rootScope.$emit("authenticated");
+				if (authSvc.isAuthorized()) {
+					$rootScope.$broadcast('authenticated');
+				} else {
+					$rootScope.$broadcast('unauthenticated');
+
+					// TODO: make configurable - set to true to force auth
+					if (false) {
+						$rootScope.$broadcast('show_login');
+					}
 				}
 			});
 		}

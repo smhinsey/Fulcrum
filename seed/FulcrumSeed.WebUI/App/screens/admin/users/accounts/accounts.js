@@ -1,9 +1,9 @@
 ﻿angular.module('fulcrumSeed.screens.admin.userAccounts', [])
 	.config(function($stateProvider) {
 		$stateProvider
-			.state('admin.userAccounts', {
-				url: "/userAccounts",
-				templateUrl: "app/screens/admin/userAccounts/userAccounts.html?v=" + APP_VERSION
+			.state('admin.users.accounts', {
+				url: "/accounts",
+				templateUrl: "app/screens/admin/users/accounts/accounts.html?v=" + APP_VERSION
 			});
 	})
 	.controller('userAccountsController', [
@@ -12,21 +12,23 @@
 
 			$scope.gridOptions = {
 				enableSorting: true,
-				enableFiltering: true,
+				enableFiltering: false,
 				enableHorizontalScrollbar: 0,
 				enableColumnMenus: false,
 				columnDefs: [
 					{ name: 'First Name', field: 'firstName' },
 					{ name: 'Last Name', field: 'lastName' },
 					{ name: 'Email', field: 'email' },
+					{ name: 'Registered', field: 'registrationDate', cellFilter: "date:'short'" },
+					{ name: 'Last Login', field: 'lastLoginDate', cellFilter: "date:'short'" },
 					{
 						name: '',
 						field: 'id',
 						enableSorting: false,
 						enableFiltering: false,
 						enableColumnMenus: false,
-						cellTemplate: "<button class='gridBtn btn btn-primary' ng-click='grid.appScope.editUser(row.entity)'>Edit</button>",
-						headerCellTemplate: "<button class='gridBtn btn btn-primary' ng-click='grid.appScope.newUser()'>New</button>",
+						cellTemplate: "<i class='glyphicon glyphicon-edit' ng-click='grid.appScope.editUser(row.entity)'></i>",
+						headerCellTemplate: "<i class='glyphicon glyphicon-plus' ng-click='grid.appScope.newUser()'></i>",
 						maxWidth: 90
 					},
 				],

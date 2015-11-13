@@ -28,7 +28,9 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 				LastName = a.LastName,
 				Email = a.Email,
 				Id = a.ID,
-				GroupIds = new Guid[] { }
+				GroupIds = new Guid[] { },
+				RegistrationDate = new DateTimeOffset(a.Created),
+				LastLoginDate = a.LastLogin
 			});
 
 			return projection.ToList();

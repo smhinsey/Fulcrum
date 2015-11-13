@@ -30,6 +30,17 @@
 		function ($scope, $state, authSvc, $rootScope, authRedirectSvc,
 			$modal, profileSvc) {
 
+
+			var showLogin = function () {
+
+					var modal = $modal.open({
+						templateUrl: 'login.html',
+						controller: 'loginController',
+						size: 'sm',
+					});
+
+			};
+
 			$scope.visible = false;
 
 			$rootScope.$on('authenticated', function () {
@@ -54,6 +65,11 @@
 				$scope.profile = undefined;
 			});
 
+			$rootScope.$on('show_login', function () {
+				console.log('received show_login');
+				showLogin();
+			});
+
 			$scope.logout = function () {
 				$scope.visible = false;
 				authSvc.logout();
@@ -65,13 +81,7 @@
 			};
 
 			$scope.login = function () {
-
-				$modal.open({
-					templateUrl: 'login.html',
-					controller: 'loginController',
-					size: 'sm',
-				});
-
+				showLogin();
 			};
 		}
 	])

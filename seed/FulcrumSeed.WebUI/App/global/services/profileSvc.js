@@ -5,13 +5,22 @@
 		function ($q, appSettings, $timeout, $http, localStorageService) {
 			var getClaimsPromise = undefined;
 
-			var setPromise = function() {
+			var setPromise = function () {
 				var url = appSettings.apiBasePath + "auth/connect/userinfo";
 
 				var promise = $http.get(url);
 
 				getClaimsPromise = promise;
-			}
+			};
+			var setProfile = function (profile) {
+				localStorageService.set("user_profile", profile);
+			};
+			var getProfile = function () {
+				return localStorageService.get("user_profile");
+			};
+			var clearProfile = function () {
+				return localStorageService.remove("user_profile");
+			};
 
 			// uses a promise to prevent multiple simultaneous requests
 			// but successive calls do result in new requests if they are
@@ -28,15 +37,6 @@
 
 				// TODO: investigate caching this - lots of edge cases around expiration tho
 				return getClaimsPromise;
-			};
-			var setProfile = function (profile) {
-				localStorageService.set("user_profile", profile);
-			};
-			var getProfile = function () {
-				return localStorageService.get("user_profile");
-			};
-			var clearProfile = function () {
-				return localStorageService.remove("user_profile");
 			};
 			this.getProfile = function () {
 				return getProfile();

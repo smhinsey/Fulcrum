@@ -3,15 +3,33 @@
 		'localStorageService',
 		function (localStorageService) {
 
-			var setToken = function (token) {
-				//console.log('setting token', token);
+			var localCopy;
 
+			var setToken = function(token) {
+				console.log('setting token', token);
+
+				localCopy = token;
 				localStorageService.set("oauth_token", token);
 			};
 			var getToken = function() {
 				var token = localStorageService.get("oauth_token");
 
-				//console.log('reading token', token);
+				if(!token && localCopy != undefined) {
+					token = localCopy;
+				}
+
+				if (!token) return null;
+
+				var expirationTime = moment(token.timestamp).add(token.expires_in, 's');
+
+				var expired = moment().isAfter(moment(expirationTime));
+
+				//console.log('token.expires_in', token.expires_in);
+				//console.log('token.timestamp      ', moment(token.timestamp).format());
+				//console.log('token expiration time', expirationTime.format());
+				//console.log('token expired', expired);
+
+				if (expired) return null;
 
 				return token;
 			};
@@ -24,11 +42,11 @@
 			this.getToken = function() {
 				return getToken();
 			};
+			this.setToken = function(token) {
+				token.timestamp = moment();
 
-			this.setToken = function (token) {
 				setToken(token);
 			};
-
 			this.clearToken = function() {
 				clearToken();
 			};
@@ -65,10 +83,11 @@
 	])
 	.service('authSvc', [
 		'$http', 'appSettings', 'authTokenSvc', '$q', '$rootScope',
-			'$injector',
-		function ($http, appSettings, authTokenSvc, $q, $rootScope,
-			$injector) {
+		'$injector',
+		function($http, appSettings, authTokenSvc, $q, $rootScope,
+		         $injector) {
 
+			var authorizing = false;
 			var authorized = false;
 
 			this.login = function(username, password) {
@@ -89,6 +108,7 @@
 						}
 					})
 					.success(function(token) {
+						authorizing = false;
 						authorized = true;
 						authTokenSvc.setToken(token);
 
@@ -108,7 +128,7 @@
 							state.go(state.current, stateParams, { reload: true });
 						}
 					})
-					.error(function (error) {
+					.error(function(error) {
 						console.log('authentication error', error);
 						authorized = false;
 						authTokenSvc.clearToken();
@@ -176,17 +196,13 @@
 			};
 
 			this.isAuthorized = function() {
-				if (authorized) {
+				var token = authTokenSvc.getToken();
+
+				if (token) {
 					return true;
-				} else {
-					var token = authTokenSvc.getToken();
-
-					if (token) {
-						return true;
-					}
-
-					return false;
 				}
+
+				return false;
 			};
 		}
 	])
@@ -204,6 +220,8 @@
 
 				if (token) {
 					config.headers.Authorization = 'Bearer ' + token.access_token;
+				} else {
+					//console.log('no token for auth header');
 				}
 
 				return config;
@@ -211,33 +229,34 @@
 
 			factory.responseError = function(rejection) {
 				// TODO: implement refresh tokens in idsvr3
-				if (rejection.status === 401111) {
-					var deferred = $q.defer();
+				if (rejection.status === 401) {
+					$rootScope.$broadcast('show_login');
+					// TODO: update request-resuming logic
+					//var deferred = $q.defer();
 
-					$injector.get("authSvc").attemptRefresh()
-						.then(function() {
-								// TODO: clean up request-resuming logic
-								$injector.get("$http")(rejection.config).then(function(response) {
-									// we have a successful response - resolve it using deferred
-									$rootScope.$broadcast('authenticated');
+					//$injector.get("authSvc").attemptRefresh()
+					//	.then(function() {
+					//			$injector.get("$http")(rejection.config).then(function(response) {
+					//				// we have a successful response - resolve it using deferred
+					//				$rootScope.$broadcast('authenticated');
 
-									deferred.resolve(response);
-									var redirectSvc = $injector.get("authRedirectSvc");
-									var redirectTarget = redirectSvc.getRedirect();
-									//console.log('redirectTarget', redirectTarget);
-									//console.log('redirectTarget.state', redirectTarget.state);
-									$injector.get("$state").go(redirectTarget.state.name, redirectTarget.params);
-								}, function(response) {
-									deferred.reject(response); // retried request failed
-									$injector.get("$state").go("login");
-								});
-							}, function(response) {
-								// unable to refresh auth token, prompt for credentials
-								$injector.get("$state").go("login");
-								return;
-							}
-						);
-					return deferred.promise;
+					//				deferred.resolve(response);
+					//				var redirectSvc = $injector.get("authRedirectSvc");
+					//				var redirectTarget = redirectSvc.getRedirect();
+					//				//console.log('redirectTarget', redirectTarget);
+					//				//console.log('redirectTarget.state', redirectTarget.state);
+					//				$injector.get("$state").go(redirectTarget.state.name, redirectTarget.params);
+					//			}, function(response) {
+					//				deferred.reject(response); // retried request failed
+					//				$injector.get("$state").go("login");
+					//			});
+					//		}, function(response) {
+					//			// unable to refresh auth token, prompt for credentials
+					//			$injector.get("$state").go("login");
+					//			return;
+					//		}
+					//	);
+					//return deferred.promise;
 				}
 
 				return $q.reject(rejection);
@@ -245,4 +264,4 @@
 
 			return factory;
 		}
-	]);;
+	]);

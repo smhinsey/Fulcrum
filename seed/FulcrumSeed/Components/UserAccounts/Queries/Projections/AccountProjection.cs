@@ -13,5 +13,9 @@ namespace FulcrumSeed.Components.UserAccounts.Queries.Projections
 		public Guid Id { get; set; }
 
 		public string LastName { get; set; }
+
+		public DateTimeOffset RegistrationDate { get; set; }
+
+		public DateTimeOffset? LastLoginDate { get; set; }
 	}
 }

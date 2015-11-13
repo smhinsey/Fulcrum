@@ -2,9 +2,9 @@
 		.config(function ($stateProvider) {
 
 			$stateProvider
-				.state('admin.userSessions', {
-					url: "/users",
-					templateUrl: "app/screens/admin/userSessions/userSessions.html?v=" + APP_VERSION
+				.state('admin.users.sessions', {
+					url: "/sessions",
+					templateUrl: "app/screens/admin/users/sessions/sessions.html?v=" + APP_VERSION
 				});
 
 		})

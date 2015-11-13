@@ -247,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\global\directives\claims.js" />
+    <Content Include="App\global\filters\filters.js" />
     <Content Include="App\global\services\authSvc.js" />
     <Content Include="App\global\services\commandSvc.js" />
     <Content Include="App\global\services\logSvc.js" />
@@ -260,12 +261,13 @@
     <Content Include="App\screens\admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
-    <Content Include="App\screens\admin\userGroups\userGroups.html" />
-    <Content Include="App\screens\admin\userGroups\userGroups.js" />
-    <Content Include="App\screens\admin\userSessions\userSessions.html" />
-    <Content Include="App\screens\admin\userSessions\userSessions.js" />
-    <Content Include="App\screens\admin\userAccounts\userAccounts.html" />
-    <Content Include="App\screens\admin\userAccounts\userAccounts.js" />
+    <Content Include="App\screens\admin\users\groups\groups.html" />
+    <Content Include="App\screens\admin\users\groups\groups.js" />
+    <Content Include="App\screens\admin\users\sessions\sessions.html" />
+    <Content Include="App\screens\admin\users\sessions\sessions.js" />
+    <Content Include="App\screens\admin\users\accounts\accounts.html" />
+    <Content Include="App\screens\admin\users\accounts\accounts.js" />
+    <Content Include="App\screens\admin\users\users.js" />
     <Content Include="App\screens\home\home.html" />
     <Content Include="App\screens\home\home.js" />
     <Content Include="App\screens\profile\profile.html" />
@@ -302,6 +304,7 @@
     <Content Include="Content\ui-grid.css" />
     <Content Include="Content\ui-grid.min.css" />
     <Content Include="Content\ui-grid.svg" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-animate.js" />
@@ -331,6 +334,8 @@
     <Content Include="Scripts\angular-messages.js" />
     <Content Include="Scripts\angular-messages.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-moment.js" />
+    <Content Include="Scripts\angular-moment.min.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-resource.min.js" />
     <Content Include="Scripts\angular-route.js" />
@@ -512,6 +517,7 @@
     <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\README.md" />
     <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\test\testdata.json" />
     <Content Include="Scripts\angular-schema-form-dynamic-select-0.12.4\test\testdata_mapped.json" />
+    <Content Include="Scripts\angular-moment.min.js.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\i18n\az.js" />
     <Content Include="Scripts\i18n\bg.js" />
@@ -561,6 +567,10 @@
     <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\objectpath-1.2.1\index.js" />
     <Content Include="Scripts\objectpath-1.2.1\lib\ObjectPath.js" />
     <Content Include="Scripts\objectpath-1.2.1\test\index.js" />
@@ -874,9 +884,7 @@
       <Name>FulcrumSeed</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App\global\filters\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

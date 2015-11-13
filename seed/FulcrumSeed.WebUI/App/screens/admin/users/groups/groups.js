@@ -2,9 +2,9 @@
 		.config(function ($stateProvider) {
 
 			$stateProvider
-				.state('admin.userGroups', {
-					url: "/userGroups",
-					templateUrl: "app/screens/admin/userGroups/userGroups.html?v=" + APP_VERSION
+				.state('admin.users.groups', {
+					url: "/groups",
+					templateUrl: "app/screens/admin/users/groups/groups.html?v=" + APP_VERSION
 				});
 
 		})
