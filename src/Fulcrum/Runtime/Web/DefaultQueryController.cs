@@ -148,7 +148,7 @@ namespace Fulcrum.Runtime.Web
 
 				if (!safeToProceed)
 				{
-					return new HttpUnauthorizedResult(string.Format("Query {0}/{1} failed to authorize claims for {2}. See logs for more.",
+					return new HttpUnauthorizedResult(string.Format("User {2} lacks the claims required for query {0}/{1}. See logs for more.",
 						queryObject.Name, queryMethod.Name, User.Identity.Name));
 				}
 			}

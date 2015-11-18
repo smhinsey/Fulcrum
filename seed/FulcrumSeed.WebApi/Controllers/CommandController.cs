@@ -45,8 +45,8 @@ namespace FulcrumSeed.WebApi.Controllers
 
 		[Route("{inNamespace}/{commandName}/publish")]
 		[HttpPost]
-		//[Authorize]
-		public override JsonResult Publish(string inNamespace, string commandName,
+		[Authorize]
+		public override ActionResult Publish(string inNamespace, string commandName,
 			[ModelBinder(typeof(CommandModelBinder))] ICommand command)
 		{
 			return base.Publish(inNamespace, commandName, command);

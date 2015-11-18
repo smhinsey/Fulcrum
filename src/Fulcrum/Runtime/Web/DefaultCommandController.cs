@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Web.Mvc;
 using Fulcrum.Common;
 using Fulcrum.Core;
+using Fulcrum.Core.Security;
 using Fulcrum.Runtime.Api;
 using Fulcrum.Runtime.Api.Results;
 using Fulcrum.Runtime.Api.Results.CommandPublication;
@@ -70,13 +74,13 @@ namespace Fulcrum.Runtime.Web
 			return Json(new { error = "HTTP POST only." });
 		}
 
-		public virtual JsonResult Publish(string inNamespace, string commandName,
+		public virtual ActionResult Publish(string inNamespace, string commandName,
 			[ModelBinder(typeof(CommandModelBinder))] ICommand command)
 		{
 			return publish(command);
 		}
 
-		private JsonResult publish(ICommand command)
+		private ActionResult publish(ICommand command)
 		{
 			// This is not command-level validation, rather this is 
 			// validation that all of the command's properties are intact.
@@ -88,6 +92,65 @@ namespace Fulcrum.Runtime.Web
 			{
 				try
 				{
+					// TODO: factor this out
+					var customAttributes = command.GetType().GetCustomAttributes(typeof(RequiresClaimAttribute), false);
+
+					var claimsDemandsAttrs = new List<Attribute>(customAttributes.Cast<Attribute>());
+
+					if (claimsDemandsAttrs.Any())
+					{
+						var safeToProceed = false;
+
+						var claimsPrincipal = User as ClaimsPrincipal;
+
+						if (claimsPrincipal != null)
+						{
+							var userClaims = claimsPrincipal.Claims;
+
+							if (userClaims != null && userClaims.Count() >= claimsDemandsAttrs.Count())
+							{
+								foreach (var claimAttr in claimsDemandsAttrs)
+								{
+									var demandedClaim = claimAttr as RequiresClaimAttribute;
+
+									if (demandedClaim == null)
+									{
+										this.LogDebug("claimAttr is null. This is unexpected.");
+									}
+									else
+									{
+										var matchedClaim = userClaims.SingleOrDefault(c => c.Type == demandedClaim.Type &&
+																																			 c.Value == demandedClaim.Value);
+
+										if (matchedClaim != null)
+										{
+											safeToProceed = true;
+										}
+										else
+										{
+											this.LogWarn("User {0} doesn't possess claim of type {1} with value {2} required for command {3}.",
+												User.Identity.Name, demandedClaim.Type, demandedClaim.Value, command.GetType().Name);
+										}
+									}
+								}
+							}
+							else
+							{
+								// fail
+							}
+						}
+						else
+						{
+							this.LogWarn("This command requires that the Authorize attribute be present on the command controller's Publish action.");
+						}
+
+						if (!safeToProceed)
+						{
+							return new HttpUnauthorizedResult(string.Format("User {0} lacks the claims required for command {1}. See logs for more.",
+								User.Identity.Name, command.GetType().Name));
+						}
+					}
+
 					var record = _commandPipeline.Publish(command);
 
 					if (record.Status == CommandPublicationStatus.Failed)
