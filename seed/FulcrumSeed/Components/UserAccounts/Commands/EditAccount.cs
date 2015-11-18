@@ -6,8 +6,7 @@ using Fulcrum.Core.Security;
 
 namespace FulcrumSeed.Components.UserAccounts.Commands
 {
-	//[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
-	[RequiresClaim(ClaimTypes.Role, "whateverman")]
+	[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
 	public class EditAccount : DefaultCommand
 	{
 		[Required]
