@@ -8,10 +8,10 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 		public static IEnumerable<Scope> Get()
 		{
 			// TODO: make configurable
-			var scopeName = "FulcrumApiScope";
+			var scopeName = "FulcrumApiScope-";
 
 			// TODO: make configurable
-			var scopeDescription = "Grants access to the Fulcrum API.";
+			var scopeDescription = "Grants access to the Fulcrum API. Type: ";
 
 			var scopes = new List<Scope>
 			{
@@ -21,8 +21,8 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 				new Scope
 				{
 					Enabled = true,
-					Name = scopeName,
-					Description = scopeDescription,
+					Name = scopeName + "Identity",
+					Description = scopeDescription + "Identity",
 					Type = ScopeType.Identity,
 					IncludeAllClaimsForUser = true,
 					
@@ -30,8 +30,25 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 					{
 						//new ScopeClaim(IdentityServer3.Core.Constants.ClaimTypes.Email),
 						//new ScopeClaim(System.Security.Claims.ClaimTypes.Role),
-						//new ScopeClaim("firstName"),
-						//new ScopeClaim("fastName"),
+						new ScopeClaim("firstName"),
+						new ScopeClaim("lastName"),
+					}
+				},
+				new Scope
+				{
+					Enabled = true,
+					Name = scopeName + "Resource",
+					Description = scopeDescription + "Resource",
+					Type = ScopeType.Resource,
+					IncludeAllClaimsForUser = true,
+					
+					Claims = new List<ScopeClaim>
+					{
+						//new ScopeClaim(IdentityServer3.Core.Constants.ClaimTypes.Email),
+						//new ScopeClaim(System.Security.Claims.ClaimTypes.Role),
+						new ScopeClaim("firstName"),
+						new ScopeClaim("lastName"),
+						new ScopeClaim("lastName"),
 					}
 				}
 			};

@@ -109,7 +109,7 @@ namespace Fulcrum.Runtime.Web
 				{
 					var userClaims = claimsPrincipal.Claims;
 
-					if (userClaims != null && userClaims.Count() == claimsDemandsAttrs.Count())
+					if (userClaims != null && userClaims.Count() >= claimsDemandsAttrs.Count())
 					{
 						foreach (var claimAttr in claimsDemandsAttrs)
 						{
@@ -148,7 +148,7 @@ namespace Fulcrum.Runtime.Web
 
 				if (!safeToProceed)
 				{
-					throw new UnauthorizedAccessException(string.Format("Query {0}/{1} failed to authorize claims for {2}. See WARN logs for more.",
+					return new HttpUnauthorizedResult(string.Format("Query {0}/{1} failed to authorize claims for {2}. See logs for more.",
 						queryObject.Name, queryMethod.Name, User.Identity.Name));
 				}
 			}

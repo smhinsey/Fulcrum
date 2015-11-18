@@ -132,6 +132,7 @@
     <Compile Include="Components\UserAccounts\Queries\UserAccountQueries.cs" />
     <Compile Include="Components\UserAccounts\Queries\UserGroupQueries.cs" />
     <Compile Include="Infrastructure\IdentityServer3\Clients.cs" />
+    <Compile Include="Infrastructure\IdentityServer3\CustomClaimsProvider.cs" />
     <Compile Include="Infrastructure\IdentityServer3\Scopes.cs" />
     <Compile Include="Infrastructure\MembershipReboot\AuthProvider.cs" />
     <Compile Include="Infrastructure\MembershipReboot\MembershipConfig.cs" />

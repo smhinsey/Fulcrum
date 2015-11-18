@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using IdentityServer3.Core.Models;
 
 namespace FulcrumSeed.Infrastructure.IdentityServer3
@@ -35,7 +36,7 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 					AccessTokenLifetime = accessTokenLifetime,
 					AllowAccessToAllScopes = true,
 					AllowAccessToAllCustomGrantTypes = true,
-					AlwaysSendClientClaims = false,
+					AlwaysSendClientClaims = true,
 					AllowedScopes = new List<string>()
 					{
 						"openid",
@@ -49,6 +50,9 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 						"write",
 					},
 					UpdateAccessTokenClaimsOnRefresh = true,
+					IncludeJwtId = true,
+					PrefixClientClaims = false,
+					Claims = new List<Claim>(){new Claim("PrefixTest","TestPrefix")}
 				}
 			};
 		}

@@ -23,6 +23,7 @@ namespace FulcrumSeed.Infrastructure.MembershipReboot
 				var claims = user.GetAllClaims();
 
 				var id = new ClaimsIdentity(claims, "MembershipReboot");
+
 				context.Validated(id);
 			}
 
