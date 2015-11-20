@@ -39,6 +39,8 @@ namespace Fulcrum.Runtime.Web
 
 			if (commandType != null)
 			{
+				// TODO: filter command by claims
+				
 				return JsonWithNulls(new CommandDescription(commandType, false));
 			}
 
@@ -63,6 +65,8 @@ namespace Fulcrum.Runtime.Web
 		public virtual JsonResult ListAll()
 		{
 			var commands = _commandLocator.ListAllCommands();
+
+			// TODO: filter commands by claims
 
 			var descriptions = commands.Select(command => new CommandDescription(command, true));
 

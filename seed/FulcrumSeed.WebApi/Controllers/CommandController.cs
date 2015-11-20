@@ -8,6 +8,7 @@ using Fulcrum.Runtime.Web;
 namespace FulcrumSeed.WebApi.Controllers
 {
 	[RoutePrefix("commands")]
+	[Authorize]
 	public class CommandController : DefaultCommandController
 	{
 		public CommandController(ICommandPipeline commandPipeline, ICommandLocator commandLocator)
@@ -45,7 +46,6 @@ namespace FulcrumSeed.WebApi.Controllers
 
 		[Route("{inNamespace}/{commandName}/publish")]
 		[HttpPost]
-		[Authorize]
 		public override ActionResult Publish(string inNamespace, string commandName,
 			[ModelBinder(typeof(CommandModelBinder))] ICommand command)
 		{
