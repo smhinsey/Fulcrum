@@ -15,7 +15,22 @@
 					<ul class="nav navbar-nav navbar-right" ng-controller="badgeController">
 						<li ng-show="claims"><p class="navbar-text">Hello, {{claims['firstName']}}</p></li>
 						<li ng-show="!claims" ui-sref-active="active"><a ui-sref="register">Register</a></li>
-						<li ng-show="claims" ui-sref-active="active" visible-with-role-claim="Admin"><a ui-sref="admin">Admin</a></li>
+
+						<li class="dropdown" uib-dropdown is-open="status.isopen" ng-show="claims" ui-sref-active="active" visible-with-role-claim="Admin">
+							<a class="dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled">
+								Site Admin <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li>Users</li>
+								<li><a ui-sref="admin.users.accounts">Accounts</a></li>
+								<li><a ui-sref="admin.users.roles">Roles</a></li>
+								<li><a ui-sref="admin.users.sessions">Sessions</a></li>
+								<li class="divider"></li>
+								<li>Section</li>
+								<li><a href="#">Sub-section</a></li>
+							</ul>
+						</li>
+
 						<li><p class="navbar-text">&nbsp;</p></li>
 						<li ng-show="claims"><button type="button" class="btn btn-default navbar-btn" ng-click="logout()">Log Out</button></li>
 						<li ng-show="!claims"><button type="button" class="btn btn-default navbar-btn" ng-click="login()">Log In</button></li>

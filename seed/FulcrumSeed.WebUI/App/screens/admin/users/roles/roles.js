@@ -1,16 +1,18 @@
-﻿angular.module('fulcrumSeed.screens.admin.userGroups', [])
+﻿angular.module('fulcrumSeed.screens.admin.users.roles', [])
 		.config(function ($stateProvider) {
 
 			$stateProvider
-				.state('admin.users.groups', {
-					url: "/groups",
-					templateUrl: "app/screens/admin/users/groups/groups.html?v=" + APP_VERSION
+				.state('admin.users.roles', {
+					url: "/roles",
+					templateUrl: "app/screens/admin/users/roles/roles.html?v=" + APP_VERSION
 				});
 
 		})
-	.controller('userGroupsController', [
+	.controller('userRolesController', [
 		'$scope', '$state', '$rootScope','querySvc','$modal',
 		function ($scope, $state, $rootScope, querySvc, $modal) {
+
+			$rootScope.title = "User Roles";
 
 			$scope.gridOptions = {
 				enableSorting: true,
@@ -41,8 +43,8 @@
 
 			$scope.newGroup = function () {
 				var newUserModal = $modal.open({
-					templateUrl: 'newGroup.html',
-					controller: 'newGroupController',
+					templateUrl: 'newRole.html',
+					controller: 'newRoleController',
 					size: 'md',
 				});
 
@@ -52,7 +54,7 @@
 			};
 		}
 	])
-	.controller('newGroupController', [
+	.controller('newRoleController', [
 		'$scope', '$state', 'authSvc', '$rootScope', 'authRedirectSvc', '$modalInstance',
 		'commandSvc',
 		function ($scope, $state, authSvc, $rootScope, authRedirectSvc, $modalInstance,

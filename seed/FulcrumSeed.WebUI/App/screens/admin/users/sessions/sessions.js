@@ -12,5 +12,7 @@
 		'$scope', '$state', '$rootScope',
 		function ($scope, $state, $rootScope) {
 
+			$rootScope.title = "User Sessions";
+
 		}
 	]);

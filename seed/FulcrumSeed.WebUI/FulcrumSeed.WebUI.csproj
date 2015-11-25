@@ -261,8 +261,8 @@
     <Content Include="App\screens\admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
-    <Content Include="App\screens\admin\users\groups\groups.html" />
-    <Content Include="App\screens\admin\users\groups\groups.js" />
+    <Content Include="App\screens\admin\users\roles\roles.html" />
+    <Content Include="App\screens\admin\users\roles\roles.js" />
     <Content Include="App\screens\admin\users\sessions\sessions.html" />
     <Content Include="App\screens\admin\users\sessions\sessions.js" />
     <Content Include="App\screens\admin\users\accounts\accounts.html" />

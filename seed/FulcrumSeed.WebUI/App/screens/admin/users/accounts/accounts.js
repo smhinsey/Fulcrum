@@ -1,4 +1,4 @@
-﻿angular.module('fulcrumSeed.screens.admin.userAccounts', [])
+﻿angular.module('fulcrumSeed.screens.admin.users.accounts', [])
 	.config(function($stateProvider) {
 		$stateProvider
 			.state('admin.users.accounts', {
@@ -9,6 +9,8 @@
 	.controller('userAccountsController', [
 		'$scope', '$state', '$rootScope', 'querySvc', '$modal',
 		function($scope, $state, $rootScope, querySvc, $modal) {
+
+			$rootScope.title = "User Accounts";
 
 			$scope.gridOptions = {
 				enableSorting: true,
