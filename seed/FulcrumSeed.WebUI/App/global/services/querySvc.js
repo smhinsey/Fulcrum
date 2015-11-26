@@ -40,5 +40,22 @@
 
 				return $http(queryRequest);
 			};
+
+			this.list = function(namespace) {
+
+				var url = appSettings.apiBasePath + "api/queries/";
+
+				if(namespace) {
+					url += namespace;
+				}
+
+
+				var queryRequest = {
+					url: url + "?v=" + APP_VERSION,
+					method: 'GET',
+				};
+
+				return $http(queryRequest);
+			}
 		}
 	]);

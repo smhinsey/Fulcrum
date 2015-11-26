@@ -192,6 +192,7 @@
     <Compile Include="Core\Concepts\IEntity.cs" />
     <Compile Include="Core\IFormModel.cs" />
     <Compile Include="Core\PortableEvent.cs" />
+    <Compile Include="Core\QuerySchema.cs" />
     <Compile Include="Core\Security\RequiresClaimAttribute.cs" />
     <Compile Include="Migrations\201509301951594_Initialize.cs" />
     <Compile Include="Migrations\201509301951594_Initialize.Designer.cs">
@@ -210,6 +211,7 @@
     <Compile Include="Runtime\Api\Results\CommandPublication\CommandCompleteOrPendingResult.cs" />
     <Compile Include="Runtime\Api\Results\QueryObjectDescription.cs" />
     <Compile Include="Runtime\AppSettings.cs" />
+    <Compile Include="Runtime\QuerySchemaGenerator.cs" />
     <Compile Include="Runtime\FulcrumSetup.cs" />
     <Compile Include="Runtime\EventSchemaGenerator.cs" />
     <Compile Include="Runtime\EventLocator.cs" />

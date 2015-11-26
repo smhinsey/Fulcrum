@@ -1,0 +1,16 @@
+﻿<div ng-controller="queryController">
+	<div ui-grid="gridOptions"></div>
+</div>
+
+<script type="text/ng-template" id="runQuery.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Run Query {{query.queryObject}}/{{query.query}}</h3>
+	</div>
+	<div class="modal-body">
+		<form name="runQueryForm"
+					sf-schema="schema"
+					sf-form="form"
+					sf-model="formModel"
+					ng-submit="run(runQueryForm, formModel)"></form>
+	</div>
+</script>

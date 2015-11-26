@@ -6,29 +6,34 @@ using FulcrumSeed.Components.UserAccounts.Queries.Projections;
 
 namespace FulcrumSeed.Components.UserAccounts.Queries
 {
-	public class UserGroupQueries : IQuery
+	public class UserRoleQueries : IQuery
 	{
 		private readonly UserGroupRepository _repo;
 
-		public UserGroupQueries(UserGroupRepository repo)
+		public UserRoleQueries(UserGroupRepository repo)
 		{
 			_repo = repo;
 		}
 
 		// TODO: enable this
 		//[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
-		public IList<GroupProjection> ListGroups()
+		public IList<RoleProjection> ListRoles()
 		{
 			var users = _repo.ListAll();
 
-			var projection = users.Select(a => new GroupProjection()
+			var projection = users.Select(a => new RoleProjection()
 			{
-				GroupName = a.Name,
+				Name = a.Name,
 				Description = a.Description,
-				Id = a.ID
+				RoleId = a.ID
 			});
 
 			return projection.ToList();
+		}
+
+		public bool Test(string param1, int param2, bool param3, string param4)
+		{
+			return false;
 		}
 	}
 }

@@ -110,6 +110,46 @@ namespace Fulcrum.Common.JsonSchema
 			}
 		}
 
+		public SchemaObject(QuerySchema eventSchema, string name, string @namespace)
+			: this()
+		{
+			Type = SchemaObjectType.@object;
+			Title = name;
+			Description = string.Format("JSON schema for {0}/{1}.", @namespace, name);
+
+			if (eventSchema.Properties == null)
+			{
+				return;
+			}
+
+			foreach (var property in eventSchema.Properties)
+			{
+				var validated = isPropertyValidated(property.Value);
+
+				var propertyType = getPropertyType(property.Value);
+
+				ISchemaPropertyMetadata metadata;
+
+				if (validated)
+				{
+					var validationMetadata = getValidatedPropertyMetadata(property.Value, propertyType);
+
+					if (validationMetadata.Required.HasValue && validationMetadata.Required.Value)
+					{
+						Required.Add(property.Key);
+					}
+
+					metadata = validationMetadata;
+				}
+				else
+				{
+					metadata = new SimplePropertyMetadata(propertyType);
+				}
+
+				Properties.Add(property.Key, metadata);
+			}
+		}
+
 		public string Description { get; private set; }
 
 		public IDictionary<string, ISchemaPropertyMetadata> Properties { get; private set; }
@@ -134,7 +174,7 @@ namespace Fulcrum.Common.JsonSchema
 
 			if (schemaType == JsonSchemaType.Integer)
 			{
-				return SchemaPropertyType.boolean;
+				return SchemaPropertyType.integer;
 			}
 
 			if (schemaType == JsonSchemaType.Float)

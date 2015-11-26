@@ -20,6 +20,12 @@ namespace Fulcrum.Runtime.Api.Results
 				Parameters.Add(parameter.Name, parameter.ParameterType.Name);
 			}
 
+			var querySchema = QuerySchemaGenerator.GenerateSchema(methodInfo);
+
+			var name = @namespace + "/" + queryObject + "." + methodInfo.Name;
+
+			Schema = new SchemaObject(querySchema, name, Namespace);
+
 			Links = new List<JsonLink>();
 
 			if (includeDetailsLink)
@@ -69,6 +75,8 @@ namespace Fulcrum.Runtime.Api.Results
 					Namespace, QueryObject, Query, queryString), "results"));
 			}
 		}
+
+		public SchemaObject Schema { get; set; }
 
 		public List<JsonLink> Links { get; private set; }
 

@@ -2,12 +2,12 @@ using System;
 
 namespace FulcrumSeed.Components.UserAccounts.Queries.Projections
 {
-	public class GroupProjection
+	public class RoleProjection
 	{
-		public string GroupName { get; set; }
+		public string Name { get; set; }
 
 		public string Description { get; set; }
 
-		public Guid Id { get; set; }
+		public Guid RoleId { get; set; }
 	}
 }

@@ -4,13 +4,13 @@ using BrockAllen.MembershipReboot;
 
 namespace FulcrumSeed.Components.UserAccounts.Domain.Entities
 {
-	public class UserClaimGroup : RelationalGroup
+	public class UserRole : RelationalGroup
 	{
-		public UserClaimGroup()
+		public UserRole()
 		{
 		}
 
-		public UserClaimGroup(string name)
+		public UserRole(string name)
 		{
 			Name = name;
 			Created = DateTime.UtcNow;

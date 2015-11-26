@@ -4,7 +4,7 @@ namespace FulcrumSeed.Components.UserAccounts.Domain.Entities
 {
 	public class UserGroupAssociation
 	{
-		public UserClaimGroup Group { get; set; }
+		public UserRole Group { get; set; }
 
 		public Guid GroupId { get; set; }
 

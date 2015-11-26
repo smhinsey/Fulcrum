@@ -1,0 +1,16 @@
+﻿<div ng-controller="commandsController">
+	<div ui-grid="gridOptions"></div>
+</div>
+
+<script type="text/ng-template" id="runCommand.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Run Command</h3>
+	</div>
+	<div class="modal-body">
+		<form name="runCommandForm"
+					sf-schema="schema"
+					sf-form="form"
+					sf-model="formModel"
+					ng-submit="run(runCommandForm, formModel)"></form>
+	</div>
+</script>

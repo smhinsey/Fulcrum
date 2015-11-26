@@ -261,6 +261,10 @@
     <Content Include="App\screens\admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
+    <Content Include="App\screens\admin\commands\commands.html" />
+    <Content Include="App\screens\admin\commands\commands.js" />
+    <Content Include="App\screens\admin\queries\queries.html" />
+    <Content Include="App\screens\admin\queries\queries.js" />
     <Content Include="App\screens\admin\users\roles\roles.html" />
     <Content Include="App\screens\admin\users\roles\roles.js" />
     <Content Include="App\screens\admin\users\sessions\sessions.html" />

@@ -6,7 +6,7 @@ using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 
 namespace FulcrumSeed.Components.UserAccounts.Domain.Repositories
 {
-	public class UserGroupRepository : DbContextGroupRepository<SeedDbContext, UserClaimGroup>, IRepository
+	public class UserGroupRepository : DbContextGroupRepository<SeedDbContext, UserRole>, IRepository
 	{
 		private readonly SeedDbContext _db;
 
@@ -16,7 +16,7 @@ namespace FulcrumSeed.Components.UserAccounts.Domain.Repositories
 			_db = db;
 		}
 
-		public IList<UserClaimGroup> ListAll()
+		public IList<UserRole> ListAll()
 		{
 			return _db.Groups.ToList();
 		}

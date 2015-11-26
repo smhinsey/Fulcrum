@@ -5,7 +5,7 @@ using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 
 namespace FulcrumSeed.Components
 {
-	public class SeedDbContext : MembershipRebootDbContext<AppUser, UserClaimGroup>
+	public class SeedDbContext : MembershipRebootDbContext<AppUser, UserRole>
 	{
 		public SeedDbContext()
 			: base("FulcrumSeedDb")

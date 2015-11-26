@@ -3,7 +3,7 @@ using Fulcrum.Core;
 
 namespace FulcrumSeed.Components.UserAccounts.Commands
 {
-	public class CreateUserClaimGroup : DefaultCommand
+	public class CreateUserRole : DefaultCommand
 	{
 		public string Description { get; set; }
 

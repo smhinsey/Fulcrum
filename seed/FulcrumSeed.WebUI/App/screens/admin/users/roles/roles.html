@@ -1,9 +1,9 @@
 ﻿<div ng-controller="userRolesController">
 	<div ui-grid="gridOptions"></div>
-	<button class="gridBtn btn btn-primary" ng-click="newGroup()">New Role</button>
+	<button class="gridBtn btn btn-primary" ng-click="newRole()">New Role</button>
 </div>
 
-<script type="text/ng-template" id="newGroup.html">
+<script type="text/ng-template" id="newRole.html">
 	<div class="modal-header">
 		<h3 class="modal-title">New Role</h3>
 	</div>
@@ -12,9 +12,22 @@
 					sf-schema="schema"
 					sf-form="form"
 					sf-model="formModel"
-					ng-submit="register(groupForm,formModel)"></form>
+					ng-submit="save(groupForm,formModel)"></form>
 	</div>
 	<div class="modal-footer">
 		<button class="btn btn-default" type="button" ng-click="">Cancel</button>
+	</div>
+</script>
+
+<script type="text/ng-template" id="editRole.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Edit Role {{formModel.name}}</h3>
+	</div>
+	<div class="modal-body">
+		<form name="groupForm"
+					sf-schema="schema"
+					sf-form="form"
+					sf-model="formModel"
+					ng-submit="save(groupForm,formModel)"></form>
 	</div>
 </script>

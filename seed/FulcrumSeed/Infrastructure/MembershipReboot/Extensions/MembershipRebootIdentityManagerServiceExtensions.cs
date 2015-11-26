@@ -16,11 +16,11 @@ namespace FulcrumSeed.Infrastructure.MembershipReboot.Extensions
 		public static void Configure(this IdentityManagerServiceFactory factory, string connectionString)
 		{
 			factory.IdentityManagerService =
-				new Registration<IIdentityManagerService, MembershipRebootIdentityManagerService<AppUser, UserClaimGroup>>();
+				new Registration<IIdentityManagerService, MembershipRebootIdentityManagerService<AppUser, UserRole>>();
 			factory.Register(new Registration<UserAccountService<AppUser>>());
 			factory.Register(new Registration<UserGroupService>());
 			factory.Register(new Registration<DbContextUserAccountRepository<SeedDbContext, AppUser>>());
-			factory.Register(new Registration<DbContextGroupRepository<SeedDbContext, UserClaimGroup>>());
+			factory.Register(new Registration<DbContextGroupRepository<SeedDbContext, UserRole>>());
 			factory.Register(new Registration<SeedDbContext>(resolver => new SeedDbContext()));
 			factory.Register(new Registration<MembershipConfig>(MembershipConfig.Config));
 			factory.Register(new Registration<UserAccountRepository>());

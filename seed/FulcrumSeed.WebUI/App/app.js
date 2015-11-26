@@ -39,6 +39,8 @@ angular.module('fulcrumSeed.screens', [
 	'fulcrumSeed.screens.admin.users.accounts',
 	'fulcrumSeed.screens.admin.users.roles',
 	'fulcrumSeed.screens.admin.users.sessions',
+	'fulcrumSeed.screens.admin.queries',
+	'fulcrumSeed.screens.admin.commands',
 	'fulcrumSeed.screens.profile',
 	'fulcrumSeed.screens.register',
 ]);
@@ -48,6 +50,8 @@ angular.module('fulcrumSeed.screens.admin', []);
 angular.module('fulcrumSeed.screens.admin.users.accounts', []);
 angular.module('fulcrumSeed.screens.admin.users.roles', []);
 angular.module('fulcrumSeed.screens.admin.users.sessions', []);
+angular.module('fulcrumSeed.screens.admin.queries', []);
+angular.module('fulcrumSeed.screens.admin.commands', []);
 angular.module('fulcrumSeed.screens.profile', []);
 angular.module('fulcrumSeed.screens.register', []);
 
