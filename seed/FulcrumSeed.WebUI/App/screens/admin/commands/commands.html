@@ -1,16 +1,12 @@
-﻿<div ng-controller="commandsController">
+﻿<div ng-controller="commandRegistryController">
 	<div ui-grid="gridOptions"></div>
 </div>
 
-<script type="text/ng-template" id="runCommand.html">
+<script type="text/ng-template" id="entryDetails.html">
 	<div class="modal-header">
-		<h3 class="modal-title">Run Command</h3>
+		<h3 class="modal-title">View Publication Record</h3>
 	</div>
 	<div class="modal-body">
-		<form name="runCommandForm"
-					sf-schema="schema"
-					sf-form="form"
-					sf-model="formModel"
-					ng-submit="run(runCommandForm, formModel)"></form>
+		<!-- FORM HERE -->
 	</div>
 </script>

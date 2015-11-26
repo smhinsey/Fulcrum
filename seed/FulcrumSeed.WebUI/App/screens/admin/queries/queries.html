@@ -12,5 +12,13 @@
 					sf-form="form"
 					sf-model="formModel"
 					ng-submit="run(runQueryForm, formModel)"></form>
+		<div ng-show="!formModel">
+			<button ng-click="run(runQueryForm, formModel)">Run</button>
+		</div>
+	</div>
+	<div class="modal-body" ng-show="showResults">
+		<hr />
+		<h3>Results</h3>
+		<div ui-grid="gridOptions"></div>
 	</div>
 </script>

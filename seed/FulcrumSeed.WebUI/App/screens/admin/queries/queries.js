@@ -83,17 +83,34 @@
 					}
 				];
 
-				$scope.formModel = {};
 				$scope.schema = query.schema == null ? {} : query.schema;
 			};
 
+			var init = function() {
+				$scope.gridOptions = {
+					enableSorting: true,
+					enableFiltering: false,
+					enableHorizontalScrollbar: 0,
+					enableColumnMenus: false,
+
+				};
+			}
+
 			configureForm();
+			init();
 
 			$scope.run = function(form, formModel) {
 				$scope.$broadcast('schemaFormValidate');
 
 				if (form.$valid) {
 					// run query
+					querySvc.run(query.queryObject + '/' + query.query, formModel)
+					.then(function (response) {
+						$scope.gridOptions.data = response.data.results;
+						$scope.showResults = true;
+					}, function (error) {
+						// TODO: handle
+					});
 				}
 			};
 

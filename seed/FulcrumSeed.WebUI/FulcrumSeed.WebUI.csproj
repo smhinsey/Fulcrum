@@ -261,6 +261,7 @@
     <Content Include="App\screens\admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
+    <Content Include="App\screens\admin\commands\registry.html" />
     <Content Include="App\screens\admin\commands\commands.html" />
     <Content Include="App\screens\admin\commands\commands.js" />
     <Content Include="App\screens\admin\queries\queries.html" />
