@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;

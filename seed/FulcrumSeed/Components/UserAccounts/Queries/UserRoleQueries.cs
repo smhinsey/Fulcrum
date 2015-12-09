@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Fulcrum.Core;
+using Fulcrum.Core.Security;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
 using FulcrumSeed.Components.UserAccounts.Queries.Projections;
 
@@ -15,8 +18,7 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 			_repo = repo;
 		}
 
-		// TODO: enable this
-		//[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
+		[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
 		public IList<RoleProjection> ListRoles()
 		{
 			var users = _repo.ListAll();
@@ -31,9 +33,13 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 			return projection.ToList();
 		}
 
-		public bool Test(string param1, int param2, bool param3, string param4)
+		public IList<RoleProjection> Test(string param1, int param2, bool param3, string param4)
 		{
-			return false;
+			return new List<RoleProjection>
+			{
+				new RoleProjection { Description = "Lorem ipsum", Name = "SampleRole", RoleId = Guid.NewGuid() },
+				new RoleProjection { Description = "Dolor sit amet", Name = "AnotherSampleRole", RoleId = Guid.NewGuid() }
+			};
 		}
 	}
 }

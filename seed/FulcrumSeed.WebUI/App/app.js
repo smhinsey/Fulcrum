@@ -4,6 +4,7 @@
 	'ui.bootstrap',
 	'ui.router',
 	'ui.grid',
+	'ui.grid.autoResize',
 	'ui.select',
 	'pascalprecht.translate',
 	'angular-loading-bar',

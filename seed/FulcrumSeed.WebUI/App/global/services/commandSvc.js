@@ -4,6 +4,22 @@
 		'$q', 'appSettings', '$timeout', '$http',
 		function($q, appSettings, $timeout, $http) {
 
+			this.list = function (namespace) {
+
+				var url = appSettings.apiBasePath + "api/commands/";
+
+				if (namespace) {
+					url += namespace;
+				}
+
+
+				var queryRequest = {
+					url: url + "?v=" + APP_VERSION,
+					method: 'GET',
+				};
+
+				return $http(queryRequest);
+			}
 			this.getSchema = function(name, namespace) {
 				// TODO: add caching
 				namespace = namespace == undefined ? "~" : namespace;
@@ -11,10 +27,6 @@
 				var url = appSettings.apiBasePath + "api/commands/" + namespace + "/" + name + "";
 
 				return $http.get(url);
-			};
-			this.validate = function(schema, command) {
-				// use tv4 to validate command using schema.
-				// look for query validation, execute it if present
 			};
 			this.publish = function(name, properties, opts) {
 				var retries = 0;

@@ -16,10 +16,11 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 			CommandName = record.PortableCommand.ClrTypeName;
 			QueryReferences = record.QueryReferences;
 
+			// TODO: this should probably be subsumed by QueryReferences, meaning the registry should
+			// have an IQuery front end
 			Links = new List<JsonLink>()
 			{
-				new JsonLink(string.Format("/api/commands/publication-registry/{0}", Id), "details"),
-				new JsonLink("/api/commands/", "home")
+				new JsonLink(string.Format("/api/commands/publication-registry/{0}", Id), "publication-record"),
 			};
 
 			foreach (var reference in QueryReferences)

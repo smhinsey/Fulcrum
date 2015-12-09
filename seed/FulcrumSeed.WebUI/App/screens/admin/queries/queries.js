@@ -70,8 +70,6 @@
 		function($scope, $state, authSvc, $rootScope, $modalInstance,
 		         querySvc, query) {
 
-			console.log('query', query);
-
 			$scope.query = query;
 
 			var configureForm = function() {
@@ -82,6 +80,8 @@
 						title: "Run"
 					}
 				];
+
+				$scope.formModel = {};
 
 				$scope.schema = query.schema == null ? {} : query.schema;
 			};
@@ -102,10 +102,16 @@
 			$scope.run = function(form, formModel) {
 				$scope.$broadcast('schemaFormValidate');
 
+				//console.log('form', form);
+				//console.log('formModel', formModel);
+
 				if (form.$valid) {
 					// run query
 					querySvc.run(query.queryObject + '/' + query.query, formModel)
 					.then(function (response) {
+
+						console.log('response.data.results', response.data.results);
+
 						$scope.gridOptions.data = response.data.results;
 						$scope.showResults = true;
 					}, function (error) {
