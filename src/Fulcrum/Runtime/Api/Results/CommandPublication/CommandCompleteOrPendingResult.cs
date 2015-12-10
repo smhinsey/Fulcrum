@@ -26,8 +26,14 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 
 			foreach (var reference in QueryReferences)
 			{
+				if(reference.Parameters == null)
+				{
+					reference.Parameters = new List<QueryReferenceParameter>();
+				}
+
 				var queryUrl = string.Format("/api/queries/{0}/results?id={1}",
-					reference.QueryName, string.Join("&amp;", reference.Parameters.Select(x => x.Name + "=" + x.Value).ToArray()));
+					reference.QueryName, string.Join("&amp;", reference.Parameters.Any() ?
+					reference.Parameters.Select(x => x.Name + "=" + x.Value).ToArray() : new[] {""} ));
 
 				Links.Add(new JsonLink(queryUrl, "query-reference"));
 			}

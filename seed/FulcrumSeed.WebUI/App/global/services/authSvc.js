@@ -228,35 +228,39 @@
 			};
 
 			factory.responseError = function(rejection) {
-				// TODO: implement refresh tokens in idsvr3
 				if (rejection.status === 401) {
 					$rootScope.$broadcast('show_login');
-					// TODO: update request-resuming logic
-					//var deferred = $q.defer();
+					var deferred = $q.defer();
 
-					//$injector.get("authSvc").attemptRefresh()
-					//	.then(function() {
-					//			$injector.get("$http")(rejection.config).then(function(response) {
-					//				// we have a successful response - resolve it using deferred
-					//				$rootScope.$broadcast('authenticated');
+					$injector.get("authSvc").attemptRefresh()
+						.then(function() {
+								$injector.get("$http")(rejection.config).then(function(response) {
+									// we have a successful response - resolve it using deferred
+									$rootScope.$broadcast('authenticated');
 
-					//				deferred.resolve(response);
-					//				var redirectSvc = $injector.get("authRedirectSvc");
-					//				var redirectTarget = redirectSvc.getRedirect();
-					//				//console.log('redirectTarget', redirectTarget);
-					//				//console.log('redirectTarget.state', redirectTarget.state);
-					//				$injector.get("$state").go(redirectTarget.state.name, redirectTarget.params);
-					//			}, function(response) {
-					//				deferred.reject(response); // retried request failed
-					//				$injector.get("$state").go("login");
-					//			});
-					//		}, function(response) {
-					//			// unable to refresh auth token, prompt for credentials
-					//			$injector.get("$state").go("login");
-					//			return;
-					//		}
-					//	);
-					//return deferred.promise;
+									deferred.resolve(response);
+
+									var redirectSvc = $injector.get("authRedirectSvc");
+									var redirectTarget = redirectSvc.getRedirect();
+
+									//console.log('redirectTarget', redirectTarget);
+									//console.log('redirectTarget.state', redirectTarget.state);
+
+									$injector.get("$state").go(redirectTarget.state.name, redirectTarget.params);
+								}, function (response) {
+
+									deferred.reject(response); // retried request failed
+									$rootScope.$broadcast("show_login");
+
+
+								});
+							}, function(response) {
+								// unable to refresh auth token, prompt for credentials
+								$rootScope.$broadcast("show_login");
+								return;
+							}
+						);
+					return deferred.promise;
 				}
 
 				return $q.reject(rejection);

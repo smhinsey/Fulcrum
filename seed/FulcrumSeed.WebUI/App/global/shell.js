@@ -32,13 +32,11 @@
 
 
 			var showLogin = function () {
-
-					var modal = $modal.open({
+					$modal.open({
 						templateUrl: 'login.html',
 						controller: 'loginController',
 						size: 'sm',
 					});
-
 			};
 
 			$scope.visible = false;
@@ -94,9 +92,9 @@
 
 			$scope.login = function () {
 
-				console.log("Login attempt");
-				console.log("Username:", $scope.email);
-				console.log("Password:", $scope.password);
+				//console.log("Login attempt");
+				//console.log("Username:", $scope.email);
+				//console.log("Password:", $scope.password);
 
 				authSvc.login($scope.email, $scope.password)
 					.then(function () {

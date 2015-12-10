@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Fulcrum.Core;
 
@@ -36,11 +37,14 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 		private CommandPublicationRecord safelyFetchRecord(Guid publicationId)
 		{
-			var recordQuery = (from dbRecord in _db.CommandPublicationRecords
+			var query = (from dbRecord in _db.CommandPublicationRecords
 			                   where dbRecord.Id == publicationId
 			                   select dbRecord);
 
-			var record = recordQuery.SingleOrDefault();
+			query = query.Include(r => r.QueryReferences);
+			query = query.Include(r => r.QueryReferences.Select(q=>q.Parameters));
+
+			var record = query.SingleOrDefault();
 
 			if (record == null)
 			{
