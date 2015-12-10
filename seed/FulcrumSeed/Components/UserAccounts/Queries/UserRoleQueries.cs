@@ -19,6 +19,26 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 		}
 
 		[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
+		public RoleProjection FindById(Guid id)
+		{
+			var user = _repo.GetByID(id);
+
+			if (user != null)
+			{
+				var projection = new RoleProjection()
+				{
+					Name = user.Name,
+					Description = user.Description,
+					RoleId = user.ID
+				};
+
+				return projection;
+			}
+
+			return null;
+		}
+
+		[RequiresClaim(ClaimTypes.Role, UserRoles.Admin)]
 		public IList<RoleProjection> ListRoles()
 		{
 			var users = _repo.ListAll();
@@ -31,15 +51,6 @@ namespace FulcrumSeed.Components.UserAccounts.Queries
 			});
 
 			return projection.ToList();
-		}
-
-		public IList<RoleProjection> Test(string param1, int param2, bool param3, string param4)
-		{
-			return new List<RoleProjection>
-			{
-				new RoleProjection { Description = "Lorem ipsum", Name = "SampleRole", RoleId = Guid.NewGuid() },
-				new RoleProjection { Description = "Dolor sit amet", Name = "AnotherSampleRole", RoleId = Guid.NewGuid() }
-			};
 		}
 	}
 }

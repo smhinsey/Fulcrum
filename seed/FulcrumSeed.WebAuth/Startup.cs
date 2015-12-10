@@ -108,7 +108,7 @@ namespace FulcrumSeed.WebAuth
 					EnableDiscoveryEndpoint = true,
 					EnableAuthorizeEndpoint = true,
 					EnableTokenEndpoint = true,
-					EnableTokenRevocationEndpoint = true
+					EnableTokenRevocationEndpoint = true,
 				},
 				
 			};

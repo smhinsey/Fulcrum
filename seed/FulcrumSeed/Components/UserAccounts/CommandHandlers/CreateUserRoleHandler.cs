@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using Fulcrum.Common;
 using Fulcrum.Core;
+using Fulcrum.Runtime.CommandPipeline;
 using FulcrumSeed.Components.UserAccounts.Commands;
 using FulcrumSeed.Components.UserAccounts.Domain.Entities;
 using FulcrumSeed.Components.UserAccounts.Domain.Repositories;
+using FulcrumSeed.Components.UserAccounts.Queries;
 
 namespace FulcrumSeed.Components.UserAccounts.CommandHandlers
 {
@@ -11,9 +14,14 @@ namespace FulcrumSeed.Components.UserAccounts.CommandHandlers
 	{
 		private readonly UserGroupRepository _repo;
 
-		public CreateUserRoleHandler(UserGroupRepository repo)
+		private readonly CommandPublicationRegistry _registry;
+
+		private readonly ICommandPipeline _pipeline;
+
+		public CreateUserRoleHandler(UserGroupRepository repo, CommandPublicationRegistry registry)
 		{
 			_repo = repo;
+			_registry = registry;
 		}
 
 		public void Handle(CreateUserRole command)
@@ -23,9 +31,27 @@ namespace FulcrumSeed.Components.UserAccounts.CommandHandlers
 				throw new Exception("A group by this name already exists.");
 			}
 
-			_repo.Add(new UserRole(command.Name)
+			var newRole = new UserRole(command.Name)
 			{
 				Description = command.Description,
+			};
+
+			_repo.Add(newRole);
+
+			var queryName = QueryReferencer.GetName<UserRoleQueries>(q => q.FindById(newRole.ID));
+
+			_registry.AssociateQueryReference(command.PublicationRecordId, new ParameterizedQueryReference
+			{
+				QueryName = queryName,
+				Parameters = new List<QueryReferenceParameter>
+				{
+					new QueryReferenceParameter
+					{
+						Name = "id",
+						Value = newRole.ID.ToString(),
+						Id = Guid.NewGuid()
+					}
+				}
 			});
 		}
 	}

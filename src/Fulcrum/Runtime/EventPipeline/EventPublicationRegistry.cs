@@ -15,7 +15,7 @@ namespace Fulcrum.Runtime.EventPipeline
 			_db = db;
 		}
 
-		public IEventPublicationRecord AssociateQueryReference(Guid publicationId, IdentifierQueryReference reference)
+		public IEventPublicationRecord AssociateQueryReference(Guid publicationId, ParameterizedQueryReference reference)
 		{
 			var record = safelyFetchRecord(publicationId);
 
@@ -23,7 +23,7 @@ namespace Fulcrum.Runtime.EventPipeline
 
 			if (record.QueryReferences == null)
 			{
-				record.QueryReferences = new List<IdentifierQueryReference>();
+				record.QueryReferences = new List<ParameterizedQueryReference>();
 			}
 
 			reference.Id = Guid.NewGuid();

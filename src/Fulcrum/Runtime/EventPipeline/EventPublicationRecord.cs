@@ -17,7 +17,7 @@ namespace Fulcrum.Runtime.EventPipeline
 			Id = ev.PublicationRecordId;
 			PortableEvent = new PortableEvent(ev, EventSchemaGenerator.GenerateSchema(ev.GetType()));
 			Created = DateTime.UtcNow;
-			QueryReferences = new EditableList<IdentifierQueryReference>();
+			QueryReferences = new EditableList<ParameterizedQueryReference>();
 		}
 
 		public DateTime Created { get; private set; }
@@ -28,7 +28,7 @@ namespace Fulcrum.Runtime.EventPipeline
 
 		public PortableEvent PortableEvent { get; private set; }
 
-		public IList<IdentifierQueryReference> QueryReferences { get; set; }
+		public IList<ParameterizedQueryReference> QueryReferences { get; set; }
 
 		public EventPublicationStatus Status { get; set; }
 

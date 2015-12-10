@@ -14,7 +14,7 @@ namespace Fulcrum.Core
 
 		PortableCommand PortableCommand { get; }
 
-		IList<IdentifierQueryReference> QueryReferences { get; set; }
+		IList<ParameterizedQueryReference> QueryReferences { get; set; }
 
 		CommandPublicationStatus Status { get; set; }
 

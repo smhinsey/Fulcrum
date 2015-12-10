@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fulcrum.Core
 {
@@ -6,12 +7,12 @@ namespace Fulcrum.Core
 	///   As a command is processed, a handlers can create references to queries
 	///   which will return the read models it has created.
 	/// </summary>
-	public class IdentifierQueryReference
+	public class ParameterizedQueryReference
 	{
-		public Guid Id { get; set; }
+		public IList<QueryReferenceParameter> Parameters { get; set; }
 
 		public string QueryName { get; set; }
 
-		public string QueryParameter { get; set; }
+		public Guid Id { get; set; }
 	}
 }

@@ -17,7 +17,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 			Id = command.PublicationRecordId;
 			PortableCommand = new PortableCommand(command, CommandSchemaGenerator.GenerateSchema(command.GetType()));
 			Created = DateTime.UtcNow;
-			QueryReferences = new EditableList<IdentifierQueryReference>();
+			QueryReferences = new EditableList<ParameterizedQueryReference>();
 		}
 
 		public DateTime Created { get; private set; }
@@ -28,7 +28,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 		public PortableCommand PortableCommand { get; private set; }
 
-		public IList<IdentifierQueryReference> QueryReferences { get; set; }
+		public IList<ParameterizedQueryReference> QueryReferences { get; set; }
 
 		public CommandPublicationStatus Status { get; set; }
 

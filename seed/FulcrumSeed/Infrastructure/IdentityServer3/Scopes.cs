@@ -25,11 +25,8 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 					Description = scopeDescription + "Identity",
 					Type = ScopeType.Identity,
 					IncludeAllClaimsForUser = true,
-					
 					Claims = new List<ScopeClaim>
 					{
-						//new ScopeClaim(IdentityServer3.Core.Constants.ClaimTypes.Email),
-						//new ScopeClaim(System.Security.Claims.ClaimTypes.Role),
 						new ScopeClaim("firstName"),
 						new ScopeClaim("lastName"),
 					}
@@ -41,15 +38,18 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 					Description = scopeDescription + "Resource",
 					Type = ScopeType.Resource,
 					IncludeAllClaimsForUser = true,
-					
 					Claims = new List<ScopeClaim>
 					{
-						//new ScopeClaim(IdentityServer3.Core.Constants.ClaimTypes.Email),
-						//new ScopeClaim(System.Security.Claims.ClaimTypes.Role),
 						new ScopeClaim("firstName"),
 						new ScopeClaim("lastName"),
-						new ScopeClaim("lastName"),
 					}
+				},
+				new Scope()
+				{
+					Enabled = true,
+					Name = "offline_access",
+					Type = ScopeType.Resource,
+					IncludeAllClaimsForUser = true,
 				}
 			};
 

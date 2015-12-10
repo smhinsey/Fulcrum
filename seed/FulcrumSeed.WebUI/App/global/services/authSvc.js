@@ -97,7 +97,7 @@
 					grant_type: 'password',
 					client_id: 'FulcrumApi',
 					client_secret: 'apiSecret',
-					scope: 'openid FulcrumApiScope-Identity FulcrumApiScope-Resource',
+					scope: 'openid FulcrumApiScope-Identity FulcrumApiScope-Resource offline_access',
 				};
 				var deferred = $q.defer();
 

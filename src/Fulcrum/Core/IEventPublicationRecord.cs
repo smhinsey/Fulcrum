@@ -14,7 +14,7 @@ namespace Fulcrum.Core
 
 		PortableEvent PortableEvent { get; }
 
-		IList<IdentifierQueryReference> QueryReferences { get; set; }
+		IList<ParameterizedQueryReference> QueryReferences { get; set; }
 
 		EventPublicationStatus Status { get; set; }
 

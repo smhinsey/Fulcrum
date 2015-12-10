@@ -14,7 +14,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 			_db = db;
 		}
 
-		public ICommandPublicationRecord AssociateQueryReference(Guid publicationId, IdentifierQueryReference reference)
+		public ICommandPublicationRecord AssociateQueryReference(Guid publicationId, ParameterizedQueryReference reference)
 		{
 			var record = safelyFetchRecord(publicationId);
 
@@ -22,7 +22,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 
 			if (record.QueryReferences == null)
 			{
-				record.QueryReferences = new List<IdentifierQueryReference>();
+				record.QueryReferences = new List<ParameterizedQueryReference>();
 			}
 
 			reference.Id = Guid.NewGuid();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Fulcrum.Common.JsonSchema;
 using Fulcrum.Core;
 
@@ -26,7 +27,7 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 			foreach (var reference in QueryReferences)
 			{
 				var queryUrl = string.Format("/api/queries/{0}/results?id={1}",
-					reference.QueryName, reference.QueryParameter);
+					reference.QueryName, string.Join("&amp;", reference.Parameters.Select(x => x.Name + "=" + x.Value).ToArray()));
 
 				Links.Add(new JsonLink(queryUrl, "query-reference"));
 			}
@@ -40,7 +41,7 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 
 		public IList<JsonLink> Links { get; private set; }
 
-		public IList<IdentifierQueryReference> QueryReferences { get; private set; }
+		public IList<ParameterizedQueryReference> QueryReferences { get; private set; }
 
 		public CommandPublicationStatus Status { get; private set; }
 

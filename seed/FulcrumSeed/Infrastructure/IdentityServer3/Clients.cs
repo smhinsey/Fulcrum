@@ -39,9 +39,10 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 					AlwaysSendClientClaims = true,
 					AllowedScopes = new List<string>()
 					{
-						"openid",
-						"profile",
-						"roles",
+						StandardScopes.OpenId.Name,
+						StandardScopes.OfflineAccess.Name,
+						StandardScopes.Profile.Name,
+						StandardScopes.Roles.Name,
 						"FulcrumApiScope",
 						"firstName",
 						"lastName",
@@ -52,7 +53,10 @@ namespace FulcrumSeed.Infrastructure.IdentityServer3
 					UpdateAccessTokenClaimsOnRefresh = true,
 					IncludeJwtId = true,
 					PrefixClientClaims = false,
-					Claims = new List<Claim>(){new Claim("PrefixTest","TestPrefix")}
+					Claims = new List<Claim>(){new Claim("PrefixTest","TestPrefix")},
+					RefreshTokenUsage = TokenUsage.OneTimeOnly,
+					RefreshTokenExpiration = TokenExpiration.Sliding,
+					SlidingRefreshTokenLifetime = 90 * 60
 				}
 			};
 		}
