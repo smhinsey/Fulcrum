@@ -12,6 +12,16 @@
 					url += namespace;
 				}
 
+				var queryRequest = {
+					url: url + "?v=" + APP_VERSION,
+					method: 'GET',
+				};
+
+				return $http(queryRequest);
+			}
+			this.showRegistry = function () {
+
+				var url = appSettings.apiBasePath + "api/commands/publication-registry";
 
 				var queryRequest = {
 					url: url + "?v=" + APP_VERSION,

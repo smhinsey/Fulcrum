@@ -33,6 +33,7 @@ namespace FulcrumSeed.WebUI
 				.Include("~/Scripts/angular-schema-form-0.8.12/dist/bootstrap-decorator.js")
 				.Include("~/Scripts/angular-schema-form-dynamic-select-0.12.4/angular-schema-form-dynamic-select.js")
 				.Include("~/Scripts/ui-grid.js")
+				.Include("~/Scripts/json-formatter/dist/json-formatter.js")
 				);
 
 			bundles.Add(new ScriptBundle("~/bundles/app")
@@ -43,6 +44,7 @@ namespace FulcrumSeed.WebUI
 
 			bundles.Add(new StyleBundle("~/bundles/css")
 				.IncludeDirectory("~/content", "*.css", true)
+				.Include("~/Scripts/json-formatter/dist/json-formatter.css")
 				);
 
 			// don't set this so that its value is determined at runtime

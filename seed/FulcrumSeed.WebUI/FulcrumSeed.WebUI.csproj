@@ -262,9 +262,9 @@
     <Content Include="App\screens\admin\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
-    <Content Include="App\screens\admin\commands\registry.html" />
     <Content Include="App\screens\admin\commands\commands.html" />
     <Content Include="App\screens\admin\commands\commands.js" />
+    <Content Include="App\screens\admin\commands\registry.html" />
     <Content Include="App\screens\admin\queries\queries.html" />
     <Content Include="App\screens\admin\queries\queries.js" />
     <Content Include="App\screens\admin\users\roles\roles.html" />
@@ -569,6 +569,21 @@
     <Content Include="Scripts\i18n\zh-TW.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\json-formatter\demo\demo.css" />
+    <Content Include="Scripts\json-formatter\demo\demo.html" />
+    <Content Include="Scripts\json-formatter\demo\demo.js" />
+    <Content Include="Scripts\json-formatter\dist\json-formatter.css" />
+    <Content Include="Scripts\json-formatter\dist\json-formatter.js" />
+    <Content Include="Scripts\json-formatter\dist\json-formatter.min.css" />
+    <Content Include="Scripts\json-formatter\dist\json-formatter.min.js" />
+    <Content Include="Scripts\json-formatter\gulpfile.js" />
+    <Content Include="Scripts\json-formatter\index.html" />
+    <Content Include="Scripts\json-formatter\karma.conf.js" />
+    <Content Include="Scripts\json-formatter\screenshot.png" />
+    <Content Include="Scripts\json-formatter\src\json-formatter.html" />
+    <Content Include="Scripts\json-formatter\src\json-formatter.js" />
+    <Content Include="Scripts\json-formatter\src\recursion-helper.js" />
+    <Content Include="Scripts\json-formatter\test\json-formatter.spec.js" />
     <Content Include="Scripts\loading-bar.js" />
     <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\lodash.js" />
@@ -873,6 +888,17 @@
     <Content Include="Scripts\objectpath-1.2.1\license" />
     <Content Include="Scripts\objectpath-1.2.1\package.json" />
     <Content Include="Scripts\objectpath-1.2.1\readme.md" />
+    <Content Include="Scripts\json-formatter\.bowerrc" />
+    <Content Include="Scripts\json-formatter\.gitignore" />
+    <Content Include="Scripts\json-formatter\.jshintrc" />
+    <Content Include="Scripts\json-formatter\.travis.yml" />
+    <Content Include="Scripts\json-formatter\bower.json" />
+    <Content Include="Scripts\json-formatter\demo\giant.json" />
+    <Content Include="Scripts\json-formatter\LICENSE.md" />
+    <Content Include="Scripts\json-formatter\package.json" />
+    <Content Include="Scripts\json-formatter\README.md" />
+    <Content Include="Scripts\json-formatter\src\json-formatter.less" />
+    <Content Include="Scripts\json-formatter\test\.jshintrc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

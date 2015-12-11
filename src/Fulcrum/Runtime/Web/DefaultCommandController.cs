@@ -47,9 +47,9 @@ namespace Fulcrum.Runtime.Web
 			return Json(new { error = "Unable to locate specified command." });
 		}
 
-		public virtual ActionResult Inquire(Guid publicationId)
+		public virtual ActionResult RegistryDetails(Guid publicationId)
 		{
-			var record = _commandPipeline.Inquire(publicationId);
+			var record = _commandPipeline.GetRecordById(publicationId);
 
 			if (record != null)
 			{
@@ -60,6 +60,17 @@ namespace Fulcrum.Runtime.Web
 			{
 				error = string.Format("Record {0} not found in command registry.", publicationId)
 			});
+		}
+
+		public virtual JsonResult ListRegistry()
+		{
+			var records = _commandPipeline.GetRegistryPage(100,0);
+
+			// TODO: filter access based on the claims of the command associated with the record
+
+			var descriptions = records.Select(record => new DetailedPublicationRecordResult(record));
+
+			return JsonWithoutNulls(descriptions.ToList());
 		}
 
 		public virtual JsonResult ListAll()

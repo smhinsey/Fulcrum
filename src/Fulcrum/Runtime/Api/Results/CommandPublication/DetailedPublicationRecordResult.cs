@@ -28,9 +28,23 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 			foreach (var reference in record.QueryReferences)
 			{
 				var queryUrl = string.Format("/api/queries/{0}/results?id={1}",
-					reference.QueryName, string.Join("&amp;", reference.Parameters.Select(x => x.Name + "=" + x.Value).ToArray()));
+					reference.QueryName, string.Join("&amp;", reference.Parameters.Any() ?
+						                                          reference.Parameters.Select(x => x.Name + "=" + x.Value).ToArray() : new[] { "" }));
 
 				Links.Add(new JsonLink(queryUrl, "query-reference"));
+			}
+
+			if (record.QueryReferences != null && record.QueryReferences.Any())
+			{
+				QueryReferences = record.QueryReferences.Select(r => new QueryReferenceResult
+				{
+					QueryName = r.QueryName,
+					Parameters = r.Parameters.Select(p => new QueryReferenceParameterResult
+					{
+						Name = p.Name,
+						Value = p.Value
+					}).ToList()
+				}).ToList();
 			}
 		}
 
@@ -49,6 +63,8 @@ namespace Fulcrum.Runtime.Api.Results.CommandPublication
 		public IList<JsonLink> Links { get; private set; }
 
 		public object OriginalCommand { get; private set; }
+
+		public IList<QueryReferenceResult> QueryReferences { get; set; }
 
 		public CommandPublicationStatus Status { get; private set; }
 

@@ -10,6 +10,7 @@
 	'angular-loading-bar',
 	'LocalStorageModule',
 	'schemaForm',
+	'jsonFormatter',
 	'fulcrumSeed.global.directives',
 	'fulcrumSeed.global.directives.claims',
 	'fulcrumSeed.global.filters',

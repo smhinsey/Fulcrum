@@ -211,6 +211,8 @@
     <Compile Include="Runtime\Api\BaseMvcController.cs" />
     <Compile Include="Runtime\Api\CommandModelBinder.cs" />
     <Compile Include="Runtime\Api\JsonNetResult.cs" />
+    <Compile Include="Runtime\Api\Results\CommandPublication\QueryReferenceParameterResult.cs" />
+    <Compile Include="Runtime\Api\Results\CommandPublication\QueryReferenceResult.cs" />
     <Compile Include="Runtime\Api\Results\EventDescription.cs" />
     <Compile Include="Runtime\Api\Results\EventPublication\EventCompleteOrPendingResult.cs" />
     <Compile Include="Runtime\Api\Results\EventPublication\EventFailedResult.cs" />

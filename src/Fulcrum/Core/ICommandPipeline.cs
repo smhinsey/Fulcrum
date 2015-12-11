@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Fulcrum.Runtime.CommandPipeline;
 
 namespace Fulcrum.Core
 {
@@ -12,7 +14,7 @@ namespace Fulcrum.Core
 		/// </summary>
 		/// <param name="publicationId"></param>
 		/// <returns></returns>
-		ICommandPublicationRecord Inquire(Guid publicationId);
+		ICommandPublicationRecord GetRecordById(Guid publicationId);
 
 		ICommandPublicationRecord MarkAsComplete(Guid publicationId);
 
@@ -23,5 +25,7 @@ namespace Fulcrum.Core
 		ICommandPublicationRecord MarkAsWaitingOnJob(Guid publicationId);
 
 		ICommandPublicationRecord Publish(ICommand command);
+
+		List<CommandPublicationRecord> GetRegistryPage(int pageSize, int skip);
 	}
 }

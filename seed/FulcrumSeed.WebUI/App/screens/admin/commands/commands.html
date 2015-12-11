@@ -39,11 +39,11 @@
 				</tr>
 				<tr>
 					<th>Links</th>
-					<td colspan="3"><div ui-grid-auto-resize ui-grid="linkGrid"></div></td>
-				</tr>
-				<tr ng-show="pubRecord.queryReferences > 0">
-					<th>Queries</th>
-					<td colspan="3"><div ui-grid-auto-resize ui-grid="queryGrid"></div></td>
+					<td colspan="3">
+						<ul>
+							<li ng-repeat="link in pubRecord.links"><a href="{{link.href}}">{{link.rel}}</a></li>
+						</ul>
+					</td>
 				</tr>
 			</table>
 		</div>

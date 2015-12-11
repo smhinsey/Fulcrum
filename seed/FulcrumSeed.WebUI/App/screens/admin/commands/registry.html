@@ -1,16 +1,63 @@
-﻿<div ng-controller="commandsController">
+﻿<div ng-controller="commandRegistryController">
 	<div ui-grid="gridOptions"></div>
 </div>
 
-<script type="text/ng-template" id="runCommand.html">
+<script type="text/ng-template" id="recordDetails.html">
 	<div class="modal-header">
-		<h3 class="modal-title">Run Command</h3>
+		<h3 class="modal-title">Publication Record Details</h3>
 	</div>
 	<div class="modal-body">
-		<form name="runCommandForm"
-					sf-schema="schema"
-					sf-form="form"
-					sf-model="formModel"
-					ng-submit="run(runCommandForm, formModel)"></form>
+		<table class="table table-rounded">
+			<tr>
+				<th>Command</th>
+				<td>{{record.commandName}}</td>
+				<th>Record Id</th>
+				<td>{{record.id}}</td>
+			</tr>
+			<tr>
+				<th>Published</th>
+				<td>{{record.created | date:'shortDateTime'}}</td>
+				<th>Completed</th>
+				<td>{{record.updated | date:'shortDateTime'}}</td>
+			</tr>
+			<tr>
+				<th>Status</th>
+				<td colspan="3">{{record.status}}</td>
+			</tr>
+			<tr>
+				<th>Values</th>
+				<td><json-formatter json="record.originalCommand" open="1"></json-formatter></td>
+			</tr>
+			<tr>
+				<th>Links</th>
+				<td colspan="3">
+					<ul>
+						<li ng-repeat="l in record.links"><a href="{{l.href}}">{{l.rel}}</a></li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<th>Query References</th>
+				<td colspan="3">
+					<br />
+					<table class="table">
+						<tbody ng-repeat="q in record.queryReferences">
+							<tr>
+								<th>Name</th>
+								<td>{{q.queryName}}</td>
+							</tr>
+							<tr>
+								<th>Parameters</th>
+								<td><json-formatter json="q.parameters" open="2"></json-formatter></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><button class="btn btn-standard">Run Query</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+</table>
 	</div>
 </script>

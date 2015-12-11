@@ -5,6 +5,12 @@
 				url: "/commands",
 				templateUrl: "app/screens/admin/commands/commands.html?v=" + APP_VERSION
 			});
+
+		$stateProvider
+			.state('admin.commandRegistry', {
+				url: "/commands/publication-registry",
+				templateUrl: "app/screens/admin/commands/registry.html?v=" + APP_VERSION
+			});
 	})
 	.controller('commandController', [
 		'$scope', '$state', '$rootScope', 'commandSvc', '$modal',
@@ -123,4 +129,77 @@
 				$modalInstance.dismiss();
 			};
 		}
-	]);
+	])
+	.controller('commandRegistryController', [
+		'$scope', '$state', '$rootScope', 'commandSvc', '$modal',
+		function ($scope, $state, $rootScope, commandSvc, $modal) {
+
+			$rootScope.title = "Command Registry";
+
+			$scope.gridOptions = {
+				enableSorting: true,
+				enableFiltering: false,
+				enableHorizontalScrollbar: 0,
+				enableColumnMenus: false,
+				columnDefs: [
+					{ name: 'Created', field: 'created' },
+					{ name: 'Updated', field: 'updated' },
+					{ name: 'Status', field: 'status' },
+					{ name: 'Command Name', field: 'commandName' },
+					{
+						name: '',
+						field: 'id',
+						enableSorting: false,
+						enableFiltering: false,
+						enableColumnMenus: false,
+						cellTemplate: "<i class='glyphicon glyphicon-eye-open' ng-click='grid.appScope.details(row.entity)'></i>",
+						maxWidth: 90
+					},
+				],
+			};
+
+			var init = function () {
+				commandSvc.showRegistry()
+					.then(function (response) {
+						$scope.gridOptions.data = response.data;
+					}, function (error) {
+						// TODO: ??
+					});
+			};
+			init();
+
+			$scope.details = function (record) {
+				var detailsModal = $modal.open({
+					templateUrl: 'recordDetails.html',
+					controller: 'publicationRecordDetailsController',
+					size: 'lg',
+					resolve: {
+						record: function () {
+							return record;
+						}
+					}
+				});
+
+				detailsModal.result.then(function (response) {
+					init();
+				});
+			};
+		}
+
+	])
+	.controller('publicationRecordDetailsController', [
+		'$scope', '$state', 'authSvc', '$rootScope', '$modalInstance',
+		'commandSvc', 'record',
+		function ($scope, $state, authSvc, $rootScope, $modalInstance,
+		         commandSvc, record) {
+
+			$scope.record = record;
+
+			console.log('record', record);
+
+			$scope.cancel = function () {
+				$modalInstance.dismiss();
+			};
+		}
+	])
+;

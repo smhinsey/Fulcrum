@@ -25,9 +25,16 @@ namespace FulcrumSeed.WebApi.Controllers
 
 		[Route("publication-registry/{publicationId}")]
 		[HttpGet]
-		public override ActionResult Inquire(Guid publicationId)
+		public override ActionResult RegistryDetails(Guid publicationId)
 		{
-			return base.Inquire(publicationId);
+			return base.RegistryDetails(publicationId);
+		}
+
+		[Route("publication-registry")]
+		[HttpGet]
+		public override JsonResult ListRegistry()
+		{
+			return base.ListRegistry();
 		}
 
 		[Route("")]

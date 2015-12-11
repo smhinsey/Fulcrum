@@ -27,7 +27,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 			_db = db;
 		}
 
-		public ICommandPublicationRecord Inquire(Guid publicationId)
+		public ICommandPublicationRecord GetRecordById(Guid publicationId)
 		{
 			var recordQuery = (from dbRecord in _db.CommandPublicationRecords
 												 where dbRecord.Id == publicationId
@@ -184,6 +184,21 @@ namespace Fulcrum.Runtime.CommandPipeline
 				command.GetType().Name, ConfigurationSettings.AppSettings["ApiBaseUrl"], publicationRecord.Id);
 
 			return safelyFetchRecord(publicationRecord.Id);
+		}
+
+		public List<CommandPublicationRecord> GetRegistryPage(int pageSize, int skip)
+		{
+			var query = (from dbRecord in _db.CommandPublicationRecords
+												 select dbRecord);
+
+			query = query.Include(r => r.QueryReferences);
+			query = query.Include(r => r.QueryReferences.Select(q => q.Parameters));
+
+			query = query.OrderByDescending(r => r.Created);
+
+			query = query.Skip(skip).Take(pageSize);
+
+			return query.ToList();
 		}
 
 		// TODO: delegate all usages to CommandPublicationRegistry
