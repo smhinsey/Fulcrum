@@ -1,4 +1,8 @@
-﻿angular.module('fulcrumSeed.screens.admin.commands', [])
+﻿var isArray = function (myArray) {
+	return myArray.constructor.toString().indexOf("Array") > -1;
+}
+
+angular.module('fulcrumSeed.screens.admin.commands', [])
 	.config(function($stateProvider) {
 		$stateProvider
 			.state('admin.commands', {
@@ -75,6 +79,7 @@
 
 			$scope.command = command;
 			$scope.showResults = false;
+			$scope.showQueryResults = false;
 
 			var configureForm = function() {
 				$scope.form = [
@@ -103,7 +108,14 @@
 					enableHorizontalScrollbar: 0,
 					enableColumnMenus: false,
 				};
+				$scope.resultGrid = {
+					enableSorting: true,
+					enableFiltering: false,
+					enableHorizontalScrollbar: 0,
+					enableColumnMenus: false,
+				};
 			};
+
 			configureForm();
 			init();
 
@@ -129,12 +141,23 @@
 				$modalInstance.dismiss();
 			};
 
-			$scope.runQuery = function(query) {
-				querySvc.run(q.queryName, q.parameters)
+			$scope.runQuery = function (q) {
+				querySvc.run(q.queryName, q.parameters, { skipNameWildcard: true })
 					.then(function (response) {
 						console.log('response', response);
 
+						var resultInArray = response.data.results;
 
+						if (!isArray(resultInArray)) {
+							var scalar = angular.copy(resultInArray);
+
+							resultInArray = [];
+
+							resultInArray.push(scalar);
+						}
+
+						$scope.resultGrid.data = resultInArray;
+						$scope.showQueryResults = true;
 					}, function (error) {
 						// TODO: handle error
 					});
@@ -214,13 +237,10 @@
 					enableFiltering: false,
 					enableHorizontalScrollbar: 0,
 					enableColumnMenus: false,
-
 				};
 			}
 
-			var isArray = function(myArray) {
-				return myArray.constructor.toString().indexOf("Array") > -1;
-			}
+
 
 			init();
 
@@ -228,6 +248,7 @@
 				$modalInstance.dismiss();
 			};
 
+			// TODO: resolve duplication in publishCommandController
 			$scope.runQuery = function (q) {
 				querySvc.run(q.queryName, q.parameters, { skipNameWildcard: true })
 					.then(function (response) {

@@ -55,6 +55,12 @@
 									<td></td>
 									<td><button class="btn btn-standard" ng-click="runQuery(q)">Run Query</button></td>
 								</tr>
+								<tr class="well" ng-show="showQueryResults">
+									<th>Results</th>
+									<td>
+										<div ui-grid-auto-resize ui-grid="resultGrid"></div>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</td>
