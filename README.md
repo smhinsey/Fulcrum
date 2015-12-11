@@ -27,7 +27,10 @@ Seed To-do
 1. ~~Create login & auth views, controllers, services, etc.~~
 1. ~~Make QueryController claims-aware~~
 1. ~~Make CommandController claims-aware~~
-1. Implement Refresh Tokens in Identity Server 
+1. ~~Implement Refresh Tokens in Identity Server~~
+1. ~~Create generic query browser/runner UI~~
+1. ~~~Create generic command browser/runner UI~~
+1. ~~Create command publication registry viewer~~~
 1. Create breadcrumb directive
 1. Create profile management Angular views, controllers, etc. 
 1. Create user profile admin Angular views, controllers, etc. 
@@ -49,4 +52,5 @@ General To-do
 1. Better config management, specifically around the connection string
 1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 1. Refactor SimpleCommandPipeline, implement pure async
+1. Refactor SimpleCommandPipeline, divide along separations of concerns to create a set of queries for publication records and a service for the actual execution of commands
 1. Investigate a way to have IQuery implementations return inline/anonymous projections rather than requiring often-redundant projection types.
