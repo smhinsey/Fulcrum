@@ -41,14 +41,14 @@ Seed To-do
 1. Create viewer UI with searching, sorting, filtering, etc. for logging model
 1. Implement "My Session" feature - a link in the footer to the log viewer, pre-filtered by the current user's session log ID 
 1. Install/configure ELMAH, tied to log4net 
-
+1. Implement templating using bower, nuget, etc. so that a developer can easily spin up a new project based on the seed
 
 General To-do
 =======
 1. Extend Command API to include an angular-schema-form form defintion alongside of the JSON Schema. The definition should be based on attributes decorating the command, such as DescriptionAttribute, similarly to the JSON Schema.
 1. Verify that query-based command validation still works and implement anything Seed needs to take advantage of it
 1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
-1. Create custom AuthorizeAttribute with on/off config switch
+1. Create custom AuthorizeAttribute with on/off config switch so that authorization can be disabled in dev mode
 1. Better config management, specifically around the connection string
 1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 1. Refactor SimpleCommandPipeline, implement pure async
