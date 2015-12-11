@@ -187,6 +187,11 @@ namespace Fulcrum.Common.JsonSchema
 				return SchemaPropertyType.@string;
 			}
 
+			if (schemaType == JsonSchemaType.Object)
+			{
+				return SchemaPropertyType.@string;
+			}
+
 			return SchemaPropertyType.@object;
 		}
 

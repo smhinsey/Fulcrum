@@ -71,6 +71,9 @@
 		         querySvc, query) {
 
 			$scope.query = query;
+			$scope.hasParameters = Object.keys(query.parameters).length > 0;
+			
+			console.log('query', query);
 
 			var configureForm = function() {
 				$scope.form = [
@@ -110,9 +113,19 @@
 					querySvc.run(query.queryObject + '/' + query.query, formModel)
 					.then(function (response) {
 
-						console.log('response.data.results', response.data.results);
+						//console.log('response.data.results', response.data.results);
 
-						$scope.gridOptions.data = response.data.results;
+						var resultInArray = response.data.results;
+
+						if (!_.isArray(resultInArray)) {
+							var scalar = angular.copy(resultInArray);
+
+							resultInArray = [];
+
+							resultInArray.push(scalar);
+						}
+
+						$scope.gridOptions.data = resultInArray;
 						$scope.showResults = true;
 					}, function (error) {
 						// TODO: handle

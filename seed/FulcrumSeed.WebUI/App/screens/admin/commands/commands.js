@@ -1,8 +1,4 @@
-﻿var isArray = function (myArray) {
-	return myArray.constructor.toString().indexOf("Array") > -1;
-}
-
-angular.module('fulcrumSeed.screens.admin.commands', [])
+﻿angular.module('fulcrumSeed.screens.admin.commands', [])
 	.config(function($stateProvider) {
 		$stateProvider
 			.state('admin.commands', {
@@ -148,7 +144,7 @@ angular.module('fulcrumSeed.screens.admin.commands', [])
 
 						var resultInArray = response.data.results;
 
-						if (!isArray(resultInArray)) {
+						if (!_.isArray(resultInArray)) {
 							var scalar = angular.copy(resultInArray);
 
 							resultInArray = [];
@@ -256,7 +252,7 @@ angular.module('fulcrumSeed.screens.admin.commands', [])
 
 						var resultInArray = response.data.results;
 
-						if (!isArray(resultInArray)) {
+						if (!_.isArray(resultInArray)) {
 							var scalar = angular.copy(resultInArray);
 
 							resultInArray = [];
