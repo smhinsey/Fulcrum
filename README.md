@@ -29,8 +29,8 @@ Seed To-do
 1. ~~Make CommandController claims-aware~~
 1. ~~Implement Refresh Tokens in Identity Server~~
 1. ~~Create generic query browser/runner UI~~
-1. ~~~Create generic command browser/runner UI~~
-1. ~~Create command publication registry viewer~~~
+1. ~~Create generic command browser/runner UI~~
+1. ~~Create command publication registry viewer~~
 1. Create breadcrumb directive
 1. Create profile management Angular views, controllers, etc. 
 1. Create user profile admin Angular views, controllers, etc. 
