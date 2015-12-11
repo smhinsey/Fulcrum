@@ -8,6 +8,7 @@ using Fulcrum.Runtime.Web;
 namespace FulcrumSeed.WebApi.Controllers
 {
 	[RoutePrefix("queries")]
+	[Authorize]
 	public class QueryController : DefaultQueryController
 	{
 		public QueryController(IQueryLocator queryLocator, IWindsorContainer container)
@@ -37,7 +38,6 @@ namespace FulcrumSeed.WebApi.Controllers
 		}
 
 		[Route("{inNamespace}/{queryObjectName}/{query}/results")]
-		[Authorize]
 		[HttpGet]
 		public override ActionResult Results(string inNamespace, string queryObjectName, string query)
 		{

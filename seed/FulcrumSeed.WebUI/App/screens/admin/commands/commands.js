@@ -7,7 +7,7 @@
 			});
 
 		$stateProvider
-			.state('admin.commandRegistry', {
+			.state('admin.publicationRegistry', {
 				url: "/commands/publication-registry",
 				templateUrl: "app/screens/admin/commands/registry.html?v=" + APP_VERSION
 			});
@@ -219,7 +219,7 @@
 	])
 	.controller('publicationRecordDetailsController', [
 		'$scope', '$state', 'authSvc', '$rootScope', '$modalInstance',
-		'commandSvc', 'record','querySvc',
+		'commandSvc', 'record', 'querySvc',
 		function ($scope, $state, authSvc, $rootScope, $modalInstance,
 		         commandSvc, record, querySvc) {
 
@@ -235,8 +235,6 @@
 					enableColumnMenus: false,
 				};
 			}
-
-
 
 			init();
 
