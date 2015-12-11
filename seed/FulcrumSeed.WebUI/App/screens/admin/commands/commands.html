@@ -38,11 +38,25 @@
 					<td colspan="3">{{pubRecord.status}}</td>
 				</tr>
 				<tr>
-					<th>Links</th>
+					<th>Query References</th>
 					<td colspan="3">
-						<ul>
-							<li ng-repeat="link in pubRecord.links"><a href="{{link.href}}">{{link.rel}}</a></li>
-						</ul>
+						<br />
+						<table class="table">
+							<tbody ng-repeat="q in pubRecord.queryReferences">
+								<tr>
+									<th>Name</th>
+									<td>{{q.queryName}}</td>
+								</tr>
+								<tr>
+									<th>Parameters</th>
+									<td><json-formatter json="q.parameters" open="2"></json-formatter></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><button class="btn btn-standard" ng-click="runQuery(q)">Run Query</button></td>
+								</tr>
+							</tbody>
+						</table>
 					</td>
 				</tr>
 			</table>

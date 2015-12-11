@@ -29,14 +29,6 @@
 				<td><json-formatter json="record.originalCommand" open="1"></json-formatter></td>
 			</tr>
 			<tr>
-				<th>Links</th>
-				<td colspan="3">
-					<ul>
-						<li ng-repeat="l in record.links"><a href="{{l.href}}">{{l.rel}}</a></li>
-					</ul>
-				</td>
-			</tr>
-			<tr>
 				<th>Query References</th>
 				<td colspan="3">
 					<br />
@@ -52,8 +44,14 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td><button class="btn btn-standard">Run Query</button></td>
+								<td><button class="btn btn-standard" ng-click="runQuery(q)">Run Query</button></td>
 							</tr>
+							<tr ng-show="showResults">
+								<th>Results</th>
+								<td>
+									<div ui-grid-auto-resize ui-grid="resultGrid"></div>
+								</td>
+							</t>
 						</tbody>
 					</table>
 				</td>

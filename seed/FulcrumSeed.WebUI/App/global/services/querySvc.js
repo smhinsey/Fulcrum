@@ -17,9 +17,15 @@
 
 				var namespace = opts.namespace == undefined ? "~" : opts.namespace;
 
-				var url = appSettings.apiBasePath + "api/queries/" + namespace + "/" + queryName + "/results?";
+				var queryIdentifier = namespace + "/" + queryName;
 
-				//return $http.get(url + $.param(params) + "&v=" + APP_VERSION);
+				if (opts.skipNameWildcard != undefined) {
+					if (opts.skipNameWildcard) {
+						queryIdentifier = queryName;
+					}
+				}
+
+				var url = appSettings.apiBasePath + "api/queries/" + queryIdentifier + "/results?";
 
 				var queryRequest = {
 					url: url + $.param(params) + "&v=" + APP_VERSION,

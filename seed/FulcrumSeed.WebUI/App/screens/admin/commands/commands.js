@@ -69,9 +69,9 @@
 	])
 	.controller('publishCommandController', [
 		'$scope', '$state', 'authSvc', '$rootScope', '$modalInstance',
-		'commandSvc', 'command',
+		'commandSvc', 'command', 'querySvc',
 		function($scope, $state, authSvc, $rootScope, $modalInstance,
-		         commandSvc, command) {
+		         commandSvc, command, querySvc) {
 
 			$scope.command = command;
 			$scope.showResults = false;
@@ -128,6 +128,17 @@
 			$scope.cancel = function() {
 				$modalInstance.dismiss();
 			};
+
+			$scope.runQuery = function(query) {
+				querySvc.run(q.queryName, q.parameters)
+					.then(function (response) {
+						console.log('response', response);
+
+
+					}, function (error) {
+						// TODO: handle error
+					});
+			}
 		}
 	])
 	.controller('commandRegistryController', [
@@ -189,17 +200,55 @@
 	])
 	.controller('publicationRecordDetailsController', [
 		'$scope', '$state', 'authSvc', '$rootScope', '$modalInstance',
-		'commandSvc', 'record',
+		'commandSvc', 'record','querySvc',
 		function ($scope, $state, authSvc, $rootScope, $modalInstance,
-		         commandSvc, record) {
+		         commandSvc, record, querySvc) {
 
 			$scope.record = record;
 
-			console.log('record', record);
+			//console.log('record', record);
+
+			var init = function () {
+				$scope.resultGrid = {
+					enableSorting: true,
+					enableFiltering: false,
+					enableHorizontalScrollbar: 0,
+					enableColumnMenus: false,
+
+				};
+			}
+
+			var isArray = function(myArray) {
+				return myArray.constructor.toString().indexOf("Array") > -1;
+			}
+
+			init();
 
 			$scope.cancel = function () {
 				$modalInstance.dismiss();
 			};
+
+			$scope.runQuery = function (q) {
+				querySvc.run(q.queryName, q.parameters, { skipNameWildcard: true })
+					.then(function (response) {
+						console.log('response', response);
+
+						var resultInArray = response.data.results;
+
+						if (!isArray(resultInArray)) {
+							var scalar = angular.copy(resultInArray);
+
+							resultInArray = [];
+
+							resultInArray.push(scalar);
+						}
+
+						$scope.resultGrid.data = resultInArray;
+						$scope.showResults = true;
+					}, function (error) {
+						// TODO: handle error
+					});
+			}
 		}
 	])
 ;
