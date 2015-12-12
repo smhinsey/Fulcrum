@@ -25,7 +25,9 @@
 					<th>Command</th>
 					<td>{{pubRecord.commandName}}</td>
 					<th>Record Id</th>
-					<td>{{pubRecord.id}}</td>
+					<td ui-sref="admin.publicationRegistry.record({ recordId: pubRecord.id})">
+						<a href="#">{{pubRecord.id}}</a>
+					</td>
 				</tr>
 				<tr>
 					<th>Published</th>

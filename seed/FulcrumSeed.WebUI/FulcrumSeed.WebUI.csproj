@@ -251,6 +251,7 @@
     <Content Include="App\global\filters\filters.js" />
     <Content Include="App\global\services\authSvc.js" />
     <Content Include="App\global\services\commandSvc.js" />
+    <Content Include="App\global\services\modalStateSvc.js" />
     <Content Include="App\global\services\logSvc.js" />
     <Content Include="App\global\services\profileSvc.js" />
     <Content Include="App\global\services\querySvc.js" />

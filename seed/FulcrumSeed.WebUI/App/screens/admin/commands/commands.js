@@ -11,6 +11,12 @@
 				url: "/commands/publication-registry",
 				templateUrl: "app/screens/admin/commands/registry.html?v=" + APP_VERSION
 			});
+
+		$stateProvider
+			.state('admin.publicationRegistry.record', {
+				url: "/{recordId}",
+				templateUrl: "app/screens/admin/commands/registry.html?v=" + APP_VERSION
+			});
 	})
 	.controller('commandController', [
 		'$scope', '$state', '$rootScope', 'commandSvc', '$modal',
@@ -161,8 +167,8 @@
 		}
 	])
 	.controller('commandRegistryController', [
-		'$scope', '$state', '$rootScope', 'commandSvc', '$modal',
-		function ($scope, $state, $rootScope, commandSvc, $modal) {
+		'$scope', '$state', '$rootScope', 'commandSvc', '$modal', '$stateParams','$uibModalStack',
+		function ($scope, $state, $rootScope, commandSvc, $modal, $stateParams, $uibModalStack) {
 
 			$rootScope.title = "Command Registry";
 
@@ -196,7 +202,23 @@
 						// TODO: ??
 					});
 			};
+
 			init();
+
+			if ($stateParams.recordId) {
+				init();
+
+				$uibModalStack.dismissAll();
+
+				commandSvc.getPublicationRecord($stateParams.recordId)
+					.then(function (response) {
+						console.log('response.data', response.data);
+
+						$scope.details(response.data);
+					}, function (error) {
+						// TODO: error handling
+					});
+			}
 
 			$scope.details = function (record) {
 				var detailsModal = $modal.open({

@@ -30,6 +30,19 @@
 
 				return $http(queryRequest);
 			}
+			this.getPublicationRecord = function (recordId) {
+
+				var url = appSettings.apiBasePath + "api/commands/publication-registry/" + recordId;
+
+				console.log('pub record from', url);
+
+				var queryRequest = {
+					url: url + "?v=" + APP_VERSION,
+					method: 'GET',
+				};
+
+				return $http(queryRequest);
+			}
 			this.getSchema = function(name, namespace) {
 				// TODO: add caching
 				namespace = namespace == undefined ? "~" : namespace;

@@ -34,6 +34,7 @@ namespace Fulcrum.Runtime.CommandPipeline
 												 select dbRecord);
 
 			recordQuery = recordQuery.Include(r => r.QueryReferences);
+			recordQuery = recordQuery.Include(r => r.QueryReferences.Select(q => q.Parameters));
 
 			return recordQuery.SingleOrDefault();
 		}
