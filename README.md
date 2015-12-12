@@ -27,7 +27,10 @@ Seed To-do
 1. ~~Create login & auth views, controllers, services, etc.~~
 1. ~~Make QueryController claims-aware~~
 1. ~~Make CommandController claims-aware~~
-1. Implement Refresh Tokens in Identity Server 
+1. ~~Implement Refresh Tokens in Identity Server~~
+1. ~~Create generic query browser/runner UI~~
+1. ~~Create generic command browser/runner UI~~
+1. ~~Create command publication registry viewer~~
 1. Create breadcrumb directive
 1. Create profile management Angular views, controllers, etc. 
 1. Create user profile admin Angular views, controllers, etc. 
@@ -38,15 +41,16 @@ Seed To-do
 1. Create viewer UI with searching, sorting, filtering, etc. for logging model
 1. Implement "My Session" feature - a link in the footer to the log viewer, pre-filtered by the current user's session log ID 
 1. Install/configure ELMAH, tied to log4net 
-
+1. Implement templating using bower, nuget, etc. so that a developer can easily spin up a new project based on the seed
 
 General To-do
 =======
 1. Extend Command API to include an angular-schema-form form defintion alongside of the JSON Schema. The definition should be based on attributes decorating the command, such as DescriptionAttribute, similarly to the JSON Schema.
 1. Verify that query-based command validation still works and implement anything Seed needs to take advantage of it
 1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
-1. Create custom AuthorizeAttribute with on/off config switch
+1. Create custom AuthorizeAttribute with on/off config switch so that authorization can be disabled in dev mode
 1. Better config management, specifically around the connection string
 1. Investigate replacing/augmenting log4net with serilog in ILoggingSource and in general
 1. Refactor SimpleCommandPipeline, implement pure async
+1. Refactor SimpleCommandPipeline, divide along separations of concerns to create a set of queries for publication records and a service for the actual execution of commands
 1. Investigate a way to have IQuery implementations return inline/anonymous projections rather than requiring often-redundant projection types.
