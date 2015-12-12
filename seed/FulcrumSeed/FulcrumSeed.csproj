@@ -132,6 +132,7 @@
     <Compile Include="Components\UserAccounts\Queries\Projections\AccountProjection.cs" />
     <Compile Include="Components\UserAccounts\Queries\UserAccountQueries.cs" />
     <Compile Include="Components\UserAccounts\Queries\UserRoleQueries.cs" />
+    <Compile Include="Components\UserAccounts\Queries\UserSessionQueries.cs" />
     <Compile Include="Infrastructure\IdentityServer3\Clients.cs" />
     <Compile Include="Infrastructure\IdentityServer3\CustomClaimsProvider.cs" />
     <Compile Include="Infrastructure\IdentityServer3\Scopes.cs" />
