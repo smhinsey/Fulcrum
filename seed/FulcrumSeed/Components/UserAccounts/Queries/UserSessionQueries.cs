@@ -1,22 +1,34 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using Fulcrum.Core;
-using IdentityServer3.Core.Models;
-using IdentityServer3.Core.Services;
+using FulcrumSeed.Components.UserAccounts.Queries.Projections;
+using IdentityServer3.EntityFramework;
+using IdentityServer3.EntityFramework.Entities;
 
 namespace FulcrumSeed.Components.UserAccounts.Queries
 {
 	public class UserSessionQueries : IQuery
 	{
-		private readonly IRefreshTokenStore _tokenStore;
+		private readonly IOperationalDbContext _db;
 
-		public UserSessionQueries(IRefreshTokenStore tokenStore)
+		public UserSessionQueries()
 		{
-			_tokenStore = tokenStore;
+			_db = new OperationalDbContext(ConfigurationManager.ConnectionStrings["FulcrumSeedDb"].ConnectionString);
 		}
 
-		public IEnumerable<ITokenMetadata> GetAll()
+		public IList<TokenProjection> GetAll()
 		{
-			return _tokenStore.GetAllAsync("").Result;
+			var query = _db.Tokens.Where(t => t.TokenType == TokenType.RefreshToken);
+
+			var projection = query.Select(t => new TokenProjection
+			{
+				ClientId = t.ClientId,
+				Expiry = t.Expiry,
+				RawJson = t.JsonCode
+			});
+
+			return projection.ToList();
 		}
 	}
 }

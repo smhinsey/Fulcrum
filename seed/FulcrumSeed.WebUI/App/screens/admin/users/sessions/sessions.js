@@ -20,7 +20,7 @@
 				enableHorizontalScrollbar: 0,
 				enableColumnMenus: false,
 				columnDefs: [
-					{ name: 'Username', field: 'name' },
+					{ name: 'Username', field: 'username' },
 					{ name: 'Logged In', field: 'name' },
 					{ name: 'Last Seen', field: 'name' },
 					{
@@ -40,6 +40,18 @@
 					.then(function (response) {
 
 						var data = response.data.results;
+
+						angular.forEach(data, function (s) {
+							s.code = JSON.parse(s.rawJson);
+
+							var matchedClaim = _.findWhere(s.code.AccessToken.Claims, { Type: 'preferred_username' });
+
+							console.log('matchedClaim', matchedClaim);
+
+							s.username = matchedClaim.Value;
+						});
+
+						console.log('data', data);
 
 						$scope.gridOptions.data = data;
 
