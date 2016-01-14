@@ -135,6 +135,7 @@
     <Compile Include="Components\UserAccounts\Commands\EditAccount.cs" />
     <Compile Include="Components\UserAccounts\Commands\EditUserRole.cs" />
     <Compile Include="Components\UserAccounts\Commands\RegisterAccount.cs" />
+    <Compile Include="Components\UserAccounts\Commands\UploadVideo.cs" />
     <Compile Include="Components\UserAccounts\Domain\Entities\PermissionClaim.cs" />
     <Compile Include="Components\UserAccounts\Domain\Entities\UserGroupAssociation.cs" />
     <Compile Include="Components\UserAccounts\Queries\Projections\RoleProjection.cs" />

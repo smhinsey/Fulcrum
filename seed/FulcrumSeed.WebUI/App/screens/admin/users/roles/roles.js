@@ -108,7 +108,7 @@
 				$scope.formModel = {};
 			};
 			var init = function() {
-				commandSvc.getSchema('CreateUserClaimGroup')
+				commandSvc.getSchema('CreateUserRole')
 					.then(function(response) {
 						$scope.schema = response.data.schema;
 					});
@@ -117,7 +117,7 @@
 			configureForm();
 			init();
 
-			$scope.register = function(form, formModel) {
+			$scope.save = function(form, formModel) {
 				$scope.$broadcast('schemaFormValidate');
 
 				if (form.$valid) {
