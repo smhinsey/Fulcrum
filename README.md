@@ -45,7 +45,7 @@ Seed To-do
 
 General To-do
 =======
-1. Extend Command API to include an angular-schema-form form defintion alongside of the JSON Schema. The definition should be based on attributes decorating the command, such as DescriptionAttribute, similarly to the JSON Schema.
+1. ~~Extend Command API to include an angular-schema-form form defintion alongside of the JSON Schema. The definition should be based on attributes decorating the command, such as DescriptionAttribute, similarly to the JSON Schema.~~
 1. Verify that query-based command validation still works and implement anything Seed needs to take advantage of it
 1. Refactor CommandModelBinder and QueryController's approach to mapping HTTP requests to objects
 1. Create custom AuthorizeAttribute with on/off config switch so that authorization can be disabled in dev mode
